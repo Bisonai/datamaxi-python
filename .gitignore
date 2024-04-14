@@ -1,0 +1,15 @@
+build
+dist
+datamaxi.egg-info/
+__pycache___
+*.pyc
+.DS_Store
+
+# Environments
+.env
+.venv
+venv/
+
+# IDE
+.idea/
+.vscode/

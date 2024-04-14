@@ -1,0 +1,5 @@
+-r requirements-test.txt
+mkdocs
+mkdocs-material
+mkdocstrings
+mkdocstrings-python

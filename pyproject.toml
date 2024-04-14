@@ -1,0 +1,26 @@
+[project]
+name = "datamaxi"
+version = "0.1.0"
+authors = [
+  { name="Bisonai", email="business@bisonai.com" },
+]
+description = "Official Python client for DataMaxi+ API"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+   "Intended Audience :: Developers",
+   "Intended Audience :: Financial and Insurance Industry",
+   "License :: OSI Approved :: MIT License",
+   "Programming Language :: Python :: 3.8",
+   "Programming Language :: Python :: 3.9",
+   "Programming Language :: Python :: 3.10",
+   "Programming Language :: Python :: 3.11",
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements/common.txt"]}
+
+[project.urls]
+Homepage = "https://github.com/bisonai/datamaxi-python"
+Issues = "https://github.com/bisonai/datamaxi-python/issues"

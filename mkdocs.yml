@@ -1,0 +1,63 @@
+site_name: DataMaxi+
+
+repo_name: bisonai/datamaxi-python
+repo_url: https://github.com/bisonai/datamaxi-python
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            docstring_options:
+              ignore_init_summary: true
+            docstring_section_style: list
+            separate_signature: true
+            show_signature_annotations: true
+            show_symbol_type_heading: true
+            merge_init_into_class: true
+
+markdown_extensions:
+- toc:
+    permalink: true
+- codehilite
+- pymdownx.highlight:
+    use_pygments: true
+- pymdownx.superfences
+
+nav:
+  - Main: index.md
+  - API: api.md
+  - Binance: binance.md
+  - Defillama: defillama.md
+  - Naver Trend: naver-trend.md
+  - Google Trend: google-trend.md
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: teal
+    accent: purple
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: black
+    accent: lime
+    toggle:
+      icon: material/weather-night
+      name: Switch to system preference
+
+watch:
+  - datamaxi
