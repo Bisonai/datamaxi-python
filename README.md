@@ -94,7 +94,6 @@ python -m pytest tests/
 ## Links
 
 * [DataMaxi+](https://datamaxiplus.com/)
-* [DataMaxi+ API](https://api.neverest.finance/)
 * [DataMaxi+ API Documentation](https://docs.neverest.finance/)
 
 ## Contributing
