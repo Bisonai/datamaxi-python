@@ -39,7 +39,7 @@ class Naver(API):
 
         `GET /v1/naver/trend`
 
-        <https://docs.neverest.finance/naver/trend>
+        <https://docs.datamaxiplus.com/naver/trend>
 
         Args:
             keyword (str): keyword to search for

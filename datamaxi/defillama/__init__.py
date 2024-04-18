@@ -29,7 +29,7 @@ class Defillama(API):
 
         `GET /v1/defillama/protocol`
 
-        <https://docs.neverest.finance/defillama/protocol>
+        <https://docs.datamaxiplus.com/defillama/protocol>
 
         Returns:
             List of supported protocols
@@ -42,7 +42,7 @@ class Defillama(API):
 
         `GET /v1/defillama/chain`
 
-        <https://docs.neverest.finance/defillama/chain>
+        <https://docs.datamaxiplus.com/defillama/chain>
 
         Returns:
             List of supported chains
@@ -55,7 +55,7 @@ class Defillama(API):
 
         `GET /v1/defillama/token`
 
-        <https://docs.neverest.finance/defillama/token>
+        <https://docs.datamaxiplus.com/defillama/token>
 
         Returns:
             List of supported tokens
@@ -68,7 +68,7 @@ class Defillama(API):
 
         `GET /v1/defillama/pool`
 
-        <https://docs.neverest.finance/defillama/pool>
+        <https://docs.datamaxiplus.com/defillama/pool>
 
         Returns:
             List of supported pools
@@ -81,7 +81,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin`
 
-        <https://docs.neverest.finance/defillama/stablecoin>
+        <https://docs.datamaxiplus.com/defillama/stablecoin>
 
         Returns:
             List of supported stablecoins
@@ -95,7 +95,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             pandas (bool): Return data as pandas DataFrame
@@ -114,7 +114,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             protocols (Union[str, List[str]]): single protocol or multiple protocol names
@@ -136,7 +136,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             chains (Union[str, List[str]]): single chain or multiple chain names
@@ -158,7 +158,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             protocol (str): protocol name
@@ -180,7 +180,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             protocol (str): protocol name
@@ -206,7 +206,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.neverest.finance/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
             protocol (str): protocol name
@@ -236,7 +236,7 @@ class Defillama(API):
 
         `GET /v1/defillama/mcap`
 
-        <https://docs.neverest.finance/defillama/mcap>
+        <https://docs.datamaxiplus.com/defillama/mcap>
 
         Args:
             protocols (Union[str, List[str]]): single protocol or multiple protocol names
@@ -260,7 +260,7 @@ class Defillama(API):
 
         `GET /v1/defillama/token`
 
-        <https://docs.neverest.finance/defillama/token-price>
+        <https://docs.datamaxiplus.com/defillama/token-price>
 
         Args:
             addresses (Union[str, List[str]]): single address or multiple addresses
@@ -292,7 +292,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin`
 
-        <https://docs.neverest.finance/defillama/stablecoin-mcap>
+        <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
 
         Args:
             stablecoin (str): stablecoin name
@@ -315,7 +315,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin`
 
-        <https://docs.neverest.finance/defillama/stablecoin-mcap>
+        <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
 
         Args:
             stablecoin (str): stablecoin name
@@ -340,7 +340,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin/price`
 
-        <https://docs.neverest.finance/defillama/stablecoin-price>
+        <https://docs.datamaxiplus.com/defillama/stablecoin-price>
 
         Args:
             stablecoins (Union[str, List[str]]): single stablecoin or multiple stablecoin names
@@ -368,7 +368,7 @@ class Defillama(API):
 
         `GET /v1/defillama/fee`
 
-        <https://docs.neverest.finance/defillama/fee>
+        <https://docs.datamaxiplus.com/defillama/fee>
 
         Args:
             protocols (Union[str, List[str]]): single protocol or multiple protocol names
@@ -410,7 +410,7 @@ class Defillama(API):
 
         `GET /v1/defillama/revenue`
 
-        <https://docs.neverest.finance/defillama/revenue>
+        <https://docs.datamaxiplus.com/defillama/revenue>
 
         Args:
             protocols (Union[str, List[str]]): single protocol or multiple protocol names
@@ -448,7 +448,7 @@ class Defillama(API):
 
         `GET /v1/defillama/fee/detail`
 
-        <https://docs.neverest.finance/defillama/fee-detail>
+        <https://docs.datamaxiplus.com/defillama/fee-detail>
 
         Args:
             protocol (str): protocol name
@@ -477,7 +477,7 @@ class Defillama(API):
 
         `GET /v1/defillama/revenue/detail`
 
-        <https://docs.neverest.finance/defillama/revenue-detail>
+        <https://docs.datamaxiplus.com/defillama/revenue-detail>
 
         Args:
             protocol (str): protocol name

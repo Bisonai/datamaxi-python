@@ -1,1 +1,1 @@
-BASE_URL = "http://api.neverest.finance"
+BASE_URL = "http://api.datamaxiplus.com"

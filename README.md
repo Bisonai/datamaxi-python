@@ -1,4 +1,5 @@
 # DataMaxi+ Python Client
+
 [![PyPI version](https://img.shields.io/pypi/v/datamaxi)](https://pypi.python.org/pypi/datamaxi)
 [![Python version](https://img.shields.io/pypi/pyversions/datamaxi)](https://www.python.org/downloads/)
 [![Documentation](https://img.shields.io/badge/docs-latest-blue)](https://datamaxi.readthedocs.io/en/stable/)
@@ -6,19 +7,19 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is the official implementation of Python client for DataMaxi+ API.
-The package can be used to fetch both historical and latest data using [DataMaxi+ API](https://docs.neverest.finance/).
+The package can be used to fetch both historical and latest data using [DataMaxi+ API](https://docs.datamaxiplus.com/).
 This package is compatible with Python v3.8+.
 
-* [Installation](#installation)
-* [Configuration](#configuration)
-  * [Environment Variables](#environment-variables)
-* [Quickstart](#quickstart)
-* [Local Development](#local-development)
-  * [Setup](#setup)
-  * [Testing](#testing)
-* [Links](#links)
-* [Contributing](#contributing)
-* [License](#license)
+- [Installation](#installation)
+- [Configuration](#configuration)
+  - [Environment Variables](#environment-variables)
+- [Quickstart](#quickstart)
+- [Local Development](#local-development)
+  - [Setup](#setup)
+  - [Testing](#testing)
+- [Links](#links)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -32,9 +33,9 @@ Access to DataMaxi+ is protected by API Key.
 If you are interested to try DataMaxi+, you can request your API key at [business@bisonai.com](mailto:business@bisonai.com).
 
 | Option             | Explanation                                                                           |
-|--------------------|---------------------------------------------------------------------------------------|
+| ------------------ | ------------------------------------------------------------------------------------- |
 | `api_key`          | Your API key                                                                          |
-| `base_url`         | If `base_url` is not provided, it defaults to `api.neverest.finance`.                 |
+| `base_url`         | If `base_url` is not provided, it defaults to `api.datamaxiplus.com`.                 |
 | `timeout`          | Number of seconds to wait for a server response. By default requests do not time out. |
 | `proxies`          | Proxy through which the request is queried                                            |
 | `show_limit_usage` | Return response as dictionary including including `"limit_usage"` and `"data"` keys   |
@@ -45,17 +46,17 @@ If you are interested to try DataMaxi+, you can request your API key at [busines
 You may use environment variables to configure the DataMaxi+ client to avoid any inline boilerplate.
 
 | Env                | Description                                  |
-|--------------------|----------------------------------------------|
+| ------------------ | -------------------------------------------- |
 | `NEVEREST_API_KEY` | Used instead of `api_key` if none is passed. |
 
 ## Quickstart
 
 DataMaxi+ Python package currently includes the following clients:
 
-* `Binance`
-* `Defillama`
-* `Naver`
-* `Google`
+- `Binance`
+- `Defillama`
+- `Naver`
+- `Google`
 
 All clients accept the same parameters that are described at [Configuration](#configuration) section.
 First, import the clients,
@@ -93,9 +94,9 @@ python -m pytest tests/
 
 ## Links
 
-* [DataMaxi+](https://datamaxiplus.com/)
-* [DataMaxi+ API](https://api.neverest.finance/)
-* [DataMaxi+ API Documentation](https://docs.neverest.finance/)
+- [DataMaxi+](https://datamaxiplus.com/)
+- [DataMaxi+ API](https://api.datamaxiplus.com/)
+- [DataMaxi+ API Documentation](https://docs.datamaxiplus.com/)
 
 ## Contributing
 

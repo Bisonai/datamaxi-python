@@ -25,7 +25,7 @@ class Binance(API):
 
         `GET /v1/raw/binance/symbols`
 
-        <https://docs.neverest.finance/cex/binance/symbols>
+        <https://docs.datamaxiplus.com/cex/binance/symbols>
 
         Returns:
             List of supported Binance symbols
@@ -41,7 +41,7 @@ class Binance(API):
 
         `GET /v1/raw/binance/kline`
 
-        <https://docs.neverest.finance/cex/binance/kline>
+        <https://docs.datamaxiplus.com/cex/binance/kline>
 
         Args:
             symbol (str): Binance symbol
