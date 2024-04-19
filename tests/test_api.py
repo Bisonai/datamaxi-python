@@ -34,7 +34,7 @@ def test_API_env_key():
     """Tests the API initialization with API key in environment variable"""
 
     api_key = random_str()
-    os.environ["NEVEREST_API_KEY"] = api_key
+    os.environ["DATAMAXI_API_KEY"] = api_key
     client = API()
 
     client.should.be.a(API)

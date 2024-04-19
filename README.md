@@ -47,7 +47,7 @@ You may use environment variables to configure the DataMaxi+ client to avoid any
 
 | Env                | Description                                  |
 | ------------------ | -------------------------------------------- |
-| `NEVEREST_API_KEY` | Used instead of `api_key` if none is passed. |
+| `DATAMAXI_API_KEY` | Used instead of `api_key` if none is passed. |
 
 ## Quickstart
 
