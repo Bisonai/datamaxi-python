@@ -24,7 +24,7 @@ def test_API_initial():
         "datamaxi/" + __version__
     )
     client.session.headers.should.have.key("Authorization").which.should.be.equal(
-        "X-NVRST-APIKEY None"
+        "X-DTMX-APIKEY None"
     )
 
     client._logger.should.be(logging.getLogger("datamaxi.api"))
@@ -40,7 +40,7 @@ def test_API_env_key():
     client.should.be.a(API)
     client.api_key.should.be.equal(api_key)
     client.session.headers.should.have.key("Authorization").which.should.be.equal(
-        f"X-NVRST-APIKEY {api_key}"
+        f"X-DTMX-APIKEY {api_key}"
     )
 
 
@@ -68,5 +68,5 @@ def test_API_with_extra_parameters():
     client.show_header.should.be.true
     client.proxies.should.equal(proxies)
     client.session.headers.should.have.key("Authorization").which.should.equal(
-        f"X-NVRST-APIKEY {api_key}"
+        f"X-DTMX-APIKEY {api_key}"
     )
