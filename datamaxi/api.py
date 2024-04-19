@@ -11,7 +11,7 @@ from datamaxi.lib.utils import encoded_string
 
 class API(object):
     """The base class for all DataMaxi+ Python clients. `api_key` can be set
-    as an environment variable `NEVEREST_API_KEY`.
+    as an environment variable `DATAMAXI_API_KEY`.
     """
 
     def __init__(
@@ -24,7 +24,7 @@ class API(object):
         show_header=False,
     ):
         """Client API constructor. `api_key` can be set
-        as an environment variable `NEVEREST_API_KEY`.
+        as an environment variable `DATAMAXI_API_KEY`.
 
         Args:
             api_key (str): The API key for the DataMaxi+ API.
@@ -34,7 +34,7 @@ class API(object):
             show_limit_usage (bool): Show the limit usage.
             show_header (bool): Show the header.
         """
-        self.api_key = api_key or os.environ.get("NEVEREST_API_KEY")
+        self.api_key = api_key or os.environ.get("DATAMAXI_API_KEY")
         self.base_url = base_url
         self.timeout = timeout
         self.proxies = None
@@ -46,7 +46,7 @@ class API(object):
             {
                 "Content-Type": "application/json;charset=utf-8",
                 "User-Agent": "datamaxi/" + __version__,
-                "Authorization": "X-NVRST-APIKEY " + str(self.api_key),
+                "Authorization": "X-DTMX-APIKEY " + str(self.api_key),
             }
         )
 
