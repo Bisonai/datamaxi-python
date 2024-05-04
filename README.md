@@ -24,7 +24,7 @@ This package is compatible with Python v3.8+.
 ## Installation
 
 ```shell
-pip install datamaxi
+pip3 install datamaxi
 ```
 
 ## Configuration
@@ -87,9 +87,9 @@ If you wish to work on local development please clone/fork the git repo and use 
 
 ```shell
 # In case packages are not installed yet
-pip install -r requirements/requirements-test.txt
+pip3 install -r requirements/requirements-test.txt
 
-python -m pytest tests/
+python3 -m pytest tests/
 ```
 
 ## Links
