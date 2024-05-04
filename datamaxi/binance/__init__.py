@@ -18,7 +18,8 @@ class Binance(API):
         """
         if "base_url" not in kwargs:
             kwargs["base_url"] = BASE_URL
-            super().__init__(api_key, **kwargs)
+
+        super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
         """Supported Binance supported symbols
@@ -33,24 +34,37 @@ class Binance(API):
         url_path = "/v1/raw/binance/symbols"
         return self.query(url_path)
 
+    def intervals(self) -> List[str]:
+        """Supported Binance supported intervals
+
+        `GET /v1/raw/binance/intervals`
+
+        <https://docs.datamaxiplus.com/cex/binance/intervals>
+
+        Returns:
+            List of supported Binance intervals
+        """
+        url_path = "/v1/raw/binance/intervals"
+        return self.query(url_path)
+
     @postprocess()
-    def kline(
+    def candle(
         self, symbol: str, interval: str = "1d", pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
         """Get Binance k-line data
 
-        `GET /v1/raw/binance/kline`
+        `GET /v1/raw/binance/candle`
 
-        <https://docs.datamaxiplus.com/cex/binance/kline>
+        <https://docs.datamaxiplus.com/cex/binance/candle>
 
         Args:
             symbol (str): Binance symbol
-            interval (str): Kline interval
+            interval (str): Candle interval
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Binance kline data for a given symbol and interval in pandas DataFrame
+            Binance candle data for a given symbol and interval in pandas DataFrame
         """
         check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
         params = {"symbol": symbol, "interval": interval}
-        return self.query("/v1/raw/binance/kline", params)
+        return self.query("/v1/raw/binance/candle", params)

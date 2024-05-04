@@ -8,7 +8,6 @@ from urllib.parse import urlencode
 
 mock_item = [
     [
-        "Symbol",
         "OpenTime",
         "OpenPrice",
         "HighPrice",
@@ -22,7 +21,6 @@ mock_item = [
         "TakerBuyQuoteVolume",
     ],
     [
-        "BTCUSDT",
         1609459200000,
         "28923.63000000",
         "29600.00000000",
@@ -46,12 +44,12 @@ params = {"symbol": "BTC-USDT", "interval": "1d", "pandas": False}
 
 @mock_http_response(
     responses.GET,
-    "/v1/raw/binance/kline\\?" + urlencode(req_params),
+    "/v1/raw/binance/candle\\?" + urlencode(req_params),
     mock_item,
     200,
 )
-def test_binance_kline():
-    """Tests the API endpoint to get Binance trend."""
+def test_binance_candle():
+    """Tests the API endpoint to get Binance candle."""
 
-    response = client.kline(**params)
+    response = client.candle(**params)
     response.should.equal(mock_item)
