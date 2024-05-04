@@ -63,6 +63,8 @@ First, import the clients,
 
 ```python
 from datamaxi.binance import Binance
+from datamaxi.okx import Okx
+from datamaxi.bybit import Bybit
 from datamaxi.defillama import Defillama
 from datamaxi.naver import Naver
 from datamaxi.google import Google
@@ -72,6 +74,8 @@ and initialize them.
 
 ```python
 binance = Binance(api_key=api_key)
+okx = Okx(api_key=api_key)
+bybit = Bybit(api_key=api_key)
 defillama = Defillama(api_key=api_key)
 naver = Naver(api_key=api_key)
 google = Google(api_key=api_key)
