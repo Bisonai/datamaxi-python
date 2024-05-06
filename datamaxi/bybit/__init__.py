@@ -6,8 +6,8 @@ from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
 
 
-class Binance(API):
-    """Client to fetch Binance data from DataMaxi+ API."""
+class Bybit(API):
+    """Client to fetch Bybit data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize the object.
@@ -22,49 +22,49 @@ class Binance(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Binance supported symbols
+        """Supported Bybit supported symbols
 
-        `GET /v1/raw/binance/symbols`
+        `GET /v1/raw/bybit/symbols`
 
-        <https://docs.datamaxiplus.com/cex/binance/symbols>
+        <https://docs.datamaxiplus.com/cex/bybit/symbols>
 
         Returns:
-            List of supported Binance symbols
+            List of supported Bybit symbols
         """
-        url_path = "/v1/raw/binance/symbols"
+        url_path = "/v1/raw/bybit/symbols"
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Binance supported intervals
+        """Supported Bybit supported intervals
 
-        `GET /v1/raw/binance/intervals`
+        `GET /v1/raw/bybit/intervals`
 
-        <https://docs.datamaxiplus.com/cex/binance/intervals>
+        <https://docs.datamaxiplus.com/cex/bybit/intervals>
 
         Returns:
-            List of supported Binance intervals
+            List of supported Bybit intervals
         """
-        url_path = "/v1/raw/binance/intervals"
+        url_path = "/v1/raw/bybit/intervals"
         return self.query(url_path)
 
     @postprocess()
     def candle(
         self, symbol: str, interval: str = "1d", pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get Binance candle data
+        """Get Bybit candle data
 
-        `GET /v1/raw/binance/candle`
+        `GET /v1/raw/bybit/candle`
 
-        <https://docs.datamaxiplus.com/cex/binance/candle>
+        <https://docs.datamaxiplus.com/cex/bybit/candle>
 
         Args:
-            symbol (str): Binance symbol
+            symbol (str): Bybit symbol
             interval (str): Candle interval
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Binance candle data for a given symbol and interval in pandas DataFrame
+            Bybit candle data for a given symbol and interval in pandas DataFrame
         """
         check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
         params = {"symbol": symbol, "interval": interval}
-        return self.query("/v1/raw/binance/candle", params)
+        return self.query("/v1/raw/bybit/candle", params)

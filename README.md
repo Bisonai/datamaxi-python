@@ -24,7 +24,7 @@ This package is compatible with Python v3.8+.
 ## Installation
 
 ```shell
-pip install datamaxi
+pip3 install datamaxi
 ```
 
 ## Configuration
@@ -54,6 +54,12 @@ You may use environment variables to configure the DataMaxi+ client to avoid any
 DataMaxi+ Python package currently includes the following clients:
 
 - `Binance`
+- `Bithumb`
+- `Bybit`
+- `Coinone`
+- `Huobi`
+- `Okx`
+- `Upbit`
 - `Defillama`
 - `Naver`
 - `Google`
@@ -62,8 +68,19 @@ All clients accept the same parameters that are described at [Configuration](#co
 First, import the clients,
 
 ```python
+# CEX
 from datamaxi.binance import Binance
+from datamaxi.bithumb import Bithumb
+from datamaxi.bybit import Bybit
+from datamaxi.coinone import Coinone
+from datamaxi.huobi import Huobi
+from datamaxi.okx import Okx
+from datamaxi.upbit import Upbit
+
+# DeFi
 from datamaxi.defillama import Defillama
+
+# Trend
 from datamaxi.naver import Naver
 from datamaxi.google import Google
 ```
@@ -71,8 +88,19 @@ from datamaxi.google import Google
 and initialize them.
 
 ```python
+# CEX
 binance = Binance(api_key=api_key)
+bithumb = Bithumb(api_key=api_key)
+bybit = Bybit(api_key=api_key)
+coinone = Coinone(api_key=api_key)
+huobi = Huobi(api_key=api_key)
+okx = Okx(api_key=api_key)
+upbit = Upbit(api_key=api_key)
+
+# DeFi
 defillama = Defillama(api_key=api_key)
+
+# Trend
 naver = Naver(api_key=api_key)
 google = Google(api_key=api_key)
 ```
@@ -87,9 +115,9 @@ If you wish to work on local development please clone/fork the git repo and use 
 
 ```shell
 # In case packages are not installed yet
-pip install -r requirements/requirements-test.txt
+pip3 install -r requirements/requirements-test.txt
 
-python -m pytest tests/
+python3 -m pytest tests/
 ```
 
 ## Links

@@ -6,8 +6,8 @@ from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
 
 
-class Binance(API):
-    """Client to fetch Binance data from DataMaxi+ API."""
+class Bithumb(API):
+    """Client to fetch Bithumb data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize the object.
@@ -22,49 +22,49 @@ class Binance(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Binance supported symbols
+        """Supported Bithumb supported symbols
 
-        `GET /v1/raw/binance/symbols`
+        `GET /v1/raw/bithumb/symbols`
 
-        <https://docs.datamaxiplus.com/cex/binance/symbols>
+        <https://docs.datamaxiplus.com/cex/bithumb/symbols>
 
         Returns:
-            List of supported Binance symbols
+            List of supported Bithumb symbols
         """
-        url_path = "/v1/raw/binance/symbols"
+        url_path = "/v1/raw/bithumb/symbols"
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Binance supported intervals
+        """Supported Bithumb supported intervals
 
-        `GET /v1/raw/binance/intervals`
+        `GET /v1/raw/bithumb/intervals`
 
-        <https://docs.datamaxiplus.com/cex/binance/intervals>
+        <https://docs.datamaxiplus.com/cex/bithumb/intervals>
 
         Returns:
-            List of supported Binance intervals
+            List of supported Bithumb intervals
         """
-        url_path = "/v1/raw/binance/intervals"
+        url_path = "/v1/raw/bithumb/intervals"
         return self.query(url_path)
 
     @postprocess()
     def candle(
         self, symbol: str, interval: str = "1d", pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get Binance candle data
+        """Get Bithumb candle data
 
-        `GET /v1/raw/binance/candle`
+        `GET /v1/raw/bithumb/candle`
 
-        <https://docs.datamaxiplus.com/cex/binance/candle>
+        <https://docs.datamaxiplus.com/cex/bithumb/candle>
 
         Args:
-            symbol (str): Binance symbol
+            symbol (str): Bithumb symbol
             interval (str): Candle interval
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Binance candle data for a given symbol and interval in pandas DataFrame
+            Bithumb candle data for a given symbol and interval in pandas DataFrame
         """
         check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
         params = {"symbol": symbol, "interval": interval}
-        return self.query("/v1/raw/binance/candle", params)
+        return self.query("/v1/raw/bithumb/candle", params)
