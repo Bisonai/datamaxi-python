@@ -20,52 +20,54 @@ plugins:
             merge_init_into_class: true
 
 markdown_extensions:
-- toc:
-    permalink: true
-- codehilite
-- pymdownx.highlight:
-    use_pygments: true
-- pymdownx.superfences
+  - toc:
+      permalink: true
+  - codehilite
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
 
 nav:
   - Main: index.md
   - API: api.md
   - CEX:
-    - Binance: binance.md
-    - Bithumb: bithumb.md
-    - Bybit: bybit.md
-    - Coinone: coinone.md
-    - Huobi: huobi.md
-    - Okx: okx.md
-    - Upbit: upbit.md
+      - Binance: binance.md
+      - Bithumb: bithumb.md
+      - Bybit: bybit.md
+      - Coinone: coinone.md
+      - Huobi: huobi.md
+      - Okx: okx.md
+      - Upbit: upbit.md
   - Defillama: defillama.md
   - Trend:
-    - Naver Trend: naver-trend.md
-    - Google Trend: google-trend.md
+      - Naver Trend: naver-trend.md
+      - Google Trend: google-trend.md
 
 theme:
   name: material
+  logo: /assets/logo.png
+  favicon: /assets/images/favicon.png
   icon:
     repo: fontawesome/brands/github
   palette:
-  - media: "(prefers-color-scheme)"
-    toggle:
-      icon: material/brightness-auto
-      name: Switch to light mode
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    primary: teal
-    accent: purple
-    toggle:
-      icon: material/weather-sunny
-      name: Switch to dark mode
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
-    primary: black
-    accent: lime
-    toggle:
-      icon: material/weather-night
-      name: Switch to system preference
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
 
 watch:
   - datamaxi
