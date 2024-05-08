@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
     
     
       
@@ -684,11 +684,11 @@ This package is compatible with Python v3.8+.</p>
 <li><a href="#license">License</a></li>
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>datamaxi
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>datamaxi
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Access to DataMaxi+ is protected by API Key.
-If you are interested to try DataMaxi+, you can request your API key at <a href="mailto:business@bisonai.com">business@bisonai.com</a>.</p>
+If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ through <a href="https://datamaxiplus.com/auth">this login/singup page</a> and get free API key for two months.</p>
 <table>
 <thead>
 <tr>
@@ -715,11 +715,11 @@ If you are interested to try DataMaxi+, you can request your API key at <a href=
 </tr>
 <tr>
 <td><code>show_limit_usage</code></td>
-<td>Return response as dictionary including including <code>"limit_usage"</code> and <code>"data"</code> keys</td>
+<td>Return response as dictionary including <code>"limit_usage"</code> and <code>"data"</code> keys</td>
 </tr>
 <tr>
 <td><code>show_header</code></td>
-<td>Return response as dictionary including including <code>"header"</code> and <code>"data"</code> keys</td>
+<td>Return response as dictionary including <code>"header"</code> and <code>"data"</code> keys</td>
 </tr>
 </tbody>
 </table>
@@ -743,20 +743,48 @@ If you are interested to try DataMaxi+, you can request your API key at <a href=
 <p>DataMaxi+ Python package currently includes the following clients:</p>
 <ul>
 <li><code>Binance</code></li>
+<li><code>Bithumb</code></li>
+<li><code>Bybit</code></li>
+<li><code>Coinone</code></li>
+<li><code>Huobi</code></li>
+<li><code>Okx</code></li>
+<li><code>Upbit</code></li>
 <li><code>Defillama</code></li>
 <li><code>Naver</code></li>
 <li><code>Google</code></li>
 </ul>
 <p>All clients accept the same parameters that are described at <a href="#configuration">Configuration</a> section.
 First, import the clients,</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datamaxi.binance</span> <span class="kn">import</span> <span class="n">Binance</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># CEX</span>
+<span class="kn">from</span> <span class="nn">datamaxi.binance</span> <span class="kn">import</span> <span class="n">Binance</span>
+<span class="kn">from</span> <span class="nn">datamaxi.bithumb</span> <span class="kn">import</span> <span class="n">Bithumb</span>
+<span class="kn">from</span> <span class="nn">datamaxi.bybit</span> <span class="kn">import</span> <span class="n">Bybit</span>
+<span class="kn">from</span> <span class="nn">datamaxi.coinone</span> <span class="kn">import</span> <span class="n">Coinone</span>
+<span class="kn">from</span> <span class="nn">datamaxi.huobi</span> <span class="kn">import</span> <span class="n">Huobi</span>
+<span class="kn">from</span> <span class="nn">datamaxi.okx</span> <span class="kn">import</span> <span class="n">Okx</span>
+<span class="kn">from</span> <span class="nn">datamaxi.upbit</span> <span class="kn">import</span> <span class="n">Upbit</span>
+
+<span class="c1"># DeFi</span>
 <span class="kn">from</span> <span class="nn">datamaxi.defillama</span> <span class="kn">import</span> <span class="n">Defillama</span>
+
+<span class="c1"># Trend</span>
 <span class="kn">from</span> <span class="nn">datamaxi.naver</span> <span class="kn">import</span> <span class="n">Naver</span>
 <span class="kn">from</span> <span class="nn">datamaxi.google</span> <span class="kn">import</span> <span class="n">Google</span>
 </code></pre></div>
 <p>and initialize them.</p>
-<div class="highlight"><pre><span></span><code><span class="n">binance</span> <span class="o">=</span> <span class="n">Binance</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># CEX</span>
+<span class="n">binance</span> <span class="o">=</span> <span class="n">Binance</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">bithumb</span> <span class="o">=</span> <span class="n">Bithumb</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">bybit</span> <span class="o">=</span> <span class="n">Bybit</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">coinone</span> <span class="o">=</span> <span class="n">Coinone</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">huobi</span> <span class="o">=</span> <span class="n">Huobi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">okx</span> <span class="o">=</span> <span class="n">Okx</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">upbit</span> <span class="o">=</span> <span class="n">Upbit</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+<span class="c1"># DeFi</span>
 <span class="n">defillama</span> <span class="o">=</span> <span class="n">Defillama</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+<span class="c1"># Trend</span>
 <span class="n">naver</span> <span class="o">=</span> <span class="n">Naver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 <span class="n">google</span> <span class="o">=</span> <span class="n">Google</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>
@@ -765,9 +793,9 @@ First, import the clients,</p>
 <p>If you wish to work on local development please clone/fork the git repo and use <code>pip install -r requirements.txt</code> to setup the project.</p>
 <h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># In case packages are not installed yet</span>
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements/requirements-test.txt
+pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements/requirements-test.txt
 
-python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/
+python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/
 </code></pre></div>
 <h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
 <ul>
@@ -829,7 +857,7 @@ If you discover a bug in this project, please feel free to open an issue to disc
     <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.3220b9d7.min.js"></script>
+      <script src="assets/javascripts/bundle.a7c05c9e.min.js"></script>
       
     
   </body>

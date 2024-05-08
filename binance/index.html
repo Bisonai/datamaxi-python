@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
     
     
       
@@ -368,9 +368,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamaxi.binance.Binance.kline" class="md-nav__link">
+  <a href="#datamaxi.binance.Binance.candle" class="md-nav__link">
     <span class="md-ellipsis">
-      kline
+      candle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamaxi.binance.Binance.intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      intervals
     </span>
   </a>
   
@@ -504,9 +513,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamaxi.binance.Binance.kline" class="md-nav__link">
+  <a href="#datamaxi.binance.Binance.candle" class="md-nav__link">
     <span class="md-ellipsis">
-      kline
+      candle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamaxi.binance.Binance.intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      intervals
     </span>
   </a>
   
@@ -587,9 +605,9 @@
 
 
 
-  <p>Parameters:</p>
+  <p><span class="doc-section-title">Parameters:</span></p>
   <ul>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
         <b><code>api_key</code></b>
             (<code>str</code>, default:
                 <code>None</code>
@@ -599,7 +617,7 @@
           <p>The DataMaxi+ API key</p>
         </div>
       </li>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
         <b><code>**kwargs</code></b>
             (<code><span title="typing.Any">Any</span></code>, default:
                 <code>{}</code>
@@ -629,27 +647,27 @@
 
 
 
-<h3 id="datamaxi.binance.Binance.kline" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">kline</span>
+<h3 id="datamaxi.binance.Binance.candle" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">candle</span>
 
 
-<a href="#datamaxi.binance.Binance.kline" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">kline</span><span class="p">(</span>
+<a href="#datamaxi.binance.Binance.candle" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">candle</span><span class="p">(</span>
     <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1d&quot;</span><span class="p">,</span> <span class="n">pandas</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
 </code></pre></div>
 
   <div class="doc doc-contents ">
   
-      <p>Get Binance k-line data</p>
-<p><code>GET /v1/raw/binance/kline</code></p>
-<p><a href="https://docs.datamaxiplus.com/cex/binance/kline">https://docs.datamaxiplus.com/cex/binance/kline</a></p>
+      <p>Get Binance candle data</p>
+<p><code>GET /v1/raw/binance/candle</code></p>
+<p><a href="https://docs.datamaxiplus.com/cex/binance/candle">https://docs.datamaxiplus.com/cex/binance/candle</a></p>
 
 
 
-  <p>Parameters:</p>
+  <p><span class="doc-section-title">Parameters:</span></p>
   <ul>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
         <b><code>symbol</code></b>
             (<code>str</code>)
         –
@@ -657,17 +675,17 @@
           <p>Binance symbol</p>
         </div>
       </li>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
         <b><code>interval</code></b>
             (<code>str</code>, default:
                 <code>&#39;1d&#39;</code>
 )
         –
         <div class="doc-md-description">
-          <p>Kline interval</p>
+          <p>Candle interval</p>
         </div>
       </li>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
         <b><code>pandas</code></b>
             (<code>bool</code>, default:
                 <code>True</code>
@@ -681,13 +699,49 @@
 
 
 
-  <p>Returns:</p>
+  <p><span class="doc-section-title">Returns:</span></p>
   <ul>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
             <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
         –
         <div class="doc-md-description">
-          <p>Binance kline data for a given symbol and interval in pandas DataFrame</p>
+          <p>Binance candle data for a given symbol and interval in pandas DataFrame</p>
+      </div>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamaxi.binance.Binance.intervals" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">intervals</span>
+
+
+<a href="#datamaxi.binance.Binance.intervals" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">intervals</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Supported Binance supported intervals</p>
+<p><code>GET /v1/raw/binance/intervals</code></p>
+<p><a href="https://docs.datamaxiplus.com/cex/binance/intervals">https://docs.datamaxiplus.com/cex/binance/intervals</a></p>
+
+
+
+  <p><span class="doc-section-title">Returns:</span></p>
+  <ul>
+      <li class="doc-section-item field-body">
+            <code><span title="typing.List">List</span>[str]</code>
+        –
+        <div class="doc-md-description">
+          <p>List of supported Binance intervals</p>
       </div>
       </li>
   </ul>
@@ -717,9 +771,9 @@
 
 
 
-  <p>Returns:</p>
+  <p><span class="doc-section-title">Returns:</span></p>
   <ul>
-      <li class="field-body">
+      <li class="doc-section-item field-body">
             <code><span title="typing.List">List</span>[str]</code>
         –
         <div class="doc-md-description">
@@ -798,7 +852,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      <script src="../assets/javascripts/bundle.a7c05c9e.min.js"></script>
       
     
   </body>
