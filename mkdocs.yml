@@ -30,16 +30,18 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
-  - Binance: binance.md
-  - Bithumb: bithumb.md
-  - Bybit: bybit.md
-  - Coinone: coinone.md
-  - Huobi: huobi.md
-  - Okx: okx.md
-  - Upbit: upbit.md
+  - CEX:
+    - Binance: binance.md
+    - Bithumb: bithumb.md
+    - Bybit: bybit.md
+    - Coinone: coinone.md
+    - Huobi: huobi.md
+    - Okx: okx.md
+    - Upbit: upbit.md
   - Defillama: defillama.md
-  - Naver Trend: naver-trend.md
-  - Google Trend: google-trend.md
+  - Trend:
+    - Naver Trend: naver-trend.md
+    - Google Trend: google-trend.md
 
 theme:
   name: material
