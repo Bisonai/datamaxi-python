@@ -69,3 +69,6 @@ theme:
 
 watch:
   - datamaxi
+
+extra:
+  homepage: https://datamaxiplus.com/
