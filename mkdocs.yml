@@ -70,6 +70,7 @@ theme:
         name: Switch to system preference
   features:
     - header.autohide
+    - announce.dismiss
 
 watch:
   - datamaxi
