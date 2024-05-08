@@ -68,6 +68,8 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to system preference
+  features:
+    - header.autohide
 
 watch:
   - datamaxi
