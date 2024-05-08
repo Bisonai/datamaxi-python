@@ -30,7 +30,7 @@ pip3 install datamaxi
 ## Configuration
 
 Access to DataMaxi+ is protected by API Key.
-If you are interested to try DataMaxi+, you can request your API key at [business@bisonai.com](mailto:business@bisonai.com).
+If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ through [this login/singup page](https://datamaxiplus.com/auth) and get free API key for two months.
 
 | Option             | Explanation                                                                           |
 | ------------------ | ------------------------------------------------------------------------------------- |
@@ -38,8 +38,8 @@ If you are interested to try DataMaxi+, you can request your API key at [busines
 | `base_url`         | If `base_url` is not provided, it defaults to `api.datamaxiplus.com`.                 |
 | `timeout`          | Number of seconds to wait for a server response. By default requests do not time out. |
 | `proxies`          | Proxy through which the request is queried                                            |
-| `show_limit_usage` | Return response as dictionary including including `"limit_usage"` and `"data"` keys   |
-| `show_header`      | Return response as dictionary including including `"header"` and `"data"` keys        |
+| `show_limit_usage` | Return response as dictionary including `"limit_usage"` and `"data"` keys   |
+| `show_header`      | Return response as dictionary including `"header"` and `"data"` keys        |
 
 ### Environment Variables
 
