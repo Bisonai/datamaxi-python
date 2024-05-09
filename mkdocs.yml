@@ -1,4 +1,4 @@
-site_name: DataMaxi+
+site_name: ""
 
 repo_name: bisonai/datamaxi-python
 repo_url: https://github.com/bisonai/datamaxi-python
@@ -20,44 +20,90 @@ plugins:
             merge_init_into_class: true
 
 markdown_extensions:
-- toc:
-    permalink: true
-- codehilite
-- pymdownx.highlight:
-    use_pygments: true
-- pymdownx.superfences
+  - toc:
+      permalink: true
+  - codehilite
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
 
 nav:
   - Main: index.md
   - API: api.md
-  - Binance: binance.md
+  - CEX:
+      - Binance: binance.md
+      - Bithumb: bithumb.md
+      - Bybit: bybit.md
+      - Coinone: coinone.md
+      - Huobi: huobi.md
+      - Okx: okx.md
+      - Upbit: upbit.md
   - Defillama: defillama.md
-  - Naver Trend: naver-trend.md
-  - Google Trend: google-trend.md
+  - Trend:
+      - Naver Trend: naver-trend.md
+      - Google Trend: google-trend.md
 
 theme:
   name: material
+  logo: /assets/logo.png
+  favicon: /assets/images/favicon.png
   icon:
     repo: fontawesome/brands/github
   palette:
-  - media: "(prefers-color-scheme)"
-    toggle:
-      icon: material/brightness-auto
-      name: Switch to light mode
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    primary: teal
-    accent: purple
-    toggle:
-      icon: material/weather-sunny
-      name: Switch to dark mode
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
-    primary: black
-    accent: lime
-    toggle:
-      icon: material/weather-night
-      name: Switch to system preference
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+  features:
+    - header.autohide
+    - announce.dismiss
+    - navigation.footer
+    - navigation.path
 
 watch:
   - datamaxi
+
+extra:
+  homepage: https://datamaxiplus.com/
+  analytics:
+    provider: google
+    property: G-X2HTG9B39J
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="..." target="_blank" rel="noopener">feedback form</a>.
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Bisonai
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/datamaxiplus
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/datamaxiplus
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@datamaxiplus
+
+copyright: Copyright &copy; 2024 BISONAI PTE. LTD.
