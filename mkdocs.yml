@@ -1,4 +1,4 @@
-site_name: DataMaxi+
+site_name: ""
 
 repo_name: bisonai/datamaxi-python
 repo_url: https://github.com/bisonai/datamaxi-python
@@ -71,9 +71,22 @@ theme:
   features:
     - header.autohide
     - announce.dismiss
+    - navigation.footer
+    - navigation.path
 
 watch:
   - datamaxi
 
 extra:
   homepage: https://datamaxiplus.com/
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Bisonai
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/datamaxiplus
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/datamaxiplus
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@datamaxiplus
+
+copyright: Copyright &copy; 2024 BISONAI PTE. LTD.
