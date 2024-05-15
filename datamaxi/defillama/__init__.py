@@ -440,7 +440,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/revenue", params)
 
-    @postprocess(num_index=4)
+    @postprocess(num_index=3)
     def fee_detail(
         self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
@@ -469,7 +469,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/fee/detail", params)
 
-    @postprocess(num_index=4)
+    @postprocess(num_index=3)
     def revenue_detail(
         self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
