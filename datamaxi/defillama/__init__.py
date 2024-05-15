@@ -254,7 +254,7 @@ class Defillama(API):
 
     @postprocess()
     def token_price(
-        self, addresses: Union[str, List[str]] = None, pandas: bool = True
+        self, address: str, change: bool = False, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
         """Get token prices
 
@@ -263,16 +263,17 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/token-price>
 
         Args:
-            addresses (Union[str, List[str]]): single address or multiple addresses
+            address (str): Token address
+            change (bool): Return price change (default: False)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of token prices
         """
-        addresses = make_list(addresses)
-        check_required_parameter_list(addresses, "addresses")
+        check_required_parameters([[address, "address"], [change, "change"]])
         params = {
-            "addresses": encode_string_list(addresses),
+            "address": address,
+            "change": str(change).lower(),
         }
         return self.query("/v1/defillama/token", params)
 
