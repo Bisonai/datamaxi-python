@@ -288,74 +288,54 @@ class Defillama(API):
 
     @postprocess()
     def stablecoin_mcap(
-        self, stablecoin: str = None, pandas: bool = True
+        self, stablecoin: str, chain: str = None, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get market cap for given stablecoin
+        """Get market cap for given stablecoin and chain
 
-        `GET /v1/defillama/stablecoin`
+        `GET /v1/defillama/stablecoin/mcap`
 
         <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
 
         Args:
-            stablecoin (str): stablecoin name
+            stablecoin (str): Stablecoin name
+            chain (str): Chain name (optional)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Timeseries of market cap for given stablecoin
+            Timeseries of market cap for given stablecoin and chain
         """
-        check_required_parameter_list(stablecoin, "stablecoin")
+        check_required_parameter(stablecoin, "stablecoin")
         params = {
             "stablecoin": stablecoin,
         }
-        return self.query("/v1/defillama/stablecoin", params)
 
-    @postprocess()
-    def stablecoin_chain_mcap(
-        self, stablecoin: str, chain: str, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get market cap for a given stablecoin on a specific chain
+        if chain is not None:
+            params["chain"] = chain
 
-        `GET /v1/defillama/stablecoin`
-
-        <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
-
-        Args:
-            stablecoin (str): stablecoin name
-            chain (str): chain name
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of market cap for given stablecoin on a specific chain
-        """
-        check_required_parameters([[stablecoin, "stablecoin"], [chain, "chain"]])
-        params = {
-            "stablecoin": stablecoin,
-            "chain": chain,
-        }
-        return self.query("/v1/defillama/stablecoin", params)
+        return self.query("/v1/defillama/stablecoin/mcap", params)
 
     @postprocess()
     def stablecoin_price(
-        self, stablecoins: Union[str, List[str]] = None, pandas: bool = True
+        self, stablecoin: str, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get price for given stablecoins
+        """Get price for given stablecoin
 
         `GET /v1/defillama/stablecoin/price`
 
         <https://docs.datamaxiplus.com/defillama/stablecoin-price>
 
         Args:
-            stablecoins (Union[str, List[str]]): single stablecoin or multiple stablecoin names
+            stablecoin (str): Stablecoin name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of stablecoin prices
         """
-        stablecoins = make_list(stablecoins)
-        check_required_parameter_list(stablecoins, "stablecoins")
+        check_required_parameter(stablecoin, "stablecoin")
         params = {
-            "stablecoins": encode_string_list(stablecoins),
+            "stablecoin": stablecoin,
         }
+        print(params)
         return self.query("/v1/defillama/stablecoin/price", params)
 
     @postprocess()
