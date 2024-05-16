@@ -46,7 +46,7 @@ def check_at_least_one_set_parameters(params):
             check_required_parameter(p[0], p[1])
             at_least_one_set = True
             break
-        except:  # flake8: noqa: E722
+        except:  # noqa: E722
             pass
 
     if not at_least_one_set:
