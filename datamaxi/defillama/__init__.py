@@ -4,6 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter_list
+from datamaxi.lib.utils import check_at_least_one_set_parameters
 from datamaxi.lib.utils import encode_string_list
 from datamaxi.lib.utils import make_list
 from datamaxi.lib.utils import postprocess
@@ -438,7 +439,11 @@ class Defillama(API):
 
     @postprocess(num_index=4)
     def fee_detail(
-        self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
+        self,
+        protocol: str = None,
+        chain: str = None,
+        daily: bool = True,
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get fee detail for given protocol and chain
 
@@ -448,18 +453,22 @@ class Defillama(API):
 
         Args:
             protocol (str): Protocol name
-            chain (str): Chain name (optional)
+            chain (str): Chain name
             daily (bool): Daily fee or total fee
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of fee detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [daily, "daily"]])
+        check_required_parameter(daily, "daily")
         params = {
-            "protocol": protocol,
             "daily": str(daily).lower(),
         }
+
+        check_at_least_one_set_parameters([[protocol, "protocol"], [chain, "chain"]])
+        if protocol is not None:
+            params["protocol"] = protocol
+
         if chain is not None:
             params["chain"] = chain
 
@@ -467,7 +476,11 @@ class Defillama(API):
 
     @postprocess(num_index=4)
     def revenue_detail(
-        self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
+        self,
+        protocol: str = None,
+        chain: str = None,
+        daily: bool = True,
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get revenue detail for given protocol and chain
 
@@ -477,18 +490,22 @@ class Defillama(API):
 
         Args:
             protocol (str): Protocol name
-            chain (str): Chain name (optional)
+            chain (str): Chain name
             daily (bool): Daily revenue or total revenue
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of revenue detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [daily, "daily"]])
+        check_required_parameter(daily, "daily")
         params = {
-            "protocol": protocol,
             "daily": str(daily).lower(),
         }
+
+        check_at_least_one_set_parameters([[protocol, "protocol"], [chain, "chain"]])
+        if protocol is not None:
+            params["protocol"] = protocol
+
         if chain is not None:
             params["chain"] = chain
 
