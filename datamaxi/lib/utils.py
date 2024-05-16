@@ -3,6 +3,7 @@ from urllib.parse import urlencode
 import pandas as pd
 from functools import wraps
 from datamaxi.error import ParameterRequiredError
+from datamaxi.error import AtLeastOneParameterRequiredError
 
 
 def to_float(x):
@@ -36,6 +37,20 @@ def check_required_parameters(params):
     """
     for p in params:
         check_required_parameter(p[0], p[1])
+
+
+def check_at_least_one_set_parameters(params):
+    at_least_one_set = False
+    for p in params:
+        try:
+            check_required_parameter(p[0], p[1])
+            at_least_one_set = True
+            break
+        except:  # noqa: E722
+            pass
+
+    if not at_least_one_set:
+        raise AtLeastOneParameterRequiredError()
 
 
 def check_required_parameter_list(values: List, name: str):
