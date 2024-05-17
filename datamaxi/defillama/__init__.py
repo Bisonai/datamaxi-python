@@ -279,7 +279,7 @@ class Defillama(API):
         return self.query("/v1/defillama/token", params)
 
     @postprocess()
-    def pool_yield(self, poolId: str) -> pd.DataFrame:
+    def pool_yield(self, poolId: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get yield for given pool
 
         `GET /v1/defillama/pool/yield`
@@ -288,6 +288,7 @@ class Defillama(API):
 
         Args:
             poolId (str): Pool ID
+            pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of yield for given pool
