@@ -278,13 +278,26 @@ class Defillama(API):
         }
         return self.query("/v1/defillama/token", params)
 
-    # def yields(self, pools: Union[str, List[str]]=None) -> pd.DataFrame:
-    #     pools = make_list(pools)
-    #     check_required_parameter_list(pools, "pools")
-    #     params = {
-    #         "poolIds": encode_string_list(pools),
-    #     }
-    #     return self.query("/v1/defillama/yield", params)
+    @postprocess()
+    def pool_yield(self, poolId: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+        """Get yield for given pool
+
+        `GET /v1/defillama/pool/yield`
+
+        <https://docs.datamaxiplus.com/defillama/yield>
+
+        Args:
+            poolId (str): Pool ID
+            pandas (bool): Return data as pandas DataFrame
+
+        Returns:
+            Timeseries of yield for given pool
+        """
+        check_required_parameter(poolId, "poolId")
+        params = {
+            "poolId": poolId,
+        }
+        return self.query("/v1/defillama/pool/yield", params)
 
     @postprocess()
     def stablecoin_mcap(
