@@ -3,10 +3,7 @@ import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.lib.utils import check_required_parameter_list
 from datamaxi.lib.utils import check_at_least_one_set_parameters
-from datamaxi.lib.utils import encode_string_list
-from datamaxi.lib.utils import make_list
 from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
 
@@ -91,7 +88,9 @@ class Defillama(API):
         return self.query(url_path)
 
     @postprocess()
-    def tvl(self, pandas: bool = True) -> Union[List, pd.DataFrame]:
+    def tvl(
+        self, protocol: str = None, chain: str = None, pandas: bool = True
+    ) -> Union[List, pd.DataFrame]:
         """Get total TVL across all chains and protocols
 
         `GET /v1/defillama/tvl`
@@ -99,157 +98,72 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
+            protocol (str): Protocol name
+            chain (str): Chain name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of total TVL
         """
+        params = {}
+        if protocol is not None:
+            params["protocol"] = protocol
+
+        if chain is not None:
+            params["chain"] = chain
+
         url_path = "/v1/defillama/tvl"
-        return self.query(url_path)
-
-    @postprocess()
-    def protocol_tvl(
-        self, protocols: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given protocols
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of protocol TVLs
-        """
-        protocols = make_list(protocols)
-        check_required_parameter_list(protocols, "protocols")
-        params = {"protocols": encode_string_list(protocols)}
-        return self.query("/v1/defillama/tvl", params)
-
-    @postprocess()
-    def chain_tvl(
-        self, chains: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given chains
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            chains (Union[str, List[str]]): single chain or multiple chain names
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of chain TVLs
-        """
-        chains = make_list(chains)
-        check_required_parameter_list(chains, "chains")
-        params = {"chains": encode_string_list(chains)}
-        return self.query("/v1/defillama/tvl", params)
-
-    @postprocess()
-    def protocol_chain_tvl(
-        self, protocol: str, chain: str, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given protocol and chain
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocol (str): protocol name
-            chain (str): chain name
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of protocol TVL on a given chain
-        """
-        check_required_parameters([[protocol, "protocol"], [chain, "chain"]])
-        params = {"chain": chain, "protocol": protocol}
-        return self.query("/v1/defillama/tvl", params)
+        return self.query(url_path, params)
 
     @postprocess(num_index=2)
-    def protocol_token_tvl(
-        self, protocol: str, usd: bool = True, pandas: bool = True
+    def tvl_detail(
+        self, protocol: str, chain: str = None, token: bool = False, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get token TVL on a given protocol
+        """Get TVL detail for given protocol and chain
 
-        `GET /v1/defillama/tvl`
+        `GET /v1/defillama/tvl/detail`
 
-        <https://docs.datamaxiplus.com/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl-detail>
 
         Args:
-            protocol (str): protocol name
-            usd (bool): Convert to USD otherwise return token amount
+            protocol (str): Protocol name
+            chain (str): Chain name
+            token (bool): Return token amount (return by default USD)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Timeseries of token TVL for a given protocol
+            Timeseries of TVL detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [usd, "usd"]])
-        params = {
-            "protocol": protocol,
-            "token": "true",
-            "usd": str(usd).lower(),
-        }
-        return self.query("/v1/defillama/tvl", params)
+        check_required_parameter(protocol, "protocol")
+        params = {"protocol": protocol}
 
-    @postprocess(num_index=2)
-    def protocol_chain_token_tvl(
-        self, protocol: str, chain: str, usd: bool = True, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get token TVL on a given protocol and chain
+        if chain is not None:
+            params["chain"] = chain
 
-        `GET /v1/defillama/tvl`
+        if token:
+            params["token"] = str(token).lower()
 
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocol (str): protocol name
-            chain (str): chain name
-            usd (bool): Convert to USD otherwise return token amount
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of token TVL for a given protocol and chain
-        """
-        check_required_parameters(
-            [[protocol, "protocol"], [chain, "chain"], [usd, "usd"]]
-        )
-        params = {
-            "protocol": protocol,
-            "chain": chain,
-            "token": "true",
-            "usd": str(usd).lower(),
-        }
-        return self.query("/v1/defillama/tvl", params)
+        url_path = "/v1/defillama/tvl/detail"
+        return self.query(url_path, params)
 
     @postprocess()
-    def protocol_mcap(
-        self, protocols: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get market cap for given protocols
+    def mcap(self, protocol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+        """Get market cap for given protocol
 
         `GET /v1/defillama/mcap`
 
         <https://docs.datamaxiplus.com/defillama/mcap>
 
         Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
+            protocols (str): Protocol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of market cap for given protocols
         """
-        protocols = make_list(protocols)
-        check_required_parameter_list(protocols, "protocols")
+        check_required_parameter(protocol, "protocol")
         params = {
-            "protocols": encode_string_list(protocols),
+            "protocol": protocol,
         }
         return self.query("/v1/defillama/mcap", params)
 
