@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="/assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.23">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -775,9 +775,9 @@
 
 
 <a id="datamaxi.naver"></a>
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
 
   <div class="doc doc-children">
 
@@ -793,49 +793,48 @@
 
 
 <h2 id="datamaxi.naver.Naver" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>          <span class="doc doc-object-name doc-class-name">Naver</span>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">Naver</span>
 
 
 <a href="#datamaxi.naver.Naver" class="headerlink" title="Permanent link">&para;</a></h2>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">Naver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
 </code></pre></div>
 
-  <div class="doc doc-contents ">
-          <p class="doc doc-class-bases">
-            Bases: <code><a class="autorefs autorefs-internal" title="datamaxi.api.API" href="../api/#datamaxi.api.API">API</a></code></p>
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="datamaxi.api.API" href="../api/#datamaxi.api.API">API</a></code></p>
 
-  
+
       <p>Client to fetch Naver trend data from DataMaxi+ API.</p>
-  
 
 
 
-  <p><span class="doc-section-title">Parameters:</span></p>
-  <ul>
-      <li class="doc-section-item field-body">
-        <b><code>api_key</code></b>
-            (<code>str</code>, default:
-                <code>None</code>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code>api_key</code></b>
+              (<code>str</code>, default:
+                  <code>None</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>The DataMaxi+ API key</p>
-        </div>
-      </li>
-      <li class="doc-section-item field-body">
-        <b><code>**kwargs</code></b>
-            (<code><span title="typing.Any">Any</span></code>, default:
-                <code>{}</code>
+          –
+          <div class="doc-md-description">
+            <p>The DataMaxi+ API key</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>**kwargs</code></b>
+              (<code><span title="typing.Any">Any</span></code>, default:
+                  <code>{}</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Keyword arguments used by <code>datamaxi.api.API</code>.</p>
-        </div>
-      </li>
-  </ul>
+          –
+          <div class="doc-md-description">
+            <p>Keyword arguments used by <code>datamaxi.api.API</code>.</p>
+          </div>
+        </li>
+    </ul>
 
 
-  
+
 
   <div class="doc doc-children">
 
@@ -847,49 +846,44 @@
 
 
 
-
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="datamaxi.naver.Naver.keywords" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">keywords</span>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">keywords</span>
 
 
 <a href="#datamaxi.naver.Naver.keywords" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">keywords</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Get Naver trend supported keywords</p>
 <p><code>GET /v1/naver/keywords</code></p>
 <p><a href="https://docs.datamaxi.finance/naver/keywords">https://docs.datamaxi.finance/naver/keywords</a></p>
 
 
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.List">List</span>[str]</code>
+          –
+          <div class="doc-md-description">
+            <p>List of supported Naver trend keywords</p>
+          </div>
+        </li>
+    </ul>
 
-  <p><span class="doc-section-title">Returns:</span></p>
-  <ul>
-      <li class="doc-section-item field-body">
-            <code><span title="typing.List">List</span>[str]</code>
-        –
-        <div class="doc-md-description">
-          <p>List of supported Naver trend keywords</p>
-      </div>
-      </li>
-  </ul>
-
-  </div>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
 <h3 id="datamaxi.naver.Naver.trend" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">trend</span>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">trend</span>
 
 
 <a href="#datamaxi.naver.Naver.trend" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -898,68 +892,65 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
 </code></pre></div>
 
-  <div class="doc doc-contents ">
-  
+    <div class="doc doc-contents ">
+
       <p>Get Naver trend for given keyword</p>
 <p><code>GET /v1/naver/trend</code></p>
 <p><a href="https://docs.datamaxiplus.com/naver/trend">https://docs.datamaxiplus.com/naver/trend</a></p>
 
 
-
-  <p><span class="doc-section-title">Parameters:</span></p>
-  <ul>
-      <li class="doc-section-item field-body">
-        <b><code>keyword</code></b>
-            (<code>str</code>)
-        –
-        <div class="doc-md-description">
-          <p>keyword to search for</p>
-        </div>
-      </li>
-      <li class="doc-section-item field-body">
-        <b><code>pandas</code></b>
-            (<code>bool</code>, default:
-                <code>True</code>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code>keyword</code></b>
+              (<code>str</code>)
+          –
+          <div class="doc-md-description">
+            <p>keyword to search for</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>pandas</code></b>
+              (<code>bool</code>, default:
+                  <code>True</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Return data as pandas DataFrame</p>
-        </div>
-      </li>
-  </ul>
+          –
+          <div class="doc-md-description">
+            <p>Return data as pandas DataFrame</p>
+          </div>
+        </li>
+    </ul>
 
 
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
+          –
+          <div class="doc-md-description">
+            <p>Naver trend data</p>
+          </div>
+        </li>
+    </ul>
 
-  <p><span class="doc-section-title">Returns:</span></p>
-  <ul>
-      <li class="doc-section-item field-body">
-            <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
-        –
-        <div class="doc-md-description">
-          <p>Naver trend data</p>
-      </div>
-      </li>
-  </ul>
-
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
+    </div>
 
 </div>
 
 
 
+  </div>
+
+    </div>
+
+</div>
+
+
+
 
   </div>
 
-  </div>
+    </div>
 
 </div>
 
@@ -1145,7 +1136,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      <script src="../assets/javascripts/bundle.ebd0bdb7.min.js"></script>
       
     
   </body>
