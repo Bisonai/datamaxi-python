@@ -18,7 +18,7 @@ class Naver(API):
         """
         if "base_url" not in kwargs:
             kwargs["base_url"] = BASE_URL
-            super().__init__(api_key, **kwargs)
+        super().__init__(api_key, **kwargs)
 
     def keywords(self) -> List[str]:
         """Get Naver trend supported keywords

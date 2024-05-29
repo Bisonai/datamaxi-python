@@ -3,9 +3,7 @@ import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.lib.utils import check_required_parameter_list
-from datamaxi.lib.utils import encode_string_list
-from datamaxi.lib.utils import make_list
+from datamaxi.lib.utils import check_at_least_one_set_parameters
 from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
 
@@ -22,7 +20,7 @@ class Defillama(API):
         """
         if "base_url" not in kwargs:
             kwargs["base_url"] = BASE_URL
-            super().__init__(api_key, **kwargs)
+        super().__init__(api_key, **kwargs)
 
     def protocols(self) -> List[str]:
         """Get supported protocols
@@ -90,7 +88,9 @@ class Defillama(API):
         return self.query(url_path)
 
     @postprocess()
-    def tvl(self, pandas: bool = True) -> Union[List, pd.DataFrame]:
+    def tvl(
+        self, protocol: str = None, chain: str = None, pandas: bool = True
+    ) -> Union[List, pd.DataFrame]:
         """Get total TVL across all chains and protocols
 
         `GET /v1/defillama/tvl`
@@ -98,163 +98,78 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/tvl>
 
         Args:
+            protocol (str): Protocol name
+            chain (str): Chain name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of total TVL
         """
+        params = {}
+        if protocol is not None:
+            params["protocol"] = protocol
+
+        if chain is not None:
+            params["chain"] = chain
+
         url_path = "/v1/defillama/tvl"
-        return self.query(url_path)
-
-    @postprocess()
-    def protocol_tvl(
-        self, protocols: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given protocols
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of protocol TVLs
-        """
-        protocols = make_list(protocols)
-        check_required_parameter_list(protocols, "protocols")
-        params = {"protocols": encode_string_list(protocols)}
-        return self.query("/v1/defillama/tvl", params)
-
-    @postprocess()
-    def chain_tvl(
-        self, chains: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given chains
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            chains (Union[str, List[str]]): single chain or multiple chain names
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of chain TVLs
-        """
-        chains = make_list(chains)
-        check_required_parameter_list(chains, "chains")
-        params = {"chains": encode_string_list(chains)}
-        return self.query("/v1/defillama/tvl", params)
-
-    @postprocess()
-    def protocol_chain_tvl(
-        self, protocol: str, chain: str, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get TVL for given protocol and chain
-
-        `GET /v1/defillama/tvl`
-
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocol (str): protocol name
-            chain (str): chain name
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of protocol TVL on a given chain
-        """
-        check_required_parameters([[protocol, "protocol"], [chain, "chain"]])
-        params = {"chain": chain, "protocol": protocol}
-        return self.query("/v1/defillama/tvl", params)
+        return self.query(url_path, params)
 
     @postprocess(num_index=2)
-    def protocol_token_tvl(
-        self, protocol: str, usd: bool = True, pandas: bool = True
+    def tvl_detail(
+        self, protocol: str, chain: str = None, token: bool = False, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get token TVL on a given protocol
+        """Get TVL detail for given protocol and chain
 
-        `GET /v1/defillama/tvl`
+        `GET /v1/defillama/tvl/detail`
 
-        <https://docs.datamaxiplus.com/defillama/tvl>
+        <https://docs.datamaxiplus.com/defillama/tvl-detail>
 
         Args:
-            protocol (str): protocol name
-            usd (bool): Convert to USD otherwise return token amount
+            protocol (str): Protocol name
+            chain (str): Chain name
+            token (bool): Return token amount (return by default USD)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Timeseries of token TVL for a given protocol
+            Timeseries of TVL detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [usd, "usd"]])
-        params = {
-            "protocol": protocol,
-            "token": "true",
-            "usd": str(usd).lower(),
-        }
-        return self.query("/v1/defillama/tvl", params)
+        check_required_parameter(protocol, "protocol")
+        params = {"protocol": protocol}
 
-    @postprocess(num_index=2)
-    def protocol_chain_token_tvl(
-        self, protocol: str, chain: str, usd: bool = True, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get token TVL on a given protocol and chain
+        if chain is not None:
+            params["chain"] = chain
 
-        `GET /v1/defillama/tvl`
+        if token:
+            params["token"] = str(token).lower()
 
-        <https://docs.datamaxiplus.com/defillama/tvl>
-
-        Args:
-            protocol (str): protocol name
-            chain (str): chain name
-            usd (bool): Convert to USD otherwise return token amount
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of token TVL for a given protocol and chain
-        """
-        check_required_parameters(
-            [[protocol, "protocol"], [chain, "chain"], [usd, "usd"]]
-        )
-        params = {
-            "protocol": protocol,
-            "chain": chain,
-            "token": "true",
-            "usd": str(usd).lower(),
-        }
-        return self.query("/v1/defillama/tvl", params)
+        url_path = "/v1/defillama/tvl/detail"
+        return self.query(url_path, params)
 
     @postprocess()
-    def protocol_mcap(
-        self, protocols: Union[str, List[str]] = None, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get market cap for given protocols
+    def mcap(self, protocol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+        """Get market cap for given protocol
 
         `GET /v1/defillama/mcap`
 
         <https://docs.datamaxiplus.com/defillama/mcap>
 
         Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
+            protocols (str): Protocol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of market cap for given protocols
         """
-        protocols = make_list(protocols)
-        check_required_parameter_list(protocols, "protocols")
+        check_required_parameter(protocol, "protocol")
         params = {
-            "protocols": encode_string_list(protocols),
+            "protocol": protocol,
         }
         return self.query("/v1/defillama/mcap", params)
 
     @postprocess()
     def token_price(
-        self, addresses: Union[str, List[str]] = None, pandas: bool = True
+        self, address: str, change: bool = False, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
         """Get token prices
 
@@ -263,117 +178,111 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/token-price>
 
         Args:
-            addresses (Union[str, List[str]]): single address or multiple addresses
+            address (str): Token address
+            change (bool): Return price change (default: False)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of token prices
         """
-        addresses = make_list(addresses)
-        check_required_parameter_list(addresses, "addresses")
+        check_required_parameters([[address, "address"], [change, "change"]])
         params = {
-            "addresses": encode_string_list(addresses),
+            "address": address,
+            "change": str(change).lower(),
         }
         return self.query("/v1/defillama/token", params)
 
-    # def yields(self, pools: Union[str, List[str]]=None) -> pd.DataFrame:
-    #     pools = make_list(pools)
-    #     check_required_parameter_list(pools, "pools")
-    #     params = {
-    #         "poolIds": encode_string_list(pools),
-    #     }
-    #     return self.query("/v1/defillama/yield", params)
+    @postprocess()
+    def pool_yield(self, poolId: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+        """Get yield for given pool
+
+        `GET /v1/defillama/pool/yield`
+
+        <https://docs.datamaxiplus.com/defillama/yield>
+
+        Args:
+            poolId (str): Pool ID
+            pandas (bool): Return data as pandas DataFrame
+
+        Returns:
+            Timeseries of yield for given pool
+        """
+        check_required_parameter(poolId, "poolId")
+        params = {
+            "poolId": poolId,
+        }
+        return self.query("/v1/defillama/pool/yield", params)
 
     @postprocess()
     def stablecoin_mcap(
-        self, stablecoin: str = None, pandas: bool = True
+        self, stablecoin: str, chain: str = None, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get market cap for given stablecoin
+        """Get market cap for given stablecoin and chain
 
-        `GET /v1/defillama/stablecoin`
+        `GET /v1/defillama/stablecoin/mcap`
 
         <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
 
         Args:
-            stablecoin (str): stablecoin name
+            stablecoin (str): Stablecoin name
+            chain (str): Chain name (optional)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Timeseries of market cap for given stablecoin
+            Timeseries of market cap for given stablecoin and chain
         """
-        check_required_parameter_list(stablecoin, "stablecoin")
+        check_required_parameter(stablecoin, "stablecoin")
         params = {
             "stablecoin": stablecoin,
         }
-        return self.query("/v1/defillama/stablecoin", params)
 
-    @postprocess()
-    def stablecoin_chain_mcap(
-        self, stablecoin: str, chain: str, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get market cap for a given stablecoin on a specific chain
+        if chain is not None:
+            params["chain"] = chain
 
-        `GET /v1/defillama/stablecoin`
-
-        <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
-
-        Args:
-            stablecoin (str): stablecoin name
-            chain (str): chain name
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of market cap for given stablecoin on a specific chain
-        """
-        check_required_parameters([[stablecoin, "stablecoin"], [chain, "chain"]])
-        params = {
-            "stablecoin": stablecoin,
-            "chain": chain,
-        }
-        return self.query("/v1/defillama/stablecoin", params)
+        return self.query("/v1/defillama/stablecoin/mcap", params)
 
     @postprocess()
     def stablecoin_price(
-        self, stablecoins: Union[str, List[str]] = None, pandas: bool = True
+        self, stablecoin: str, pandas: bool = True
     ) -> Union[List, pd.DataFrame]:
-        """Get price for given stablecoins
+        """Get price for given stablecoin
 
         `GET /v1/defillama/stablecoin/price`
 
         <https://docs.datamaxiplus.com/defillama/stablecoin-price>
 
         Args:
-            stablecoins (Union[str, List[str]]): single stablecoin or multiple stablecoin names
+            stablecoin (str): Stablecoin name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of stablecoin prices
         """
-        stablecoins = make_list(stablecoins)
-        check_required_parameter_list(stablecoins, "stablecoins")
+        check_required_parameter(stablecoin, "stablecoin")
         params = {
-            "stablecoins": encode_string_list(stablecoins),
+            "stablecoin": stablecoin,
         }
+        print(params)
         return self.query("/v1/defillama/stablecoin/price", params)
 
     @postprocess()
     def fee(
         self,
-        protocols: Union[str, List[str]] = None,
-        chains: Union[str, List[str]] = None,
+        protocol: str = None,
+        chain: str = None,
         daily: bool = True,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
-        """Get fee for given protocols or chains
+        """Get fee for given protocol or chain
 
         `GET /v1/defillama/fee`
 
         <https://docs.datamaxiplus.com/defillama/fee>
 
         Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
-            chains (Union[str, List[str]]): single chain or multiple chain names
-            daily (bool): daily fee or total fee
+            protocol (str): Protocol name
+            chain (str): Chain name
+            daily (bool): Daily fee or total fee
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -384,38 +293,36 @@ class Defillama(API):
             "daily": str(daily).lower(),
         }
 
-        if not ((protocols is None) ^ (chains is None)):
+        if not ((protocol is None) ^ (chain is None)):
             raise ValueError("Either protocols or chains should be provided")
 
-        if protocols is not None:
-            protocols = make_list(protocols)
-            check_required_parameter_list(protocols, "protocols")
-            params["protocols"] = encode_string_list(protocols)
-        elif chains is not None:
-            chains = make_list(chains)
-            check_required_parameter_list(chains, "chains")
-            params["chains"] = encode_string_list(chains)
+        if protocol is not None:
+            check_required_parameter(protocol, "protocol")
+            params["protocol"] = protocol
+        elif chain is not None:
+            check_required_parameter(chain, "chain")
+            params["chain"] = chain
 
         return self.query("/v1/defillama/fee", params)
 
     @postprocess()
     def revenue(
         self,
-        protocols: Union[str, List[str]] = None,
-        chains: Union[str, List[str]] = None,
+        protocol: str = None,
+        chain: str = None,
         daily: bool = True,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
-        """Get revenue for given protocols or chains
+        """Get revenue for given protocol or chain
 
         `GET /v1/defillama/revenue`
 
         <https://docs.datamaxiplus.com/defillama/revenue>
 
         Args:
-            protocols (Union[str, List[str]]): single protocol or multiple protocol names
-            chains (Union[str, List[str]]): single chain or multiple chain names
-            daily (bool): daily revenue or total revenue
+            protocol (str): Protocol name
+            chain (str): Chain name
+            daily (bool): Daily revenue or total revenue
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -426,23 +333,25 @@ class Defillama(API):
             "daily": str(daily).lower(),
         }
 
-        if not ((protocols is None) ^ (chains is None)):
+        if not ((protocol is None) ^ (chain is None)):
             raise ValueError("Either protocols or chains should be provided")
 
-        if protocols is not None:
-            protocols = make_list(protocols)
-            check_required_parameter_list(protocols, "protocols")
-            params["protocols"] = encode_string_list(protocols)
-        elif chains is not None:
-            chains = make_list(chains)
-            check_required_parameter_list(chains, "chains")
-            params["chains"] = encode_string_list(chains)
+        if protocol is not None:
+            check_required_parameter(protocol, "protocol")
+            params["protocol"] = protocol
+        elif chain is not None:
+            check_required_parameter(chain, "chain")
+            params["chain"] = chain
 
         return self.query("/v1/defillama/revenue", params)
 
-    @postprocess(num_index=4)
+    @postprocess(num_index=3)
     def fee_detail(
-        self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
+        self,
+        protocol: str = None,
+        chain: str = None,
+        daily: bool = True,
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get fee detail for given protocol and chain
 
@@ -451,27 +360,35 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/fee-detail>
 
         Args:
-            protocol (str): protocol name
-            chain (str): chain name (optional)
-            daily (bool): daily fee or total fee
+            protocol (str): Protocol name
+            chain (str): Chain name
+            daily (bool): Daily fee or total fee
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of fee detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [daily, "daily"]])
+        check_required_parameter(daily, "daily")
         params = {
-            "protocol": protocol,
             "daily": str(daily).lower(),
         }
+
+        check_at_least_one_set_parameters([[protocol, "protocol"], [chain, "chain"]])
+        if protocol is not None:
+            params["protocol"] = protocol
+
         if chain is not None:
             params["chain"] = chain
 
         return self.query("/v1/defillama/fee/detail", params)
 
-    @postprocess(num_index=4)
+    @postprocess(num_index=3)
     def revenue_detail(
-        self, protocol: str, chain: str = None, daily: bool = True, pandas: bool = True
+        self,
+        protocol: str = None,
+        chain: str = None,
+        daily: bool = True,
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get revenue detail for given protocol and chain
 
@@ -480,19 +397,23 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/revenue-detail>
 
         Args:
-            protocol (str): protocol name
-            chain (str): chain name (optional)
-            daily (bool): daily revenue or total revenue
+            protocol (str): Protocol name
+            chain (str): Chain name
+            daily (bool): Daily revenue or total revenue
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Timeseries of revenue detail for a given protocol and chain
         """
-        check_required_parameters([[protocol, "protocol"], [daily, "daily"]])
+        check_required_parameter(daily, "daily")
         params = {
-            "protocol": protocol,
             "daily": str(daily).lower(),
         }
+
+        check_at_least_one_set_parameters([[protocol, "protocol"], [chain, "chain"]])
+        if protocol is not None:
+            params["protocol"] = protocol
+
         if chain is not None:
             params["chain"] = chain
 

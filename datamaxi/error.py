@@ -28,3 +28,8 @@ class ParameterRequiredError(Error):
 
     def __str__(self):
         return "%s is mandatory, but received empty." % (", ".join(self.params))
+
+
+class AtLeastOneParameterRequiredError(Error):
+    def __str__(self):
+        return "At least one parameter is required."
