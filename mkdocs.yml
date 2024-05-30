@@ -77,6 +77,8 @@ theme:
 watch:
   - datamaxi
 
+extra_css: [extra.css]
+
 extra:
   homepage: https://datamaxiplus.com/
   analytics:
