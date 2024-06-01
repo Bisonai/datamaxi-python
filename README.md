@@ -38,8 +38,8 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 | `base_url`         | If `base_url` is not provided, it defaults to `api.datamaxiplus.com`.                 |
 | `timeout`          | Number of seconds to wait for a server response. By default requests do not time out. |
 | `proxies`          | Proxy through which the request is queried                                            |
-| `show_limit_usage` | Return response as dictionary including `"limit_usage"` and `"data"` keys   |
-| `show_header`      | Return response as dictionary including `"header"` and `"data"` keys        |
+| `show_limit_usage` | Return response as dictionary including `"limit_usage"` and `"data"` keys             |
+| `show_header`      | Return response as dictionary including `"header"` and `"data"` keys                  |
 
 ### Environment Variables
 
@@ -123,7 +123,6 @@ python3 -m pytest tests/
 ## Links
 
 - [DataMaxi+](https://datamaxiplus.com/)
-- [DataMaxi+ API](https://api.datamaxiplus.com/)
 - [DataMaxi+ API Documentation](https://docs.datamaxiplus.com/)
 
 ## Contributing

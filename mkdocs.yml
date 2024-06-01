@@ -50,24 +50,20 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: teal
-      accent: purple
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
-        name: Switch to dark mode
+        name: Switch to light mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
-      accent: lime
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
-        name: Switch to system preference
+        name: Switch to light mode
   features:
     - header.autohide
     - announce.dismiss
@@ -77,8 +73,10 @@ theme:
 watch:
   - datamaxi
 
+extra_css: [extra.css]
+
 extra:
-  homepage: https://datamaxiplus.com/
+  homepage:
   analytics:
     provider: google
     property: G-X2HTG9B39J
@@ -106,4 +104,4 @@ extra:
     - icon: fontawesome/brands/medium
       link: https://medium.com/@datamaxiplus
 
-copyright: Copyright &copy; 2024 BISONAI PTE. LTD.
+copyright: Copyright &copy; 2024 DataMaxi+
