@@ -1,0 +1,26 @@
+/* For light mode */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #cba202;
+  .md-header {
+    background-color: #5e7283;
+  }
+  .md-main {
+    background-color: #ffffff;
+  }
+}
+
+/* For dark mode */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #fed535;
+  .md-header {
+    background-color: #242526;
+  }
+  .md-main {
+    background-color: #1b1b1d;
+  }
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 0.9rem;
+}
