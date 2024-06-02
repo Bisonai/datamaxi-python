@@ -80,5 +80,5 @@ class Datamaxi(API):
         check_required_parameters(
             [[exchange, "exchange"], [symbol, "symbol"], [interval, "interval"]]
         )
-        params = {"symbol": symbol, "interval": interval}
+        params = {"exchange": exchange, "symbol": symbol, "interval": interval}
         return self.query("/v1/candle", params)
