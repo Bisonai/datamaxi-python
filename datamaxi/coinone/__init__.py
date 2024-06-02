@@ -22,7 +22,7 @@ class Coinone(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Coinone supported symbols
+        """Coinone supported symbols
 
         `GET /v1/raw/coinone/symbols`
 
@@ -35,7 +35,7 @@ class Coinone(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Coinone supported intervals
+        """Coinone supported intervals
 
         `GET /v1/raw/coinone/intervals`
 
