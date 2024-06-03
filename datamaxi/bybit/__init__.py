@@ -22,7 +22,7 @@ class Bybit(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Bybit supported symbols
+        """Bybit supported symbols
 
         `GET /v1/raw/bybit/symbols`
 
@@ -35,7 +35,7 @@ class Bybit(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Bybit supported intervals
+        """Bybit supported intervals
 
         `GET /v1/raw/bybit/intervals`
 

@@ -22,7 +22,7 @@ class Upbit(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Upbit supported symbols
+        """Upbit supported symbols
 
         `GET /v1/raw/upbit/symbols`
 
@@ -35,7 +35,7 @@ class Upbit(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Upbit supported intervals
+        """Upbit supported intervals
 
         `GET /v1/raw/upbit/intervals`
 

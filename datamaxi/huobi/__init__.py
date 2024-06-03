@@ -22,7 +22,7 @@ class Huobi(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Huobi supported symbols
+        """Huobi supported symbols
 
         `GET /v1/raw/huobi/symbols`
 
@@ -35,7 +35,7 @@ class Huobi(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Huobi supported intervals
+        """Huobi supported intervals
 
         `GET /v1/raw/huobi/intervals`
 

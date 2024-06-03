@@ -22,7 +22,7 @@ class Binance(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Binance supported symbols
+        """Binance supported symbols
 
         `GET /v1/raw/binance/symbols`
 
@@ -35,7 +35,7 @@ class Binance(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Binance supported intervals
+        """Binance supported intervals
 
         `GET /v1/raw/binance/intervals`
 

@@ -22,7 +22,7 @@ class Okx(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Okx supported symbols
+        """Okx supported symbols
 
         `GET /v1/raw/okx/symbols`
 
@@ -35,7 +35,7 @@ class Okx(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Okx supported intervals
+        """Okx supported intervals
 
         `GET /v1/raw/okx/intervals`
 

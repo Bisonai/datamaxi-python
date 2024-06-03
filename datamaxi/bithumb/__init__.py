@@ -22,7 +22,7 @@ class Bithumb(API):
         super().__init__(api_key, **kwargs)
 
     def symbols(self) -> List[str]:
-        """Supported Bithumb supported symbols
+        """Bithumb supported symbols
 
         `GET /v1/raw/bithumb/symbols`
 
@@ -35,7 +35,7 @@ class Bithumb(API):
         return self.query(url_path)
 
     def intervals(self) -> List[str]:
-        """Supported Bithumb supported intervals
+        """Bithumb supported intervals
 
         `GET /v1/raw/bithumb/intervals`
 
