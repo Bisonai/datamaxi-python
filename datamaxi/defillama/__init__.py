@@ -155,11 +155,11 @@ class Defillama(API):
         <https://docs.datamaxiplus.com/defillama/mcap>
 
         Args:
-            protocols (str): Protocol name
+            protocol (str): Protocol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Timeseries of market cap for given protocols
+            Timeseries of market cap for given protocol
         """
         check_required_parameter(protocol, "protocol")
         params = {
