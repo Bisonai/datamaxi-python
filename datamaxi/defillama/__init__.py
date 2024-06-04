@@ -48,19 +48,6 @@ class Defillama(API):
         url_path = "/v1/defillama/chain"
         return self.query(url_path)
 
-    def tokens(self) -> List[str]:
-        """Get supported tokens
-
-        `GET /v1/defillama/token`
-
-        <https://docs.datamaxiplus.com/defillama/token>
-
-        Returns:
-            List of supported tokens
-        """
-        url_path = "/v1/defillama/token"
-        return self.query(url_path)
-
     def pools(self) -> List[str]:
         """Get supported pools
 
