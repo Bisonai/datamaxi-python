@@ -332,7 +332,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/revenue", params)
 
-    @postprocess(num_index=3)
+    @postprocess(num_index=-1)
     def fee_detail(
         self,
         protocol: str = None,
@@ -369,7 +369,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/fee/detail", params)
 
-    @postprocess(num_index=3)
+    @postprocess(num_index=-1)
     def revenue_detail(
         self,
         protocol: str = None,
