@@ -13,12 +13,12 @@ client = Client(key)
 
 @mock_http_response(
     responses.GET,
-    "/v1/naver/keywords",
+    "/v1/naver/symbols",
     mock_item,
     200,
 )
-def test_naver_keywords():
-    """Tests the API endpoint to get naver trend keywords."""
+def test_naver_symbols():
+    """Tests the API endpoint to get naver trend token symbols."""
 
-    response = client.keywords()
+    response = client.symbols()
     response.should.equal(mock_item)
