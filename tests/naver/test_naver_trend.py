@@ -6,13 +6,13 @@ from tests.util import mock_http_response
 from urllib.parse import urlencode
 
 
-mock_item = [["Timestamp", "Ethereum"], ["2020-01-01 00:00", "9723"]]
+mock_item = [["Date", "Ethereum"], ["2020-01-01 00:00", "9723"]]
 
 key = random_str()
 client = Client(key)
 
-req_params = {"keyword": "Ethereum"}
-params = {"keyword": "Ethereum", "pandas": False}
+req_params = {"symbol": "ETH"}
+params = {"symbol": "ETH", "pandas": False}
 
 
 @mock_http_response(

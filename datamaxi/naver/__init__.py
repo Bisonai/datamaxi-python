@@ -20,34 +20,34 @@ class Naver(API):
             kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def keywords(self) -> List[str]:
-        """Get Naver trend supported keywords
+    def symbols(self) -> List[str]:
+        """Get Naver trend supported token symbols
 
-        `GET /v1/naver/keywords`
+        `GET /v1/naver/symbols`
 
-        <https://docs.datamaxi.finance/naver/keywords>
+        <https://docs.datamaxi.finance/naver/symbols>
 
         Returns:
-            List of supported Naver trend keywords
+            List of supported Naver trend token symbols
         """
-        url_path = "/v1/naver/keywords"
+        url_path = "/v1/naver/symbols"
         return self.query(url_path)
 
     @postprocess()
-    def trend(self, keyword: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
-        """Get Naver trend for given keyword
+    def trend(self, symbol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+        """Get Naver trend for given token symbol
 
         `GET /v1/naver/trend`
 
         <https://docs.datamaxiplus.com/naver/trend>
 
         Args:
-            keyword (str): keyword to search for
+            symbol (str): token symbol to search for
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Naver trend data
         """
-        check_required_parameter(keyword, "keyword")
-        params = {"keyword": keyword}
+        check_required_parameter(symbol, "symbol")
+        params = {"symbol": symbol}
         return self.query("/v1/naver/trend", params)
