@@ -48,19 +48,6 @@ class Defillama(API):
         url_path = "/v1/defillama/chain"
         return self.query(url_path)
 
-    def tokens(self) -> List[str]:
-        """Get supported tokens
-
-        `GET /v1/defillama/token`
-
-        <https://docs.datamaxiplus.com/defillama/token>
-
-        Returns:
-            List of supported tokens
-        """
-        url_path = "/v1/defillama/token"
-        return self.query(url_path)
-
     def pools(self) -> List[str]:
         """Get supported pools
 
@@ -345,7 +332,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/revenue", params)
 
-    @postprocess(num_index=3)
+    @postprocess(num_index=-1)
     def fee_detail(
         self,
         protocol: str = None,
@@ -382,7 +369,7 @@ class Defillama(API):
 
         return self.query("/v1/defillama/fee/detail", params)
 
-    @postprocess(num_index=3)
+    @postprocess(num_index=-1)
     def revenue_detail(
         self,
         protocol: str = None,
