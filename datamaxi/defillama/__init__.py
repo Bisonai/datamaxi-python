@@ -2,7 +2,6 @@ from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
-from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_at_least_one_set_parameters
 from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
@@ -155,31 +154,6 @@ class Defillama(API):
         return self.query("/v1/defillama/mcap", params)
 
     @postprocess()
-    def token_price(
-        self, address: str, change: bool = False, pandas: bool = True
-    ) -> Union[List, pd.DataFrame]:
-        """Get token prices
-
-        `GET /v1/defillama/token`
-
-        <https://docs.datamaxiplus.com/defillama/token-price>
-
-        Args:
-            address (str): Token address
-            change (bool): Return price change (default: False)
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            Timeseries of token prices
-        """
-        check_required_parameters([[address, "address"], [change, "change"]])
-        params = {
-            "address": address,
-            "change": str(change).lower(),
-        }
-        return self.query("/v1/defillama/token", params)
-
-    @postprocess()
     def pool_yield(self, poolId: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get yield for given pool
 
@@ -249,7 +223,6 @@ class Defillama(API):
         params = {
             "stablecoin": stablecoin,
         }
-        print(params)
         return self.query("/v1/defillama/stablecoin/price", params)
 
     @postprocess()
