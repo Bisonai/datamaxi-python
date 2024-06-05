@@ -685,15 +685,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamaxi.defillama.Defillama.token_price" class="md-nav__link">
-    <span class="md-ellipsis">
-      token_price
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#datamaxi.defillama.Defillama.tvl" class="md-nav__link">
     <span class="md-ellipsis">
       tvl
@@ -956,15 +947,6 @@
   <a href="#datamaxi.defillama.Defillama.stablecoins" class="md-nav__link">
     <span class="md-ellipsis">
       stablecoins
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamaxi.defillama.Defillama.token_price" class="md-nav__link">
-    <span class="md-ellipsis">
-      token_price
     </span>
   </a>
   
@@ -1788,74 +1770,6 @@
           –
           <div class="doc-md-description">
             <p>List of supported stablecoins</p>
-          </div>
-        </li>
-    </ul>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="datamaxi.defillama.Defillama.token_price" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">token_price</span>
-
-
-<a href="#datamaxi.defillama.Defillama.token_price" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">token_price</span><span class="p">(</span>
-    <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">change</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pandas</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-      <p>Get token prices</p>
-<p><code>GET /v1/defillama/token</code></p>
-<p><a href="https://docs.datamaxiplus.com/defillama/token-price">https://docs.datamaxiplus.com/defillama/token-price</a></p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          <b><code>address</code></b>
-              (<code>str</code>)
-          –
-          <div class="doc-md-description">
-            <p>Token address</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>change</code></b>
-              (<code>bool</code>, default:
-                  <code>False</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Return price change (default: False)</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>pandas</code></b>
-              (<code>bool</code>, default:
-                  <code>True</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Return data as pandas DataFrame</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
-          –
-          <div class="doc-md-description">
-            <p>Timeseries of token prices</p>
           </div>
         </li>
     </ul>
