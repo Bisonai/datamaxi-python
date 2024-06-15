@@ -27,7 +27,7 @@ class Datamaxi(API):
 
         `GET /v1/symbols`
 
-        <https://docs.datamaxiplus.com/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex/symbols>
 
         Args:
             exchange (str): Exchange name
@@ -45,7 +45,7 @@ class Datamaxi(API):
 
         `GET /v1/intervals`
 
-        <https://docs.datamaxiplus.com/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex/intervals>
 
         Args:
             exchange (str): Exchange name
@@ -66,7 +66,7 @@ class Datamaxi(API):
 
         `GET /v1/candle`
 
-        <https://docs.datamaxiplus.com/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex/candle>
 
         Args:
             exchange (str): Exchange name

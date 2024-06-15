@@ -26,7 +26,7 @@ class Upbit(API):
 
         `GET /v1/raw/upbit/symbols`
 
-        <https://docs.datamaxiplus.com/cex/upbit/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/upbit/symbols>
 
         Returns:
             List of supported Upbit symbols
@@ -39,7 +39,7 @@ class Upbit(API):
 
         `GET /v1/raw/upbit/intervals`
 
-        <https://docs.datamaxiplus.com/cex/upbit/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/upbit/intervals>
 
         Returns:
             List of supported Upbit intervals
@@ -55,7 +55,7 @@ class Upbit(API):
 
         `GET /v1/raw/upbit/candle`
 
-        <https://docs.datamaxiplus.com/cex/upbit/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/upbit/candle>
 
         Args:
             symbol (str): Upbit symbol

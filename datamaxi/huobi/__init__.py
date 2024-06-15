@@ -26,7 +26,7 @@ class Huobi(API):
 
         `GET /v1/raw/huobi/symbols`
 
-        <https://docs.datamaxiplus.com/cex/huobi/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/huobi/symbols>
 
         Returns:
             List of supported Huobi symbols
@@ -39,7 +39,7 @@ class Huobi(API):
 
         `GET /v1/raw/huobi/intervals`
 
-        <https://docs.datamaxiplus.com/cex/huobi/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/huobi/intervals>
 
         Returns:
             List of supported Huobi intervals
@@ -55,7 +55,7 @@ class Huobi(API):
 
         `GET /v1/raw/huobi/candle`
 
-        <https://docs.datamaxiplus.com/cex/huobi/candle>
+        <https://docs.datamaxiplus.com/api/dataset/cex-raw/huobi/candle>
 
         Args:
             symbol (str): Huobi symbol

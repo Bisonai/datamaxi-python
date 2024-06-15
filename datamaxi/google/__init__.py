@@ -25,7 +25,7 @@ class Google(API):
 
         `GET /v1/google/keywords`
 
-        <https://docs.datamaxi.finance/google/keywords>
+        <https://docs.datamaxi.finance/api/datasets/trend/google/keywords>
 
         Returns:
             List of supported Google trend keywords
@@ -39,7 +39,7 @@ class Google(API):
 
         `GET /v1/google/trend`
 
-        <https://docs.datamaxi.finance/google/trend>
+        <https://docs.datamaxi.finance/api/datasets/trend/google/trend>
 
         Args:
             keyword (str): keyword to search for
