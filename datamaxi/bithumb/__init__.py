@@ -26,7 +26,7 @@ class Bithumb(API):
 
         `GET /v1/raw/bithumb/symbols`
 
-        <https://docs.datamaxiplus.com/cex/bithumb/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bithumb/symbols>
 
         Returns:
             List of supported Bithumb symbols
@@ -39,7 +39,7 @@ class Bithumb(API):
 
         `GET /v1/raw/bithumb/intervals`
 
-        <https://docs.datamaxiplus.com/cex/bithumb/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bithumb/intervals>
 
         Returns:
             List of supported Bithumb intervals
@@ -55,7 +55,7 @@ class Bithumb(API):
 
         `GET /v1/raw/bithumb/candle`
 
-        <https://docs.datamaxiplus.com/cex/bithumb/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bithumb/candle>
 
         Args:
             symbol (str): Bithumb symbol

@@ -26,7 +26,7 @@ class Bybit(API):
 
         `GET /v1/raw/bybit/symbols`
 
-        <https://docs.datamaxiplus.com/cex/bybit/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bybit/symbols>
 
         Returns:
             List of supported Bybit symbols
@@ -39,7 +39,7 @@ class Bybit(API):
 
         `GET /v1/raw/bybit/intervals`
 
-        <https://docs.datamaxiplus.com/cex/bybit/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bybit/intervals>
 
         Returns:
             List of supported Bybit intervals
@@ -55,7 +55,7 @@ class Bybit(API):
 
         `GET /v1/raw/bybit/candle`
 
-        <https://docs.datamaxiplus.com/cex/bybit/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/bybit/candle>
 
         Args:
             symbol (str): Bybit symbol

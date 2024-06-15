@@ -26,7 +26,7 @@ class Coinone(API):
 
         `GET /v1/raw/coinone/symbols`
 
-        <https://docs.datamaxiplus.com/cex/coinone/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/coinone/symbols>
 
         Returns:
             List of supported Coinone symbols
@@ -39,7 +39,7 @@ class Coinone(API):
 
         `GET /v1/raw/coinone/intervals`
 
-        <https://docs.datamaxiplus.com/cex/coinone/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/coinone/intervals>
 
         Returns:
             List of supported Coinone intervals
@@ -55,7 +55,7 @@ class Coinone(API):
 
         `GET /v1/raw/coinone/candle`
 
-        <https://docs.datamaxiplus.com/cex/coinone/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/coinone/candle>
 
         Args:
             symbol (str): Coinone symbol

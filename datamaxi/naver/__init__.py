@@ -25,7 +25,7 @@ class Naver(API):
 
         `GET /v1/naver/symbols`
 
-        <https://docs.datamaxi.finance/naver/symbols>
+        <https://docs.datamaxi.finance/api/datasets/trend/naver/symbols>
 
         Returns:
             List of supported Naver trend token symbols
@@ -39,7 +39,7 @@ class Naver(API):
 
         `GET /v1/naver/trend`
 
-        <https://docs.datamaxiplus.com/naver/trend>
+        <https://docs.datamaxiplus.com/api/datasets/trend/naver/trend>
 
         Args:
             symbol (str): token symbol to search for

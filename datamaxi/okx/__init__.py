@@ -26,7 +26,7 @@ class Okx(API):
 
         `GET /v1/raw/okx/symbols`
 
-        <https://docs.datamaxiplus.com/cex/okx/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/okx/symbols>
 
         Returns:
             List of supported Okx symbols
@@ -39,7 +39,7 @@ class Okx(API):
 
         `GET /v1/raw/okx/intervals`
 
-        <https://docs.datamaxiplus.com/cex/okx/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/okx/intervals>
 
         Returns:
             List of supported Okx intervals
@@ -55,7 +55,7 @@ class Okx(API):
 
         `GET /v1/raw/okx/candle`
 
-        <https://docs.datamaxiplus.com/cex/okx/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/okx/candle>
 
         Args:
             symbol (str): Okx symbol

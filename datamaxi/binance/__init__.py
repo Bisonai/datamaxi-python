@@ -26,7 +26,7 @@ class Binance(API):
 
         `GET /v1/raw/binance/symbols`
 
-        <https://docs.datamaxiplus.com/cex/binance/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/binance/symbols>
 
         Returns:
             List of supported Binance symbols
@@ -39,7 +39,7 @@ class Binance(API):
 
         `GET /v1/raw/binance/intervals`
 
-        <https://docs.datamaxiplus.com/cex/binance/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/binance/intervals>
 
         Returns:
             List of supported Binance intervals
@@ -55,7 +55,7 @@ class Binance(API):
 
         `GET /v1/raw/binance/candle`
 
-        <https://docs.datamaxiplus.com/cex/binance/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/binance/candle>
 
         Args:
             symbol (str): Binance symbol

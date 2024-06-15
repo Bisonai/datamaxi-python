@@ -26,7 +26,7 @@ class Defillama(API):
 
         `GET /v1/defillama/protocol`
 
-        <https://docs.datamaxiplus.com/defillama/protocol>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/protocol>
 
         Returns:
             List of supported protocols
@@ -39,7 +39,7 @@ class Defillama(API):
 
         `GET /v1/defillama/chain`
 
-        <https://docs.datamaxiplus.com/defillama/chain>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/chain>
 
         Returns:
             List of supported chains
@@ -52,7 +52,7 @@ class Defillama(API):
 
         `GET /v1/defillama/pool`
 
-        <https://docs.datamaxiplus.com/defillama/pool>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/pool>
 
         Returns:
             List of supported pools
@@ -65,7 +65,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin`
 
-        <https://docs.datamaxiplus.com/defillama/stablecoin>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin>
 
         Returns:
             List of supported stablecoins
@@ -81,7 +81,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl`
 
-        <https://docs.datamaxiplus.com/defillama/tvl>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/tvl>
 
         Args:
             protocol (str): Protocol name
@@ -109,7 +109,7 @@ class Defillama(API):
 
         `GET /v1/defillama/tvl/detail`
 
-        <https://docs.datamaxiplus.com/defillama/tvl-detail>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/tvl-detail>
 
         Args:
             protocol (str): Protocol name
@@ -138,7 +138,7 @@ class Defillama(API):
 
         `GET /v1/defillama/mcap`
 
-        <https://docs.datamaxiplus.com/defillama/mcap>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/mcap>
 
         Args:
             protocol (str): Protocol name
@@ -159,7 +159,7 @@ class Defillama(API):
 
         `GET /v1/defillama/pool/yield`
 
-        <https://docs.datamaxiplus.com/defillama/yield>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/pool-yield>
 
         Args:
             poolId (str): Pool ID
@@ -182,7 +182,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin/mcap`
 
-        <https://docs.datamaxiplus.com/defillama/stablecoin-mcap>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin-mcap>
 
         Args:
             stablecoin (str): Stablecoin name
@@ -210,7 +210,7 @@ class Defillama(API):
 
         `GET /v1/defillama/stablecoin/price`
 
-        <https://docs.datamaxiplus.com/defillama/stablecoin-price>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin-price>
 
         Args:
             stablecoin (str): Stablecoin name
@@ -237,7 +237,7 @@ class Defillama(API):
 
         `GET /v1/defillama/fee`
 
-        <https://docs.datamaxiplus.com/defillama/fee>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/fee>
 
         Args:
             protocol (str): Protocol name
@@ -277,7 +277,7 @@ class Defillama(API):
 
         `GET /v1/defillama/revenue`
 
-        <https://docs.datamaxiplus.com/defillama/revenue>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/revenue>
 
         Args:
             protocol (str): Protocol name
@@ -317,7 +317,7 @@ class Defillama(API):
 
         `GET /v1/defillama/fee/detail`
 
-        <https://docs.datamaxiplus.com/defillama/fee-detail>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/fee-detail>
 
         Args:
             protocol (str): Protocol name
@@ -354,7 +354,7 @@ class Defillama(API):
 
         `GET /v1/defillama/revenue/detail`
 
-        <https://docs.datamaxiplus.com/defillama/revenue-detail>
+        <https://docs.datamaxiplus.com/api/datasets/defillama/revenue-detail>
 
         Args:
             protocol (str): Protocol name
