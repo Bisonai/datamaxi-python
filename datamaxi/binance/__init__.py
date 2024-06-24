@@ -49,7 +49,11 @@ class Binance(API):
 
     @postprocess()
     def candle(
-        self, symbol: str, interval: str = "1d", pandas: bool = True
+        self,
+        symbol: str,
+        interval: str = "1d",
+        market: str = "spot",
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get Binance candle data
 
@@ -60,11 +64,18 @@ class Binance(API):
         Args:
             symbol (str): Binance symbol
             interval (str): Candle interval
+            market (str): Market type (spot/futures)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Binance candle data for a given symbol and interval in pandas DataFrame
+            Binance candle data for a given symbol, interval and market in pandas DataFrame
         """
-        check_required_parameters([[symbol, "symbol"], [interval, "interval"]])
-        params = {"symbol": symbol, "interval": interval}
+        check_required_parameters(
+            [[symbol, "symbol"], [interval, "interval"], [market, "market"]]
+        )
+
+        if market not in ["spot", "futures"]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {"symbol": symbol, "interval": interval, "market": market}
         return self.query("/v1/raw/binance/candle", params)
