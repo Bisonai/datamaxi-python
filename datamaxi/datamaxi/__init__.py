@@ -60,7 +60,12 @@ class Datamaxi(API):
 
     @postprocess()
     def candle(
-        self, exchange: str, symbol: str, interval: str = "1d", pandas: bool = True
+        self,
+        exchange: str,
+        symbol: str,
+        interval: str = "1d",
+        market: str = "spot",
+        pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Get candle data
 
@@ -72,13 +77,28 @@ class Datamaxi(API):
             exchange (str): Exchange name
             symbol (str): Symbol name
             interval (str): Candle interval
+            market (str): Market type (spot/futures)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Candle data for a given symbol and interval in pandas DataFrame
+            Candle data for a given symbol, interval and market in pandas DataFrame
         """
         check_required_parameters(
-            [[exchange, "exchange"], [symbol, "symbol"], [interval, "interval"]]
+            [
+                [exchange, "exchange"],
+                [symbol, "symbol"],
+                [interval, "interval"],
+                [market, "market"],
+            ]
         )
-        params = {"exchange": exchange, "symbol": symbol, "interval": interval}
+
+        if market not in ["spot", "futures"]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {
+            "exchange": exchange,
+            "symbol": symbol,
+            "interval": interval,
+            "market": market,
+        }
         return self.query("/v1/candle", params)
