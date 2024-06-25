@@ -358,15 +358,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.API" class="md-nav__link">
-    <span class="md-ellipsis">
-      API
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#datamaxi.datamaxi.Datamaxi" class="md-nav__link">
     <span class="md-ellipsis">
       Datamaxi
@@ -766,15 +757,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.API" class="md-nav__link">
-    <span class="md-ellipsis">
-      API
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#datamaxi.datamaxi.Datamaxi" class="md-nav__link">
     <span class="md-ellipsis">
       Datamaxi
@@ -859,120 +841,6 @@
 
 
 
-<h2 id="datamaxi.datamaxi.API" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">API</span>
-
-
-<a href="#datamaxi.datamaxi.API" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">API</span><span class="p">(</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">show_limit_usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">show_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code>object</code></p>
-
-
-      <p>The base class for all DataMaxi+ Python clients. <code>api_key</code> can be set
-as an environment variable <code>DATAMAXI_API_KEY</code>.</p>
-
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          <b><code>api_key</code></b>
-              (<code>str</code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The API key for the DataMaxi+ API.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>base_url</code></b>
-              (<code>str</code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The base URL for the DataMaxi+ API.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>timeout</code></b>
-              (<code>int</code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The timeout for the requests.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>proxies</code></b>
-              (<code>dict</code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The proxies for the requests.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>show_limit_usage</code></b>
-              (<code>bool</code>, default:
-                  <code>False</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Show the limit usage.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>show_header</code></b>
-              (<code>bool</code>, default:
-                  <code>False</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Show the header.</p>
-          </div>
-        </li>
-    </ul>
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-class">
-
-
-
 <h2 id="datamaxi.datamaxi.Datamaxi" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">Datamaxi</span>
 
@@ -1039,6 +907,7 @@ as an environment variable <code>DATAMAXI_API_KEY</code>.</p>
     <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">interval</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1d&quot;</span><span class="p">,</span>
+    <span class="n">market</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;spot&quot;</span><span class="p">,</span>
     <span class="n">pandas</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
 </code></pre></div>
@@ -1079,6 +948,16 @@ as an environment variable <code>DATAMAXI_API_KEY</code>.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
+          <b><code>market</code></b>
+              (<code>str</code>, default:
+                  <code>&#39;spot&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Market type (spot/futures)</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
           <b><code>pandas</code></b>
               (<code>bool</code>, default:
                   <code>True</code>
@@ -1097,7 +976,7 @@ as an environment variable <code>DATAMAXI_API_KEY</code>.</p>
               <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
           –
           <div class="doc-md-description">
-            <p>Candle data for a given symbol and interval in pandas DataFrame</p>
+            <p>Candle data for a given symbol, interval and market in pandas DataFrame</p>
           </div>
         </li>
     </ul>
