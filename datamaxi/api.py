@@ -46,7 +46,7 @@ class API(object):
             {
                 "Content-Type": "application/json;charset=utf-8",
                 "User-Agent": "datamaxi/" + __version__,
-                "Authorization": "X-DTMX-APIKEY " + str(self.api_key),
+                "X-DTMX-APIKEY": str(self.api_key),
             }
         )
 
