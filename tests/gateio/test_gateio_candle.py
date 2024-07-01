@@ -14,18 +14,17 @@ mock_item = [
         "LowPrice",
         "ClosePrice",
         "TradingVolumeInQuoteCurrency",
-        "TradingVolumeInBaseCurrency"
-  ],
-  [
+        "TradingVolumeInBaseCurrency",
+    ],
+    [
         1714752000000,
         "61693.2",
         "61693.2",
         "61681.2",
         "61681.3",
         "13176.79679900",
-        "0.21360000"
-  ],
-
+        "0.21360000",
+    ],
 ]
 
 key = random_str()
