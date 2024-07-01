@@ -23,8 +23,8 @@ def test_API_initial():
     client.session.headers.should.have.key("User-Agent").which.should.equal(
         "datamaxi/" + __version__
     )
-    client.session.headers.should.have.key("Authorization").which.should.be.equal(
-        "X-DTMX-APIKEY None"
+    client.session.headers.should.have.key("X-DTMX-APIKEY").which.should.be.equal(
+        "None"
     )
 
     client._logger.should.be(logging.getLogger("datamaxi.api"))
@@ -39,8 +39,8 @@ def test_API_env_key():
 
     client.should.be.a(API)
     client.api_key.should.be.equal(api_key)
-    client.session.headers.should.have.key("Authorization").which.should.be.equal(
-        f"X-DTMX-APIKEY {api_key}"
+    client.session.headers.should.have.key("X-DTMX-APIKEY").which.should.be.equal(
+        api_key
     )
 
 
@@ -67,6 +67,4 @@ def test_API_with_extra_parameters():
     client.show_limit_usage.should.be.true
     client.show_header.should.be.true
     client.proxies.should.equal(proxies)
-    client.session.headers.should.have.key("Authorization").which.should.equal(
-        f"X-DTMX-APIKEY {api_key}"
-    )
+    client.session.headers.should.have.key("X-DTMX-APIKEY").which.should.equal(api_key)
