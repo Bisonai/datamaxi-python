@@ -79,3 +79,27 @@ class Binance(API):
 
         params = {"symbol": symbol, "interval": interval, "market": market}
         return self.query("/v1/raw/binance/candle", params)
+
+    @postprocess()
+    def funding_rate(
+        self,
+        symbol: str,
+        pandas: bool = True,
+    ) -> Union[List, pd.DataFrame]:
+        """Get Binance funding rate data
+
+        `GET /v1/raw/binance/funding-rate`
+
+        <https://docs.datamaxiplus.com/api/datasets/cex-raw/binance/funding-rate>
+
+        Args:
+            symbol (str): Binance symbol
+            pandas (bool): Return data as pandas DataFrame
+
+        Returns:
+            Binance funding rate data for a given symbol in pandas DataFrame
+        """
+        check_required_parameters([[symbol, "symbol"]])
+
+        params = {"symbol": symbol}
+        return self.query("/v1/raw/binance/funding-rate", params)
