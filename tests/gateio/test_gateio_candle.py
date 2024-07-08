@@ -30,8 +30,8 @@ mock_item = [
 key = random_str()
 client = Client(key)
 
-req_params = {"symbol": "BTC-USDT", "interval": "1d"}
-params = {"symbol": "BTC-USDT", "interval": "1d", "pandas": False}
+req_params = {"symbol": "BTC-USDT", "interval": "1d", "market": "spot"}
+params = {"symbol": "BTC-USDT", "interval": "1d", "market": "spot", "pandas": False}
 
 
 @mock_http_response(
