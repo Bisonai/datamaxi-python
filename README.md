@@ -53,13 +53,8 @@ You may use environment variables to configure the DataMaxi+ client to avoid any
 
 DataMaxi+ Python package currently includes the following clients:
 
+- `Datamaxi`
 - `Binance`
-- `Bithumb`
-- `Bybit`
-- `Coinone`
-- `Huobi`
-- `Okx`
-- `Upbit`
 - `Defillama`
 - `Naver`
 - `Google`
@@ -68,14 +63,11 @@ All clients accept the same parameters that are described at [Configuration](#co
 First, import the clients,
 
 ```python
+# Main client
+from datamaxi.datamaxi import Datamaxi
+
 # CEX
 from datamaxi.binance import Binance
-from datamaxi.bithumb import Bithumb
-from datamaxi.bybit import Bybit
-from datamaxi.coinone import Coinone
-from datamaxi.huobi import Huobi
-from datamaxi.okx import Okx
-from datamaxi.upbit import Upbit
 
 # DeFi
 from datamaxi.defillama import Defillama
@@ -88,14 +80,11 @@ from datamaxi.google import Google
 and initialize them.
 
 ```python
+# Main client
+maxi = Datamaxi(api_key=api_key)
+
 # CEX
 binance = Binance(api_key=api_key)
-bithumb = Bithumb(api_key=api_key)
-bybit = Bybit(api_key=api_key)
-coinone = Coinone(api_key=api_key)
-huobi = Huobi(api_key=api_key)
-okx = Okx(api_key=api_key)
-upbit = Upbit(api_key=api_key)
 
 # DeFi
 defillama = Defillama(api_key=api_key)
