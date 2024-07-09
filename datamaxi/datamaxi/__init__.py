@@ -223,6 +223,7 @@ class Datamaxi(API):
 
         def next_request():
             return self.funding_rate(
+                exchange,
                 symbol,
                 page + 1,
                 limit,
