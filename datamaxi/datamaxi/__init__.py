@@ -155,7 +155,7 @@ class Datamaxi(API):
             return df, next_request
         else:
             return res, next_request
-        
+
     def funding_rate(
         self,
         exchange: str,
@@ -192,7 +192,7 @@ class Datamaxi(API):
                 [symbol, "symbol"],
             ]
         )
-        
+
         if page < 1:
             raise ValueError("page must be greater than 0")
 
@@ -207,7 +207,6 @@ class Datamaxi(API):
         if sort not in ["asc", "desc"]:
             raise ValueError("sort must be either asc or desc")
 
-
         params = {
             "exchange": exchange,
             "symbol": symbol,
@@ -221,6 +220,7 @@ class Datamaxi(API):
         res = self.query("/v1/funding-rate", params)
         if res["data"] is None:
             raise ValueError("no data found")
+
         def next_request():
             return self.funding_rate(
                 symbol,
