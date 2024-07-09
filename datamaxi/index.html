@@ -761,8 +761,15 @@
     <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">interval</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1d&quot;</span><span class="p">,</span>
     <span class="n">market</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;spot&quot;</span><span class="p">,</span>
+    <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">fromDateTime</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">toDateTime</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;desc&quot;</span><span class="p">,</span>
     <span class="n">pandas</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span>
+    <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
+<span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -811,6 +818,56 @@
           </div>
         </li>
         <li class="doc-section-item field-body">
+          <b><code>page</code></b>
+              (<code>int</code>, default:
+                  <code>1</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Page number</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>limit</code></b>
+              (<code>int</code>, default:
+                  <code>1000</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Limit of data</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>fromDateTime</code></b>
+              (<code>str</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>toDateTime</code></b>
+              (<code>str</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>End date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>sort</code></b>
+              (<code>str</code>, default:
+                  <code>&#39;desc&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Sort order</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
           <b><code>pandas</code></b>
               (<code>bool</code>, default:
                   <code>True</code>
@@ -826,10 +883,10 @@
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>, <span title="pandas.DataFrame">DataFrame</span>]</code>
+              <code><span title="typing.Union">Union</span>[<span title="typing.Tuple">Tuple</span>[<span title="typing.Dict">Dict</span>, <span title="typing.Callable">Callable</span>], <span title="typing.Tuple">Tuple</span>[<span title="pandas.DataFrame">DataFrame</span>, <span title="typing.Callable">Callable</span>]]</code>
           –
           <div class="doc-md-description">
-            <p>Candle data for a given symbol, interval and market in pandas DataFrame</p>
+            <p>Candle data for a given symbol, interval and market in pandas DataFrame and next request function</p>
           </div>
         </li>
     </ul>

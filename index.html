@@ -849,27 +849,19 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 <h2 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h2>
 <p>DataMaxi+ Python package currently includes the following clients:</p>
 <ul>
+<li><code>Datamaxi</code></li>
 <li><code>Binance</code></li>
-<li><code>Bithumb</code></li>
-<li><code>Bybit</code></li>
-<li><code>Coinone</code></li>
-<li><code>Huobi</code></li>
-<li><code>Okx</code></li>
-<li><code>Upbit</code></li>
 <li><code>Defillama</code></li>
 <li><code>Naver</code></li>
 <li><code>Google</code></li>
 </ul>
 <p>All clients accept the same parameters that are described at <a href="#configuration">Configuration</a> section.
 First, import the clients,</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># CEX</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Main client</span>
+<span class="kn">from</span> <span class="nn">datamaxi.datamaxi</span> <span class="kn">import</span> <span class="n">Datamaxi</span>
+
+<span class="c1"># CEX</span>
 <span class="kn">from</span> <span class="nn">datamaxi.binance</span> <span class="kn">import</span> <span class="n">Binance</span>
-<span class="kn">from</span> <span class="nn">datamaxi.bithumb</span> <span class="kn">import</span> <span class="n">Bithumb</span>
-<span class="kn">from</span> <span class="nn">datamaxi.bybit</span> <span class="kn">import</span> <span class="n">Bybit</span>
-<span class="kn">from</span> <span class="nn">datamaxi.coinone</span> <span class="kn">import</span> <span class="n">Coinone</span>
-<span class="kn">from</span> <span class="nn">datamaxi.huobi</span> <span class="kn">import</span> <span class="n">Huobi</span>
-<span class="kn">from</span> <span class="nn">datamaxi.okx</span> <span class="kn">import</span> <span class="n">Okx</span>
-<span class="kn">from</span> <span class="nn">datamaxi.upbit</span> <span class="kn">import</span> <span class="n">Upbit</span>
 
 <span class="c1"># DeFi</span>
 <span class="kn">from</span> <span class="nn">datamaxi.defillama</span> <span class="kn">import</span> <span class="n">Defillama</span>
@@ -879,14 +871,11 @@ First, import the clients,</p>
 <span class="kn">from</span> <span class="nn">datamaxi.google</span> <span class="kn">import</span> <span class="n">Google</span>
 </code></pre></div>
 <p>and initialize them.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># CEX</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Main client</span>
+<span class="n">maxi</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+<span class="c1"># CEX</span>
 <span class="n">binance</span> <span class="o">=</span> <span class="n">Binance</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">bithumb</span> <span class="o">=</span> <span class="n">Bithumb</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">bybit</span> <span class="o">=</span> <span class="n">Bybit</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">coinone</span> <span class="o">=</span> <span class="n">Coinone</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">huobi</span> <span class="o">=</span> <span class="n">Huobi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">okx</span> <span class="o">=</span> <span class="n">Okx</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-<span class="n">upbit</span> <span class="o">=</span> <span class="n">Upbit</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 
 <span class="c1"># DeFi</span>
 <span class="n">defillama</span> <span class="o">=</span> <span class="n">Defillama</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
