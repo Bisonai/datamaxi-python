@@ -2,7 +2,6 @@ from typing import Any, Callable, Dict, Tuple, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.lib.utils import postprocess
 from datamaxi.lib.constants import BASE_URL
 
 
@@ -64,15 +63,16 @@ class Binance(API):
         if res["data"] is None:
             raise ValueError("no data found")
 
-        next_request = lambda: self.funding_rate(
-            symbol,
-            page + 1,
-            limit,
-            fromDateTime,
-            toDateTime,
-            sort,
-            pandas,
-        )
+        def next_request():
+            return self.funding_rate(
+                symbol,
+                page + 1,
+                limit,
+                fromDateTime,
+                toDateTime,
+                sort,
+                pandas,
+            )
 
         if pandas:
             df = pd.DataFrame(res["data"])

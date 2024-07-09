@@ -133,18 +133,19 @@ class Datamaxi(API):
         if res["data"] is None:
             raise ValueError("no data found")
 
-        next_request = lambda: self.candle(
-            exchange,
-            symbol,
-            interval,
-            market,
-            page + 1,
-            limit,
-            fromDateTime,
-            toDateTime,
-            sort,
-            pandas,
-        )
+        def next_request():
+            return self.candle(
+                exchange,
+                symbol,
+                interval,
+                market,
+                page + 1,
+                limit,
+                fromDateTime,
+                toDateTime,
+                sort,
+                pandas,
+            )
 
         if pandas:
             df = pd.DataFrame(res["data"])
