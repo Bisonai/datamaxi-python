@@ -447,7 +447,7 @@
         
   
   <span class="md-ellipsis">
-    Unified Trading Data
+    Trading Data
   </span>
   
 
@@ -787,7 +787,6 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 <p>DataMaxi+ Python package currently includes the following clients:</p>
 <ul>
 <li><code>Datamaxi</code></li>
-<li><code>Binance</code></li>
 <li><code>Defillama</code></li>
 <li><code>Naver</code></li>
 <li><code>Google</code></li>
@@ -796,9 +795,6 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 First, import the clients,</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Main client</span>
 <span class="kn">from</span> <span class="nn">datamaxi.datamaxi</span> <span class="kn">import</span> <span class="n">Datamaxi</span>
-
-<span class="c1"># CEX</span>
-<span class="kn">from</span> <span class="nn">datamaxi.binance</span> <span class="kn">import</span> <span class="n">Binance</span>
 
 <span class="c1"># DeFi</span>
 <span class="kn">from</span> <span class="nn">datamaxi.defillama</span> <span class="kn">import</span> <span class="n">Defillama</span>
@@ -810,9 +806,6 @@ First, import the clients,</p>
 <p>and initialize them.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Main client</span>
 <span class="n">maxi</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-
-<span class="c1"># CEX</span>
-<span class="n">binance</span> <span class="o">=</span> <span class="n">Binance</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 
 <span class="c1"># DeFi</span>
 <span class="n">defillama</span> <span class="o">=</span> <span class="n">Defillama</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
