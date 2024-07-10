@@ -31,8 +31,6 @@ nav:
   - Main: index.md
   - API: api.md
   - Unified Trading Data: datamaxi.md
-  - CEX:
-      - Binance: binance.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md
