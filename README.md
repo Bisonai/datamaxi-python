@@ -54,7 +54,6 @@ You may use environment variables to configure the DataMaxi+ client to avoid any
 DataMaxi+ Python package currently includes the following clients:
 
 - `Datamaxi`
-- `Binance`
 - `Defillama`
 - `Naver`
 - `Google`
@@ -65,9 +64,6 @@ First, import the clients,
 ```python
 # Main client
 from datamaxi.datamaxi import Datamaxi
-
-# CEX
-from datamaxi.binance import Binance
 
 # DeFi
 from datamaxi.defillama import Defillama
@@ -82,9 +78,6 @@ and initialize them.
 ```python
 # Main client
 maxi = Datamaxi(api_key=api_key)
-
-# CEX
-binance = Binance(api_key=api_key)
 
 # DeFi
 defillama = Defillama(api_key=api_key)

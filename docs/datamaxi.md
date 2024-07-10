@@ -1,4 +1,4 @@
-# Unified Trading Data
+# Trading Data
 
 ::: datamaxi.datamaxi
     options:

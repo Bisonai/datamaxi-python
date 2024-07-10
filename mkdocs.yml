@@ -30,7 +30,7 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
-  - Unified Trading Data: datamaxi.md
+  - Trading Data: datamaxi.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md
