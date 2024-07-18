@@ -18,7 +18,9 @@ class Candle(API):
         super().__init__(api_key, **kwargs)
 
     def exchanges(self, market: str = "spot") -> List[str]:
-        """Fetch supported exchanges accepted by `datamaxi.candle` API
+        """Fetch supported exchanges accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
 
         `GET /v1/candle/exchanges`
 
@@ -40,7 +42,9 @@ class Candle(API):
         return self.query(url_path, params)
 
     def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by `datamaxi.candle` API
+        """Fetch supported symbols accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
 
         `GET /v1/candle/symbols`
 
@@ -68,7 +72,9 @@ class Candle(API):
         return self.query(url_path, params)
 
     def intervals(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported intervals accepted by `datamaxi.candle` API
+        """Fetch supported intervals accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
 
         `GET /v1/candle/intervals`
 

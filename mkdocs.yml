@@ -30,7 +30,9 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
-  - Trading Data: datamaxi.md
+  - Datamaxi:
+      - Candle: candle.md
+      - Funding Rate: funding-rate.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md

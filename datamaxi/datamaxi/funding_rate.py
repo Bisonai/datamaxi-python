@@ -18,7 +18,9 @@ class FundingRate(API):
         super().__init__(api_key, **kwargs)
 
     def exchanges(self) -> List[str]:
-        """Fetch supported exchanges accepted by `datamaxi.funding_rate` API
+        """Fetch supported exchanges accepted by
+        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        API.
 
         `GET /v1/funding-rate/exchanges`
 
@@ -31,7 +33,9 @@ class FundingRate(API):
         return self.query(url_path)
 
     def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by `datamaxi.funding_rate` API
+        """Fetch supported symbols accepted by
+        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        API.
 
         `GET /v1/funding-rate/symbols`
 
