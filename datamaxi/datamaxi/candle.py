@@ -18,87 +18,6 @@ class Candle(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def exchanges(self, market: str = "spot") -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
-        API.
-
-        `GET /v1/candle/exchanges`
-
-        <https://docs.datamaxiplus.com/api/datasets/candle/exchanges>
-
-        Args:
-            market (str): Market type (spot/futures)
-
-        Returns:
-            List of supported exchanges
-        """
-        check_required_parameter(market, "market")
-
-        if market not in ["spot", "futures"]:
-            raise ValueError("market must be either spot or futures")
-
-        params = {"market": market}
-        url_path = "/v1/candle/exchanges"
-        return self.query(url_path, params)
-
-    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
-        API.
-
-        `GET /v1/candle/symbols`
-
-        <https://docs.datamaxiplus.com/api/datasets/candle/symbols>
-
-        Args:
-            exchange (str): Exchange name
-            market (str): Market type (spot/futures)
-
-        Returns:
-            List of supported symbols
-        """
-        check_required_parameters(
-            [
-                [exchange, "exchange"],
-                [market, "market"],
-            ]
-        )
-
-        if market not in ["spot", "futures"]:
-            raise ValueError("market must be either spot or futures")
-
-        params = {"exchange": exchange, "market": market}
-        url_path = "/v1/candle/symbols"
-        return self.query(url_path, params)
-
-    def intervals(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported intervals accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
-        API.
-
-        `GET /v1/candle/intervals`
-
-        <https://docs.datamaxiplus.com/api/datasets/candle/intervals>
-
-        Args:
-            exchange (str): Exchange name
-            market (str): Market type (spot/futures)
-
-        Returns:
-            List of supported intervals
-        """
-        check_required_parameters(
-            [
-                [exchange, "exchange"],
-                [market, "market"],
-            ]
-        )
-
-        params = {"exchange": exchange, "market": market}
-        url_path = "/v1/candle/intervals"
-        return self.query(url_path, params)
-
     def get(
         self,
         exchange: str,
@@ -194,3 +113,84 @@ class Candle(API):
             return df, next_request
         else:
             return res, next_request
+
+    def exchanges(self, market: str = "spot") -> List[str]:
+        """Fetch supported exchanges accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
+
+        `GET /v1/candle/exchanges`
+
+        <https://docs.datamaxiplus.com/api/datasets/candle/exchanges>
+
+        Args:
+            market (str): Market type (spot/futures)
+
+        Returns:
+            List of supported exchanges
+        """
+        check_required_parameter(market, "market")
+
+        if market not in ["spot", "futures"]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {"market": market}
+        url_path = "/v1/candle/exchanges"
+        return self.query(url_path, params)
+
+    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
+        """Fetch supported symbols accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
+
+        `GET /v1/candle/symbols`
+
+        <https://docs.datamaxiplus.com/api/datasets/candle/symbols>
+
+        Args:
+            exchange (str): Exchange name
+            market (str): Market type (spot/futures)
+
+        Returns:
+            List of supported symbols
+        """
+        check_required_parameters(
+            [
+                [exchange, "exchange"],
+                [market, "market"],
+            ]
+        )
+
+        if market not in ["spot", "futures"]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {"exchange": exchange, "market": market}
+        url_path = "/v1/candle/symbols"
+        return self.query(url_path, params)
+
+    def intervals(self, exchange: str, market: str = "spot") -> List[str]:
+        """Fetch supported intervals accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
+
+        `GET /v1/candle/intervals`
+
+        <https://docs.datamaxiplus.com/api/datasets/candle/intervals>
+
+        Args:
+            exchange (str): Exchange name
+            market (str): Market type (spot/futures)
+
+        Returns:
+            List of supported intervals
+        """
+        check_required_parameters(
+            [
+                [exchange, "exchange"],
+                [market, "market"],
+            ]
+        )
+
+        params = {"exchange": exchange, "market": market}
+        url_path = "/v1/candle/intervals"
+        return self.query(url_path, params)

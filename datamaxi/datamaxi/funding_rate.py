@@ -18,41 +18,6 @@ class FundingRate(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def exchanges(self) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
-        API.
-
-        `GET /v1/funding-rate/exchanges`
-
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/exchanges>
-
-        Returns:
-            List of supported exchanges
-        """
-        url_path = "/v1/funding-rate/exchanges"
-        return self.query(url_path)
-
-    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
-        API.
-
-        `GET /v1/funding-rate/symbols`
-
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/symbols>
-
-        Args:
-            exchange (str): Exchange name
-
-        Returns:
-            List of supported symbols
-        """
-        check_required_parameter(exchange, "exchange")
-        params = {"exchange": exchange}
-        url_path = "/v1/funding-rate/symbols"
-        return self.query(url_path, params)
-
     def get(
         self,
         exchange: str,
@@ -135,3 +100,38 @@ class FundingRate(API):
             return df, next_request
         else:
             return res, next_request
+
+    def exchanges(self) -> List[str]:
+        """Fetch supported exchanges accepted by
+        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        API.
+
+        `GET /v1/funding-rate/exchanges`
+
+        <https://docs.datamaxiplus.com/api/datasets/funding-rate/exchanges>
+
+        Returns:
+            List of supported exchanges
+        """
+        url_path = "/v1/funding-rate/exchanges"
+        return self.query(url_path)
+
+    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
+        """Fetch supported symbols accepted by
+        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        API.
+
+        `GET /v1/funding-rate/symbols`
+
+        <https://docs.datamaxiplus.com/api/datasets/funding-rate/symbols>
+
+        Args:
+            exchange (str): Exchange name
+
+        Returns:
+            List of supported symbols
+        """
+        check_required_parameter(exchange, "exchange")
+        params = {"exchange": exchange}
+        url_path = "/v1/funding-rate/symbols"
+        return self.query(url_path, params)
