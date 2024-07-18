@@ -3,6 +3,7 @@ import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
+from datamaxi.datamaxi.utils import convert_data_to_data_frame
 
 
 class FundingRate(API):
