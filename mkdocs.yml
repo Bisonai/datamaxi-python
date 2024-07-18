@@ -18,6 +18,7 @@ plugins:
             show_signature_annotations: true
             show_symbol_type_heading: true
             merge_init_into_class: true
+            members_order: source
 
 markdown_extensions:
   - toc:
@@ -30,7 +31,9 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
-  - Trading Data: datamaxi.md
+  - Datamaxi:
+      - Candle: candle.md
+      - Funding Rate: funding-rate.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md

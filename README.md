@@ -62,7 +62,7 @@ All clients accept the same parameters that are described at [Configuration](#co
 First, import the clients,
 
 ```python
-# Main client
+# Main client to access crypto trading data
 from datamaxi.datamaxi import Datamaxi
 
 # DeFi
