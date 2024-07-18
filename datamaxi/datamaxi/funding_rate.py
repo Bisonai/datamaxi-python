@@ -130,10 +130,7 @@ class FundingRate(API):
             )
 
         if pandas:
-            df = pd.DataFrame(res["data"])
-            df = df.set_index("d")
-            df.replace("NaN", pd.NA, inplace=True)
-            df = df.apply(pd.to_numeric, errors="coerce")
+            df = convert_data_to_data_frame(res["data"])
             return df, next_request
         else:
             return res, next_request
