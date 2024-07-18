@@ -13,7 +13,7 @@ def test_API_initial():
 
     client.should.be.a(API)
     client.api_key.should.be.none
-    client.timeout.should.be.none
+    client.timeout.should.equal(10)
     client.show_limit_usage.should.be.false
     client.show_header.should.be.false
     client.session.should.be.a(requests.Session)
