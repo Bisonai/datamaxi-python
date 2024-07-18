@@ -1,8 +1,4 @@
-from typing import Any, Callable, Tuple, List, Dict, Union
-import pandas as pd
-from datamaxi.api import API
-from datamaxi.lib.utils import check_required_parameter
-from datamaxi.lib.utils import check_required_parameters
+from typing import Any
 from datamaxi.lib.constants import BASE_URL
 from datamaxi.datamaxi.candle import Candle
 from datamaxi.datamaxi.funding_rate import FundingRate

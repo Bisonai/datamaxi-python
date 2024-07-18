@@ -48,7 +48,7 @@ class FundingRate(API):
         url_path = "/v1/funding-rate/symbols"
         return self.query(url_path, params)
 
-    def funding_rate(
+    def get(
         self,
         exchange: str,
         symbol: str,
