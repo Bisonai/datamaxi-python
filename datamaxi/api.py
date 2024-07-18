@@ -18,7 +18,7 @@ class API(object):
         self,
         api_key=None,
         base_url=None,
-        timeout=None,
+        timeout=10,
         proxies=None,
         show_limit_usage=False,
         show_header=False,
