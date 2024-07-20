@@ -34,6 +34,7 @@ nav:
   - Datamaxi:
       - Candle: candle.md
       - Funding Rate: funding-rate.md
+      - DEX Trade: dex-trade.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md
