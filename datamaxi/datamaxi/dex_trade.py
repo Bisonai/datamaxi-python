@@ -1,16 +1,15 @@
 from typing import Any, Callable, Tuple, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
-from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 
 
-class FundingRate(API):
-    """Client to fetch funding rate data from DataMaxi+ API."""
+class DexTrade(API):
+    """Client to fetch DEX trade data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize funding rate client.
+        """Initialize DEX trade client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -29,11 +28,11 @@ class FundingRate(API):
         sort: str = "desc",
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
-        """Fetch funding rate data
+        """Fetch DEX trade data
 
-        `GET /v1/funding-rate`
+        `GET /v1/dex/trade`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/funding-rate>
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/trade>
 
         Args:
             exchange (str): Exchange name
@@ -46,7 +45,7 @@ class FundingRate(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Funding rate data in pandas DataFrame and next request function
+            DEX trade data in pandas DataFrame and next request function
         """
         check_required_parameters(
             [
@@ -54,7 +53,6 @@ class FundingRate(API):
                 [symbol, "symbol"],
             ]
         )
-
         if page < 1:
             raise ValueError("page must be greater than 0")
 
@@ -79,7 +77,7 @@ class FundingRate(API):
             "sort": sort,
         }
 
-        res = self.query("/v1/funding-rate", params)
+        res = self.query("/v1/dex/trade", params)
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -96,42 +94,22 @@ class FundingRate(API):
             )
 
         if pandas:
-            df = convert_data_to_data_frame(res["data"])
+            df = convert_data_to_data_frame(res["data"], ["b", "bq", "qq", "p", "usd"])
             return df, next_request
         else:
             return res, next_request
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
         API.
 
-        `GET /v1/funding-rate/exchanges`
+        `GET /v1/dex/trade/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/exchanges>
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/exchanges>
 
         Returns:
             List of supported exchanges
         """
-        url_path = "/v1/funding-rate/exchanges"
+        url_path = "/v1/dex/trade/exchanges"
         return self.query(url_path)
-
-    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
-        API.
-
-        `GET /v1/funding-rate/symbols`
-
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/symbols>
-
-        Args:
-            exchange (str): Exchange name
-
-        Returns:
-            List of supported symbols
-        """
-        check_required_parameter(exchange, "exchange")
-        params = {"exchange": exchange}
-        url_path = "/v1/funding-rate/symbols"
-        return self.query(url_path, params)

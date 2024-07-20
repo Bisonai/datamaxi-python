@@ -95,7 +95,7 @@ class Candle(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.candle(
+            return self.get(
                 exchange,
                 symbol,
                 interval,
