@@ -35,6 +35,9 @@ nav:
       - Candle: candle.md
       - Funding Rate: funding-rate.md
       - DEX Trade: dex-trade.md
+      - Forex: forex.md
+      - Ticker: ticker.md
+      - Premium: premium.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md

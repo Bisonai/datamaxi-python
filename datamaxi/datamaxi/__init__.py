@@ -3,6 +3,9 @@ from datamaxi.lib.constants import BASE_URL
 from datamaxi.datamaxi.candle import Candle
 from datamaxi.datamaxi.funding_rate import FundingRate
 from datamaxi.datamaxi.dex_trade import DexTrade
+from datamaxi.datamaxi.forex import Forex
+from datamaxi.datamaxi.ticker import Ticker
+from datamaxi.datamaxi.premium import Premium
 
 
 class Datamaxi:
@@ -21,3 +24,6 @@ class Datamaxi:
         self.candle = Candle(api_key, **kwargs)
         self.funding_rate = FundingRate(api_key, **kwargs)
         self.dex_trade = DexTrade(api_key, **kwargs)
+        self.forex = Forex(api_key, **kwargs)
+        self.ticker = Ticker(api_key, **kwargs)
+        self.premium = Premium(api_key, **kwargs)

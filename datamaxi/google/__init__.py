@@ -23,21 +23,21 @@ class Google(API):
     def keywords(self) -> List[str]:
         """Get Google trend supported keywords
 
-        `GET /v1/google/keywords`
+        `GET /api/v1/google/keywords`
 
         <https://docs.datamaxi.finance/api/datasets/trend/google/keywords>
 
         Returns:
             List of supported Google trend keywords
         """
-        url_path = "/v1/google/keywords"
+        url_path = "/api/v1/google/keywords"
         return self.query(url_path)
 
     @postprocess()
     def trend(self, keyword: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get Google trend for given keyword
 
-        `GET /v1/google/trend`
+        `GET /api/v1/google/trend`
 
         <https://docs.datamaxi.finance/api/datasets/trend/google/trend>
 
@@ -50,4 +50,4 @@ class Google(API):
         """
         check_required_parameter(keyword, "keyword")
         params = {"keyword": keyword}
-        return self.query("/v1/google/trend", params)
+        return self.query("/api/v1/google/trend", params)
