@@ -64,7 +64,7 @@ class Premium(API):
         else:
             return res
 
-    def exchanges(self, exchange: str) -> List[str]:
+    def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
         [datamaxi.Premium.get](./#datamaxi.datamaxi.Premium.get)
         API.
