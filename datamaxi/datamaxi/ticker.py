@@ -2,6 +2,7 @@ from typing import Any, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
+from datamaxi.lib.utils import check_required_parameter
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 
 
@@ -60,7 +61,7 @@ class Ticker(API):
         else:
             return res
 
-    def exchanges(self, exchange: str) -> List[str]:
+    def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
         [datamaxi.Ticker.get](./#datamaxi.datamaxi.Ticker.get)
         API.
