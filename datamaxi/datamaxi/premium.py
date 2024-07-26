@@ -57,10 +57,9 @@ class Premium(API):
         res = self.query("/api/v1/premium", params)
 
         if pandas:
-            return res
-        # FIXME
-        # df = convert_data_to_data_frame(res)
-        # return df
+            df = pd.DataFrame(res)
+            df = df.set_index("d")
+            return df
         else:
             return res
 
