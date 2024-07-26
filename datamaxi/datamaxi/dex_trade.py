@@ -30,7 +30,7 @@ class DexTrade(API):
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch DEX trade data
 
-        `GET /v1/dex/trade`
+        `GET /api/v1/dex/trade`
 
         <https://docs.datamaxiplus.com/api/datasets/dex-trade/trade>
 
@@ -77,7 +77,7 @@ class DexTrade(API):
             "sort": sort,
         }
 
-        res = self.query("/v1/dex/trade", params)
+        res = self.query("/api/v1/dex/trade", params)
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -104,12 +104,12 @@ class DexTrade(API):
         [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
         API.
 
-        `GET /v1/dex/trade/exchanges`
+        `GET /api/v1/dex/trade/exchanges`
 
         <https://docs.datamaxiplus.com/api/datasets/dex-trade/exchanges>
 
         Returns:
             List of supported exchanges
         """
-        url_path = "/v1/dex/trade/exchanges"
+        url_path = "/api/v1/dex/trade/exchanges"
         return self.query(url_path)

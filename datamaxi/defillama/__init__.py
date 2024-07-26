@@ -24,53 +24,53 @@ class Defillama(API):
     def protocols(self) -> List[str]:
         """Get supported protocols
 
-        `GET /v1/defillama/protocol`
+        `GET /api/v1/defillama/protocol`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/protocol>
 
         Returns:
             List of supported protocols
         """
-        url_path = "/v1/defillama/protocol"
+        url_path = "/api/v1/defillama/protocol"
         return self.query(url_path)
 
     def chains(self) -> List[str]:
         """Get supported chains
 
-        `GET /v1/defillama/chain`
+        `GET /api/v1/defillama/chain`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/chain>
 
         Returns:
             List of supported chains
         """
-        url_path = "/v1/defillama/chain"
+        url_path = "/api/v1/defillama/chain"
         return self.query(url_path)
 
     def pools(self) -> List[str]:
         """Get supported pools
 
-        `GET /v1/defillama/pool`
+        `GET /api/v1/defillama/pool`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/pool>
 
         Returns:
             List of supported pools
         """
-        url_path = "/v1/defillama/pool"
+        url_path = "/api/v1/defillama/pool"
         return self.query(url_path)
 
     def stablecoins(self) -> List[str]:
         """Get supported stablecoins
 
-        `GET /v1/defillama/stablecoin`
+        `GET /api/v1/defillama/stablecoin`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin>
 
         Returns:
             List of supported stablecoins
         """
-        url_path = "/v1/defillama/stablecoin"
+        url_path = "/api/v1/defillama/stablecoin"
         return self.query(url_path)
 
     @postprocess()
@@ -79,7 +79,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get total TVL across all chains and protocols
 
-        `GET /v1/defillama/tvl`
+        `GET /api/v1/defillama/tvl`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/tvl>
 
@@ -98,7 +98,7 @@ class Defillama(API):
         if chain is not None:
             params["chain"] = chain
 
-        url_path = "/v1/defillama/tvl"
+        url_path = "/api/v1/defillama/tvl"
         return self.query(url_path, params)
 
     @postprocess(num_index=2)
@@ -107,7 +107,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get TVL detail for given protocol and chain
 
-        `GET /v1/defillama/tvl/detail`
+        `GET /api/v1/defillama/tvl/detail`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/tvl-detail>
 
@@ -129,14 +129,14 @@ class Defillama(API):
         if token:
             params["token"] = str(token).lower()
 
-        url_path = "/v1/defillama/tvl/detail"
+        url_path = "/api/v1/defillama/tvl/detail"
         return self.query(url_path, params)
 
     @postprocess()
     def mcap(self, protocol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get market cap for given protocol
 
-        `GET /v1/defillama/mcap`
+        `GET /api/v1/defillama/mcap`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/mcap>
 
@@ -151,13 +151,13 @@ class Defillama(API):
         params = {
             "protocol": protocol,
         }
-        return self.query("/v1/defillama/mcap", params)
+        return self.query("/api/v1/defillama/mcap", params)
 
     @postprocess()
     def pool_yield(self, poolId: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get yield for given pool
 
-        `GET /v1/defillama/pool/yield`
+        `GET /api/v1/defillama/pool/yield`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/pool-yield>
 
@@ -172,7 +172,7 @@ class Defillama(API):
         params = {
             "poolId": poolId,
         }
-        return self.query("/v1/defillama/pool/yield", params)
+        return self.query("/api/v1/defillama/pool/yield", params)
 
     @postprocess()
     def stablecoin_mcap(
@@ -180,7 +180,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get market cap for given stablecoin and chain
 
-        `GET /v1/defillama/stablecoin/mcap`
+        `GET /api/v1/defillama/stablecoin/mcap`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin-mcap>
 
@@ -200,7 +200,7 @@ class Defillama(API):
         if chain is not None:
             params["chain"] = chain
 
-        return self.query("/v1/defillama/stablecoin/mcap", params)
+        return self.query("/api/v1/defillama/stablecoin/mcap", params)
 
     @postprocess()
     def stablecoin_price(
@@ -208,7 +208,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get price for given stablecoin
 
-        `GET /v1/defillama/stablecoin/price`
+        `GET /api/v1/defillama/stablecoin/price`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/stablecoin-price>
 
@@ -223,7 +223,7 @@ class Defillama(API):
         params = {
             "stablecoin": stablecoin,
         }
-        return self.query("/v1/defillama/stablecoin/price", params)
+        return self.query("/api/v1/defillama/stablecoin/price", params)
 
     @postprocess()
     def fee(
@@ -235,7 +235,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get fee for given protocol or chain
 
-        `GET /v1/defillama/fee`
+        `GET /api/v1/defillama/fee`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/fee>
 
@@ -263,7 +263,7 @@ class Defillama(API):
             check_required_parameter(chain, "chain")
             params["chain"] = chain
 
-        return self.query("/v1/defillama/fee", params)
+        return self.query("/api/v1/defillama/fee", params)
 
     @postprocess()
     def revenue(
@@ -275,7 +275,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get revenue for given protocol or chain
 
-        `GET /v1/defillama/revenue`
+        `GET /api/v1/defillama/revenue`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/revenue>
 
@@ -303,7 +303,7 @@ class Defillama(API):
             check_required_parameter(chain, "chain")
             params["chain"] = chain
 
-        return self.query("/v1/defillama/revenue", params)
+        return self.query("/api/v1/defillama/revenue", params)
 
     @postprocess(num_index=-1)
     def fee_detail(
@@ -315,7 +315,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get fee detail for given protocol and chain
 
-        `GET /v1/defillama/fee/detail`
+        `GET /api/v1/defillama/fee/detail`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/fee-detail>
 
@@ -340,7 +340,7 @@ class Defillama(API):
         if chain is not None:
             params["chain"] = chain
 
-        return self.query("/v1/defillama/fee/detail", params)
+        return self.query("/api/v1/defillama/fee/detail", params)
 
     @postprocess(num_index=-1)
     def revenue_detail(
@@ -352,7 +352,7 @@ class Defillama(API):
     ) -> Union[List, pd.DataFrame]:
         """Get revenue detail for given protocol and chain
 
-        `GET /v1/defillama/revenue/detail`
+        `GET /api/v1/defillama/revenue/detail`
 
         <https://docs.datamaxiplus.com/api/datasets/defillama/revenue-detail>
 
@@ -377,4 +377,4 @@ class Defillama(API):
         if chain is not None:
             params["chain"] = chain
 
-        return self.query("/v1/defillama/revenue/detail", params)
+        return self.query("/api/v1/defillama/revenue/detail", params)

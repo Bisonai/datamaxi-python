@@ -31,7 +31,7 @@ class FundingRate(API):
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch funding rate data
 
-        `GET /v1/funding-rate`
+        `GET /api/v1/funding-rate`
 
         <https://docs.datamaxiplus.com/api/datasets/funding-rate/funding-rate>
 
@@ -79,7 +79,7 @@ class FundingRate(API):
             "sort": sort,
         }
 
-        res = self.query("/v1/funding-rate", params)
+        res = self.query("/api/v1/funding-rate", params)
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -106,14 +106,14 @@ class FundingRate(API):
         [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
         API.
 
-        `GET /v1/funding-rate/exchanges`
+        `GET /api/v1/funding-rate/exchanges`
 
         <https://docs.datamaxiplus.com/api/datasets/funding-rate/exchanges>
 
         Returns:
             List of supported exchanges
         """
-        url_path = "/v1/funding-rate/exchanges"
+        url_path = "/api/v1/funding-rate/exchanges"
         return self.query(url_path)
 
     def symbols(self, exchange: str, market: str = "spot") -> List[str]:
@@ -121,7 +121,7 @@ class FundingRate(API):
         [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
         API.
 
-        `GET /v1/funding-rate/symbols`
+        `GET /api/v1/funding-rate/symbols`
 
         <https://docs.datamaxiplus.com/api/datasets/funding-rate/symbols>
 
@@ -133,5 +133,5 @@ class FundingRate(API):
         """
         check_required_parameter(exchange, "exchange")
         params = {"exchange": exchange}
-        url_path = "/v1/funding-rate/symbols"
+        url_path = "/api/v1/funding-rate/symbols"
         return self.query(url_path, params)

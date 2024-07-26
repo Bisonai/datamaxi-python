@@ -33,7 +33,7 @@ class Candle(API):
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch candle data
 
-        `GET /v1/candle`
+        `GET /api/v1/candle`
 
         <https://docs.datamaxiplus.com/api/datasets/candle/candle>
 
@@ -90,7 +90,7 @@ class Candle(API):
             "sort": sort,
         }
 
-        res = self.query("/v1/candle", params)
+        res = self.query("/api/v1/candle", params)
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -119,7 +119,7 @@ class Candle(API):
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
 
-        `GET /v1/candle/exchanges`
+        `GET /api/v1/candle/exchanges`
 
         <https://docs.datamaxiplus.com/api/datasets/candle/exchanges>
 
@@ -135,7 +135,7 @@ class Candle(API):
             raise ValueError("market must be either spot or futures")
 
         params = {"market": market}
-        url_path = "/v1/candle/exchanges"
+        url_path = "/api/v1/candle/exchanges"
         return self.query(url_path, params)
 
     def symbols(self, exchange: str, market: str = "spot") -> List[str]:
@@ -143,7 +143,7 @@ class Candle(API):
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
 
-        `GET /v1/candle/symbols`
+        `GET /api/v1/candle/symbols`
 
         <https://docs.datamaxiplus.com/api/datasets/candle/symbols>
 
@@ -165,7 +165,7 @@ class Candle(API):
             raise ValueError("market must be either spot or futures")
 
         params = {"exchange": exchange, "market": market}
-        url_path = "/v1/candle/symbols"
+        url_path = "/api/v1/candle/symbols"
         return self.query(url_path, params)
 
     def intervals(self, exchange: str, market: str = "spot") -> List[str]:
@@ -173,7 +173,7 @@ class Candle(API):
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
 
-        `GET /v1/candle/intervals`
+        `GET /api/v1/candle/intervals`
 
         <https://docs.datamaxiplus.com/api/datasets/candle/intervals>
 
@@ -192,5 +192,5 @@ class Candle(API):
         )
 
         params = {"exchange": exchange, "market": market}
-        url_path = "/v1/candle/intervals"
+        url_path = "/api/v1/candle/intervals"
         return self.query(url_path, params)
