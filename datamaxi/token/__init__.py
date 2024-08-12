@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, Dict, Optional
 from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
@@ -17,19 +17,54 @@ class Token(API):
             kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def updates(self, type: Optional[str] = None) -> List[str]:
+    def updates(
+        self,
+        type: Optional[str] = None,
+        page: int = 1,
+        limit: int = 1000,
+        sort: str = "desc",
+    ) -> Dict[str, Any]:
         """Get Token Updates
 
         `GET /api/v1/token/updates`
 
         <https://docs.datamaxi.finance/api/datasets/token>
 
-        Returns:
-            List of token updates
-        """
-        params = {}
-        if type:
-            params["type"] = type
+        Args:
+            type (str): Update type
+            page (int): Page number
+            limit (int): Limit of data
+            sort (str): Sort order
 
-        url_path = "/api/v1/token/updates"
-        return self.query(url_path, params)
+        Returns:
+            Token Updates data in list of dictionary
+        """
+        if page < 1:
+            raise ValueError("page must be greater than 0")
+
+        if limit < 1:
+            raise ValueError("limit must be greater than 0")
+
+        if sort not in ["asc", "desc"]:
+            raise ValueError("sort must be either asc or desc")
+
+        params = {
+            "type": type,
+            "page": page,
+            "limit": limit,
+            "sort": sort,
+        }
+
+        res = self.query("/api/v1/token/updates", params)
+        if res["data"] is None:
+            raise ValueError("no data found")
+
+        def next_request():
+            return self.get(
+                type=type,
+                page=page + 1,
+                limit=limit,
+                sort=sort,
+            )
+
+        return res, next_request

@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, Dict, Optional
 from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
@@ -17,19 +17,54 @@ class Announcement(API):
             kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def notice(self, category: Optional[str] = None) -> List[str]:
+    def get(
+        self,
+        category: Optional[str] = None,
+        page: int = 1,
+        limit: int = 1000,
+        sort: str = "desc",
+    ) -> Dict[str, Any]:
         """Get Exchange Announcements
 
         `GET /api/v1/announcements`
 
         <https://docs.datamaxi.finance/api/datasets/announcements>
 
-        Returns:
-            List of exchange announcements
-        """
-        params = {}
-        if category:
-            params["category"] = category
+        Args:
+            category (str): announcement category
+            page (int): Page number
+            limit (int): Limit of data
+            sort (str): Sort order
 
-        url_path = "/api/v1/announcements"
-        return self.query(url_path, params)
+        Returns:
+            Announcement data in list of dictionary
+        """
+        if page < 1:
+            raise ValueError("page must be greater than 0")
+
+        if limit < 1:
+            raise ValueError("limit must be greater than 0")
+
+        if sort not in ["asc", "desc"]:
+            raise ValueError("sort must be either asc or desc")
+
+        params = {
+            "category": category,
+            "page": page,
+            "limit": limit,
+            "sort": sort,
+        }
+
+        res = self.query("/api/v1/announcements", params)
+        if res["data"] is None:
+            raise ValueError("no data found")
+
+        def next_request():
+            return self.get(
+                category=category,
+                page=page + 1,
+                limit=limit,
+                sort=sort,
+            )
+
+        return res, next_request

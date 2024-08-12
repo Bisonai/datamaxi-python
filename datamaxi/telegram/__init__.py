@@ -1,5 +1,4 @@
-from typing import Any, List, Union, Optional
-import pandas as pd
+from typing import Any, Dict, Optional
 from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
@@ -18,26 +17,65 @@ class Telegram(API):
             kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def channels(self, category: Optional[str] = None) -> List[str]:
+    def channels(
+        self,
+        category: Optional[str] = None,
+        page: int = 1,
+        limit: int = 1000,
+        sort: str = "desc",
+    ) -> Dict[str, Any]:
         """Get Telegram supported channels
 
         `GET /api/v1/telegram/channels`
 
         <https://docs.datamaxi.finance/api/datasets/trend/telegram/channels>
 
+        Args:
+            category (str): channel category
+            page (int): Page number
+            limit (int): Limit of data
+            sort (str): Sort order
+
         Returns:
             List of supported Telegram channels
         """
-        params = {}
-        if category:
-            params["category"] = category
+        if page < 1:
+            raise ValueError("page must be greater than 0")
 
-        url_path = "/api/v1/telegram/channels"
-        return self.query(url_path, params)
+        if limit < 1:
+            raise ValueError("limit must be greater than 0")
+
+        if sort not in ["asc", "desc"]:
+            raise ValueError("sort must be either asc or desc")
+
+        params = {
+            "category": category,
+            "page": page,
+            "limit": limit,
+            "sort": sort,
+        }
+
+        res = self.query("/api/v1/telegram/channels", params)
+        if res["data"] is None:
+            raise ValueError("no data found")
+
+        def next_request():
+            return self.get(
+                category=category,
+                page=page + 1,
+                limit=limit,
+                sort=sort,
+            )
+
+        return res, next_request
 
     def posts(
-        self, channel_username: Optional[str] = None
-    ) -> Union[List, pd.DataFrame]:
+        self,
+        channel_username: Optional[str] = None,
+        page: int = 1,
+        limit: int = 1000,
+        sort: str = "desc",
+    ) -> Dict[str, Any]:
         """Get Telegram posts for given channel username
 
         `GET /api/v1/telegram/posts`
@@ -46,11 +84,39 @@ class Telegram(API):
 
         Args:
             channel_username (str): channel username to search posts for
+            page (int): Page number
+            limit (int): Limit of data
+            sort (str): Sort order
 
         Returns:
-            Telegram post data
+            Telegram post data in list of dictionary
         """
-        params = {}
-        if channel_username:
-            params["channel"] = channel_username
-        return self.query("/api/v1/telegram/posts", params)
+        if page < 1:
+            raise ValueError("page must be greater than 0")
+
+        if limit < 1:
+            raise ValueError("limit must be greater than 0")
+
+        if sort not in ["asc", "desc"]:
+            raise ValueError("sort must be either asc or desc")
+
+        params = {
+            "channel": channel_username,
+            "page": page,
+            "limit": limit,
+            "sort": sort,
+        }
+
+        res = self.query("/api/v1/telegram/posts", params)
+        if res["data"] is None:
+            raise ValueError("no data found")
+
+        def next_request():
+            return self.get(
+                channel_username=channel_username,
+                page=page + 1,
+                limit=limit,
+                sort=sort,
+            )
+
+        return res, next_request
