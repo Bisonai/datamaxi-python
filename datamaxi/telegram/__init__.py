@@ -71,7 +71,7 @@ class Telegram(API):
 
     def posts(
         self,
-        channel_username: Optional[str] = None,
+        channel_name: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
         sort: str = "desc",
@@ -101,7 +101,7 @@ class Telegram(API):
             raise ValueError("sort must be either asc or desc")
 
         params = {
-            "channel": channel_username,
+            "channel": channel_name,
             "page": page,
             "limit": limit,
             "sort": sort,
@@ -113,7 +113,7 @@ class Telegram(API):
 
         def next_request():
             return self.get(
-                channel_username=channel_username,
+                channel_name=channel_name,
                 page=page + 1,
                 limit=limit,
                 sort=sort,

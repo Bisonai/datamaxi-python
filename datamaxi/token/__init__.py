@@ -49,7 +49,7 @@ class Token(API):
             raise ValueError("sort must be either asc or desc")
 
         if type is not None and type not in ["listed", "delisted"]:
-            raise ValueError("type must be either listing or delisting when set")
+            raise ValueError("type must be either listed or delisted when set")
 
         params = {
             "type": type,
