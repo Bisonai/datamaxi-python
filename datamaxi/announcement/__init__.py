@@ -4,7 +4,7 @@ from datamaxi.lib.constants import BASE_URL
 
 
 class Announcement(API):
-    """Client to fetch Announcement data from DataMaxi+ API."""
+    """Client to fetch announcement data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize the object.
@@ -24,11 +24,11 @@ class Announcement(API):
         limit: int = 1000,
         sort: str = "desc",
     ) -> Dict[str, Any]:
-        """Get Exchange Announcements
+        """Get exchange announcements
 
         `GET /api/v1/announcements`
 
-        <https://docs.datamaxi.finance/api/datasets/announcements>
+        <https://docs.datamaxiplus.com/api/datasets/announcements>
 
         Args:
             category (str): announcement category
@@ -37,7 +37,7 @@ class Announcement(API):
             sort (str): Sort order
 
         Returns:
-            Announcement data in list of dictionary
+            Announcements
         """
         if page < 1:
             raise ValueError("page must be greater than 0")

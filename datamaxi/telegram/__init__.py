@@ -28,7 +28,7 @@ class Telegram(API):
 
         `GET /api/v1/telegram/channels`
 
-        <https://docs.datamaxi.finance/api/datasets/trend/telegram/channels>
+        <https://docs.datamaxiplus.com/api/datasets/telegram/channels>
 
         Args:
             category (str): channel category
@@ -80,16 +80,16 @@ class Telegram(API):
 
         `GET /api/v1/telegram/posts`
 
-        <https://docs.datamaxiplus.com/api/datasets/trend/telegram/posts>
+        <https://docs.datamaxiplus.com/api/datasets/telegram/posts>
 
         Args:
-            channel_username (str): channel username to search posts for
+            channel_name (str): channel name to get posts from
             page (int): Page number
             limit (int): Limit of data
             sort (str): Sort order
 
         Returns:
-            Telegram post data in list of dictionary
+            Telegram channel posts
         """
         if page < 1:
             raise ValueError("page must be greater than 0")

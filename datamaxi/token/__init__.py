@@ -4,7 +4,7 @@ from datamaxi.lib.constants import BASE_URL
 
 
 class Token(API):
-    """Client to fetch Token status data from DataMaxi+ API."""
+    """Client to fetch token status data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize the object.
@@ -28,7 +28,7 @@ class Token(API):
 
         `GET /api/v1/token/updates`
 
-        <https://docs.datamaxi.finance/api/datasets/token>
+        <https://docs.datamaxiplus.com/api/datasets/token>
 
         Args:
             type (str): Update type
@@ -47,6 +47,9 @@ class Token(API):
 
         if sort not in ["asc", "desc"]:
             raise ValueError("sort must be either asc or desc")
+        
+        if type is not None and type not in ["listing", "delisting"]:
+            raise ValueError("type must be either listing or delisting when set")
 
         params = {
             "type": type,
