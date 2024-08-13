@@ -28,7 +28,7 @@ class Token(API):
 
         `GET /api/v1/token/updates`
 
-        <https://docs.datamaxiplus.com/api/datasets/token>
+        <https://docs.datamaxiplus.com/api/datasets/token-listing-delisting>
 
         Args:
             type (str): Update type
