@@ -42,6 +42,9 @@ nav:
   - Trend:
       - Naver Trend: naver-trend.md
       - Google Trend: google-trend.md
+  - Telegram: telegram.md
+  - Announcement: announcement.md
+  - Token Listing/Delisting: token-updates.md
 
 theme:
   name: material
