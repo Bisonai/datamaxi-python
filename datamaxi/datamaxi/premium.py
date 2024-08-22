@@ -30,10 +30,10 @@ class Premium(API):
         `GET /api/v1/premium`
         <https://docs.datamaxiplus.com/api/datasets/premium/premium>
 
-        `GET /api/v1/premium/{sourceExchange}
+        `GET /api/v1/premium/:sourceExchange`
         <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-exchange>
 
-        `GET /api/v1/premium/{sourceExchange}/{targetExchange}
+        `GET /api/v1/premium/:sourceExchange/:targetExchange`
         <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-and-target-exchange>
 
         Args:
