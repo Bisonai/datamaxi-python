@@ -48,20 +48,20 @@ class Premium(API):
             Premium data in pandas DataFrame
         """
         params = {}
-        if sort != None:
+        if sort is not None:
             params["sort"] = sort
 
-        if limit != None:
+        if limit is not None:
             params["limit"] = limit
 
-        if symbol != None:
+        if symbol is not None:
             params["symbol"] = symbol
 
-        if sourceExchange != None and targetExchange != None:
+        if sourceExchange is not None and targetExchange is not None:
             res = self.query(
                 f"/api/v1/premium/{sourceExchange}/{targetExchange}", params
             )
-        elif sourceExchange != None:
+        elif sourceExchange is not None:
             res = self.query(f"/api/v1/premium/{sourceExchange}", params)
         else:
             res = self.query("/api/v1/premium", params)
