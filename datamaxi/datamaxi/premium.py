@@ -18,42 +18,53 @@ class Premium(API):
 
     def get(
         self,
-        sourceExchange: str,
-        targetExchange: str,
-        symbol: str,
+        sort: str = None,
+        limit: int = None,
+        symbol: str = None,
+        sourceExchange: str = None,
+        targetExchange: str = None,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch premium data
 
         `GET /api/v1/premium`
-
         <https://docs.datamaxiplus.com/api/datasets/premium/premium>
 
+        `GET /api/v1/premium/{sourceExchange}
+        <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-exchange>
+
+        `GET /api/v1/premium/{sourceExchange}/{targetExchange}
+        <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-and-target-exchange>
+
         Args:
+            sort (str): Sort data by `asc` or `desc`
+            limit (int): Limit number of data to return
+            symbol (str): Symbol name
             sourceExchange (str): Source exchange name
             targetExchange (str): Target exchange name
-            symbol (str): Symbol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Premium data in pandas DataFrame
         """
+        params = {}
+        if sort != None:
+            params["sort"] = sort
 
-        check_required_parameters(
-            [
-                [sourceExchange, "sourceExchange"],
-                [targetExchange, "targetExchange"],
-                [symbol, "symbol"],
-            ]
-        )
+        if limit != None:
+            params["limit"] = limit
 
-        params = {
-            "sourceExchange": sourceExchange,
-            "targetExchange": targetExchange,
-            "symbol": symbol,
-        }
+        if symbol != None:
+            params["symbol"] = symbol
 
-        res = self.query("/api/v1/premium", params)
+        if sourceExchange != None and targetExchange != None:
+            res = self.query(
+                f"/api/v1/premium/{sourceExchange}/{targetExchange}", params
+            )
+        elif sourceExchange != None:
+            res = self.query(f"/api/v1/premium/{sourceExchange}", params)
+        else:
+            res = self.query("/api/v1/premium", params)
 
         if pandas:
             df = pd.DataFrame(res)
@@ -82,7 +93,7 @@ class Premium(API):
         [datamaxi.Premium.get](./#datamaxi.datamaxi.Premium.get)
         API.
 
-        `GET /api/v1/premium/symbols`
+        `GET /api/v1/premium/symbols/{sourceExchange}/{targetExchange}`
 
         <https://docs.datamaxiplus.com/api/datasets/premium/symbols>
 
@@ -100,7 +111,5 @@ class Premium(API):
             ]
         )
 
-        params = {"sourceExchange": sourceExchange, "targetExchange": targetExchange}
-
-        url_path = "/api/v1/premium/symbols"
-        return self.query(url_path, params)
+        url_path = f"/api/v1/premium/symbols/{sourceExchange}/{targetExchange}"
+        return self.query(url_path)
