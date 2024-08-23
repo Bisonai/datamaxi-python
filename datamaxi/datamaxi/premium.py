@@ -105,5 +105,5 @@ class Premium(API):
         )
 
         params = {"sourceExchange": sourceExchange, "targetExchange": targetExchange}
-        url_path = f"/api/v1/premium/symbols"
+        url_path = "/api/v1/premium/symbols"
         return self.query(url_path, params)
