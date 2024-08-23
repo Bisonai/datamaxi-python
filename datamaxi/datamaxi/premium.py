@@ -30,12 +30,6 @@ class Premium(API):
         `GET /api/v1/premium`
         <https://docs.datamaxiplus.com/api/datasets/premium/premium>
 
-        `GET /api/v1/premium/:sourceExchange`
-        <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-exchange>
-
-        `GET /api/v1/premium/:sourceExchange/:targetExchange`
-        <https://docs.datamaxiplus.com/api/datasets/premium/premium-by-source-and-target-exchange>
-
         Args:
             sort (str): Sort data by `asc` or `desc`
             limit (int): Limit number of data to return
@@ -48,6 +42,12 @@ class Premium(API):
             Premium data in pandas DataFrame
         """
         params = {}
+        if sourceExchange is not None:
+            params["sourceExchange"] = sourceExchange
+
+        if targetExchange is not None:
+            params["targetExchange"] = targetExchange
+
         if sort is not None:
             params["sort"] = sort
 
@@ -57,14 +57,7 @@ class Premium(API):
         if symbol is not None:
             params["symbol"] = symbol
 
-        if sourceExchange is not None and targetExchange is not None:
-            res = self.query(
-                f"/api/v1/premium/{sourceExchange}/{targetExchange}", params
-            )
-        elif sourceExchange is not None:
-            res = self.query(f"/api/v1/premium/{sourceExchange}", params)
-        else:
-            res = self.query("/api/v1/premium", params)
+        res = self.query("/api/v1/premium", params)
 
         if pandas:
             df = pd.DataFrame(res)
@@ -93,7 +86,7 @@ class Premium(API):
         [datamaxi.Premium.get](./#datamaxi.datamaxi.Premium.get)
         API.
 
-        `GET /api/v1/premium/symbols/{sourceExchange}/{targetExchange}`
+        `GET /api/v1/premium/symbols`
 
         <https://docs.datamaxiplus.com/api/datasets/premium/symbols>
 
@@ -111,5 +104,6 @@ class Premium(API):
             ]
         )
 
-        url_path = f"/api/v1/premium/symbols/{sourceExchange}/{targetExchange}"
-        return self.query(url_path)
+        params = {"sourceExchange": sourceExchange, "targetExchange": targetExchange}
+        url_path = f"/api/v1/premium/symbols"
+        return self.query(url_path, params)
