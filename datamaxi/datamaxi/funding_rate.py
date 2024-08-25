@@ -141,6 +141,13 @@ class FundingRate(API):
 
         res = self.query("/api/v1/funding-rate/latest", params)
 
+        if pandas:
+            df = pd.DataFrame(res)
+            df = df.set_index("d")
+            return df
+        else:
+            return res
+
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
         [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
