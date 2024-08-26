@@ -1,4 +1,4 @@
-from typing import Any, List, Dict, Union
+from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
@@ -24,7 +24,7 @@ class Premium(API):
         sourceExchange: str = None,
         targetExchange: str = None,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[List, pd.DataFrame]:
         """Fetch premium data
 
         `GET /api/v1/premium`
@@ -42,11 +42,6 @@ class Premium(API):
             Premium data in pandas DataFrame
         """
         params = {}
-        if sourceExchange is not None:
-            params["sourceExchange"] = sourceExchange
-
-        if targetExchange is not None:
-            params["targetExchange"] = targetExchange
 
         if sort is not None:
             params["sort"] = sort
@@ -56,6 +51,12 @@ class Premium(API):
 
         if symbol is not None:
             params["symbol"] = symbol
+
+        if sourceExchange is not None:
+            params["sourceExchange"] = sourceExchange
+
+        if targetExchange is not None:
+            params["targetExchange"] = targetExchange
 
         res = self.query("/api/v1/premium", params)
 

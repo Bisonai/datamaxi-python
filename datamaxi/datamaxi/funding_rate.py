@@ -29,11 +29,11 @@ class FundingRate(API):
         sort: str = "desc",
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
-        """Fetch funding rate data
+        """Fetch historical funding rate data
 
         `GET /api/v1/funding-rate`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/funding-rate>
+        <https://docs.datamaxiplus.com/api/datasets/funding-rate/historical-funding-rate>
 
         Args:
             exchange (str): Exchange name
@@ -46,7 +46,7 @@ class FundingRate(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Funding rate data in pandas DataFrame and next request function
+            Historical funding rate data in pandas DataFrame and next request function
         """
         check_required_parameters(
             [
@@ -100,6 +100,53 @@ class FundingRate(API):
             return df, next_request
         else:
             return res, next_request
+
+    def getLatest(
+        self,
+        sort: str = None,
+        limit: int = None,
+        symbol: str = None,
+        exchange: str = None,
+        pandas: bool = True,
+    ) -> Union[Tuple[List, Callable], Tuple[pd.DataFrame, Callable]]:
+        """Fetch latest funding rate data
+
+        `GET /api/v1/funding-rate/latest`
+
+        <https://docs.datamaxiplus.com/api/datasets/funding-rate/latest-funding-rate>
+
+        Args:
+            sort (str): Sort data by `asc` or `desc`
+            limit (int): Limit number of data to return
+            symbol (str): Symbol name
+            exchange (str): exchange name
+            pandas (bool): Return data as pandas DataFrame
+
+        Returns:
+            Latest funding rate data in pandas DataFrame
+        """
+        params = {}
+
+        if sort is not None:
+            params["sort"] = sort
+
+        if limit is not None:
+            params["limit"] = limit
+
+        if symbol is not None:
+            params["symbol"] = symbol
+
+        if exchange is not None:
+            params["exchange"] = exchange
+
+        res = self.query("/api/v1/funding-rate/latest", params)
+
+        if pandas:
+            df = pd.DataFrame(res)
+            df = df.set_index("d")
+            return df
+        else:
+            return res
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
