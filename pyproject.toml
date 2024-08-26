@@ -1,6 +1,6 @@
 [project]
 name = "datamaxi"
-version = "0.17.0"
+version = "0.17.1"
 authors = [
   { name="Bisonai", email="business@bisonai.com" },
 ]

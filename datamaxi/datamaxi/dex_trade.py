@@ -94,7 +94,7 @@ class DexTrade(API):
             )
 
         if pandas:
-            df = convert_data_to_data_frame(res["data"], ["b", "bq", "qq", "p", "usd"])
+            df = convert_data_to_data_frame(res["data"], ["b", "bq", "qq", "p"])
             return df, next_request
         else:
             return res, next_request
