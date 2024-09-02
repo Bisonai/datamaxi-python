@@ -113,3 +113,36 @@ class DexTrade(API):
         """
         url_path = "/api/v1/dex/trade/exchanges"
         return self.query(url_path)
+
+    def symbols(
+        self, exchange: str = None, market: str = None, chain: str = None
+    ) -> List[Dict]:
+        """Fetch supported symbols accepted by
+        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        API.
+
+        `GET /api/v1/dex/trade/symbols`
+
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/symbols>
+
+        Args:
+            exchange (str): Exchange name
+            market (str): Market type (spot/futures)
+            chain (str): Chain name
+
+        Returns:
+            List of supported symbols
+        """
+        if market is not None and market not in ["spot", "futures"]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {}
+        if exchange is not None:
+            params["exchange"] = exchange
+        if market is not None:
+            params["market"] = market
+        if chain is not None:
+            params["chain"] = chain
+
+        url_path = "/api/v1/dex/trade/symbols"
+        return self.query(url_path, params)

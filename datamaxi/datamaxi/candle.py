@@ -138,7 +138,9 @@ class Candle(API):
         url_path = "/api/v1/candle/exchanges"
         return self.query(url_path, params)
 
-    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
+    def symbols(
+        self, exchange: str = None, market: str = None, chain: str = None
+    ) -> List[Dict]:
         """Fetch supported symbols accepted by
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
@@ -150,21 +152,22 @@ class Candle(API):
         Args:
             exchange (str): Exchange name
             market (str): Market type (spot/futures)
+            chain (str): Chain name (applied to DEX only)
 
         Returns:
             List of supported symbols
         """
-        check_required_parameters(
-            [
-                [exchange, "exchange"],
-                [market, "market"],
-            ]
-        )
-
-        if market not in ["spot", "futures"]:
+        if market is not None and market not in ["spot", "futures"]:
             raise ValueError("market must be either spot or futures")
 
-        params = {"exchange": exchange, "market": market}
+        params = {}
+        if exchange is not None:
+            params["exchange"] = exchange
+        if market is not None:
+            params["market"] = market
+        if chain is not None:
+            params["chain"] = chain
+
         url_path = "/api/v1/candle/symbols"
         return self.query(url_path, params)
 
