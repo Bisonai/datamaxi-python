@@ -74,8 +74,8 @@ class FundingRate(API):
             "symbol": symbol,
             "page": page,
             "limit": limit,
-            "fromDateTime": fromDateTime,
-            "toDateTime": toDateTime,
+            "from": fromDateTime,
+            "to": toDateTime,
             "sort": sort,
         }
 
