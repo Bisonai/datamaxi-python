@@ -85,8 +85,8 @@ class Candle(API):
             "market": market,
             "page": page,
             "limit": limit,
-            "fromDateTime": fromDateTime,
-            "toDateTime": toDateTime,
+            "from": fromDateTime,
+            "to": toDateTime,
             "sort": sort,
         }
 
