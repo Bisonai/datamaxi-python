@@ -32,9 +32,11 @@ nav:
   - Main: index.md
   - API: api.md
   - Datamaxi:
-      - Candle: candle.md
+      - CEX Candle: cex-candle.md
+      - DEX:
+          - Trade: dex-trade.md
+          - Candle: dex-candle.md
       - Funding Rate: funding-rate.md
-      - DEX Trade: dex-trade.md
       - Forex: forex.md
       - Ticker: ticker.md
       - Premium: premium.md

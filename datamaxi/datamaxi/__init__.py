@@ -6,6 +6,9 @@ from datamaxi.datamaxi.funding_rate import FundingRate
 from datamaxi.datamaxi.forex import Forex
 from datamaxi.datamaxi.ticker import Ticker
 from datamaxi.datamaxi.premium import Premium
+from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # noqa:F401
+from datamaxi.datamaxi.dex_candle import DexCandle  # used in documentation # noqa:F401
+from datamaxi.datamaxi.dex_trade import DexTrade  # used in documentation # noqa:F401
 
 
 class Datamaxi:
