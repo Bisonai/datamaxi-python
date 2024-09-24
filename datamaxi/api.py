@@ -128,16 +128,13 @@ class API(object):
             try:
                 err = json.loads(response.text)
             except JSONDecodeError:
-                raise ClientError(
-                    status_code, None, response.text, None, response.headers
-                )
+                raise ClientError(status_code, response.text, None, response.headers)
             error_data = None
             if "data" in err:
                 error_data = err["data"]
             raise ClientError(
                 status_code,
-                err["code"],
-                err["msg"],
+                err["error"],
                 response.headers,
                 error_data,
             )

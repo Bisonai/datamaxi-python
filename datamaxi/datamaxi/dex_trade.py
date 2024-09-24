@@ -19,8 +19,9 @@ class DexTrade(API):
 
     def get(
         self,
+        chain: str,
         exchange: str,
-        symbol: str,
+        pool: str,
         page: int = 1,
         limit: int = 1000,
         fromDateTime: str = None,
@@ -35,8 +36,9 @@ class DexTrade(API):
         <https://docs.datamaxiplus.com/api/datasets/dex-trade/trade>
 
         Args:
+            chain (str): Chain name
             exchange (str): Exchange name
-            symbol (str): Symbol name
+            pool (str): Pool name
             page (int): Page number
             limit (int): Limit of data
             fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
@@ -49,8 +51,9 @@ class DexTrade(API):
         """
         check_required_parameters(
             [
+                [chain, "chain"],
                 [exchange, "exchange"],
-                [symbol, "symbol"],
+                [pool, "pool"],
             ]
         )
         if page < 1:
@@ -68,23 +71,25 @@ class DexTrade(API):
             raise ValueError("sort must be either asc or desc")
 
         params = {
+            "chain": chain,
             "exchange": exchange,
-            "symbol": symbol,
+            "pool": pool,
             "page": page,
             "limit": limit,
-            "fromDateTime": fromDateTime,
-            "toDateTime": toDateTime,
+            "from": fromDateTime,
+            "to": toDateTime,
             "sort": sort,
         }
 
         res = self.query("/api/v1/dex/trade", params)
-        if res["data"] is None:
+        if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
         def next_request():
             return self.get(
+                chain,
                 exchange,
-                symbol,
+                pool,
                 page + 1,
                 limit,
                 fromDateTime,
@@ -98,6 +103,22 @@ class DexTrade(API):
             return df, next_request
         else:
             return res, next_request
+
+    def chains(self) -> List[str]:
+        """Fetch supported chains accepted by
+        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
+        API.
+
+        `GET /api/v1/dex/trade/chains`
+
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/chains>
+
+        Returns:
+            List of supported chains
+        """
+
+        url_path = "/api/v1/dex/trade/chains"
+        return self.query(url_path)
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
@@ -114,35 +135,27 @@ class DexTrade(API):
         url_path = "/api/v1/dex/trade/exchanges"
         return self.query(url_path)
 
-    def symbols(
-        self, exchange: str = None, market: str = None, chain: str = None
-    ) -> List[Dict]:
-        """Fetch supported symbols accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+    def pools(self, exchange: str = None, chain: str = None) -> List[Dict]:
+        """Fetch supported pools accepted by
+        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
         API.
 
-        `GET /api/v1/dex/trade/symbols`
+        `GET /api/v1/dex/trade/pools`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/pools>
 
         Args:
             exchange (str): Exchange name
-            market (str): Market type (spot/futures)
             chain (str): Chain name
 
         Returns:
-            List of supported symbols
+            List of supported pools
         """
-        if market is not None and market not in ["spot", "futures"]:
-            raise ValueError("market must be either spot or futures")
-
         params = {}
         if exchange is not None:
             params["exchange"] = exchange
-        if market is not None:
-            params["market"] = market
         if chain is not None:
             params["chain"] = chain
 
-        url_path = "/api/v1/dex/trade/symbols"
+        url_path = "/api/v1/dex/trade/pools"
         return self.query(url_path, params)

@@ -3,11 +3,9 @@ class Error(Exception):
 
 
 class ClientError(Error):
-    def __init__(self, status_code, error_code, error_message, header, error_data=None):
+    def __init__(self, status_code, error_message, header, error_data=None):
         # https status code
         self.status_code = status_code
-        # error code returned from server
-        self.error_code = error_code
         # error message returned from server
         self.error_message = error_message
         # the whole response header returned from server
