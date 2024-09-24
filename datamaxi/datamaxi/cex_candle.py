@@ -35,7 +35,7 @@ class CexCandle(API):
 
         `GET /api/v1/cex/candle`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex/candle/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex-candle/candle>
 
         Args:
             exchange (str): Exchange name
@@ -116,12 +116,12 @@ class CexCandle(API):
 
     def exchanges(self, market: str = "spot") -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/cex/candle/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex/candle/exchanges>
+        <https://docs.datamaxiplus.com/api/datasets/cex-candle/exchanges>
 
         Args:
             market (str): Market type (spot/futures)
@@ -140,12 +140,12 @@ class CexCandle(API):
 
     def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
         """Fetch supported symbols accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/cex/candle/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex/candle/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex-candle/symbols>
 
         Args:
             exchange (str): Exchange name
@@ -168,12 +168,12 @@ class CexCandle(API):
 
     def intervals(self, exchange: str, market: str = "spot") -> List[str]:
         """Fetch supported intervals accepted by
-        [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
+        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/candle/intervals`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex/candle/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex-candle/intervals>
 
         Args:
             exchange (str): Exchange name

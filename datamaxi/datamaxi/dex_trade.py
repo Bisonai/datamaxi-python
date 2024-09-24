@@ -111,7 +111,7 @@ class DexTrade(API):
 
         `GET /api/v1/dex/trade/chains`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex/trade/chains>
+        <https://docs.datamaxiplus.com/api/datasets/dex-trade/chains>
 
         Returns:
             List of supported chains
