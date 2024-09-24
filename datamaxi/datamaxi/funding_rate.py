@@ -80,7 +80,7 @@ class FundingRate(API):
         }
 
         res = self.query("/api/v1/funding-rate", params)
-        if res["data"] is None:
+        if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
         def next_request():

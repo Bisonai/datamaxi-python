@@ -1,15 +1,16 @@
 from typing import Any, Callable, Tuple, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
+from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 
 
-class DexTrade(API):
-    """Client to fetch DEX trade data from DataMaxi+ API."""
+class DexCandle(API):
+    """Client to fetch DEX candle data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize DEX trade client.
+        """Initialize client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -22,6 +23,7 @@ class DexTrade(API):
         chain: str,
         exchange: str,
         pool: str,
+        interval: str = "1d",
         page: int = 1,
         limit: int = 1000,
         fromDateTime: str = None,
@@ -29,16 +31,17 @@ class DexTrade(API):
         sort: str = "desc",
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
-        """Fetch DEX trade data
+        """Fetch DEX candle data
 
-        `GET /api/v1/dex/trade`
+        `GET /api/v1/dex/candle`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/trade>
+        <https://docs.datamaxiplus.com/api/datasets/dex/candle/candle>
 
         Args:
             chain (str): Chain name
             exchange (str): Exchange name
             pool (str): Pool name
+            interval (str): Candle interval
             page (int): Page number
             limit (int): Limit of data
             fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
@@ -47,15 +50,17 @@ class DexTrade(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            DEX trade data in pandas DataFrame and next request function
+            Candle data in pandas DataFrame and next request function
         """
         check_required_parameters(
             [
                 [chain, "chain"],
                 [exchange, "exchange"],
                 [pool, "pool"],
+                [interval, "interval"],
             ]
         )
+
         if page < 1:
             raise ValueError("page must be greater than 0")
 
@@ -74,6 +79,7 @@ class DexTrade(API):
             "chain": chain,
             "exchange": exchange,
             "pool": pool,
+            "interval": interval,
             "page": page,
             "limit": limit,
             "from": fromDateTime,
@@ -81,7 +87,7 @@ class DexTrade(API):
             "sort": sort,
         }
 
-        res = self.query("/api/v1/dex/trade", params)
+        res = self.query("/api/v1/dex/candle", params)
         if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
@@ -90,6 +96,7 @@ class DexTrade(API):
                 chain,
                 exchange,
                 pool,
+                interval,
                 page + 1,
                 limit,
                 fromDateTime,
@@ -99,54 +106,55 @@ class DexTrade(API):
             )
 
         if pandas:
-            df = convert_data_to_data_frame(res["data"], ["b", "bq", "qq", "p"])
+            df = convert_data_to_data_frame(res["data"])
             return df, next_request
         else:
             return res, next_request
 
     def chains(self) -> List[str]:
         """Fetch supported chains accepted by
-        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
+        [datamaxi.DexCandle.get](./#datamaxi.datamaxi.DexCandle.get)
         API.
 
-        `GET /api/v1/dex/trade/chains`
+        `GET /api/v1/dex/candle/chains`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex/trade/chains>
+        <https://docs.datamaxiplus.com/api/datasets/dex/candle/chains>
 
         Returns:
             List of supported chains
         """
 
-        url_path = "/api/v1/dex/trade/chains"
+        url_path = "/api/v1/dex/candle/chains"
         return self.query(url_path)
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
+        [datamaxi.DexCandle.get](./#datamaxi.datamaxi.DexCandle.get)
         API.
 
-        `GET /api/v1/dex/trade/exchanges`
+        `GET /api/v1/dex/candle/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/exchanges>
+        <https://docs.datamaxiplus.com/api/datasets/dex/candle/exchanges>
 
         Returns:
             List of supported exchanges
         """
-        url_path = "/api/v1/dex/trade/exchanges"
+
+        url_path = "/api/v1/dex/candle/exchanges"
         return self.query(url_path)
 
     def pools(self, exchange: str = None, chain: str = None) -> List[Dict]:
         """Fetch supported pools accepted by
-        [datamaxi.DexTrade.get](./#datamaxi.datamaxi.DexTrade.get)
+        [datamaxi.DexCandle.get](./#datamaxi.datamaxi.DexCandle.get)
         API.
 
-        `GET /api/v1/dex/trade/pools`
+        `GET /api/v1/dex/candle/pools`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/pools>
+        <https://docs.datamaxiplus.com/api/datasets/dex/candle/poolsx>
 
         Args:
             exchange (str): Exchange name
-            chain (str): Chain name
+            chain (str): Chain name (applied to DEX only)
 
         Returns:
             List of supported pools
@@ -157,5 +165,30 @@ class DexTrade(API):
         if chain is not None:
             params["chain"] = chain
 
-        url_path = "/api/v1/dex/trade/pools"
+        url_path = "/api/v1/dex/candle/pools"
+        return self.query(url_path, params)
+
+    def intervals(self, exchange: str) -> List[str]:
+        """Fetch supported intervals accepted by
+        [datamaxi.DexCandle.get](./#datamaxi.datamaxi.DexCandle.get)
+        API.
+
+        `GET /api/v1/candle/intervals`
+
+        <https://docs.datamaxiplus.com/api/datasets/dex/candle/intervals>
+
+        Args:
+            exchange (str): Exchange name
+
+        Returns:
+            List of supported intervals
+        """
+        check_required_parameters(
+            [
+                [exchange, "exchange"],
+            ]
+        )
+
+        params = {"exchange": exchange}
+        url_path = "/api/v1/dex/candle/intervals"
         return self.query(url_path, params)

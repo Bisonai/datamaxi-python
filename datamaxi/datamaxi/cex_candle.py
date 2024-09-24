@@ -6,11 +6,11 @@ from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 
 
-class Candle(API):
-    """Client to fetch candle data from DataMaxi+ API."""
+class CexCandle(API):
+    """Client to fetch CEX candle data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize candle client.
+        """Initialize client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -33,9 +33,9 @@ class Candle(API):
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch candle data
 
-        `GET /api/v1/candle`
+        `GET /api/v1/cex/candle`
 
-        <https://docs.datamaxiplus.com/api/datasets/candle/candle>
+        <https://docs.datamaxiplus.com/api/datasets/cex/candle/candle>
 
         Args:
             exchange (str): Exchange name
@@ -90,8 +90,8 @@ class Candle(API):
             "sort": sort,
         }
 
-        res = self.query("/api/v1/candle", params)
-        if res["data"] is None:
+        res = self.query("/api/v1/cex/candle", params)
+        if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
         def next_request():
@@ -119,9 +119,9 @@ class Candle(API):
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
 
-        `GET /api/v1/candle/exchanges`
+        `GET /api/v1/cex/candle/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/candle/exchanges>
+        <https://docs.datamaxiplus.com/api/datasets/cex/candle/exchanges>
 
         Args:
             market (str): Market type (spot/futures)
@@ -135,24 +135,21 @@ class Candle(API):
             raise ValueError("market must be either spot or futures")
 
         params = {"market": market}
-        url_path = "/api/v1/candle/exchanges"
+        url_path = "/api/v1/cex/candle/exchanges"
         return self.query(url_path, params)
 
-    def symbols(
-        self, exchange: str = None, market: str = None, chain: str = None
-    ) -> List[Dict]:
+    def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
         """Fetch supported symbols accepted by
         [datamaxi.Candle.get](./#datamaxi.datamaxi.Candle.get)
         API.
 
-        `GET /api/v1/candle/symbols`
+        `GET /api/v1/cex/candle/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/candle/symbols>
+        <https://docs.datamaxiplus.com/api/datasets/cex/candle/symbols>
 
         Args:
             exchange (str): Exchange name
             market (str): Market type (spot/futures)
-            chain (str): Chain name (applied to DEX only)
 
         Returns:
             List of supported symbols
@@ -165,10 +162,8 @@ class Candle(API):
             params["exchange"] = exchange
         if market is not None:
             params["market"] = market
-        if chain is not None:
-            params["chain"] = chain
 
-        url_path = "/api/v1/candle/symbols"
+        url_path = "/api/v1/cex/candle/symbols"
         return self.query(url_path, params)
 
     def intervals(self, exchange: str, market: str = "spot") -> List[str]:
@@ -178,7 +173,7 @@ class Candle(API):
 
         `GET /api/v1/candle/intervals`
 
-        <https://docs.datamaxiplus.com/api/datasets/candle/intervals>
+        <https://docs.datamaxiplus.com/api/datasets/cex/candle/intervals>
 
         Args:
             exchange (str): Exchange name
@@ -195,5 +190,5 @@ class Candle(API):
         )
 
         params = {"exchange": exchange, "market": market}
-        url_path = "/api/v1/candle/intervals"
+        url_path = "/api/v1/cex/candle/intervals"
         return self.query(url_path, params)
