@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../funding-rate/">
+        <link rel="prev" href="../cex-candle/">
       
       
-        <link rel="next" href="../forex/">
+        <link rel="next" href="../dex-candle/">
       
       
       <link rel="icon" href="/assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
     
     
       
-        <title>DEX Trade - </title>
+        <title>Trade - </title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.06209087.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DEX Trade
+              Trade
             
           </span>
         </div>
@@ -340,11 +340,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../candle/" class="md-nav__link">
+      <a href="../cex-candle/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Candle
+    CEX Candle
   </span>
   
 
@@ -358,22 +358,38 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../funding-rate/" class="md-nav__link">
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
-    Funding Rate
+    DEX
   </span>
   
 
-      </a>
-    </li>
-  
-
-              
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            DEX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -395,7 +411,7 @@
           
   
   <span class="md-ellipsis">
-    DEX Trade
+    Trade
   </span>
   
 
@@ -406,7 +422,7 @@
         
   
   <span class="md-ellipsis">
-    DEX Trade
+    Trade
   </span>
   
 
@@ -446,6 +462,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#datamaxi.datamaxi.DexTrade.chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      chains
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamaxi.datamaxi.DexTrade.exchanges" class="md-nav__link">
     <span class="md-ellipsis">
       exchanges
@@ -455,9 +480,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.DexTrade.symbols" class="md-nav__link">
+  <a href="#datamaxi.datamaxi.DexTrade.pools" class="md-nav__link">
     <span class="md-ellipsis">
-      symbols
+      pools
     </span>
   </a>
   
@@ -467,6 +492,56 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dex-candle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Candle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../funding-rate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funding Rate
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -751,6 +826,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#datamaxi.datamaxi.DexTrade.chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      chains
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamaxi.datamaxi.DexTrade.exchanges" class="md-nav__link">
     <span class="md-ellipsis">
       exchanges
@@ -760,9 +844,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.DexTrade.symbols" class="md-nav__link">
+  <a href="#datamaxi.datamaxi.DexTrade.pools" class="md-nav__link">
     <span class="md-ellipsis">
-      symbols
+      pools
     </span>
   </a>
   
@@ -799,7 +883,7 @@
               Bases: <code><a class="autorefs autorefs-internal" title="datamaxi.api.API" href="../api/#datamaxi.api.API">API</a></code></p>
 
 
-      <p>Client to fetch DEX trade data from DataMaxi+ API.</p>
+        <p>Client to fetch DEX trade data from DataMaxi+ API.</p>
 
 
 
@@ -849,8 +933,9 @@
 
 <a href="#datamaxi.datamaxi.DexTrade.get" class="headerlink" title="Permanent link">&para;</a></h2>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">get</span><span class="p">(</span>
+    <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="n">fromDateTime</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -864,13 +949,21 @@
 
     <div class="doc doc-contents ">
 
-      <p>Fetch DEX trade data</p>
+        <p>Fetch DEX trade data</p>
 <p><code>GET /api/v1/dex/trade</code></p>
 <p><a href="https://docs.datamaxiplus.com/api/datasets/dex-trade/trade">https://docs.datamaxiplus.com/api/datasets/dex-trade/trade</a></p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
+        <li class="doc-section-item field-body">
+          <b><code>chain</code></b>
+              (<code>str</code>)
+          –
+          <div class="doc-md-description">
+            <p>Chain name</p>
+          </div>
+        </li>
         <li class="doc-section-item field-body">
           <b><code>exchange</code></b>
               (<code>str</code>)
@@ -880,11 +973,11 @@
           </div>
         </li>
         <li class="doc-section-item field-body">
-          <b><code>symbol</code></b>
+          <b><code>pool</code></b>
               (<code>str</code>)
           –
           <div class="doc-md-description">
-            <p>Symbol name</p>
+            <p>Pool name</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -968,6 +1061,41 @@
 <div class="doc doc-object doc-function">
 
 
+<h2 id="datamaxi.datamaxi.DexTrade.chains" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">chains</span>
+
+
+<a href="#datamaxi.datamaxi.DexTrade.chains" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">chains</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch supported chains accepted by
+<a href="./#datamaxi.datamaxi.DexTrade.get">datamaxi.DexTrade.get</a>
+API.</p>
+<p><code>GET /api/v1/dex/trade/chains</code></p>
+<p><a href="https://docs.datamaxiplus.com/api/datasets/dex-trade/chains">https://docs.datamaxiplus.com/api/datasets/dex-trade/chains</a></p>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.List">List</span>[str]</code>
+          –
+          <div class="doc-md-description">
+            <p>List of supported chains</p>
+          </div>
+        </li>
+    </ul>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h2 id="datamaxi.datamaxi.DexTrade.exchanges" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">exchanges</span>
 
@@ -978,7 +1106,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Fetch supported exchanges accepted by
+        <p>Fetch supported exchanges accepted by
 <a href="./#datamaxi.datamaxi.DexTrade.get">datamaxi.DexTrade.get</a>
 API.</p>
 <p><code>GET /api/v1/dex/trade/exchanges</code></p>
@@ -1003,25 +1131,23 @@ API.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="datamaxi.datamaxi.DexTrade.symbols" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">symbols</span>
+<h2 id="datamaxi.datamaxi.DexTrade.pools" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">pools</span>
 
 
-<a href="#datamaxi.datamaxi.DexTrade.symbols" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">symbols</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">market</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<a href="#datamaxi.datamaxi.DexTrade.pools" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pools</span><span class="p">(</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-      <p>Fetch supported symbols accepted by
-<a href="./#datamaxi.datamaxi.Candle.get">datamaxi.Candle.get</a>
+        <p>Fetch supported pools accepted by
+<a href="./#datamaxi.datamaxi.DexTrade.get">datamaxi.DexTrade.get</a>
 API.</p>
-<p><code>GET /api/v1/dex/trade/symbols</code></p>
-<p><a href="https://docs.datamaxiplus.com/api/datasets/dex-trade/symbols">https://docs.datamaxiplus.com/api/datasets/dex-trade/symbols</a></p>
+<p><code>GET /api/v1/dex/trade/pools</code></p>
+<p><a href="https://docs.datamaxiplus.com/api/datasets/dex-trade/pools">https://docs.datamaxiplus.com/api/datasets/dex-trade/pools</a></p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1034,16 +1160,6 @@ API.</p>
           –
           <div class="doc-md-description">
             <p>Exchange name</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code>market</code></b>
-              (<code>str</code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Market type (spot/futures)</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -1065,7 +1181,7 @@ API.</p>
               <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>]</code>
           –
           <div class="doc-md-description">
-            <p>List of supported symbols</p>
+            <p>List of supported pools</p>
           </div>
         </li>
     </ul>
@@ -1152,7 +1268,7 @@ API.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../funding-rate/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Funding Rate">
+          <a href="../cex-candle/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CEX Candle">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1162,20 +1278,20 @@ API.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Funding Rate
+                CEX Candle
               </div>
             </div>
           </a>
         
         
           
-          <a href="../forex/" class="md-footer__link md-footer__link--next" aria-label="Next: Forex">
+          <a href="../dex-candle/" class="md-footer__link md-footer__link--next" aria-label="Next: Candle">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Forex
+                Candle
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1261,7 +1377,7 @@ API.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
