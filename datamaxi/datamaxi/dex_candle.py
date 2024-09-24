@@ -167,27 +167,17 @@ class DexCandle(API):
         url_path = "/api/v1/dex/candle/pools"
         return self.query(url_path, params)
 
-    def intervals(self, exchange: str) -> List[str]:
+    def intervals(self) -> List[str]:
         """Fetch supported intervals accepted by
         [datamaxi.DexCandle.get](./#datamaxi.datamaxi.DexCandle.get)
         API.
 
-        `GET /api/v1/candle/intervals`
+        `GET /api/v1/dex/candle/intervals`
 
         <https://docs.datamaxiplus.com/api/datasets/dex/candle/intervals>
-
-        Args:
-            exchange (str): Exchange name
 
         Returns:
             List of supported intervals
         """
-        check_required_parameters(
-            [
-                [exchange, "exchange"],
-            ]
-        )
-
-        params = {"exchange": exchange}
         url_path = "/api/v1/dex/candle/intervals"
-        return self.query(url_path, params)
+        return self.query(url_path)
