@@ -9,6 +9,8 @@ from datamaxi.datamaxi.premium import Premium
 from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # noqa:F401
 from datamaxi.datamaxi.dex_candle import DexCandle  # used in documentation # noqa:F401
 from datamaxi.datamaxi.dex_trade import DexTrade  # used in documentation # noqa:F401
+from datamaxi.datamaxi.orderbook import Orderbook
+from datamaxi.datamaxi.wallet_status import WalletStatus
 
 
 class Datamaxi:
@@ -30,3 +32,5 @@ class Datamaxi:
         self.forex = Forex(api_key, **kwargs)
         self.ticker = Ticker(api_key, **kwargs)
         self.premium = Premium(api_key, **kwargs)
+        self.orderbook = Orderbook(api_key, **kwargs)
+        self.wallet_status = WalletStatus(api_key, **kwargs)

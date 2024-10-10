@@ -40,6 +40,8 @@ nav:
       - Forex: forex.md
       - Ticker: ticker.md
       - Premium: premium.md
+      - Orderbook: orderbook.md
+      - Wallet Status: wallet-status.md
   - Defillama: defillama.md
   - Trend:
       - Naver Trend: naver-trend.md
