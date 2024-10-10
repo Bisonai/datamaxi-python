@@ -34,7 +34,7 @@ class DexCandle(API):
 
         `GET /api/v1/dex/candle`
 
-        <https://docs.datamaxiplus.com/rest/dex-candle/candle>
+        <https://docs.datamaxiplus.com/rest/dex/candle/data>
 
         Args:
             chain (str): Chain name
@@ -117,7 +117,7 @@ class DexCandle(API):
 
         `GET /api/v1/dex/candle/chains`
 
-        <https://docs.datamaxiplus.com/rest/dex-candle/chains>
+        <https://docs.datamaxiplus.com/rest/dex/candle/chains>
 
         Returns:
             List of supported chains
@@ -133,7 +133,7 @@ class DexCandle(API):
 
         `GET /api/v1/dex/candle/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/dex-candle/exchanges>
+        <https://docs.datamaxiplus.com/rest/dex/candle/exchanges>
 
         Returns:
             List of supported exchanges
@@ -149,7 +149,7 @@ class DexCandle(API):
 
         `GET /api/v1/dex/candle/pools`
 
-        <https://docs.datamaxiplus.com/rest/dex-candle/poolsx>
+        <https://docs.datamaxiplus.com/rest/dex/candle/pools>
 
         Args:
             exchange (str): Exchange name
@@ -174,7 +174,7 @@ class DexCandle(API):
 
         `GET /api/v1/dex/candle/intervals`
 
-        <https://docs.datamaxiplus.com/rest/dex-candle/intervals>
+        <https://docs.datamaxiplus.com/rest/dex/candle/intervals>
 
         Returns:
             List of supported intervals
