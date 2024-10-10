@@ -32,6 +32,7 @@ class WalletStatus(API):
         Args:
             exchange (str): Exchange name
             asset (str): Asset name
+            pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Wallet status data
