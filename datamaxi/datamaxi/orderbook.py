@@ -4,6 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
+
 class Orderbook(API):
     """Client to fetch orderbook data from DataMaxi+ API."""
 
@@ -17,10 +18,10 @@ class Orderbook(API):
         super().__init__(api_key, **kwargs)
 
     def get(
-            self,
-            exchange: str,
-            symbol: str,
-            pandas: bool = True,
+        self,
+        exchange: str,
+        symbol: str,
+        pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch orderbook data
 
@@ -44,10 +45,7 @@ class Orderbook(API):
             ]
         )
 
-        params = {
-            "exchange": exchange,
-            "symbol": symbol
-        }
+        params = {"exchange": exchange, "symbol": symbol}
 
         res = self.query("/api/v1/orderbook", params)
         if pandas:

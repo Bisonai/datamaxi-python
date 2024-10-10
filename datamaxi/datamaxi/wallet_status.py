@@ -4,6 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
+
 class WalletStatus(API):
     """Client to fetch wallet status data from DataMaxi+ API."""
 
