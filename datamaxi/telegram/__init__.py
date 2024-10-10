@@ -28,7 +28,7 @@ class Telegram(API):
 
         `GET /api/v1/telegram/channels`
 
-        <https://docs.datamaxiplus.com/api/datasets/telegram/channels>
+        <https://docs.datamaxiplus.com/rest/telegram/channels>
 
         Args:
             category (str): channel category
@@ -80,7 +80,7 @@ class Telegram(API):
 
         `GET /api/v1/telegram/posts`
 
-        <https://docs.datamaxiplus.com/api/datasets/telegram/posts>
+        <https://docs.datamaxiplus.com/rest/telegram/posts>
 
         Args:
             channel_name (str): channel name to get posts from

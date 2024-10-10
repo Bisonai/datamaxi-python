@@ -33,7 +33,7 @@ class DexTrade(API):
 
         `GET /api/v1/dex/trade`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/trade>
+        <https://docs.datamaxiplus.com/rest/dex-trade/trade>
 
         Args:
             chain (str): Chain name
@@ -111,7 +111,7 @@ class DexTrade(API):
 
         `GET /api/v1/dex/trade/chains`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/chains>
+        <https://docs.datamaxiplus.com/rest/dex-trade/chains>
 
         Returns:
             List of supported chains
@@ -127,7 +127,7 @@ class DexTrade(API):
 
         `GET /api/v1/dex/trade/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/exchanges>
+        <https://docs.datamaxiplus.com/rest/dex-trade/exchanges>
 
         Returns:
             List of supported exchanges
@@ -142,7 +142,7 @@ class DexTrade(API):
 
         `GET /api/v1/dex/trade/pools`
 
-        <https://docs.datamaxiplus.com/api/datasets/dex-trade/pools>
+        <https://docs.datamaxiplus.com/rest/dex-trade/pools>
 
         Args:
             exchange (str): Exchange name

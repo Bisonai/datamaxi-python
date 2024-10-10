@@ -33,7 +33,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/historical-funding-rate>
+        <https://docs.datamaxiplus.com/rest/funding-rate/historical-funding-rate>
 
         Args:
             exchange (str): Exchange name
@@ -113,7 +113,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate/latest`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/latest-funding-rate>
+        <https://docs.datamaxiplus.com/rest/funding-rate/latest-funding-rate>
 
         Args:
             sort (str): Sort data by `asc` or `desc`
@@ -155,7 +155,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/exchanges>
+        <https://docs.datamaxiplus.com/rest/funding-rate/exchanges>
 
         Returns:
             List of supported exchanges
@@ -170,7 +170,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/funding-rate/symbols>
+        <https://docs.datamaxiplus.com/rest/funding-rate/symbols>
 
         Args:
             exchange (str): Exchange name
