@@ -38,7 +38,7 @@ class Orderbook(API):
             Orderbook data in pandas DataFrame
         """
 
-        check_required_parameter(
+        check_required_parameters(
             [
                 [exchange, "exchange"],
                 [symbol, "symbol"],
