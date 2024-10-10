@@ -28,7 +28,7 @@ class Premium(API):
         """Fetch premium data
 
         `GET /api/v1/premium`
-        <https://docs.datamaxiplus.com/api/datasets/premium/premium>
+        <https://docs.datamaxiplus.com/rest/premium/premium>
 
         Args:
             sort (str): Sort data by `asc` or `desc`
@@ -74,7 +74,7 @@ class Premium(API):
 
         `GET /api/v1/Premium/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/Premium/exchanges>
+        <https://docs.datamaxiplus.com/rest/Premium/exchanges>
 
         Returns:
             List of supported exchange
@@ -89,7 +89,7 @@ class Premium(API):
 
         `GET /api/v1/premium/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/premium/symbols>
+        <https://docs.datamaxiplus.com/rest/premium/symbols>
 
         Args:
             sourceExchange (str): Source exchange name

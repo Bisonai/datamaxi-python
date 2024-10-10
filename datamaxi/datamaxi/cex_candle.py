@@ -35,7 +35,7 @@ class CexCandle(API):
 
         `GET /api/v1/cex/candle`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex-candle/candle>
+        <https://docs.datamaxiplus.com/rest/cex/candle/data>
 
         Args:
             exchange (str): Exchange name
@@ -121,7 +121,7 @@ class CexCandle(API):
 
         `GET /api/v1/cex/candle/exchanges`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex-candle/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/candle/exchanges>
 
         Args:
             market (str): Market type (spot/futures)
@@ -145,7 +145,7 @@ class CexCandle(API):
 
         `GET /api/v1/cex/candle/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex-candle/symbols>
+        <https://docs.datamaxiplus.com/rest/cex/candle/symbols>
 
         Args:
             exchange (str): Exchange name
@@ -173,7 +173,7 @@ class CexCandle(API):
 
         `GET /api/v1/candle/intervals`
 
-        <https://docs.datamaxiplus.com/api/datasets/cex-candle/intervals>
+        <https://docs.datamaxiplus.com/rest/cex/candle/intervals>
 
         Args:
             exchange (str): Exchange name

@@ -25,7 +25,7 @@ class Forex(API):
 
         `GET /api/v1/forex`
 
-        <https://docs.datamaxiplus.com/api/datasets/forex/forex>
+        <https://docs.datamaxiplus.com/rest/forex/forex>
 
         Args:
             symbol (str): Symbol name
@@ -56,7 +56,7 @@ class Forex(API):
 
         `GET /api/v1/forex/symbols`
 
-        <https://docs.datamaxiplus.com/api/datasets/forex/symbols>
+        <https://docs.datamaxiplus.com/rest/forex/symbols>
 
         Returns:
             List of supported symbols

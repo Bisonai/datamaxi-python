@@ -5,11 +5,11 @@ from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
 
-class Ticker(API):
-    """Client to fetch ticker data from DataMaxi+ API."""
+class WalletStatus(API):
+    """Client to fetch wallet status data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize ticker client.
+        """Initialize wallet status client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -20,74 +20,73 @@ class Ticker(API):
     def get(
         self,
         exchange: str,
-        symbol: str,
+        asset: str,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
-        """Fetch ticker data
+        """Fetch wallet status data
 
-        `GET /api/v1/ticker`
+        `GET /api/v1/wallet-status`
 
-        <https://docs.datamaxiplus.com/rest/ticker/ticker>
+        <https://docs.datamaxiplus.com/rest/wallet-status/wallet-status>
 
         Args:
             exchange (str): Exchange name
-            symbol (str): Symbol name
+            asset (str): Asset name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Ticker data in pandas DataFrame
+            Wallet status data
         """
-
         check_required_parameters(
             [
                 [exchange, "exchange"],
-                [symbol, "symbol"],
+                [asset, "asset"],
             ]
         )
 
         params = {
             "exchange": exchange,
-            "symbol": symbol,
+            "asset": asset,
         }
 
-        res = self.query("/api/v1/ticker", params)
-
+        url_path = "/api/v1/wallet-status"
+        res = self.query(url_path, params)
         if pandas:
             df = pd.DataFrame(res)
-            df = df.set_index("d")
+            df = df.set_index("network")
             return df
-        else:
-            return res
+
+        return res
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.Ticker.get](./#datamaxi.datamaxi.Ticker.get)
+        [datamaxi.WalletStatus.get](./#datamaxi.datamaxi.WalletStatus.get)
         API.
 
-        `GET /api/v1/ticker/exchanges`
+        `GET /api/v1/wallet-status/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/ticker/exchanges>
+        <https://docs.datamaxiplus.com/rest/wallet-status/exchanges>
 
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/ticker/exchanges"
+        url_path = "/api/v1/wallet-status/exchanges"
         return self.query(url_path)
 
-    def symbols(self, exchange: str) -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.Ticker.get](./#datamaxi.datamaxi.Ticker.get)
+    def assets(self, exchange: str) -> List[str]:
+        """Fetch supported assets accepted by
+        [datamaxi.WalletStatus.get](./#datamaxi.datamaxi.WalletStatus.get)
         API.
 
-        `GET /api/v1/ticker/symbols`
+        `GET /api/v1/wallet-status/assets`
 
-        <https://docs.datamaxiplus.com/rest/ticker/symbols>
+        <https://docs.datamaxiplus.com/rest/wallet-status/assets>
 
         Args:
             exchange (str): Exchange name
 
         Returns:
-            List of supported symbols
+            List of supported assets
         """
         check_required_parameter(exchange, "exchange")
 
@@ -95,5 +94,5 @@ class Ticker(API):
             "exchange": exchange,
         }
 
-        url_path = "/api/v1/ticker/symbols"
+        url_path = "/api/v1/wallet-status/assets"
         return self.query(url_path, params)

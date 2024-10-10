@@ -5,11 +5,11 @@ from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
 
-class Ticker(API):
-    """Client to fetch ticker data from DataMaxi+ API."""
+class Orderbook(API):
+    """Client to fetch orderbook data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize ticker client.
+        """Initialize orderbook client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -23,19 +23,19 @@ class Ticker(API):
         symbol: str,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
-        """Fetch ticker data
+        """Fetch orderbook data
 
-        `GET /api/v1/ticker`
+        `GET /api/v1/orderbook`
 
-        <https://docs.datamaxiplus.com/rest/ticker/ticker>
+        <https://docs.datamaxiplus.com/rest/orderbook/orderbook>
 
         Args:
             exchange (str): Exchange name
-            symbol (str): Symbol name
+            symbol (str): symbol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Ticker data in pandas DataFrame
+            Orderbook data in pandas DataFrame
         """
 
         check_required_parameters(
@@ -45,43 +45,39 @@ class Ticker(API):
             ]
         )
 
-        params = {
-            "exchange": exchange,
-            "symbol": symbol,
-        }
+        params = {"exchange": exchange, "symbol": symbol}
 
-        res = self.query("/api/v1/ticker", params)
-
+        res = self.query("/api/v1/orderbook", params)
         if pandas:
             df = pd.DataFrame(res)
             df = df.set_index("d")
             return df
-        else:
-            return res
+
+        return res
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.Ticker.get](./#datamaxi.datamaxi.Ticker.get)
+        [datamaxi.Orderbook.get](./#datamaxi.datamaxi.Orderbook.get)
         API.
 
-        `GET /api/v1/ticker/exchanges`
+        `GET /api/v1/orderbook/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/ticker/exchanges>
+        <https://docs.datamaxiplus.com/rest/orderbook/exchanges>
 
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/ticker/exchanges"
+        url_path = "/api/v1/orderbook/exchanges"
         return self.query(url_path)
 
     def symbols(self, exchange: str) -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.Ticker.get](./#datamaxi.datamaxi.Ticker.get)
+        [datamaxi.Orderbook.get](./#datamaxi.datamaxi.Orderbook.get)
         API.
 
-        `GET /api/v1/ticker/symbols`
+        `GET /api/v1/orderbook/symbols`
 
-        <https://docs.datamaxiplus.com/rest/ticker/symbols>
+        <https://docs.datamaxiplus.com/rest/orderbook/symbols>
 
         Args:
             exchange (str): Exchange name
@@ -95,5 +91,5 @@ class Ticker(API):
             "exchange": exchange,
         }
 
-        url_path = "/api/v1/ticker/symbols"
+        url_path = "/api/v1/orderbook/symbols"
         return self.query(url_path, params)

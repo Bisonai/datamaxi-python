@@ -28,7 +28,7 @@ class Announcement(API):
 
         `GET /api/v1/announcements`
 
-        <https://docs.datamaxiplus.com/api/datasets/announcements>
+        <https://docs.datamaxiplus.com/rest/announcements>
 
         Args:
             category (str): announcement category
