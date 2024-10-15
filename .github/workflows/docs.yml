@@ -11,7 +11,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v4
-      - run: pip install --upgrade pip && pip install -r requirements/requirements-dev.txt
+      - run: pip install --upgrade pip --break-system-packages && pip install -r requirements/requirements-dev.txt --break-system-packages
       - run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Publish docs
         run: mkdocs gh-deploy
