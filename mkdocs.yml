@@ -31,24 +31,25 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
-  - Datamaxi:
-      - CEX Candle: cex-candle.md
-      - DEX:
-          - Trade: dex-trade.md
-          - Candle: dex-candle.md
-      - Funding Rate: funding-rate.md
-      - Forex: forex.md
-      - Ticker: ticker.md
-      - Premium: premium.md
-      - Orderbook: orderbook.md
-      - Wallet Status: wallet-status.md
-  - Defillama: defillama.md
+  - CEX:
+      - Candle: cex-candle.md
+      - Ticker: cex-ticker.md
+      - Orderbook: cex-orderbook.md
+      - Trading Fees: cex-trading-fees.md
+      - Wallet Status: cex-wallet-status.md
+      - Announcement: cex-announcement.md
+      - Token Updates: cex-token-updates.md
+  - DEX:
+      - Candle: dex-candle.md
+      - Trade: dex-trade.md
+  - Funding Rate: funding-rate.md
+  - Premium: premium.md
+  - Forex: forex.md
   - Trend:
       - Naver Trend: naver-trend.md
       - Google Trend: google-trend.md
   - Telegram: telegram.md
-  - Announcement: announcement.md
-  - Token Listing/Delisting: token-updates.md
+  - Defillama: defillama.md
 
 theme:
   name: material

@@ -1,4 +1,4 @@
-# Telegram Client
+# Telegram
 
 ::: datamaxi.telegram
     options:

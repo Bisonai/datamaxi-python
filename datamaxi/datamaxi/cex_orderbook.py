@@ -5,11 +5,11 @@ from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
 
-class WalletStatus(API):
-    """Client to fetch wallet status data from DataMaxi+ API."""
+class CexOrderbook(API):
+    """Client to fetch orderbook data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize wallet status client.
+        """Initialize orderbook client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -20,73 +20,70 @@ class WalletStatus(API):
     def get(
         self,
         exchange: str,
-        asset: str,
+        symbol: str,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
-        """Fetch wallet status data
+        """Fetch orderbook data
 
-        `GET /api/v1/wallet-status`
+        `GET /api/v1/orderbook`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/wallet-status>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/data>
 
         Args:
             exchange (str): Exchange name
-            asset (str): Asset name
+            symbol (str): symbol name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Wallet status data
+            CexOrderbook data in pandas DataFrame
         """
+
         check_required_parameters(
             [
                 [exchange, "exchange"],
-                [asset, "asset"],
+                [symbol, "symbol"],
             ]
         )
 
-        params = {
-            "exchange": exchange,
-            "asset": asset,
-        }
+        params = {"exchange": exchange, "symbol": symbol}
 
-        url_path = "/api/v1/wallet-status"
-        res = self.query(url_path, params)
+        res = self.query("/api/v1/orderbook", params)
         if pandas:
             df = pd.DataFrame(res)
-            df = df.set_index("network")
+            df = df.set_index("d")
             return df
 
         return res
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.WalletStatus.get](./#datamaxi.datamaxi.WalletStatus.get)
+        [datamaxi.CexOrderbook.get](./#datamaxi.datamaxi.CexOrderbook.get)
         API.
 
-        `GET /api/v1/wallet-status/exchanges`
+        `GET /api/v1/orderbook/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/exchanges>
 
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/wallet-status/exchanges"
+        url_path = "/api/v1/orderbook/exchanges"
         return self.query(url_path)
 
-    def assets(self, exchange: str) -> List[str]:
-        """Fetch supported assets accepted by
-        [datamaxi.WalletStatus.get](./#datamaxi.datamaxi.WalletStatus.get)
+    def symbols(self, exchange: str) -> List[str]:
+        """Fetch supported symbols accepted by
+        [datamaxi.CexOrderbook.get](./#datamaxi.datamaxi.CexOrderbook.get)
         API.
 
-        `GET /api/v1/wallet-status/assets`
+        `GET /api/v1/orderbook/symbols`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/assets>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/symbols>
 
         Args:
             exchange (str): Exchange name
 
         Returns:
-            List of supported assets
+            List of supported symbols
         """
         check_required_parameter(exchange, "exchange")
 
@@ -94,5 +91,5 @@ class WalletStatus(API):
             "exchange": exchange,
         }
 
-        url_path = "/api/v1/wallet-status/assets"
+        url_path = "/api/v1/orderbook/symbols"
         return self.query(url_path, params)

@@ -3,11 +3,11 @@ from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
 
-class Announcement(API):
-    """Client to fetch announcement data from DataMaxi+ API."""
+class CexTokenUpdates(API):
+    """Client to fetch token update data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize the object.
+        """Initialize token update client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -19,25 +19,25 @@ class Announcement(API):
 
     def get(
         self,
-        category: Optional[str] = None,
+        type: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
         sort: str = "desc",
     ) -> Dict[str, Any]:
-        """Get exchange announcements
+        """Get token update data
 
-        `GET /api/v1/announcements`
+        `GET /api/v1/token/updates`
 
-        <https://docs.datamaxiplus.com/rest/announcements>
+        <https://docs.datamaxiplus.com/rest/cex/token-updates>
 
         Args:
-            category (str): announcement category
+            type (str): Update type
             page (int): Page number
             limit (int): Limit of data
             sort (str): Sort order
 
         Returns:
-            Announcements
+            Token update data in list of dictionary
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -48,20 +48,23 @@ class Announcement(API):
         if sort not in ["asc", "desc"]:
             raise ValueError("sort must be either asc or desc")
 
+        if type is not None and type not in ["listed", "delisted"]:
+            raise ValueError("type must be either listed or delisted when set")
+
         params = {
-            "category": category,
+            "type": type,
             "page": page,
             "limit": limit,
             "sort": sort,
         }
 
-        res = self.query("/api/v1/announcements", params)
+        res = self.query("/api/v1/cex/token-updates", params)
         if res["data"] is None:
             raise ValueError("no data found")
 
         def next_request():
             return self.get(
-                category=category,
+                type=type,
                 page=page + 1,
                 limit=limit,
                 sort=sort,

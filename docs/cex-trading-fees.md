@@ -1,6 +1,6 @@
-# Google Trend
+# CEX Trading Fees
 
-::: datamaxi.google
+::: datamaxi.datamaxi.CexTradingFees
     options:
       show_submodules: true
       show_source: false

@@ -1,6 +1,6 @@
-# Token Listing/Delisting
+# CEX Orderbook
 
-::: datamaxi.token
+::: datamaxi.datamaxi.CexOrderbook
     options:
       show_submodules: true
       show_source: false

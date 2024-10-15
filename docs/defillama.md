@@ -1,4 +1,4 @@
-# Defillama Client
+# Defillama
 
 ::: datamaxi.defillama
     options:

@@ -1,6 +1,6 @@
-# Wallet Status
+# CEX Announcement
 
-::: datamaxi.datamaxi.WalletStatus
+::: datamaxi.datamaxi.CexAnnouncement
     options:
       show_submodules: true
       show_source: false

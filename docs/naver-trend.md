@@ -1,4 +1,4 @@
-# Naver Trend Client
+# Naver Trend
 
 ::: datamaxi.naver
     options:
