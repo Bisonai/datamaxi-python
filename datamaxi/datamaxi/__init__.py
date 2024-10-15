@@ -6,24 +6,24 @@ from datamaxi.datamaxi.funding_rate import FundingRate
 from datamaxi.datamaxi.forex import Forex
 from datamaxi.datamaxi.premium import Premium
 from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_ticker import (
+from datamaxi.datamaxi.cex_ticker import (  # used in documentation # noqa:F401
     CexTicker,
-)  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_orderbook import (
+)
+from datamaxi.datamaxi.cex_orderbook import (  # used in documentation # noqa:F401
     CexOrderbook,
-)  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_trading_fees import (
+)
+from datamaxi.datamaxi.cex_trading_fees import (  # used in documentation # noqa:F401
     CexTradingFees,
-)  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_wallet_status import (
+)
+from datamaxi.datamaxi.cex_wallet_status import (  # used in documentation # noqa:F401
     CexWalletStatus,
-)  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_announcement import (
+)
+from datamaxi.datamaxi.cex_announcement import (  # used in documentation # noqa:F401
     CexAnnouncement,
-)  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_token_updates import (
+)
+from datamaxi.datamaxi.cex_token_updates import (  # used in documentation # noqa:F401
     CexTokenUpdates,
-)  # used in documentation # noqa:F401
+)
 from datamaxi.datamaxi.dex_candle import DexCandle  # used in documentation # noqa:F401
 from datamaxi.datamaxi.dex_trade import DexTrade  # used in documentation # noqa:F401
 
