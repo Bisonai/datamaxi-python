@@ -27,7 +27,7 @@ class Ticker(API):
 
         `GET /api/v1/ticker`
 
-        <https://docs.datamaxiplus.com/rest/ticker/ticker>
+        <https://docs.datamaxiplus.com/rest/cex/ticker/data>
 
         Args:
             exchange (str): Exchange name
@@ -66,7 +66,7 @@ class Ticker(API):
 
         `GET /api/v1/ticker/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/ticker/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/ticker/exchanges>
 
         Returns:
             List of supported exchange
@@ -81,7 +81,7 @@ class Ticker(API):
 
         `GET /api/v1/ticker/symbols`
 
-        <https://docs.datamaxiplus.com/rest/ticker/symbols>
+        <https://docs.datamaxiplus.com/rest/cex/ticker/symbols>
 
         Args:
             exchange (str): Exchange name

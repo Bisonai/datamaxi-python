@@ -27,7 +27,7 @@ class Orderbook(API):
 
         `GET /api/v1/orderbook`
 
-        <https://docs.datamaxiplus.com/rest/orderbook/orderbook>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/data>
 
         Args:
             exchange (str): Exchange name
@@ -62,7 +62,7 @@ class Orderbook(API):
 
         `GET /api/v1/orderbook/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/orderbook/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/exchanges>
 
         Returns:
             List of supported exchange
@@ -77,7 +77,7 @@ class Orderbook(API):
 
         `GET /api/v1/orderbook/symbols`
 
-        <https://docs.datamaxiplus.com/rest/orderbook/symbols>
+        <https://docs.datamaxiplus.com/rest/cex/orderbook/symbols>
 
         Args:
             exchange (str): Exchange name

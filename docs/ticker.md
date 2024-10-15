@@ -1,4 +1,4 @@
-# Ticker
+# CEX Ticker
 
 ::: datamaxi.datamaxi.Ticker
     options:

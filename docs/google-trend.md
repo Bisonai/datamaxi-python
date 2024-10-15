@@ -1,4 +1,4 @@
-# Google Trend Client
+# Google Trend
 
 ::: datamaxi.google
     options:

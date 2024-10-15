@@ -1,4 +1,4 @@
-# Orderbook
+# CEX Orderbook
 
 ::: datamaxi.datamaxi.Orderbook
     options:

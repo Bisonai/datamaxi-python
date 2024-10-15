@@ -1,4 +1,4 @@
-# Token Listing/Delisting
+# CEX Token Updates
 
 ::: datamaxi.token
     options:

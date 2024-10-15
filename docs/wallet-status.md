@@ -1,4 +1,4 @@
-# Wallet Status
+# CEX Wallet Status
 
 ::: datamaxi.datamaxi.WalletStatus
     options:

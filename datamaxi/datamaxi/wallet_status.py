@@ -27,7 +27,7 @@ class WalletStatus(API):
 
         `GET /api/v1/wallet-status`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/wallet-status>
+        <https://docs.datamaxiplus.com/rest/cex/wallet-status/data>
 
         Args:
             exchange (str): Exchange name
@@ -65,7 +65,7 @@ class WalletStatus(API):
 
         `GET /api/v1/wallet-status/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/wallet-status/exchanges>
 
         Returns:
             List of supported exchange
@@ -80,7 +80,7 @@ class WalletStatus(API):
 
         `GET /api/v1/wallet-status/assets`
 
-        <https://docs.datamaxiplus.com/rest/wallet-status/assets>
+        <https://docs.datamaxiplus.com/rest/cex/wallet-status/assets>
 
         Args:
             exchange (str): Exchange name

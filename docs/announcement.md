@@ -1,4 +1,4 @@
-# Announcement
+# CEX Announcement
 
 ::: datamaxi.announcement
     options:
