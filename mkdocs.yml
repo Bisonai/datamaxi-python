@@ -33,11 +33,12 @@ nav:
   - API: api.md
   - CEX:
       - Candle: cex-candle.md
-      - Ticker: ticker.md
-      - Orderbook: orderbook.md
-      - Wallet Status: wallet-status.md
-      - Announcement: announcement.md
-      - Token Updates: token-updates.md
+      - Ticker: cex-ticker.md
+      - Orderbook: cex-orderbook.md
+      - Trading Fees: cex-trading-fees.md
+      - Wallet Status: cex-wallet-status.md
+      - Announcement: cex-announcement.md
+      - Token Updates: cex-token-updates.md
   - DEX:
       - Candle: dex-candle.md
       - Trade: dex-trade.md

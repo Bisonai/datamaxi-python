@@ -1,6 +1,6 @@
-# CEX Wallet Status
+# CEX Ticker
 
-::: datamaxi.datamaxi.WalletStatus
+::: datamaxi.datamaxi.CexTicker
     options:
       show_submodules: true
       show_source: false

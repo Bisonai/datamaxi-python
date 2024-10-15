@@ -3,7 +3,7 @@ from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
 
-class Announcement(API):
+class CexAnnouncement(API):
     """Client to fetch announcement data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
@@ -37,7 +37,7 @@ class Announcement(API):
             sort (str): Sort order
 
         Returns:
-            Announcements
+            Historical announcements
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -55,7 +55,7 @@ class Announcement(API):
             "sort": sort,
         }
 
-        res = self.query("/api/v1/announcements", params)
+        res = self.query("/api/v1/cex/announcements", params)
         if res["data"] is None:
             raise ValueError("no data found")
 

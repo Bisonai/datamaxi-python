@@ -1,6 +1,6 @@
-# CEX Ticker
+# CEX Token Updates
 
-::: datamaxi.datamaxi.Ticker
+::: datamaxi.datamaxi.CexTokenUpdates
     options:
       show_submodules: true
       show_source: false
