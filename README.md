@@ -1,4 +1,4 @@
-# DataMaxi+ Python Client
+# DataMaxi+ Python SDK
 
 [![PyPI version](https://img.shields.io/pypi/v/datamaxi)](https://pypi.python.org/pypi/datamaxi)
 [![Python version](https://img.shields.io/pypi/pyversions/datamaxi)](https://www.python.org/downloads/)
@@ -6,7 +6,7 @@
 [![Code Style](https://img.shields.io/badge/code_style-black-black)](https://black.readthedocs.io/en/stable/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is the official implementation of Python client for DataMaxi+ API.
+This is the official implementation of Python SDK for DataMaxi+ API.
 The package can be used to fetch both historical and latest data using [DataMaxi+ API](https://docs.datamaxiplus.com/).
 This package is compatible with Python v3.8+.
 
@@ -29,13 +29,13 @@ pip3 install datamaxi
 
 ## Configuration
 
-Access to DataMaxi+ is protected by API Key.
-If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ through [this login/singup page](https://datamaxiplus.com/auth) and get free API key for two months.
+Private API endpoints are protected by an API key.
+You can get the API key upon registering at https://datamaxiplus.com/auth.
 
 | Option             | Explanation                                                                           |
-| ------------------ | ------------------------------------------------------------------------------------- |
+|--------------------|---------------------------------------------------------------------------------------|
 | `api_key`          | Your API key                                                                          |
-| `base_url`         | If `base_url` is not provided, it defaults to `api.datamaxiplus.com`.                 |
+| `base_url`         | If `base_url` is not provided, it defaults to `https://api.datamaxiplus.com`.         |
 | `timeout`          | Number of seconds to wait for a server response. By default requests do not time out. |
 | `proxies`          | Proxy through which the request is queried                                            |
 | `show_limit_usage` | Return response as dictionary including `"limit_usage"` and `"data"` keys             |
@@ -43,7 +43,7 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 
 ### Environment Variables
 
-You may use environment variables to configure the DataMaxi+ client to avoid any inline boilerplate.
+You may use environment variables to configure the SDK to avoid any inline boilerplate.
 
 | Env                | Description                                  |
 | ------------------ | -------------------------------------------- |
@@ -104,8 +104,8 @@ python3 -m pytest tests/
 
 ## Links
 
-- [DataMaxi+](https://datamaxiplus.com/)
-- [DataMaxi+ API Documentation](https://docs.datamaxiplus.com/)
+- [Official Website](https://datamaxiplus.com/)
+- [Documentation](https://docs.datamaxiplus.com/)
 
 ## Contributing
 
