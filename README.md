@@ -35,7 +35,7 @@ You can get the API key upon registering at https://datamaxiplus.com/auth.
 | Option             | Explanation                                                                           |
 |--------------------|---------------------------------------------------------------------------------------|
 | `api_key`          | Your API key                                                                          |
-| `base_url`         | If `base_url` is not provided, it defaults to `http://api.datamaxiplus.com`.          |
+| `base_url`         | If `base_url` is not provided, it defaults to `https://api.datamaxiplus.com`.         |
 | `timeout`          | Number of seconds to wait for a server response. By default requests do not time out. |
 | `proxies`          | Proxy through which the request is queried                                            |
 | `show_limit_usage` | Return response as dictionary including `"limit_usage"` and `"data"` keys             |
