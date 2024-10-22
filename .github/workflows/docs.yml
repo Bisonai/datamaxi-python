@@ -10,8 +10,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v4
-      - run: pip install --upgrade pip --break-system-packages && pip install -r requirements/requirements-dev.txt --break-system-packages
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --upgrade pip && pip install -r requirements/requirements-dev.txt
       - run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Publish docs
         run: mkdocs gh-deploy
