@@ -24,8 +24,6 @@ from datamaxi.datamaxi.cex_announcement import (  # used in documentation # noqa
 from datamaxi.datamaxi.cex_token_updates import (  # used in documentation # noqa:F401
     CexTokenUpdates,
 )
-from datamaxi.datamaxi.dex_candle import DexCandle  # used in documentation # noqa:F401
-from datamaxi.datamaxi.dex_trade import DexTrade  # used in documentation # noqa:F401
 
 
 class Datamaxi:
