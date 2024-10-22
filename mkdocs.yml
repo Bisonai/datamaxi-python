@@ -39,9 +39,7 @@ nav:
       - Wallet Status: cex-wallet-status.md
       - Announcement: cex-announcement.md
       - Token Updates: cex-token-updates.md
-  - DEX:
-      - Candle: dex-candle.md
-      - Trade: dex-trade.md
+  - DEX: dex.md
   - Funding Rate: funding-rate.md
   - Premium: premium.md
   - Forex: forex.md
