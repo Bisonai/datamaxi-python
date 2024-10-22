@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="/assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#datamaxi-python-client" class="md-skip">
+        <a href="#datamaxi-python-sdk" class="md-skip">
           Skip to content
         </a>
       
@@ -631,80 +631,16 @@
   
   
   
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
+    <li class="md-nav__item">
+      <a href="dex/" class="md-nav__link">
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
   
   <span class="md-ellipsis">
     DEX
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            DEX
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="dex-candle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Candle
-  </span>
-  
-
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="dex-trade/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trade
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1039,13 +975,13 @@
   
 
 
-<h1 id="datamaxi-python-client">DataMaxi+ Python Client<a class="headerlink" href="#datamaxi-python-client" title="Permanent link">&para;</a></h1>
+<h1 id="datamaxi-python-sdk">DataMaxi+ Python SDK<a class="headerlink" href="#datamaxi-python-sdk" title="Permanent link">&para;</a></h1>
 <p><a href="https://pypi.python.org/pypi/datamaxi"><img alt="PyPI version" src="https://img.shields.io/pypi/v/datamaxi" /></a>
 <a href="https://www.python.org/downloads/"><img alt="Python version" src="https://img.shields.io/pypi/pyversions/datamaxi" /></a>
 <a href="https://datamaxi.readthedocs.io/en/stable/"><img alt="Documentation" src="https://img.shields.io/badge/docs-latest-blue" /></a>
 <a href="https://black.readthedocs.io/en/stable/"><img alt="Code Style" src="https://img.shields.io/badge/code_style-black-black" /></a>
 <a href="https://opensource.org/licenses/MIT"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a></p>
-<p>This is the official implementation of Python client for DataMaxi+ API.
+<p>This is the official implementation of Python SDK for DataMaxi+ API.
 The package can be used to fetch both historical and latest data using <a href="https://docs.datamaxiplus.com/">DataMaxi+ API</a>.
 This package is compatible with Python v3.8+.</p>
 <ul>
@@ -1064,8 +1000,8 @@ This package is compatible with Python v3.8+.</p>
 <div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>datamaxi
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>Access to DataMaxi+ is protected by API Key.
-If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ through <a href="https://datamaxiplus.com/auth">this login/singup page</a> and get free API key for two months.</p>
+<p>Private API endpoints are protected by an API key.
+You can get the API key upon registering at https://datamaxiplus.com/auth.</p>
 <table>
 <thead>
 <tr>
@@ -1080,7 +1016,7 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 </tr>
 <tr>
 <td><code>base_url</code></td>
-<td>If <code>base_url</code> is not provided, it defaults to <code>api.datamaxiplus.com</code>.</td>
+<td>If <code>base_url</code> is not provided, it defaults to <code>https://api.datamaxiplus.com</code>.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
@@ -1101,7 +1037,7 @@ If you are interested to try DataMaxi+, you can simply sign up for DataMaxi+ thr
 </tbody>
 </table>
 <h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
-<p>You may use environment variables to configure the DataMaxi+ client to avoid any inline boilerplate.</p>
+<p>You may use environment variables to configure the SDK to avoid any inline boilerplate.</p>
 <table>
 <thead>
 <tr>
@@ -1158,8 +1094,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> 
 </code></pre></div>
 <h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://datamaxiplus.com/">DataMaxi+</a></li>
-<li><a href="https://docs.datamaxiplus.com/">DataMaxi+ API Documentation</a></li>
+<li><a href="https://datamaxiplus.com/">Official Website</a></li>
+<li><a href="https://docs.datamaxiplus.com/">Documentation</a></li>
 </ul>
 <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
 <p>We welcome contributions!
@@ -1333,7 +1269,7 @@ If you discover a bug in this project, please feel free to open an issue to disc
     <script id="__config" type="application/json">{"base": ".", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
