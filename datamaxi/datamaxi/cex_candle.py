@@ -166,7 +166,7 @@ class CexCandle(API):
         url_path = "/api/v1/cex/candle/symbols"
         return self.query(url_path, params)
 
-    def intervals(self, exchange: str, market: str = "spot") -> List[str]:
+    def intervals(self) -> List[str]:
         """Fetch supported intervals accepted by
         [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
         API.
@@ -175,20 +175,8 @@ class CexCandle(API):
 
         <https://docs.datamaxiplus.com/rest/cex/candle/intervals>
 
-        Args:
-            exchange (str): Exchange name
-            market (str): Market type (spot/futures)
-
         Returns:
             List of supported intervals
         """
-        check_required_parameters(
-            [
-                [exchange, "exchange"],
-                [market, "market"],
-            ]
-        )
-
-        params = {"exchange": exchange, "market": market}
         url_path = "/api/v1/cex/candle/intervals"
-        return self.query(url_path, params)
+        return self.query(url_path)
