@@ -18,11 +18,14 @@ class Premium(API):
 
     def get(
         self,
-        sort: str = None,
-        limit: int = None,
-        symbol: str = None,
         sourceExchange: str = None,
         targetExchange: str = None,
+        asset: str = None,
+        sourceQuote: str = None,
+        targetQuote: str = None,
+        currency: str = None,
+        sort: str = None,
+        limit: int = None,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Fetch premium data
@@ -31,11 +34,14 @@ class Premium(API):
         <https://docs.datamaxiplus.com/rest/premium/premium>
 
         Args:
-            sort (str): Sort data by `asc` or `desc`
-            limit (int): Limit number of data to return
-            symbol (str): Symbol name
             sourceExchange (str): Source exchange name
             targetExchange (str): Target exchange name
+            asset (str): Asset name
+            sourceQuote (str): Source quote currency
+            targetQuote (str): Target quote currency
+            currency (str): Currency applied to cross-exchange price differences
+            sort (str): Sort data by `asc` or `desc`
+            limit (int): Limit number of data to return
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -49,14 +55,23 @@ class Premium(API):
         if limit is not None:
             params["limit"] = limit
 
-        if symbol is not None:
-            params["symbol"] = symbol
-
         if sourceExchange is not None:
             params["sourceExchange"] = sourceExchange
 
         if targetExchange is not None:
             params["targetExchange"] = targetExchange
+
+        if asset is not None:
+            params["asset"] = asset
+
+        if sourceQuote is not None:
+            params["sourceQuote"] = sourceQuote
+
+        if targetQuote is not None:
+            params["targetQuote"] = targetQuote
+
+        if currency is not None:
+            params["currency"] = currency
 
         res = self.query("/api/v1/premium", params)
 
