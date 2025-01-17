@@ -47,7 +47,6 @@ nav:
       - Naver Trend: naver-trend.md
       - Google Trend: google-trend.md
   - Telegram: telegram.md
-  - Defillama: defillama.md
 
 theme:
   name: material
