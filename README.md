@@ -54,7 +54,6 @@ You may use environment variables to configure the SDK to avoid any inline boile
 DataMaxi+ Python package currently includes the following clients:
 
 - `Datamaxi`
-- `Defillama`
 - `Naver`
 - `Google`
 
@@ -64,9 +63,6 @@ First, import the clients,
 ```python
 # Main client to access crypto trading data
 from datamaxi.datamaxi import Datamaxi
-
-# DeFi
-from datamaxi.defillama import Defillama
 
 # Trend
 from datamaxi.naver import Naver
@@ -78,9 +74,6 @@ and initialize them.
 ```python
 # Main client
 maxi = Datamaxi(api_key=api_key)
-
-# DeFi
-defillama = Defillama(api_key=api_key)
 
 # Trend
 naver = Naver(api_key=api_key)
