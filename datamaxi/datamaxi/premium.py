@@ -1,7 +1,6 @@
 from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import API
-from datamaxi.lib.utils import check_required_parameters
 
 
 class Premium(API):
@@ -16,7 +15,10 @@ class Premium(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+        self.__module__ = __name__
+        self.__qualname__ = self.__class__.__qualname__
+
+    def __call__(
         self,
         sort: str = None,
         limit: int = None,
@@ -59,9 +61,11 @@ class Premium(API):
             params["targetExchange"] = targetExchange
 
         res = self.query("/api/v1/premium", params)
+        if res["data"] is None or len(res["data"]) == 0:
+            raise ValueError("no data found")
 
         if pandas:
-            df = pd.DataFrame(res)
+            df = pd.DataFrame(res["data"])
             df = df.set_index("d")
             return df
         else:
@@ -81,30 +85,3 @@ class Premium(API):
         """
         url_path = "/api/v1/premium/exchanges"
         return self.query(url_path)
-
-    def symbols(self, sourceExchange: str, targetExchange: str) -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.Premium.get](./#datamaxi.datamaxi.Premium.get)
-        API.
-
-        `GET /api/v1/premium/symbols`
-
-        <https://docs.datamaxiplus.com/rest/premium/symbols>
-
-        Args:
-            sourceExchange (str): Source exchange name
-            targetExchange (str): Target exchange name
-
-        Returns:
-            List of supported symbols
-        """
-        check_required_parameters(
-            [
-                [sourceExchange, "sourceExchange"],
-                [targetExchange, "targetExchange"],
-            ]
-        )
-
-        params = {"sourceExchange": sourceExchange, "targetExchange": targetExchange}
-        url_path = "/api/v1/premium/symbols"
-        return self.query(url_path, params)

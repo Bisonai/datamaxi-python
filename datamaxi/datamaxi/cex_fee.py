@@ -3,7 +3,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 
 
-class CexTradingFees(API):
+class CexFee(API):
     """Client to fetch CEX trading fee data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
@@ -39,12 +39,12 @@ class CexTradingFees(API):
         if symbol:
             params["symbol"] = symbol
 
-        url_path = "/api/v1/trading-fees"
+        url_path = "/api/v1/cex/fees"
         return self.query(url_path, params)
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexTradingFees.get](./#datamaxi.datamaxi.CexTradingFees.get)
+        [datamaxi.CexFee.get](./#datamaxi.datamaxi.CexFee.get)
         API.
 
         `GET /api/v1/trading-fees/exchanges`
@@ -54,7 +54,7 @@ class CexTradingFees(API):
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/trading-fees/exchanges"
+        url_path = "/api/v1/cex/fees/exchanges"
         return self.query(url_path)
 
     def symbols(self, exchange: str) -> List[str]:
@@ -78,5 +78,5 @@ class CexTradingFees(API):
             "exchange": exchange,
         }
 
-        url_path = "/api/v1/trading-fees/symbols"
+        url_path = "/api/v1/cex/fees/symbols"
         return self.query(url_path, params)

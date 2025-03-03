@@ -1,6 +1,6 @@
-# Google Trend
+# CEX Token Updates
 
-::: datamaxi.google
+::: datamaxi.datamaxi.CexToken
     options:
       show_submodules: true
       show_source: false

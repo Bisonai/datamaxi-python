@@ -2,14 +2,14 @@ from typing import Any, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.lib.utils import check_required_parameter
+from datamaxi.lib.constants import SPOT, FUTURES
 
 
 class CexTicker(API):
     """Client to fetch ticker data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize ticker client.
+        """Initialize cex ticker client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -21,6 +21,7 @@ class CexTicker(API):
         self,
         exchange: str,
         symbol: str,
+        market: str,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch ticker data
@@ -32,6 +33,7 @@ class CexTicker(API):
         Args:
             exchange (str): Exchange name
             symbol (str): Symbol name
+            market (str): Market type (spot/futures)
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -42,12 +44,17 @@ class CexTicker(API):
             [
                 [exchange, "exchange"],
                 [symbol, "symbol"],
+                [market, "market"],
             ]
         )
+
+        if market not in [SPOT, FUTURES]:
+            raise ValueError("market must be either spot or futures")
 
         params = {
             "exchange": exchange,
             "symbol": symbol,
+            "market": market,
         }
 
         res = self.query("/api/v1/ticker", params)
@@ -59,7 +66,10 @@ class CexTicker(API):
         else:
             return res
 
-    def exchanges(self) -> List[str]:
+    def exchanges(
+        self,
+        market: str,
+    ) -> List[str]:
         """Fetch supported exchanges accepted by
         [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
         API.
@@ -68,13 +78,33 @@ class CexTicker(API):
 
         <https://docs.datamaxiplus.com/rest/cex/ticker/exchanges>
 
+        Args:
+            market (str): Market type (spot/futures)
+
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/ticker/exchanges"
-        return self.query(url_path)
+        check_required_parameters(
+            [
+                [market, "market"],
+            ]
+        )
 
-    def symbols(self, exchange: str) -> List[str]:
+        if market not in [SPOT, FUTURES]:
+            raise ValueError("market must be either spot or futures")
+
+        params = {
+            "market": market,
+        }
+
+        url_path = "/api/v1/ticker/exchanges"
+        return self.query(url_path, params)
+
+    def symbols(
+        self,
+        exchange: str,
+        market: str,
+    ) -> List[str]:
         """Fetch supported symbols accepted by
         [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
         API.
@@ -85,14 +115,24 @@ class CexTicker(API):
 
         Args:
             exchange (str): Exchange name
+            market (str): Market type (spot/futures)
 
         Returns:
             List of supported symbols
         """
-        check_required_parameter(exchange, "exchange")
+        check_required_parameters(
+            [
+                [exchange, "exchange"],
+                [market, "market"],
+            ]
+        )
+
+        if market not in [SPOT, FUTURES]:
+            raise ValueError("market must be either spot or futures")
 
         params = {
             "exchange": exchange,
+            "market": market,
         }
 
         url_path = "/api/v1/ticker/symbols"

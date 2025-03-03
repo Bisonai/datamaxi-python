@@ -6,7 +6,7 @@ from datamaxi.lib.utils import check_required_parameter
 
 
 class CexWalletStatus(API):
-    """Client to fetch wallet status data from DataMaxi+ API."""
+    """Client to fetch transfer status data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize wallet status client.
@@ -23,7 +23,7 @@ class CexWalletStatus(API):
         asset: str,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
-        """Fetch wallet status data
+        """Fetch transfer status data
 
         `GET /api/v1/wallet-status`
 

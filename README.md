@@ -55,7 +55,6 @@ DataMaxi+ Python package currently includes the following clients:
 
 - `Datamaxi`
 - `Naver`
-- `Google`
 
 All clients accept the same parameters that are described at [Configuration](#configuration) section.
 First, import the clients,
@@ -66,7 +65,6 @@ from datamaxi.datamaxi import Datamaxi
 
 # Trend
 from datamaxi.naver import Naver
-from datamaxi.google import Google
 ```
 
 and initialize them.
@@ -77,7 +75,6 @@ maxi = Datamaxi(api_key=api_key)
 
 # Trend
 naver = Naver(api_key=api_key)
-google = Google(api_key=api_key)
 ```
 
 ## Local Development

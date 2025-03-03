@@ -4,13 +4,14 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
+from datamaxi.lib.constants import ASC, DESC, SPOT, FUTURES, INTERVAL_1D
 
 
 class CexCandle(API):
     """Client to fetch CEX candle data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
-        """Initialize client.
+        """Initialize cex candle client.
 
         Args:
             api_key (str): The DataMaxi+ API key
@@ -18,12 +19,15 @@ class CexCandle(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+        self.__module__ = __name__
+        self.__qualname__ = self.__class__.__qualname__
+
+    def __call__(
         self,
         exchange: str,
         symbol: str,
-        interval: str = "1d",
-        market: str = "spot",
+        interval: str = INTERVAL_1D,
+        market: str = SPOT,
         page: int = 1,
         limit: int = 1000,
         fromDateTime: str = None,
@@ -61,7 +65,7 @@ class CexCandle(API):
             ]
         )
 
-        if market not in ["spot", "futures"]:
+        if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
         if page < 1:
@@ -75,7 +79,7 @@ class CexCandle(API):
                 "fromDateTime and toDateTime cannot be set at the same time"
             )
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -114,7 +118,7 @@ class CexCandle(API):
         else:
             return res, next_request
 
-    def exchanges(self, market: str = "spot") -> List[str]:
+    def exchanges(self, market: str) -> List[str]:
         """Fetch supported exchanges accepted by
         [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
         API.
@@ -131,7 +135,7 @@ class CexCandle(API):
         """
         check_required_parameter(market, "market")
 
-        if market not in ["spot", "futures"]:
+        if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
         params = {"market": market}
@@ -154,7 +158,7 @@ class CexCandle(API):
         Returns:
             List of supported symbols
         """
-        if market is not None and market not in ["spot", "futures"]:
+        if market is not None and market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
         params = {}

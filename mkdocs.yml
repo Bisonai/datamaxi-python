@@ -34,7 +34,6 @@ nav:
   - CEX:
       - Candle: cex-candle.md
       - Ticker: cex-ticker.md
-      - Orderbook: cex-orderbook.md
       - Trading Fees: cex-trading-fees.md
       - Wallet Status: cex-wallet-status.md
       - Announcement: cex-announcement.md
@@ -43,9 +42,7 @@ nav:
   - Funding Rate: funding-rate.md
   - Premium: premium.md
   - Forex: forex.md
-  - Trend:
-      - Naver Trend: naver-trend.md
-      - Google Trend: google-trend.md
+  - Naver Trend: naver-trend.md
   - Telegram: telegram.md
 
 theme:

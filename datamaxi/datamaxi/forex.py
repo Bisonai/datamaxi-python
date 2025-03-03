@@ -16,7 +16,10 @@ class Forex(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+        self.__module__ = __name__
+        self.__qualname__ = self.__class__.__qualname__
+
+    def __call__(
         self,
         symbol: str,
         pandas: bool = True,
@@ -43,9 +46,7 @@ class Forex(API):
         res = self.query("/api/v1/forex", params)
 
         if pandas:
-            df = pd.DataFrame(res)
-            df = df.set_index("d")
-            return df
+            return pd.DataFrame([res])
         else:
             return res
 
