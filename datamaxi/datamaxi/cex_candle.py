@@ -4,7 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
-from datamaxi.lib.constants import ASC, DESC, SPOT, FUTURES, INTERVAL_1D
+from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD
 
 
 class CexCandle(API):
@@ -25,14 +25,12 @@ class CexCandle(API):
     def __call__(
         self,
         exchange: str,
+        market: str,
         symbol: str,
         interval: str = INTERVAL_1D,
-        market: str = SPOT,
-        page: int = 1,
-        limit: int = 1000,
-        fromDateTime: str = None,
-        toDateTime: str = None,
-        sort: str = "desc",
+        from_unix: str = None,
+        to_unix: str = None,
+        currency: str = USD,
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch candle data
@@ -43,14 +41,12 @@ class CexCandle(API):
 
         Args:
             exchange (str): Exchange name
+            market (str): Market type (spot/futures)
             symbol (str): Symbol name
             interval (str): Candle interval
-            market (str): Market type (spot/futures)
-            page (int): Page number
-            limit (int): Limit of data
-            fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
-            toDateTime (str): End date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
-            sort (str): Sort order
+            from_unix (str): Start time in Unix timestamp
+            to_unix (str): End time in Unix timestamp
+            currency (str): Currency
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -62,61 +58,31 @@ class CexCandle(API):
                 [symbol, "symbol"],
                 [interval, "interval"],
                 [market, "market"],
+                [currency, "currency"],
             ]
         )
 
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        if page < 1:
-            raise ValueError("page must be greater than 0")
-
-        if limit < 1:
-            raise ValueError("limit must be greater than 0")
-
-        if fromDateTime is not None and toDateTime is not None:
-            raise ValueError(
-                "fromDateTime and toDateTime cannot be set at the same time"
-            )
-
-        if sort not in [ASC, DESC]:
-            raise ValueError("sort must be either asc or desc")
-
         params = {
             "exchange": exchange,
+            "market": market,
             "symbol": symbol,
             "interval": interval,
-            "market": market,
-            "page": page,
-            "limit": limit,
-            "from": fromDateTime,
-            "to": toDateTime,
-            "sort": sort,
+            "from": from_unix,
+            "to": to_unix,
+            "currency": currency,
         }
 
         res = self.query("/api/v1/cex/candle", params)
         if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
-        def next_request():
-            return self.get(
-                exchange,
-                symbol,
-                interval,
-                market,
-                page + 1,
-                limit,
-                fromDateTime,
-                toDateTime,
-                sort,
-                pandas,
-            )
-
         if pandas:
-            df = convert_data_to_data_frame(res["data"])
-            return df, next_request
+            return convert_data_to_data_frame(res["data"])
         else:
-            return res, next_request
+            return res
 
     def exchanges(self, market: str) -> List[str]:
         """Fetch supported exchanges accepted by

@@ -18,15 +18,16 @@ class Premium(API):
         self.__module__ = __name__
         self.__qualname__ = self.__class__.__qualname__
 
-    def __call__(
+    def __call__(  # noqa: C901
         self,
-        sourceExchange: str = None,
-        targetExchange: str = None,
+        source_exchange: str = None,
+        target_exchange: str = None,
         asset: str = None,
-        sourceQuote: str = None,
-        targetQuote: str = None,
+        source_quote: str = None,
+        target_quote: str = None,
         currency: str = None,
         sort: str = None,
+        key: str = None,
         limit: int = None,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
@@ -36,13 +37,14 @@ class Premium(API):
         <https://docs.datamaxiplus.com/rest/premium/premium>
 
         Args:
-            sourceExchange (str): Source exchange name
-            targetExchange (str): Target exchange name
+            source_exchange (str): Source exchange name
+            target_exchange (str): Target exchange name
             asset (str): Asset name
-            sourceQuote (str): Source quote currency
-            targetQuote (str): Target quote currency
+            source_quote (str): Source quote currency
+            target_quote (str): Target quote currency
             currency (str): Currency applied to cross-exchange price differences
             sort (str): Sort data by `asc` or `desc`
+            key (str): Key to sort data
             limit (int): Limit number of data to return
             pandas (bool): Return data as pandas DataFrame
 
@@ -54,26 +56,26 @@ class Premium(API):
         if sort is not None:
             params["sort"] = sort
 
+        if key is not None:
+            params["key"] = key
+
         if limit is not None:
             params["limit"] = limit
 
-        if symbol is not None:
-            params["symbol"] = symbol
+        if source_exchange is not None:
+            params["sourceExchange"] = source_exchange
 
-        if sourceExchange is not None:
-            params["sourceExchange"] = sourceExchange
-
-        if targetExchange is not None:
-            params["targetExchange"] = targetExchange
+        if target_exchange is not None:
+            params["targetExchange"] = target_exchange
 
         if asset is not None:
             params["asset"] = asset
 
-        if sourceQuote is not None:
-            params["sourceQuote"] = sourceQuote
+        if source_quote is not None:
+            params["sourceQuote"] = source_quote
 
-        if targetQuote is not None:
-            params["targetQuote"] = targetQuote
+        if target_quote is not None:
+            params["targetQuote"] = target_quote
 
         if currency is not None:
             params["currency"] = currency
