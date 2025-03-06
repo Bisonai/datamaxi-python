@@ -362,7 +362,7 @@ class Dex(API):
         """Fetch supported intervals accepted by
         [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle).
 
-        `GET /api/v1/dex/candle/intervals`
+        `GET /api/v1/dex/intervals`
 
         <https://docs.datamaxiplus.com/rest/dex/intervals>
 
