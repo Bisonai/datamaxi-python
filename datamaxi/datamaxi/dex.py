@@ -290,7 +290,6 @@ class Dex(API):
         if pandas:
             df = convert_data_to_data_frame(
                 res["data"],
-                # ["b", "l"],
             )
             return df, next_request
         else:
