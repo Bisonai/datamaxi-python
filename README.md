@@ -15,8 +15,7 @@ This package is compatible with Python v3.8+.
   - [Environment Variables](#environment-variables)
 - [Quickstart](#quickstart)
 - [Local Development](#local-development)
-  - [Setup](#setup)
-  - [Testing](#testing)
+- [Testing](#testing)
 - [Links](#links)
 - [Contributing](#contributing)
 - [License](#license)
@@ -79,17 +78,23 @@ naver = Naver(api_key=api_key)
 
 ## Local Development
 
-### Setup
-
 If you wish to work on local development please clone/fork the git repo and use `pip install -r requirements.txt` to setup the project.
 
-### Testing
+## Testing
+
+### Unit tests
 
 ```shell
 # In case packages are not installed yet
 pip3 install -r requirements/requirements-test.txt
 
 python3 -m pytest tests/
+```
+
+### Test calls
+
+```shell
+python3 tests/test.py
 ```
 
 ## Links
