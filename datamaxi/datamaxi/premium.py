@@ -25,10 +25,11 @@ class Premium(API):
         asset: str = None,
         source_quote: str = None,
         target_quote: str = None,
-        currency: str = None,
         sort: str = None,
         key: str = None,
-        limit: int = None,
+        page: int = 1,
+        limit: int = 100,
+        currency: str = None,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Fetch premium data
@@ -45,22 +46,14 @@ class Premium(API):
             currency (str): Currency applied to cross-exchange price differences
             sort (str): Sort data by `asc` or `desc`
             key (str): Key to sort data
-            limit (int): Limit number of data to return
+            page (int): Page number
+            limit (int): Page size
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Premium data in pandas DataFrame
         """
         params = {}
-
-        if sort is not None:
-            params["sort"] = sort
-
-        if key is not None:
-            params["key"] = key
-
-        if limit is not None:
-            params["limit"] = limit
 
         if source_exchange is not None:
             params["sourceExchange"] = source_exchange
@@ -76,6 +69,18 @@ class Premium(API):
 
         if target_quote is not None:
             params["targetQuote"] = target_quote
+
+        if sort is not None:
+            params["sort"] = sort
+
+        if page is not None:
+            params["page"] = page
+
+        if key is not None:
+            params["key"] = key
+
+        if limit is not None:
+            params["limit"] = limit
 
         if currency is not None:
             params["currency"] = currency
