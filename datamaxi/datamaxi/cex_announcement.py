@@ -15,7 +15,7 @@ class CexAnnouncement(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+    def __call__(
         self,
         category: Optional[str] = None,
         page: int = 1,
@@ -58,7 +58,7 @@ class CexAnnouncement(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.__call__(
                 category=category,
                 page=page + 1,
                 limit=limit,

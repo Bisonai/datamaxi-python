@@ -15,7 +15,7 @@ class CexFee(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+    def __call__(
         self,
         exchange: str = None,
         symbol: str = None,
