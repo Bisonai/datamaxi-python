@@ -34,10 +34,10 @@ nav:
   - CEX:
       - Candle: cex-candle.md
       - Ticker: cex-ticker.md
-      - Trading Fees: cex-trading-fees.md
+      - Fees: cex-fee.md
       - Wallet Status: cex-wallet-status.md
       - Announcement: cex-announcement.md
-      - Token Updates: cex-token-updates.md
+      - Token: cex-token.md
   - DEX: dex.md
   - Funding Rate: funding-rate.md
   - Premium: premium.md

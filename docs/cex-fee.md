@@ -1,4 +1,4 @@
-# CEX Trading Fees
+# CEX Fees
 
 ::: datamaxi.datamaxi.CexFee
     options:

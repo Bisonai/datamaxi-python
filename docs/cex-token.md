@@ -1,4 +1,4 @@
-# CEX Token Updates
+# CEX Token
 
 ::: datamaxi.datamaxi.CexToken
     options:
