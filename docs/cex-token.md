@@ -1,6 +1,6 @@
-# CEX Orderbook
+# CEX Token
 
-::: datamaxi.datamaxi.CexOrderbook
+::: datamaxi.datamaxi.CexToken
     options:
       show_submodules: true
       show_source: false

@@ -15,8 +15,7 @@ This package is compatible with Python v3.8+.
   - [Environment Variables](#environment-variables)
 - [Quickstart](#quickstart)
 - [Local Development](#local-development)
-  - [Setup](#setup)
-  - [Testing](#testing)
+- [Tests](#tests)
 - [Links](#links)
 - [Contributing](#contributing)
 - [License](#license)
@@ -55,7 +54,6 @@ DataMaxi+ Python package currently includes the following clients:
 
 - `Datamaxi`
 - `Naver`
-- `Google`
 
 All clients accept the same parameters that are described at [Configuration](#configuration) section.
 First, import the clients,
@@ -66,7 +64,6 @@ from datamaxi.datamaxi import Datamaxi
 
 # Trend
 from datamaxi.naver import Naver
-from datamaxi.google import Google
 ```
 
 and initialize them.
@@ -77,16 +74,13 @@ maxi = Datamaxi(api_key=api_key)
 
 # Trend
 naver = Naver(api_key=api_key)
-google = Google(api_key=api_key)
 ```
 
 ## Local Development
 
-### Setup
-
 If you wish to work on local development please clone/fork the git repo and use `pip install -r requirements.txt` to setup the project.
 
-### Testing
+## Tests
 
 ```shell
 # In case packages are not installed yet
@@ -94,6 +88,7 @@ pip3 install -r requirements/requirements-test.txt
 
 python3 -m pytest tests/
 ```
+
 
 ## Links
 

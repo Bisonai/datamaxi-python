@@ -1,10 +1,10 @@
 [project]
 name = "datamaxi"
-version = "0.24.0"
+version = "0.25.0"
 authors = [
   { name="Bisonai", email="business@bisonai.com" },
 ]
-description = "Official Python client for DataMaxi+ API"
+description = "Official Python SDK for DataMaxi+ API"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [

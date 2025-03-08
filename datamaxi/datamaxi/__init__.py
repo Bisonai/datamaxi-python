@@ -9,11 +9,8 @@ from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # no
 from datamaxi.datamaxi.cex_ticker import (  # used in documentation # noqa:F401
     CexTicker,
 )
-from datamaxi.datamaxi.cex_orderbook import (  # used in documentation # noqa:F401
-    CexOrderbook,
-)
-from datamaxi.datamaxi.cex_trading_fees import (  # used in documentation # noqa:F401
-    CexTradingFees,
+from datamaxi.datamaxi.cex_fee import (  # used in documentation # noqa:F401
+    CexFee,
 )
 from datamaxi.datamaxi.cex_wallet_status import (  # used in documentation # noqa:F401
     CexWalletStatus,
@@ -21,8 +18,8 @@ from datamaxi.datamaxi.cex_wallet_status import (  # used in documentation # noq
 from datamaxi.datamaxi.cex_announcement import (  # used in documentation # noqa:F401
     CexAnnouncement,
 )
-from datamaxi.datamaxi.cex_token_updates import (  # used in documentation # noqa:F401
-    CexTokenUpdates,
+from datamaxi.datamaxi.cex_token import (  # used in documentation # noqa:F401
+    CexToken,
 )
 
 

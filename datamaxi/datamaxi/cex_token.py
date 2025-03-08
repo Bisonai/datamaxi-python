@@ -1,9 +1,9 @@
 from typing import Any, Dict, Optional
 from datamaxi.api import API
-from datamaxi.lib.constants import BASE_URL
+from datamaxi.lib.constants import DESC, ASC
 
 
-class CexTokenUpdates(API):
+class CexToken(API):
     """Client to fetch token update data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
@@ -13,16 +13,14 @@ class CexTokenUpdates(API):
             api_key (str): The DataMaxi+ API key
             **kwargs: Keyword arguments used by `datamaxi.api.API`.
         """
-        if "base_url" not in kwargs:
-            kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def get(
+    def updates(
         self,
         type: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
-        sort: str = "desc",
+        sort: str = DESC,
     ) -> Dict[str, Any]:
         """Get token update data
 
@@ -45,7 +43,7 @@ class CexTokenUpdates(API):
         if limit < 1:
             raise ValueError("limit must be greater than 0")
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         if type is not None and type not in ["listed", "delisted"]:
@@ -58,7 +56,7 @@ class CexTokenUpdates(API):
             "sort": sort,
         }
 
-        res = self.query("/api/v1/cex/token-updates", params)
+        res = self.query("/api/v1/cex/token/updates", params)
         if res["data"] is None:
             raise ValueError("no data found")
 

@@ -1,8 +1,10 @@
 from typing import Any, Callable, Tuple, List, Dict, Union
+import logging
 from datamaxi.api import API
 import pandas as pd
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
+from datamaxi.lib.constants import ASC, DESC
 
 
 class Dex(API):
@@ -49,6 +51,8 @@ class Dex(API):
         Returns:
             DEX trade data in pandas DataFrame and next request function
         """
+        logging.warning("warning: dex related endpoints are experimental")
+
         check_required_parameters(
             [
                 [chain, "chain"],
@@ -67,7 +71,7 @@ class Dex(API):
                 "fromDateTime and toDateTime cannot be set at the same time"
             )
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -138,6 +142,8 @@ class Dex(API):
         Returns:
             DEX candle data in pandas DataFrame and next request function
         """
+        logging.warning("warning: dex related endpoints are experimental")
+
         check_required_parameters(
             [
                 [chain, "chain"],
@@ -158,7 +164,7 @@ class Dex(API):
                 "fromDateTime and toDateTime cannot be set at the same time"
             )
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -229,6 +235,8 @@ class Dex(API):
         Returns:
             DEX liquidity data in pandas DataFrame and next request function
         """
+        logging.warning("warning: dex related endpoints are experimental")
+
         check_required_parameters(
             [
                 [chain, "chain"],
@@ -248,7 +256,7 @@ class Dex(API):
                 "fromDateTime and toDateTime cannot be set at the same time"
             )
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -282,7 +290,6 @@ class Dex(API):
         if pandas:
             df = convert_data_to_data_frame(
                 res["data"],
-                ["b", "l"],
             )
             return df, next_request
         else:
@@ -301,6 +308,7 @@ class Dex(API):
         Returns:
             List of supported chains
         """
+        logging.warning("warning: dex related endpoints are experimental")
 
         url_path = "/api/v1/dex/chains"
         return self.query(url_path)
@@ -318,6 +326,7 @@ class Dex(API):
         Returns:
             List of supported exchanges
         """
+        logging.warning("warning: dex related endpoints are experimental")
 
         url_path = "/api/v1/dex/exchanges"
         return self.query(url_path)
@@ -359,5 +368,7 @@ class Dex(API):
         Returns:
             List of supported intervals
         """
+        logging.warning("warning: dex related endpoints are experimental")
+
         url_path = "/api/v1/dex/intervals"
         return self.query(url_path)

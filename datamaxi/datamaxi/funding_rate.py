@@ -4,6 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
+from datamaxi.lib.constants import ASC, DESC
 
 
 class FundingRate(API):
@@ -18,7 +19,7 @@ class FundingRate(API):
         """
         super().__init__(api_key, **kwargs)
 
-    def get(
+    def history(
         self,
         exchange: str,
         symbol: str,
@@ -26,7 +27,7 @@ class FundingRate(API):
         limit: int = 1000,
         fromDateTime: str = None,
         toDateTime: str = None,
-        sort: str = "desc",
+        sort: str = DESC,
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch historical funding rate data
@@ -66,7 +67,7 @@ class FundingRate(API):
                 "fromDateTime and toDateTime cannot be set at the same time"
             )
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -79,7 +80,7 @@ class FundingRate(API):
             "sort": sort,
         }
 
-        res = self.query("/api/v1/funding-rate", params)
+        res = self.query("/api/v1/funding-rate/history", params)
         if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
@@ -101,7 +102,7 @@ class FundingRate(API):
         else:
             return res, next_request
 
-    def getLatest(
+    def latest(
         self,
         sort: str = None,
         limit: int = None,
@@ -142,7 +143,7 @@ class FundingRate(API):
         res = self.query("/api/v1/funding-rate/latest", params)
 
         if pandas:
-            df = pd.DataFrame(res)
+            df = pd.DataFrame([res])
             df = df.set_index("d")
             return df
         else:

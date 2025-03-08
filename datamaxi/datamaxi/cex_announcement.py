@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional
 from datamaxi.api import API
-from datamaxi.lib.constants import BASE_URL
+from datamaxi.lib.constants import ASC, DESC
 
 
 class CexAnnouncement(API):
@@ -13,16 +13,14 @@ class CexAnnouncement(API):
             api_key (str): The DataMaxi+ API key
             **kwargs: Keyword arguments used by `datamaxi.api.API`.
         """
-        if "base_url" not in kwargs:
-            kwargs["base_url"] = BASE_URL
         super().__init__(api_key, **kwargs)
 
-    def get(
+    def __call__(
         self,
         category: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
-        sort: str = "desc",
+        sort: str = DESC,
     ) -> Dict[str, Any]:
         """Get exchange announcements
 
@@ -45,7 +43,7 @@ class CexAnnouncement(API):
         if limit < 1:
             raise ValueError("limit must be greater than 0")
 
-        if sort not in ["asc", "desc"]:
+        if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
         params = {
@@ -60,7 +58,7 @@ class CexAnnouncement(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.__call__(
                 category=category,
                 page=page + 1,
                 limit=limit,
