@@ -86,7 +86,7 @@ class CexCandle(API):
 
     def exchanges(self, market: str) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
+        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/cex/candle/exchanges`
@@ -110,7 +110,7 @@ class CexCandle(API):
 
     def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
         """Fetch supported symbols accepted by
-        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
+        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/cex/candle/symbols`
@@ -138,7 +138,7 @@ class CexCandle(API):
 
     def intervals(self) -> List[str]:
         """Fetch supported intervals accepted by
-        [datamaxi.CexCandle.get](./#datamaxi.datamaxi.CexCandle.get)
+        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
         API.
 
         `GET /api/v1/candle/intervals`

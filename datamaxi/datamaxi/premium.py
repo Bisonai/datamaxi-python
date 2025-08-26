@@ -372,7 +372,7 @@ class Premium(API):
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.Premium.get](./#datamaxi.datamaxi.Premium.get)
+        [datamaxi.Premium.get](#datamaxi.datamaxi.Premium.get)
         API.
 
         `GET /api/v1/Premium/exchanges`

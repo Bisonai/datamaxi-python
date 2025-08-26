@@ -60,7 +60,7 @@ class CexWalletStatus(API):
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexWalletStatus.__call__](./#datamaxi.datamaxi.CexWalletStatus.__call__)
+        [datamaxi.CexWalletStatus.__call__](#datamaxi.datamaxi.CexWalletStatus.__call__)
         API.
 
         `GET /api/v1/wallet-status/exchanges`
@@ -75,7 +75,7 @@ class CexWalletStatus(API):
 
     def assets(self, exchange: str) -> List[str]:
         """Fetch supported assets accepted by
-        [datamaxi.CexWalletStatus.__call__](./#datamaxi.datamaxi.CexWalletStatus.__call__)
+        [datamaxi.CexWalletStatus.__call__](#datamaxi.datamaxi.CexWalletStatus.__call__)
         API.
 
         `GET /api/v1/wallet-status/assets`

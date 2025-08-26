@@ -205,9 +205,8 @@ class Dex(API):
 
     def chains(self) -> List[str]:
         """Fetch supported chains accepted by
-        [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle),
-        [datamaxi.Dex.trade](./#datamaxi.datamaxi.Dex.trade) and
-        [datamaxi.Dex.liquidity](./#datamaxi.datamaxi.Dex.liquidity).
+        [datamaxi.Dex.candle](#datamaxi.datamaxi.Dex.candle),
+        [datamaxi.Dex.trade](#datamaxi.datamaxi.Dex.trade).
 
         `GET /api/v1/dex/chains`
 
@@ -223,9 +222,8 @@ class Dex(API):
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle),
-        [datamaxi.Dex.trade](./#datamaxi.datamaxi.Dex.trade) and
-        [datamaxi.Dex.liquidity](./#datamaxi.datamaxi.Dex.liquidity).
+        [datamaxi.Dex.candle](#datamaxi.datamaxi.Dex.candle),
+        [datamaxi.Dex.trade](#datamaxi.datamaxi.Dex.trade).
 
         `GET /api/v1/dex/exchanges`
 
@@ -241,9 +239,8 @@ class Dex(API):
 
     def pools(self, exchange: str = None, chain: str = None) -> List[Dict]:
         """Fetch supported pools accepted by
-        [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle),
-        [datamaxi.Dex.trade](./#datamaxi.datamaxi.Dex.trade) and
-        [datamaxi.Dex.liquidity](./#datamaxi.datamaxi.Dex.liquidity).
+        [datamaxi.Dex.candle](#datamaxi.datamaxi.Dex.candle),
+        [datamaxi.Dex.trade](#datamaxi.datamaxi.Dex.trade).
 
         `GET /api/v1/dex/pools`
 
@@ -267,7 +264,7 @@ class Dex(API):
 
     def intervals(self) -> List[str]:
         """Fetch supported intervals accepted by
-        [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle).
+        [datamaxi.Dex.candle](#datamaxi.datamaxi.Dex.candle).
 
         `GET /api/v1/dex/intervals`
 

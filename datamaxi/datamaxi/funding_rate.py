@@ -151,7 +151,7 @@ class FundingRate(API):
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        [datamaxi.FundingRate.get](#datamaxi.datamaxi.FundingRate.get)
         API.
 
         `GET /api/v1/funding-rate/exchanges`
@@ -166,7 +166,7 @@ class FundingRate(API):
 
     def symbols(self, exchange: str, market: str = "spot") -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.FundingRate.get](./#datamaxi.datamaxi.FundingRate.get)
+        [datamaxi.FundingRate.get](#datamaxi.datamaxi.FundingRate.get)
         API.
 
         `GET /api/v1/funding-rate/symbols`

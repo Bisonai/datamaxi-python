@@ -79,7 +79,7 @@ class CexTicker(API):
         market: str,
     ) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
+        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
         API.
 
         `GET /api/v1/ticker/exchanges`
@@ -114,7 +114,7 @@ class CexTicker(API):
         market: str,
     ) -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
+        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
         API.
 
         `GET /api/v1/ticker/symbols`

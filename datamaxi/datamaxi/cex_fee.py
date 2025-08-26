@@ -44,7 +44,7 @@ class CexFee(API):
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexFee.get](./#datamaxi.datamaxi.CexFee.get)
+        [datamaxi.CexFee.get](#datamaxi.datamaxi.CexFee.get)
         API.
 
         `GET /api/v1/trading-fees/exchanges`
@@ -59,7 +59,7 @@ class CexFee(API):
 
     def symbols(self, exchange: str) -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.CexTradingFees.get](./#datamaxi.datamaxi.CexTradingFees.get)
+        [datamaxi.CexTradingFees.get](#datamaxi.datamaxi.CexTradingFees.get)
         API.
 
         `GET /api/v1/trading-fees/symbols`
