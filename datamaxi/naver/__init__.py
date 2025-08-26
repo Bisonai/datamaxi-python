@@ -32,7 +32,6 @@ class Naver(API):
         url_path = "/api/v1/naver-trend/symbols"
         return self.query(url_path)
 
-    # @postprocess()
     def trend(self, symbol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get Naver trend for given token symbol
 
