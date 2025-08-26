@@ -111,7 +111,6 @@ def postprocess(num_index: int = 1):
 
             if not kwarg.get("pandas", True):
                 return res
-
             if isinstance(res, dict):
                 res["data"] = _postprocess(res["data"], res["data"][0][:num_index])
             else:

@@ -22,6 +22,8 @@ class CexTicker(API):
         exchange: str,
         symbol: str,
         market: str,
+        currency: str = None,
+        conversion_base: str = None,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch ticker data
@@ -56,6 +58,12 @@ class CexTicker(API):
             "symbol": symbol,
             "market": market,
         }
+
+        if currency is not None:
+            params["currency"] = currency
+
+        if conversion_base is not None:
+            params["conversion_base"] = conversion_base
 
         res = self.query("/api/v1/ticker", params)
 

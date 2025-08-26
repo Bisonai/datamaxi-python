@@ -24,10 +24,10 @@ class Dex(API):
         chain: str,
         exchange: str,
         pool: str,
-        page: int = 1,
-        limit: int = 1000,
         fromDateTime: str = None,
         toDateTime: str = None,
+        page: int = 1,
+        limit: int = 1000,
         sort: str = "desc",
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
@@ -41,10 +41,10 @@ class Dex(API):
             chain (str): Chain name
             exchange (str): Exchange name
             pool (str): Pool name
-            page (int): Page number
-            limit (int): Limit of data
             fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
             toDateTime (str): End date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
+            page (int): Page number
+            limit (int): Limit of data
             sort (str): Sort order
             pandas (bool): Return data as pandas DataFrame
 
@@ -114,10 +114,10 @@ class Dex(API):
         exchange: str,
         pool: str,
         interval: str = "1d",
-        page: int = 1,
-        limit: int = 1000,
         fromDateTime: str = None,
         toDateTime: str = None,
+        page: int = 1,
+        limit: int = 1000,
         sort: str = "desc",
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
@@ -132,10 +132,10 @@ class Dex(API):
             exchange (str): Exchange name
             pool (str): Pool name
             interval (str): Candle interval
-            page (int): Page number
-            limit (int): Limit of data
             fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
             toDateTime (str): End date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
+            page (int): Page number
+            limit (int): Limit of data
             sort (str): Sort order
             pandas (bool): Return data as pandas DataFrame
 
@@ -203,97 +203,6 @@ class Dex(API):
         else:
             return res, next_request
 
-    def liquidity(
-        self,
-        chain: str,
-        exchange: str,
-        pool: str,
-        page: int = 1,
-        limit: int = 1000,
-        fromDateTime: str = None,
-        toDateTime: str = None,
-        sort: str = "desc",
-        pandas: bool = True,
-    ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
-        """Fetch DEX liquidity data
-
-        `GET /api/v1/dex/liquidity`
-
-        <https://docs.datamaxiplus.com/rest/dex/liquidity>
-
-        Args:
-            chain (str): Chain name
-            exchange (str): Exchange name
-            pool (str): Pool name
-            page (int): Page number
-            limit (int): Limit of data
-            fromDateTime (str): Start date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
-            toDateTime (str): End date and time (accepts format "2006-01-02 15:04:05" or "2006-01-02")
-            sort (str): Sort order
-            pandas (bool): Return data as pandas DataFrame
-
-        Returns:
-            DEX liquidity data in pandas DataFrame and next request function
-        """
-        logging.warning("warning: dex related endpoints are experimental")
-
-        check_required_parameters(
-            [
-                [chain, "chain"],
-                [exchange, "exchange"],
-                [pool, "pool"],
-            ]
-        )
-
-        if page < 1:
-            raise ValueError("page must be greater than 0")
-
-        if limit < 1:
-            raise ValueError("limit must be greater than 0")
-
-        if fromDateTime is not None and toDateTime is not None:
-            raise ValueError(
-                "fromDateTime and toDateTime cannot be set at the same time"
-            )
-
-        if sort not in [ASC, DESC]:
-            raise ValueError("sort must be either asc or desc")
-
-        params = {
-            "chain": chain,
-            "exchange": exchange,
-            "pool": pool,
-            "page": page,
-            "limit": limit,
-            "from": fromDateTime,
-            "to": toDateTime,
-            "sort": sort,
-        }
-
-        res = self.query("/api/v1/dex/liquidity", params)
-        if res["data"] is None or len(res["data"]) == 0:
-            raise ValueError("no data found")
-
-        def next_request():
-            return self.get(
-                chain,
-                exchange,
-                pool,
-                page + 1,
-                limit,
-                fromDateTime,
-                toDateTime,
-                sort,
-                pandas,
-            )
-
-        if pandas:
-            df = convert_data_to_data_frame(
-                res["data"],
-            )
-            return df, next_request
-        else:
-            return res, next_request
 
     def chains(self) -> List[str]:
         """Fetch supported chains accepted by

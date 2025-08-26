@@ -23,23 +23,23 @@ class Naver(API):
     def symbols(self) -> List[str]:
         """Get Naver trend supported token symbols
 
-        `GET /api/v1/naver/symbols`
+        `GET /api/v1/naver-trend/symbols`
 
         <https://docs.datamaxiplus.com/rest/trend/naver/symbols>
 
         Returns:
             List of supported Naver trend token symbols
         """
-        url_path = "/api/v1/naver/symbols"
+        url_path = "/api/v1/naver-trend/symbols"
         return self.query(url_path)
 
-    @postprocess()
+    # @postprocess()
     def trend(self, symbol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get Naver trend for given token symbol
 
-        `GET /api/v1/naver/trend`
+        `GET /api/v1/naver-trend`
 
-        <https://docs.datamaxiplus.com/rest/trend/naver/trend>
+        <https://docs.datamaxiplus.com/rest/trend/naver-trend>
 
         Args:
             symbol (str): token symbol to search for
@@ -50,4 +50,4 @@ class Naver(API):
         """
         check_required_parameter(symbol, "symbol")
         params = {"symbol": symbol}
-        return self.query("/api/v1/naver/trend", params)
+        return self.query("/api/v1/naver-trend", params)

@@ -34,7 +34,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate`
 
-        <https://docs.datamaxiplus.com/rest/funding-rate/historical-funding-rate>
+        <https://docs.datamaxiplus.com/rest/cex/funding-rate/historical-funding-rate>
 
         Args:
             exchange (str): Exchange name
@@ -104,23 +104,23 @@ class FundingRate(API):
 
     def latest(
         self,
+        exchange: str = None,
+        symbol: str = None,
         sort: str = None,
         limit: int = None,
-        symbol: str = None,
-        exchange: str = None,
         pandas: bool = True,
     ) -> Union[Tuple[List, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch latest funding rate data
 
         `GET /api/v1/funding-rate/latest`
 
-        <https://docs.datamaxiplus.com/rest/funding-rate/latest-funding-rate>
+        <https://docs.datamaxiplus.com/rest/cex/funding-rate/latest-funding-rate>
 
         Args:
+            exchange (str): exchange name
+            symbol (str): Symbol name
             sort (str): Sort data by `asc` or `desc`
             limit (int): Limit number of data to return
-            symbol (str): Symbol name
-            exchange (str): exchange name
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -128,17 +128,17 @@ class FundingRate(API):
         """
         params = {}
 
+        if exchange is not None:
+            params["exchange"] = exchange
+
+        if symbol is not None:
+            params["symbol"] = symbol
+
         if sort is not None:
             params["sort"] = sort
 
         if limit is not None:
             params["limit"] = limit
-
-        if symbol is not None:
-            params["symbol"] = symbol
-
-        if exchange is not None:
-            params["exchange"] = exchange
 
         res = self.query("/api/v1/funding-rate/latest", params)
 
@@ -156,7 +156,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/funding-rate/exchanges>
+        <https://docs.datamaxiplus.com/rest/cex/funding-rate/exchanges>
 
         Returns:
             List of supported exchanges
@@ -171,7 +171,7 @@ class FundingRate(API):
 
         `GET /api/v1/funding-rate/symbols`
 
-        <https://docs.datamaxiplus.com/rest/funding-rate/symbols>
+        <https://docs.datamaxiplus.com/rest/cex/funding-rate/symbols>
 
         Args:
             exchange (str): Exchange name

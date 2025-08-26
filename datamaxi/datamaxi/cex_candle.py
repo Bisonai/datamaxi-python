@@ -27,10 +27,10 @@ class CexCandle(API):
         exchange: str,
         market: str,
         symbol: str,
+        currency: str = USD,
         interval: str = INTERVAL_1D,
         from_unix: str = None,
         to_unix: str = None,
-        currency: str = USD,
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch candle data
@@ -43,10 +43,10 @@ class CexCandle(API):
             exchange (str): Exchange name
             market (str): Market type (spot/futures)
             symbol (str): Symbol name
+            currency (str): Currency
             interval (str): Candle interval
             from_unix (str): Start time in Unix timestamp
             to_unix (str): End time in Unix timestamp
-            currency (str): Currency
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
