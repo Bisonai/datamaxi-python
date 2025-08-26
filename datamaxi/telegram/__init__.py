@@ -113,7 +113,7 @@ class Telegram(API):
             "limit": limit,
             "key": key,
             "sort": sort,
-            "category": category
+            "category": category,
         }
 
         res = self.query("/api/v1/telegram/messages", params)

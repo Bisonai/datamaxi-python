@@ -67,7 +67,7 @@ def test_dex():
     datamaxi.dex.trade(
         exchange="pancakeswap",
         chain="bsc_mainnet",
-        pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24", # btc-usdt pool
+        pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24",  # btc-usdt pool
     )
 
 
@@ -80,9 +80,11 @@ def test_premium():
     datamaxi.premium()
     datamaxi.premium.exchanges()
 
+
 def test_telegram():
     telegram.channels()
     telegram.messages()
+
 
 def test_naver():
     naver.symbols()

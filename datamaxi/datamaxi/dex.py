@@ -203,7 +203,6 @@ class Dex(API):
         else:
             return res, next_request
 
-
     def chains(self) -> List[str]:
         """Fetch supported chains accepted by
         [datamaxi.Dex.candle](./#datamaxi.datamaxi.Dex.candle),

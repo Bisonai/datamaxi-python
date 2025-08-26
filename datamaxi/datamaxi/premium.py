@@ -31,7 +31,6 @@ class Premium(API):
         limit: int = 100,
         currency: str = None,
         conversion_base: str = None,
-
         min_pd: str = None,
         max_pd: str = None,
         min_pdp: str = None,
@@ -83,7 +82,6 @@ class Premium(API):
         premium_type: str = None,
         token_include: str = None,
         token_exclude: str = None,
-
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Fetch premium data
@@ -354,12 +352,20 @@ class Premium(API):
             raise ValueError("no data found")
 
         if pandas:
-            df = pd.DataFrame([
-                {**item["detail"],
-                "source_annualized_funding_rate": item.get("source_annualized_funding_rate"),
-                "target_annualized_funding_rate": item.get("target_annualized_funding_rate")}
-                for item in res["data"]
-            ])
+            df = pd.DataFrame(
+                [
+                    {
+                        **item["detail"],
+                        "source_annualized_funding_rate": item.get(
+                            "source_annualized_funding_rate"
+                        ),
+                        "target_annualized_funding_rate": item.get(
+                            "target_annualized_funding_rate"
+                        ),
+                    }
+                    for item in res["data"]
+                ]
+            )
             return df
         else:
             return res
