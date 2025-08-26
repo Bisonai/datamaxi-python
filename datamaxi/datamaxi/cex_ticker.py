@@ -22,6 +22,8 @@ class CexTicker(API):
         exchange: str,
         symbol: str,
         market: str,
+        currency: str = None,
+        conversion_base: str = None,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch ticker data
@@ -57,6 +59,12 @@ class CexTicker(API):
             "market": market,
         }
 
+        if currency is not None:
+            params["currency"] = currency
+
+        if conversion_base is not None:
+            params["conversion_base"] = conversion_base
+
         res = self.query("/api/v1/ticker", params)
 
         if pandas:
@@ -71,7 +79,7 @@ class CexTicker(API):
         market: str,
     ) -> List[str]:
         """Fetch supported exchanges accepted by
-        [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
+        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
         API.
 
         `GET /api/v1/ticker/exchanges`
@@ -106,7 +114,7 @@ class CexTicker(API):
         market: str,
     ) -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.CexTicker.get](./#datamaxi.datamaxi.CexTicker.get)
+        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
         API.
 
         `GET /api/v1/ticker/symbols`

@@ -1,6 +1,8 @@
 import os
 import logging
 from datamaxi import Datamaxi
+from datamaxi import Telegram
+from datamaxi import Naver
 
 
 logging.basicConfig(level=logging.INFO)
@@ -9,6 +11,8 @@ api_key = os.getenv("API_KEY")
 base_url = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
 
 datamaxi = Datamaxi(api_key=api_key, base_url=base_url)
+telegram = Telegram(api_key=api_key, base_url=base_url)
+naver = Naver(api_key=api_key, base_url=base_url)
 
 
 def test_cex_candle():
@@ -63,17 +67,7 @@ def test_dex():
     datamaxi.dex.trade(
         exchange="pancakeswap",
         chain="bsc_mainnet",
-        pool="0xb24cd29e32FaCDDf9e73831d5cD1FFcd1e535423",
-    )
-    datamaxi.dex.liquidity(
-        exchange="pancakeswap",
-        chain="bsc_mainnet",
-        pool="0xb24cd29e32FaCDDf9e73831d5cD1FFcd1e535423",
-    )
-    datamaxi.dex.trade(
-        exchange="pancakeswap",
-        chain="bsc_mainnet",
-        pool="0xb24cd29e32FaCDDf9e73831d5cD1FFcd1e535423",
+        pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24",  # btc-usdt pool
     )
 
 
@@ -85,3 +79,13 @@ def test_forex():
 def test_premium():
     datamaxi.premium()
     datamaxi.premium.exchanges()
+
+
+def test_telegram():
+    telegram.channels()
+    telegram.messages()
+
+
+def test_naver():
+    naver.symbols()
+    naver.trend("BTC")

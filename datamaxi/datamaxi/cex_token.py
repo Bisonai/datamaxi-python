@@ -17,9 +17,9 @@ class CexToken(API):
 
     def updates(
         self,
-        type: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
+        type: Optional[str] = None,
         sort: str = DESC,
     ) -> Dict[str, Any]:
         """Get token update data
@@ -29,10 +29,10 @@ class CexToken(API):
         <https://docs.datamaxiplus.com/rest/cex/token-updates>
 
         Args:
-            type (str): Update type
             page (int): Page number
             limit (int): Limit of data
             sort (str): Sort order
+            type (str): Update type
 
         Returns:
             Token update data in list of dictionary
@@ -50,9 +50,9 @@ class CexToken(API):
             raise ValueError("type must be either listed or delisted when set")
 
         params = {
-            "type": type,
             "page": page,
             "limit": limit,
+            "type": type,
             "sort": sort,
         }
 

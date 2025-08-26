@@ -52,7 +52,7 @@ class Forex(API):
 
     def symbols(self) -> List[str]:
         """Fetch supported symbols accepted by
-        [datamaxi.Forex.get](./#datamaxi.datamaxi.Forex.get)
+        [datamaxi.Forex.get](#datamaxi.datamaxi.Forex.get)
         API.
 
         `GET /api/v1/forex/symbols`

@@ -17,10 +17,12 @@ class CexAnnouncement(API):
 
     def __call__(
         self,
-        category: Optional[str] = None,
         page: int = 1,
         limit: int = 1000,
         sort: str = DESC,
+        key: Optional[str] = None,
+        exchange: Optional[str] = None,
+        category: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Get exchange announcements
 
@@ -47,10 +49,12 @@ class CexAnnouncement(API):
             raise ValueError("sort must be either asc or desc")
 
         params = {
-            "category": category,
             "page": page,
             "limit": limit,
             "sort": sort,
+            "key": key,
+            "exchange": exchange,
+            "category": category,
         }
 
         res = self.query("/api/v1/cex/announcements", params)
