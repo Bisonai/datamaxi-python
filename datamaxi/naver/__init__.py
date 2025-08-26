@@ -3,7 +3,6 @@ import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.constants import BASE_URL
-from datamaxi.lib.utils import postprocess
 
 
 class Naver(API):
