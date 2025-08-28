@@ -68,7 +68,7 @@ class CexTicker(API):
         res = self.query("/api/v1/ticker", params)
 
         if pandas:
-            df = pd.DataFrame(res)
+            df = pd.DataFrame([res["data"]])
             df = df.set_index("d")
             return df
         else:
