@@ -28,7 +28,7 @@ def test_cex_candle():
 
 
 def test_cex_ticker():
-    datamaxi.cex.ticker.get(exchange='binance', market='spot', symbol='BTC-USDT')
+    datamaxi.cex.ticker.get(exchange="binance", market="spot", symbol="BTC-USDT")
     datamaxi.cex.ticker.exchanges(market="spot")
     datamaxi.cex.ticker.symbols(exchange="binance", market="spot")
 
