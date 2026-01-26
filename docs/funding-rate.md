@@ -10,7 +10,7 @@ from datamaxi import Datamaxi
 maxi = Datamaxi(api_key="YOUR_API_KEY")
 
 exchanges = maxi.funding_rate.exchanges()
-symbols = maxi.funding_rate.symbols(exchange="binance", market="futures")
+symbols = maxi.funding_rate.symbols(exchange="binance")
 
 history, next_request = maxi.funding_rate.history(
     exchange="binance",
