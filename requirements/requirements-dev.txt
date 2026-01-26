@@ -1,6 +1,6 @@
 -r requirements-test.txt
-mkdocs
-mkdocs-material
+mkdocs==1.6.1
+mkdocs-material==9.7.1
 mkdocstrings==0.24.3
 mkdocstrings-python==1.9.0
 mkdocs-autorefs<1.0

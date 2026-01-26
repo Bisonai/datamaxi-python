@@ -4,8 +4,8 @@ pytest>=6.2.5
 sure>=2.0.0
 responses>=0.10.12
 pytest-pep8>=1.0.6
-black
-flake8
-tox
-tox-pyenv
-wheel
+black==26.1.0
+flake8==7.3.0
+tox==4.34.1
+tox-pyenv==1.1.0
+wheel==0.46.3
