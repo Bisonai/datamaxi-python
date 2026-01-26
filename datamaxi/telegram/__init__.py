@@ -63,7 +63,7 @@ class Telegram(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.channels(
                 category=category,
                 page=page + 1,
                 limit=limit,
@@ -121,7 +121,7 @@ class Telegram(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.messages(
                 channel_name=channel_name,
                 page=page + 1,
                 limit=limit,

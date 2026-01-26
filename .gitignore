@@ -9,6 +9,7 @@ __pycache___
 .env
 .venv
 venv/
+env/
 
 # IDE
 .idea/

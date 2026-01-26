@@ -90,14 +90,14 @@ class Dex(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.trade(
                 chain,
                 exchange,
                 pool,
-                page + 1,
-                limit,
                 fromDateTime,
                 toDateTime,
+                page + 1,
+                limit,
                 sort,
                 pandas,
             )
@@ -184,15 +184,15 @@ class Dex(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.candle(
                 chain,
                 exchange,
                 pool,
                 interval,
-                page + 1,
-                limit,
                 fromDateTime,
                 toDateTime,
+                page + 1,
+                limit,
                 sort,
                 pandas,
             )

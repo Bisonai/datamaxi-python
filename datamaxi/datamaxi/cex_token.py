@@ -61,7 +61,7 @@ class CexToken(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.updates(
                 type=type,
                 page=page + 1,
                 limit=limit,

@@ -85,7 +85,7 @@ class FundingRate(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.history(
                 exchange,
                 symbol,
                 page + 1,
