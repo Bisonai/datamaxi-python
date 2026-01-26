@@ -8,7 +8,7 @@
 
 This is the official implementation of Python SDK for DataMaxi+ API.
 The package can be used to fetch both historical and latest data using [DataMaxi+ API](https://docs.datamaxiplus.com/).
-This package is compatible with Python v3.8+.
+This package is compatible with Python v3.10+.
 
 ## Table of Contents
 
