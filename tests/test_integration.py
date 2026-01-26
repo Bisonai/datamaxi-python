@@ -24,7 +24,6 @@ from datetime import datetime, timedelta
 from datamaxi import Datamaxi, Telegram, Naver
 from datamaxi.error import ClientError
 
-
 # Skip all tests if no API key is provided
 API_KEY = os.getenv("DATAMAXI_API_KEY") or os.getenv("API_KEY")
 BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
@@ -897,9 +896,7 @@ class TestPremium:
 
     def test_premium_both_markets(self, datamaxi):
         """Test premium data filtered by both markets."""
-        result = datamaxi.premium(
-            source_market="spot", target_market="spot", limit=10
-        )
+        result = datamaxi.premium(source_market="spot", target_market="spot", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_sort_asc(self, datamaxi):

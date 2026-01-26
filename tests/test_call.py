@@ -13,7 +13,6 @@ import os
 import pytest
 from datamaxi import Datamaxi, Telegram, Naver
 
-
 # Skip all tests if no API key is provided
 API_KEY = os.getenv("DATAMAXI_API_KEY") or os.getenv("API_KEY")
 BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
