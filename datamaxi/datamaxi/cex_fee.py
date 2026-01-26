@@ -22,7 +22,7 @@ class CexFee(API):
     ) -> List[Dict]:
         """Fetch trading fee data
 
-        `GET /api/v1/trading-fees`
+        `GET /api/v1/cex/fees`
 
         <https://docs.datamaxiplus.com/rest/cex/trading-fees/data>
 
@@ -43,26 +43,22 @@ class CexFee(API):
         return self.query(url_path, params)
 
     def exchanges(self) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.CexFee.get](#datamaxi.datamaxi.CexFee.get)
-        API.
+        """Fetch supported exchanges for fee data.
 
-        `GET /api/v1/trading-fees/exchanges`
+        `GET /api/v1/cex/fees/exchanges`
 
         <https://docs.datamaxiplus.com/rest/cex/trading-fees/exchanges>
 
         Returns:
-            List of supported exchange
+            List of supported exchanges
         """
         url_path = "/api/v1/cex/fees/exchanges"
         return self.query(url_path)
 
     def symbols(self, exchange: str) -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.CexTradingFees.get](#datamaxi.datamaxi.CexTradingFees.get)
-        API.
+        """Fetch supported symbols for fee data.
 
-        `GET /api/v1/trading-fees/symbols`
+        `GET /api/v1/cex/fees/symbols`
 
         <https://docs.datamaxiplus.com/rest/cex/trading-fees/symbols>
 
@@ -70,7 +66,7 @@ class CexFee(API):
             exchange (str): Exchange name
 
         Returns:
-            List of supported assets
+            List of supported symbols
         """
         check_required_parameter(exchange, "exchange")
 

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
 from datamaxi.lib.constants import DESC, ASC
 
@@ -21,10 +21,10 @@ class CexToken(API):
         limit: int = 1000,
         type: Optional[str] = None,
         sort: str = DESC,
-    ) -> Dict[str, Any]:
+    ) -> Tuple[Dict[str, Any], Callable]:
         """Get token update data
 
-        `GET /api/v1/token/updates`
+        `GET /api/v1/cex/token/updates`
 
         <https://docs.datamaxiplus.com/rest/cex/token-updates>
 
@@ -35,7 +35,7 @@ class CexToken(API):
             type (str): Update type
 
         Returns:
-            Token update data in list of dictionary
+            Tuple of token update response and next request function
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -61,7 +61,7 @@ class CexToken(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.updates(
                 type=type,
                 page=page + 1,
                 limit=limit,

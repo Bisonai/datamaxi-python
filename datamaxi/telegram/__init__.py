@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 
@@ -24,7 +24,7 @@ class Telegram(API):
         category: Optional[str] = None,
         key: Optional[str] = None,
         sort: str = "desc",
-    ) -> Dict[str, Any]:
+    ) -> Tuple[Dict[str, Any], Callable]:
         """Get Telegram supported channels
 
         `GET /api/v1/telegram/channels`
@@ -39,7 +39,7 @@ class Telegram(API):
             sort (str): Sort order
 
         Returns:
-            List of supported Telegram channels
+            Tuple of channel response and next request function
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -63,7 +63,7 @@ class Telegram(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.channels(
                 category=category,
                 page=page + 1,
                 limit=limit,
@@ -80,7 +80,7 @@ class Telegram(API):
         key: Optional[str] = None,
         sort: str = "desc",
         category: Optional[str] = None,
-    ) -> Dict[str, Any]:
+    ) -> Tuple[Dict[str, Any], Callable]:
         """Get Telegram posts for given channel username
 
         `GET /api/v1/telegram/messages`
@@ -96,7 +96,7 @@ class Telegram(API):
             category (str): Specifies category
 
         Returns:
-            Telegram channel posts
+            Tuple of message response and next request function
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -121,7 +121,7 @@ class Telegram(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.messages(
                 channel_name=channel_name,
                 page=page + 1,
                 limit=limit,

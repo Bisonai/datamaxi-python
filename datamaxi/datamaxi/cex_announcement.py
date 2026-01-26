@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
 from datamaxi.lib.constants import ASC, DESC
 
@@ -23,21 +23,23 @@ class CexAnnouncement(API):
         key: Optional[str] = None,
         exchange: Optional[str] = None,
         category: Optional[str] = None,
-    ) -> Dict[str, Any]:
+    ) -> Tuple[Dict[str, Any], Callable]:
         """Get exchange announcements
 
-        `GET /api/v1/announcements`
+        `GET /api/v1/cex/announcements`
 
         <https://docs.datamaxiplus.com/rest/cex/announcements>
 
         Args:
-            category (str): announcement category
             page (int): Page number
             limit (int): Limit of data
             sort (str): Sort order
+            key (str): Key to sort by
+            exchange (str): Exchange name filter
+            category (str): Announcement category
 
         Returns:
-            Historical announcements
+            Tuple of announcement response and next request function
         """
         if page < 1:
             raise ValueError("page must be greater than 0")
@@ -63,6 +65,8 @@ class CexAnnouncement(API):
 
         def next_request():
             return self.__call__(
+                key=key,
+                exchange=exchange,
                 category=category,
                 page=page + 1,
                 limit=limit,

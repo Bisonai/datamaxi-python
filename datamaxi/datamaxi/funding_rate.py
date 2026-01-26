@@ -32,7 +32,7 @@ class FundingRate(API):
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch historical funding rate data
 
-        `GET /api/v1/funding-rate`
+        `GET /api/v1/funding-rate/history`
 
         <https://docs.datamaxiplus.com/rest/cex/funding-rate/historical-funding-rate>
 
@@ -85,7 +85,7 @@ class FundingRate(API):
             raise ValueError("no data found")
 
         def next_request():
-            return self.get(
+            return self.history(
                 exchange,
                 symbol,
                 page + 1,
@@ -109,7 +109,7 @@ class FundingRate(API):
         sort: str = None,
         limit: int = None,
         pandas: bool = True,
-    ) -> Union[Tuple[List, Callable], Tuple[pd.DataFrame, Callable]]:
+    ) -> Union[Dict, pd.DataFrame]:
         """Fetch latest funding rate data
 
         `GET /api/v1/funding-rate/latest`
@@ -124,7 +124,7 @@ class FundingRate(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Latest funding rate data in pandas DataFrame
+            Latest funding rate data in pandas DataFrame or dict response
         """
         params = {}
 
@@ -150,9 +150,7 @@ class FundingRate(API):
             return res
 
     def exchanges(self) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.FundingRate.get](#datamaxi.datamaxi.FundingRate.get)
-        API.
+        """Fetch supported exchanges for funding rate endpoints.
 
         `GET /api/v1/funding-rate/exchanges`
 
@@ -164,10 +162,8 @@ class FundingRate(API):
         url_path = "/api/v1/funding-rate/exchanges"
         return self.query(url_path)
 
-    def symbols(self, exchange: str, market: str = "spot") -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.FundingRate.get](#datamaxi.datamaxi.FundingRate.get)
-        API.
+    def symbols(self, exchange: str) -> List[str]:
+        """Fetch supported symbols for funding rate endpoints.
 
         `GET /api/v1/funding-rate/symbols`
 

@@ -36,10 +36,12 @@ class CexTicker(API):
             exchange (str): Exchange name
             symbol (str): Symbol name
             market (str): Market type (spot/futures)
+            currency (str): Price currency
+            conversion_base (str): Conversion base currency
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            CexTicker data in pandas DataFrame
+            Ticker data in pandas DataFrame or dict response
         """
 
         check_required_parameters(
@@ -78,9 +80,7 @@ class CexTicker(API):
         self,
         market: str,
     ) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
-        API.
+        """Fetch supported exchanges for ticker data.
 
         `GET /api/v1/ticker/exchanges`
 
@@ -90,7 +90,7 @@ class CexTicker(API):
             market (str): Market type (spot/futures)
 
         Returns:
-            List of supported exchange
+            List of supported exchanges
         """
         check_required_parameters(
             [
@@ -113,9 +113,7 @@ class CexTicker(API):
         exchange: str,
         market: str,
     ) -> List[str]:
-        """Fetch supported symbols accepted by
-        [datamaxi.CexTicker.get](#datamaxi.datamaxi.CexTicker.get)
-        API.
+        """Fetch supported symbols for ticker data.
 
         `GET /api/v1/ticker/symbols`
 
