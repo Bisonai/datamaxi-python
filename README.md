@@ -500,4 +500,4 @@ If you discover a bug in this project, please feel free to open an issue to disc
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License](license.md)

@@ -125,4 +125,5 @@ def test_telegram(telegram):
 def test_naver(naver):
     """Smoke test for naver endpoints."""
     naver.symbols()
-    naver.trend("BTC")
+    result = naver.trend("BTC")
+    assert hasattr(result, "head")

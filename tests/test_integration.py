@@ -1115,17 +1115,16 @@ class TestNaver:
     def test_trend_basic(self, naver):
         """Test basic trend data fetch."""
         result = naver.trend("BTC")
-        assert isinstance(result, list)
+        assert hasattr(result, "head")
         assert len(result) > 0
 
     def test_trend_different_symbol(self, naver):
         """Test trend data for different symbol."""
         result = naver.trend("ETH")
-        assert isinstance(result, list)
+        assert hasattr(result, "head")
 
     def test_trend_pandas_false(self, naver):
         """Test trend data with pandas=False."""
-        # Note: Naver.trend doesn't actually use pandas parameter in implementation
         result = naver.trend("BTC", pandas=False)
         assert isinstance(result, list)
 

@@ -44,8 +44,11 @@ class Naver(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Naver trend data
+            Naver trend data as list or pandas DataFrame
         """
         check_required_parameter(symbol, "symbol")
         params = {"symbol": symbol}
-        return self.query("/api/v1/naver-trend", params)
+        res = self.query("/api/v1/naver-trend", params)
+        if pandas:
+            return pd.DataFrame(res)
+        return res

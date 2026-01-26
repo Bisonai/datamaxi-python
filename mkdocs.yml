@@ -44,6 +44,7 @@ nav:
   - Forex: forex.md
   - Naver Trend: naver-trend.md
   - Telegram: telegram.md
+  - License: license.md
 
 theme:
   name: material

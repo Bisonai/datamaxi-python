@@ -371,16 +371,14 @@ class Premium(API):
             return res
 
     def exchanges(self) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.Premium.get](#datamaxi.datamaxi.Premium.get)
-        API.
+        """Fetch supported exchanges for premium data.
 
-        `GET /api/v1/Premium/exchanges`
+        `GET /api/v1/premium/exchanges`
 
-        <https://docs.datamaxiplus.com/rest/Premium/exchanges>
+        <https://docs.datamaxiplus.com/rest/premium/exchanges>
 
         Returns:
-            List of supported exchange
+            List of supported exchanges
         """
         url_path = "/api/v1/premium/exchanges"
         return self.query(url_path)

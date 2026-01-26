@@ -32,7 +32,7 @@ class CexCandle(API):
         from_unix: str = None,
         to_unix: str = None,
         pandas: bool = True,
-    ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
+    ) -> Union[Dict, pd.DataFrame]:
         """Fetch candle data
 
         `GET /api/v1/cex/candle`
@@ -50,7 +50,7 @@ class CexCandle(API):
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
-            Candle data in pandas DataFrame and next request function
+            Candle data in pandas DataFrame or dict response
         """
         check_required_parameters(
             [
@@ -85,9 +85,7 @@ class CexCandle(API):
             return res
 
     def exchanges(self, market: str) -> List[str]:
-        """Fetch supported exchanges accepted by
-        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
-        API.
+        """Fetch supported exchanges for candle data.
 
         `GET /api/v1/cex/candle/exchanges`
 
@@ -109,9 +107,7 @@ class CexCandle(API):
         return self.query(url_path, params)
 
     def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
-        """Fetch supported symbols accepted by
-        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
-        API.
+        """Fetch supported symbols for candle data.
 
         `GET /api/v1/cex/candle/symbols`
 
@@ -137,11 +133,9 @@ class CexCandle(API):
         return self.query(url_path, params)
 
     def intervals(self) -> List[str]:
-        """Fetch supported intervals accepted by
-        [datamaxi.CexCandle.get](#datamaxi.datamaxi.CexCandle.get)
-        API.
+        """Fetch supported intervals for candle data.
 
-        `GET /api/v1/candle/intervals`
+        `GET /api/v1/cex/candle/intervals`
 
         <https://docs.datamaxiplus.com/rest/cex/candle/intervals>
 
