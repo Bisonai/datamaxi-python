@@ -17,7 +17,6 @@ Usage:
 """
 
 import os
-import time
 import pytest
 import pandas as pd
 from datetime import datetime, timedelta

@@ -1,4 +1,4 @@
-from typing import Any, Callable, Tuple, List, Dict, Union
+from typing import Any, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
