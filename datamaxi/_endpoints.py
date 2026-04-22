@@ -28,14 +28,14 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
             "key": {
                 "required": False,
                 "type": "str",
                 "default": "timestamp",
-                "enum": ['exchange', 'category', 'title', 'timestamp'],
+                "enum": ["exchange", "category", "title", "timestamp"],
                 "description": "Specifies key to sort by",
             },
             "exchange": {
@@ -47,7 +47,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "",
-                "enum": ['notice', 'listing', 'delisting', 'user_events'],
+                "enum": ["notice", "listing", "delisting", "user_events"],
                 "description": "Specifies category(s), separated by ,",
             },
         },
@@ -70,7 +70,7 @@ ENDPOINTS = {
                 "required": True,
                 "type": "str",
                 "default": "spot",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
             "symbol": {
@@ -82,7 +82,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "USD",
-                "enum": ['USD', 'KRW'],
+                "enum": ["USD", "KRW"],
                 "description": "Specifies currency",
             },
             "interval": {
@@ -115,7 +115,7 @@ ENDPOINTS = {
             "market": {
                 "required": True,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market type",
             },
         },
@@ -128,8 +128,7 @@ ENDPOINTS = {
         "requires_auth": False,
         "group": "cex",
         "subgroup": "candle",
-        "params": {
-        },
+        "params": {},
     },
     "cex_candle_symbols": {
         "path": "/api/v1/cex/candle/symbols",
@@ -148,7 +147,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market type",
             },
         },
@@ -170,13 +169,13 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "min_level": {
                 "required": False,
                 "type": "str",
-                "enum": ['caution', 'warning', 'danger'],
+                "enum": ["caution", "warning", "danger"],
                 "description": "Minimum severity",
             },
             "active_only": {
@@ -213,7 +212,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "from_ms": {
@@ -260,7 +259,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures (empty = both)",
             },
             "base": {
@@ -312,7 +311,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "base": {
@@ -323,7 +322,7 @@ ENDPOINTS = {
             "source": {
                 "required": False,
                 "type": "str",
-                "enum": ['rest_native', 'announcement', 'cmc', 'manual'],
+                "enum": ["rest_native", "announcement", "cmc", "manual"],
                 "description": "Tag source filter",
             },
             "min_confidence": {
@@ -398,7 +397,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "asc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -410,8 +409,7 @@ ENDPOINTS = {
         "summary": "Chains",
         "requires_auth": False,
         "group": "dex",
-        "params": {
-        },
+        "params": {},
     },
     "dex_exchanges": {
         "path": "/api/v1/dex/exchanges",
@@ -420,8 +418,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "dex",
-        "params": {
-        },
+        "params": {},
     },
     "dex_intervals": {
         "path": "/api/v1/dex/intervals",
@@ -430,8 +427,7 @@ ENDPOINTS = {
         "summary": "Intervals",
         "requires_auth": False,
         "group": "dex",
-        "params": {
-        },
+        "params": {},
     },
     "dex_pools": {
         "path": "/api/v1/dex/pools",
@@ -502,7 +498,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "asc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -529,8 +525,7 @@ ENDPOINTS = {
         "summary": "Symbols",
         "requires_auth": False,
         "group": "forex",
-        "params": {
-        },
+        "params": {},
     },
     "funding_rate_exchanges": {
         "path": "/api/v1/funding-rate/exchanges",
@@ -539,8 +534,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "funding_rate",
-        "params": {
-        },
+        "params": {},
     },
     "funding_rate_history": {
         "path": "/api/v1/funding-rate/history",
@@ -586,7 +580,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "asc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -738,8 +732,7 @@ ENDPOINTS = {
         "summary": "Symbols",
         "requires_auth": True,
         "group": "naver_trend",
-        "params": {
-        },
+        "params": {},
     },
     "open_interest": {
         "path": "/api/v1/open-interest",
@@ -797,19 +790,19 @@ ENDPOINTS = {
             "source_market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies source market",
             },
             "target_market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies target market",
             },
             "premium_type": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot-spot', 'futures-futures', 'spot-futures'],
+                "enum": ["spot-spot", "futures-futures", "spot-futures"],
                 "description": "Specifies premium type(s), separated by ,",
             },
             "currency": {
@@ -840,7 +833,7 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort order",
             },
             "key": {
@@ -884,8 +877,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "premium",
-        "params": {
-        },
+        "params": {},
     },
     "telegram_channels": {
         "path": "/api/v1/telegram/channels",
@@ -917,14 +909,14 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "channelName",
-                "enum": ['channelName', 'handle', 'subscribers', 'createdAt'],
+                "enum": ["channelName", "handle", "subscribers", "createdAt"],
                 "description": "Specifies key to sort by",
             },
             "sort": {
                 "required": False,
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -959,21 +951,27 @@ ENDPOINTS = {
                 "required": False,
                 "type": "str",
                 "default": "publishedAt",
-                "enum": ['channelName', 'views', 'reactions', 'forwards', 'publishedAt'],
+                "enum": [
+                    "channelName",
+                    "views",
+                    "reactions",
+                    "forwards",
+                    "publishedAt",
+                ],
                 "description": "Specifies key to sort by",
             },
             "sort": {
                 "required": False,
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
             "category": {
                 "required": False,
                 "type": "str",
                 "default": "",
-                "enum": ['english', 'korean'],
+                "enum": ["english", "korean"],
                 "description": "Specifies category",
             },
             "search_query": {
@@ -1005,14 +1003,14 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
             "currency": {
                 "required": False,
                 "type": "str",
                 "default": "USD",
-                "enum": ['KRW', 'USD'],
+                "enum": ["KRW", "USD"],
                 "description": "Specifies currency applied to price values",
             },
             "conversion_base": {
@@ -1033,7 +1031,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
         },
@@ -1054,7 +1052,7 @@ ENDPOINTS = {
             "market": {
                 "required": False,
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
         },
@@ -1082,7 +1080,7 @@ ENDPOINTS = {
             "type": {
                 "required": False,
                 "type": "str",
-                "enum": ['listed', 'delisted'],
+                "enum": ["listed", "delisted"],
                 "description": "Specifies type of token update",
             },
         },
@@ -1114,8 +1112,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "trading_fees",
-        "params": {
-        },
+        "params": {},
     },
     "cex_fees_symbols": {
         "path": "/api/v1/cex/fees/symbols",
@@ -1174,8 +1171,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "wallet_status",
-        "params": {
-        },
+        "params": {},
     },
 }
 
