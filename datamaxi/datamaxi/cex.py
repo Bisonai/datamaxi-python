@@ -6,6 +6,7 @@ from datamaxi.datamaxi.cex_fee import CexFee
 from datamaxi.datamaxi.cex_wallet_status import CexWalletStatus
 from datamaxi.datamaxi.cex_announcement import CexAnnouncement
 from datamaxi.datamaxi.cex_token import CexToken
+from datamaxi.datamaxi.cex_symbol import CexSymbol
 
 
 class Cex(API):
@@ -26,3 +27,9 @@ class Cex(API):
         self.wallet_status = CexWalletStatus(api_key, **kwargs)
         self.announcement = CexAnnouncement(api_key, **kwargs)
         self.token = CexToken(api_key, **kwargs)
+        # Per-base / per-symbol surfaces (metadata, tags, cautions,
+        # delistings, volume, OI / OI-stats / liquidation aggregates).
+        # Grouped under `cex.symbol` to mirror the REST path layout
+        # (`/api/v1/cex/symbol/*`) and to keep the top-level `Cex`
+        # surface flat.
+        self.symbol = CexSymbol(api_key, **kwargs)
