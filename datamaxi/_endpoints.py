@@ -706,9 +706,9 @@ ENDPOINTS = {
         "group": "funding_rate",
         "params": {
             "exchange": {
-                "required": True,
+                "required": False,
                 "type": "str",
-                "description": "Specifies exchange name",
+                "description": "Specifies exchange name. Omit to receive symbols for all exchanges; constrain to a single exchange when filtering.",
             },
         },
     },
@@ -849,6 +849,33 @@ ENDPOINTS = {
                 "type": "str",
                 "default": "USDT",
                 "description": "Quote asset",
+            },
+        },
+    },
+    "liquidation_stats": {
+        "path": "/api/v1/liquidation/stats",
+        "method": "GET",
+        "tag": "liquidation",
+        "summary": "Liquidation KPI stats",
+        "requires_auth": True,
+        "group": "liquidation",
+        "params": {
+            "window": {
+                "required": False,
+                "type": "str",
+                "default": "1h",
+                "enum": ["1h", "4h", "24h"],
+                "description": "Rolling window",
+            },
+            "exchange": {
+                "required": False,
+                "type": "str",
+                "description": "Exchange filter",
+            },
+            "minVolumeUsd": {
+                "required": False,
+                "type": "float",
+                "description": "Minimum VolumeUsd filter",
             },
         },
     },
