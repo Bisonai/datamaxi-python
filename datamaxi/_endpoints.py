@@ -789,7 +789,7 @@ ENDPOINTS = {
                 "type": "str",
                 "description": "Base asset filter (case-insensitive)",
             },
-            "minVolumeUsd": {
+            "min_volume_usd": {
                 "required": False,
                 "type": "float",
                 "description": "Minimum VolumeUsd filter",
@@ -817,7 +817,7 @@ ENDPOINTS = {
                 "enum": ["1h", "4h", "24h"],
                 "description": "Rolling window",
             },
-            "topN": {
+            "top_n": {
                 "required": False,
                 "type": "int",
                 "default": 10,
@@ -872,7 +872,7 @@ ENDPOINTS = {
                 "type": "str",
                 "description": "Exchange filter",
             },
-            "minVolumeUsd": {
+            "min_volume_usd": {
                 "required": False,
                 "type": "float",
                 "description": "Minimum VolumeUsd filter",
@@ -1089,7 +1089,7 @@ ENDPOINTS = {
         "requires_auth": True,
         "group": "open_interest",
         "params": {
-            "topN": {
+            "top_n": {
                 "required": False,
                 "type": "int",
                 "default": 10,
