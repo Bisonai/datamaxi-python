@@ -1,6 +1,12 @@
 name: Python package
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'LICENSE'
+      - '.gitignore'
 
 jobs:
   build:
