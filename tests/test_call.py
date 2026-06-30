@@ -103,19 +103,6 @@ def test_funding_rate(datamaxi):
     datamaxi.funding_rate.symbols(exchange="binance")
 
 
-def test_dex(datamaxi):
-    """Smoke test for DEX endpoints."""
-    datamaxi.dex.chains()
-    datamaxi.dex.exchanges()
-    datamaxi.dex.pools(exchange="klayswap", chain="kaia_mainnet")
-    datamaxi.dex.intervals()
-    datamaxi.dex.trade(
-        exchange="pancakeswap",
-        chain="bsc_mainnet",
-        pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24",
-    )
-
-
 def test_forex(datamaxi):
     """Smoke test for forex endpoints."""
     datamaxi.forex.symbols()

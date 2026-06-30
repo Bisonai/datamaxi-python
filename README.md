@@ -22,7 +22,6 @@ This package is compatible with Python v3.10+.
   - [CEX Wallet Status](#cex-wallet-status)
   - [CEX Announcements](#cex-announcements)
   - [CEX Token Updates](#cex-token-updates)
-  - [DEX Data](#dex-data)
   - [Funding Rate](#funding-rate)
   - [Premium](#premium)
   - [Forex](#forex)
@@ -68,7 +67,7 @@ You may use environment variables to configure the SDK to avoid any inline boile
 
 DataMaxi+ Python package includes the following clients:
 
-- `Datamaxi` - Main client for crypto trading data (CEX, DEX, funding rates, premium, forex)
+- `Datamaxi` - Main client for crypto trading data (CEX, funding rates, premium, forex)
 - `Telegram` - Client for Telegram channel data
 - `Naver` - Client for Naver trend data
 
@@ -221,51 +220,6 @@ data, next_request = maxi.cex.token.updates(
     limit=1000,              # Optional: items per page
     type=None,               # Optional: "listed" or "delisted"
     sort="desc"              # Optional: "asc" or "desc"
-)
-```
-
-### DEX Data
-
-Fetch data from decentralized exchanges. (Experimental)
-
-```python
-# Get supported chains
-chains = maxi.dex.chains()
-
-# Get supported exchanges
-exchanges = maxi.dex.exchanges()
-
-# Get supported pools
-pools = maxi.dex.pools(exchange="klayswap", chain="kaia_mainnet")
-
-# Get supported intervals
-intervals = maxi.dex.intervals()
-
-# Fetch trade data
-df, next_request = maxi.dex.trade(
-    chain="bsc_mainnet",                              # Required: blockchain
-    exchange="pancakeswap",                           # Required: DEX name
-    pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24",  # Required: pool address
-    fromDateTime=None,       # Optional: start datetime (format: "2006-01-02" or "2006-01-02 15:04:05")
-    toDateTime=None,         # Optional: end datetime
-    page=1,                  # Optional: page number
-    limit=1000,              # Optional: items per page
-    sort="desc",             # Optional: "asc" or "desc"
-    pandas=True              # Optional: return DataFrame or dict
-)
-
-# Fetch candle data
-df, next_request = maxi.dex.candle(
-    chain="bsc_mainnet",
-    exchange="pancakeswap",
-    pool="0x6ee3eE9C3395BbD136B6076A70Cb6cFF241c0E24",
-    interval="1d",           # Optional: candle interval (default: 1d)
-    fromDateTime=None,
-    toDateTime=None,
-    page=1,
-    limit=1000,
-    sort="desc",
-    pandas=True
 )
 ```
 
@@ -477,7 +431,6 @@ python -m pytest tests/test_integration.py -v
 
 # Test specific endpoint groups using markers
 python -m pytest tests/test_integration.py -m "cex" -v
-python -m pytest tests/test_integration.py -m "dex" -v
 python -m pytest tests/test_integration.py -m "funding" -v
 python -m pytest tests/test_integration.py -m "premium" -v
 python -m pytest tests/test_integration.py -m "forex" -v
