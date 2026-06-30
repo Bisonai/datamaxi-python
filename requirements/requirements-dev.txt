@@ -1,7 +1,7 @@
 -r requirements-test.txt
 mkdocs==1.6.1
 mkdocs-material==9.7.1
-mkdocstrings==0.24.3
-mkdocstrings-python==1.9.0
-mkdocs-autorefs<1.0
-griffe==0.45.3
+mkdocstrings==1.0.4
+mkdocstrings-python==2.0.5
+mkdocs-autorefs==1.4.4
+griffe==2.1.0
