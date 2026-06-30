@@ -38,7 +38,10 @@ nav:
       - Wallet Status: cex-wallet-status.md
       - Announcement: cex-announcement.md
       - Token: cex-token.md
+      - Symbol: cex-symbol.md
   - Funding Rate: funding-rate.md
+  - Liquidation: liquidation.md
+  - Open Interest: open-interest.md
   - Premium: premium.md
   - Forex: forex.md
   - Naver Trend: naver-trend.md
