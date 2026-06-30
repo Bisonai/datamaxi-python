@@ -446,6 +446,7 @@ uv run pytest tests/test_integration.py -m "premium" -v
 uv run pytest tests/test_integration.py -m "forex" -v
 uv run pytest tests/test_integration.py -m "telegram" -v
 uv run pytest tests/test_integration.py -m "naver" -v
+uv run pytest tests/test_integration.py -m "types" -v
 
 # Run all tests
 uv run pytest tests/ -v
