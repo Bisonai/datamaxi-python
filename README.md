@@ -432,8 +432,8 @@ uv pip install -r requirements/requirements-dev.txt
 # Install test dependencies (skip if you already ran the dev install above)
 uv pip install -r requirements/requirements-test.txt
 
-# Run unit tests (no API key required)
-uv run pytest tests/test_api.py -v
+# Run keyless tests (no API key required) — this is the lane CI runs on every push
+uv run pytest tests/ -m "not integration" -v
 
 # Run integration tests (requires API key)
 export DATAMAXI_API_KEY="your_api_key"
@@ -446,6 +446,7 @@ uv run pytest tests/test_integration.py -m "premium" -v
 uv run pytest tests/test_integration.py -m "forex" -v
 uv run pytest tests/test_integration.py -m "telegram" -v
 uv run pytest tests/test_integration.py -m "naver" -v
+uv run pytest tests/test_integration.py -m "types" -v
 
 # Run all tests
 uv run pytest tests/ -v
