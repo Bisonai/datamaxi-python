@@ -729,7 +729,7 @@ class TestPremium:
 
     def test_premium_token_include(self, datamaxi):
         """Test premium data with token_include filter."""
-        result = datamaxi.premium(token_include="BTC", limit=10)
+        result = datamaxi.premium(token_include="bitcoin", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     @pytest.mark.xfail(
