@@ -65,7 +65,7 @@ class Liquidation(API):
         if topN < 1 or topN > 30:
             raise ValueError("topN must be between 1 and 30")
         return self.query(
-            "/api/v1/liquidation/heatmap", {"window": window, "topN": topN}
+            "/api/v1/liquidation/heatmap", {"window": window, "top_n": topN}
         )
 
     def map(

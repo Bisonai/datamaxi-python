@@ -80,7 +80,7 @@ class OpenInterest(API):
         """
         if topN < 1 or topN > 30:
             raise ValueError("topN must be between 1 and 30")
-        return self.query("/api/v1/open-interest/summary", {"topN": topN})
+        return self.query("/api/v1/open-interest/summary", {"top_n": topN})
 
     def history_aggregated(
         self,
