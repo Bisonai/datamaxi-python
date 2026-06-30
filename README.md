@@ -410,35 +410,45 @@ data3, next_request3 = next_request2()
 
 ## Local Development
 
+This project uses [uv](https://docs.astral.sh/uv/) for fast dev setup. Install
+uv first (see the [uv docs](https://docs.astral.sh/uv/getting-started/installation/)).
+
 ```shell
 git clone https://github.com/bisonai/datamaxi-python.git
 cd datamaxi-python
-pip install -r requirements/common.txt
+
+# Create a virtual environment and install dev dependencies
+# (requirements-dev.txt pulls in the test and docs stacks).
+uv venv
+uv pip install -r requirements/requirements-dev.txt
+
+# For runtime dependencies only:
+# uv pip install -r requirements/common.txt
 ```
 
 ## Tests
 
 ```shell
-# Install test dependencies
-pip install -r requirements/requirements-test.txt
+# Install test dependencies (skip if you already ran the dev install above)
+uv pip install -r requirements/requirements-test.txt
 
 # Run unit tests (no API key required)
-python -m pytest tests/test_api.py -v
+uv run pytest tests/test_api.py -v
 
 # Run integration tests (requires API key)
 export DATAMAXI_API_KEY="your_api_key"
-python -m pytest tests/test_integration.py -v
+uv run pytest tests/test_integration.py -v
 
 # Test specific endpoint groups using markers
-python -m pytest tests/test_integration.py -m "cex" -v
-python -m pytest tests/test_integration.py -m "funding" -v
-python -m pytest tests/test_integration.py -m "premium" -v
-python -m pytest tests/test_integration.py -m "forex" -v
-python -m pytest tests/test_integration.py -m "telegram" -v
-python -m pytest tests/test_integration.py -m "naver" -v
+uv run pytest tests/test_integration.py -m "cex" -v
+uv run pytest tests/test_integration.py -m "funding" -v
+uv run pytest tests/test_integration.py -m "premium" -v
+uv run pytest tests/test_integration.py -m "forex" -v
+uv run pytest tests/test_integration.py -m "telegram" -v
+uv run pytest tests/test_integration.py -m "naver" -v
 
 # Run all tests
-python -m pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
 ## Links
