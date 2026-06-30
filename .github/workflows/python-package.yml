@@ -31,6 +31,11 @@ jobs:
     - name: Run flake8 to check specific rules not covered by black
       run: |
         flake8 . --statistics
-    # Tests hit live production endpoints and depend on prod data
-    # availability, so they are not run in CI. Run them locally with
+    # Offline mocked tests run keyless (no DATAMAXI_API_KEY, no network).
+    # `-k "not integration"` excludes the live test_integration.py; the
+    # keyed test_call.py tests skip cleanly when no key is set.
+    - name: Run offline mocked tests
+      run: python -m pytest tests/ -k "not integration" -q
+    # The live test_integration.py hits prod endpoints and depends on prod
+    # data availability, so it is not run in CI. Run it locally with
     # `DATAMAXI_API_KEY=... python -m pytest tests/`.
