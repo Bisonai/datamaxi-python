@@ -41,6 +41,14 @@ This package is compatible with Python v3.10+.
 pip install datamaxi
 ```
 
+Or with [uv](https://docs.astral.sh/uv/):
+
+```shell
+uv pip install datamaxi
+# or, in a uv-managed project
+uv add datamaxi
+```
+
 ## Configuration
 
 Private API endpoints are protected by an API key.
@@ -416,11 +424,22 @@ cd datamaxi-python
 pip install -r requirements/common.txt
 ```
 
+Or with [uv](https://docs.astral.sh/uv/):
+
+```shell
+git clone https://github.com/bisonai/datamaxi-python.git
+cd datamaxi-python
+uv venv
+uv pip install -r requirements/common.txt
+```
+
 ## Tests
 
 ```shell
 # Install test dependencies
 pip install -r requirements/requirements-test.txt
+# or with uv
+uv pip install -r requirements/requirements-test.txt
 
 # Run unit tests (no API key required)
 python -m pytest tests/test_api.py -v
