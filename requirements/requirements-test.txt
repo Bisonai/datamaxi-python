@@ -2,7 +2,6 @@
 pytest-cov>=2.8.1
 pytest>=6.2.5
 responses>=0.10.12
-pytest-pep8>=1.0.6
 black==26.1.0
 flake8==7.3.0
 tox==4.34.1
