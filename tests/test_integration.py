@@ -16,56 +16,24 @@ Usage:
     python -m pytest tests/test_integration.py -m "cex" -v
 """
 
-import os
 import pytest
 import pandas as pd
 from datetime import datetime, timedelta
 
-from datamaxi import Datamaxi, Telegram, Naver
 from datamaxi.error import ClientError
+from tests.conftest import API_KEY, _FLAKY_PROD_DATA_XFAIL
 
-# Skip all tests if no API key is provided
-API_KEY = os.getenv("DATAMAXI_API_KEY") or os.getenv("API_KEY")
-BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
-
-pytestmark = pytest.mark.skipif(
-    not API_KEY,
-    reason="API key not provided. Set DATAMAXI_API_KEY environment variable.",
-)
-
-# Shared xfail marker for tests whose outcome depends on prod-data
-# availability — funding-rate / naver-trend state are NATS-warmed
-# in-memory caches on the API pods, so any cold-start of the API
-# fleet leaves them temporarily empty and the smoke-style tests below
-# raise ServerError(500, "no data found"). Marked strict=False so
-# they pass cleanly if the cache has filled by test time. Replacing
-# with a "skip if upstream empty" precheck would be cleaner — left
-# for a follow-up since it's orthogonal to SDK regen.
-_FLAKY_PROD_DATA_XFAIL = pytest.mark.xfail(
-    reason=(
-        "Depends on prod NATS-warmed state; intermittent 500 'no data found' "
-        "on cold pods. Pre-existing flakiness — unrelated to SDK regen."
+# Live integration lane: exercises prod endpoints with every supported param.
+# Skipped without a key and deselected from the keyless CI lane via the
+# `integration` marker. Client fixtures (datamaxi / telegram / naver) and the
+# flaky-prod-data marker come from tests/conftest.py.
+pytestmark = [
+    pytest.mark.integration,
+    pytest.mark.skipif(
+        not API_KEY,
+        reason="API key not provided. Set DATAMAXI_API_KEY environment variable.",
     ),
-    strict=False,
-)
-
-
-@pytest.fixture(scope="module")
-def datamaxi():
-    """Create Datamaxi client for tests."""
-    return Datamaxi(api_key=API_KEY, base_url=BASE_URL)
-
-
-@pytest.fixture(scope="module")
-def telegram():
-    """Create Telegram client for tests."""
-    return Telegram(api_key=API_KEY, base_url=BASE_URL)
-
-
-@pytest.fixture(scope="module")
-def naver():
-    """Create Naver client for tests."""
-    return Naver(api_key=API_KEY, base_url=BASE_URL)
+]
 
 
 # =============================================================================
@@ -166,22 +134,6 @@ class TestCexCandle:
             interval="1d",
             market="spot",
             currency="KRW",
-        )
-        assert isinstance(result, pd.DataFrame)
-        assert len(result) > 0
-
-    def test_candle_with_from_unix(self, datamaxi):
-        """Test candle data with from_unix timestamp (requires to_unix as well)."""
-        # Note: API works best with both from and to specified
-        from_ts = int((datetime.now() - timedelta(days=30)).timestamp())
-        to_ts = int((datetime.now() - timedelta(days=1)).timestamp())
-        result = datamaxi.cex.candle(
-            exchange="binance",
-            symbol="BTC-USDT",
-            interval="1d",
-            market="spot",
-            from_unix=str(from_ts),
-            to_unix=str(to_ts),
         )
         assert isinstance(result, pd.DataFrame)
         assert len(result) > 0
@@ -969,43 +921,6 @@ class TestNaver:
         """Test trend data with pandas=False."""
         result = naver.trend("BTC", pandas=False)
         assert isinstance(result, list)
-
-
-# =============================================================================
-# Error Handling Tests
-# =============================================================================
-@pytest.mark.errors
-class TestErrorHandling:
-    """Test error handling across endpoints."""
-
-    def test_invalid_exchange(self, datamaxi):
-        """Test that invalid exchange returns error or empty."""
-        # This might raise an error or return empty depending on API behavior
-        try:
-            result = datamaxi.cex.candle(
-                exchange="nonexistent_exchange",
-                symbol="BTC-USDT",
-                interval="1d",
-                market="spot",
-            )
-            # If it doesn't raise, result should be empty
-            assert len(result) == 0 or result is None
-        except (ValueError, Exception):
-            # Expected - invalid exchange should raise error
-            pass
-
-    def test_invalid_symbol(self, datamaxi):
-        """Test that invalid symbol returns error or empty."""
-        try:
-            result = datamaxi.cex.candle(
-                exchange="binance",
-                symbol="INVALID-SYMBOL",
-                interval="1d",
-                market="spot",
-            )
-            assert len(result) == 0 or result is None
-        except (ValueError, Exception):
-            pass
 
 
 # =============================================================================

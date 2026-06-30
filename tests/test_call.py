@@ -9,45 +9,21 @@ Usage:
     python -m pytest tests/test_call.py -v
 """
 
-import os
 import pytest
-from datamaxi import Datamaxi, Telegram, Naver
 
-# Skip all tests if no API key is provided
-API_KEY = os.getenv("DATAMAXI_API_KEY") or os.getenv("API_KEY")
-BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
+from tests.conftest import API_KEY, _FLAKY_PROD_DATA_XFAIL
 
-pytestmark = pytest.mark.skipif(
-    not API_KEY,
-    reason="API key not provided. Set DATAMAXI_API_KEY environment variable.",
-)
-
-# Shared xfail marker for tests whose outcome depends on prod-data
-# availability (funding-rate / naver-trend rely on NATS-warmed
-# in-memory caches; cold pods → 500 'no data found' until events
-# arrive). strict=False so they pass cleanly when the cache is hot.
-_FLAKY_PROD_DATA_XFAIL = pytest.mark.xfail(
-    reason=(
-        "Depends on prod NATS-warmed state; intermittent 500 'no data found' "
-        "on cold pods. Pre-existing flakiness — unrelated to SDK regen."
+# Live alive-check / smoke lane: a thin subset of test_integration.py that
+# pings each endpoint once. Skipped without a key and deselected from the
+# keyless CI lane via the `smoke` marker. Client fixtures and the
+# flaky-prod-data marker come from tests/conftest.py.
+pytestmark = [
+    pytest.mark.smoke,
+    pytest.mark.skipif(
+        not API_KEY,
+        reason="API key not provided. Set DATAMAXI_API_KEY environment variable.",
     ),
-    strict=False,
-)
-
-
-@pytest.fixture(scope="module")
-def datamaxi():
-    return Datamaxi(api_key=API_KEY, base_url=BASE_URL)
-
-
-@pytest.fixture(scope="module")
-def telegram():
-    return Telegram(api_key=API_KEY, base_url=BASE_URL)
-
-
-@pytest.fixture(scope="module")
-def naver():
-    return Naver(api_key=API_KEY, base_url=BASE_URL)
+]
 
 
 def test_cex_candle(datamaxi):
