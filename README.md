@@ -6,8 +6,12 @@
 [![Code Style](https://img.shields.io/badge/code_style-black-black)](https://black.readthedocs.io/en/stable/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is the official implementation of Python SDK for DataMaxi+ API.
-The package can be used to fetch both historical and latest data using [DataMaxi+ API](https://docs.datamaxiplus.com/).
+Official Python SDK for the [DataMaxi+ API](https://docs.datamaxiplus.com/).
+Fetch both historical and latest market data across centralized exchanges (OHLCV
+candles, tickers, trading fees, wallet status, announcements), perpetual funding
+rates, cross-exchange price premiums for arbitrage, forex rates, Telegram channel
+data, and Naver search trends.
+
 This package is compatible with Python v3.10+.
 
 ## Table of Contents
@@ -29,6 +33,7 @@ This package is compatible with Python v3.10+.
   - [Naver Trend](#naver-trend)
 - [Response Types](#response-types)
 - [Pagination](#pagination)
+- [Error Handling](#error-handling)
 - [Local Development](#local-development)
 - [Tests](#tests)
 - [Links](#links)
@@ -71,14 +76,21 @@ DataMaxi+ Python package includes the following clients:
 - `Telegram` - Client for Telegram channel data
 - `Naver` - Client for Naver trend data
 
+Set your API key via the `DATAMAXI_API_KEY` environment variable (recommended, so
+the key stays out of source code):
+
+```shell
+export DATAMAXI_API_KEY="your_api_key"
+```
+
 ```python
 from datamaxi import Datamaxi, Telegram, Naver
 
-# Initialize clients
-api_key = "your_api_key"
-maxi = Datamaxi(api_key=api_key)
-telegram = Telegram(api_key=api_key)
-naver = Naver(api_key=api_key)
+# Clients read DATAMAXI_API_KEY from the environment automatically.
+# Alternatively, pass api_key="your_api_key" explicitly to each client.
+maxi = Datamaxi()
+telegram = Telegram()
+naver = Naver()
 
 # Fetch CEX candle data (returns pandas DataFrame)
 df = maxi.cex.candle(
@@ -103,6 +115,11 @@ print(premium.head())
 ```
 
 ## API Reference
+
+> **Discovery helpers.** Most endpoints expose helpers to list valid argument
+> values before you fetch — commonly `.exchanges()`, `.symbols(exchange=...)`, and
+> (for candles) `.intervals()`. Use them to discover supported exchanges, trading
+> pairs, and intervals. The examples below show them per endpoint.
 
 ### CEX Candle Data
 
@@ -264,57 +281,30 @@ Fetch cross-exchange price premium data for arbitrage analysis.
 # Get supported exchanges
 exchanges = maxi.premium.exchanges()
 
-# Fetch premium data with filtering
+# Fetch premium data with common filters
 df = maxi.premium(
     source_exchange=None,    # Optional: source exchange
     target_exchange=None,    # Optional: target exchange
     asset=None,              # Optional: asset symbol (e.g., "BTC")
-    source_quote=None,       # Optional: source quote currency
-    target_quote=None,       # Optional: target quote currency
     source_market=None,      # Optional: "spot" or "futures"
     target_market=None,      # Optional: "spot" or "futures"
+    min_pdp=None,            # Optional: min price difference percentage
+    max_pdp=None,            # Optional: max price difference percentage
+    token_include=None,      # Optional: include specific tokens (full name, e.g. "bitcoin")
+    token_exclude=None,      # Optional: exclude specific tokens (full name, e.g. "bitcoin")
     page=1,                  # Optional: page number
     limit=100,               # Optional: items per page
     sort=None,               # Optional: "asc" or "desc"
     key=None,                # Optional: sort key (e.g., "pdp")
-    currency=None,           # Optional: price currency
-    conversion_base=None,    # Optional: conversion base
-
-    # Price difference filters
-    min_pd=None,             # Optional: min price difference (USD)
-    max_pd=None,             # Optional: max price difference (USD)
-    min_pdp=None,            # Optional: min price difference percentage
-    max_pdp=None,            # Optional: max price difference percentage
-    min_pdp24h=None,         # Optional: min 24h price difference %
-    max_pdp24h=None,         # Optional: max 24h price difference %
-    # ... and more time-based filters (pdp4h, pdp1h, pdp30m, pdp15m, pdp5m)
-
-    # Volume filters
-    min_sv=None,             # Optional: min source 24h volume
-    max_sv=None,             # Optional: max source 24h volume
-    min_tv=None,             # Optional: min target 24h volume
-    max_tv=None,             # Optional: max target 24h volume
-
-    # Funding rate filters
-    min_net_funding_rate=None,
-    max_net_funding_rate=None,
-    min_source_funding_rate=None,
-    max_source_funding_rate=None,
-    min_target_funding_rate=None,
-    max_target_funding_rate=None,
-
-    # Other filters
-    only_transferable=False, # Optional: filter by transferable assets
-    network=None,            # Optional: filter by network
-    source_funding_rate_interval=None,
-    target_funding_rate_interval=None,
-    premium_type=None,       # Optional: premium type
-    token_include=None,      # Optional: include specific tokens
-    token_exclude=None,      # Optional: exclude specific tokens
-
     pandas=True              # Optional: return DataFrame or dict
 )
 ```
+
+`premium()` accepts many additional filters — quote currencies, time-windowed
+price-difference thresholds (`min/max_pd`, `pdp24h`/`pdp4h`/`pdp1h`/`pdp30m`/`pdp15m`/`pdp5m`),
+volume bounds (`min/max_sv`, `min/max_tv`), funding-rate bounds, `only_transferable`,
+`network`, and more. See the [premium endpoint docs](https://docs.datamaxiplus.com/)
+for the full list.
 
 ### Forex
 
@@ -408,6 +398,31 @@ data2, next_request2 = next_request()
 data3, next_request3 = next_request2()
 ```
 
+## Error Handling
+
+All SDK exceptions subclass `datamaxi.error.Error`:
+
+| Exception                          | Raised when                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------ |
+| `ClientError`                      | Server returns a 4xx response. Has `status_code`, `error_message`, `header`, `error_data`. |
+| `ServerError`                      | Server returns a 5xx response. Has `status_code`, `message`.             |
+| `ParameterRequiredError`           | A required parameter was missing/empty.                                  |
+| `AtLeastOneParameterRequiredError` | An endpoint needs at least one of a set of parameters, none given.       |
+
+```python
+from datamaxi import Datamaxi
+from datamaxi.error import ClientError, ServerError
+
+maxi = Datamaxi()
+
+try:
+    df = maxi.cex.candle(exchange="binance", symbol="BTC-USDT", interval="1d", market="spot")
+except ClientError as e:
+    print(f"Client error {e.status_code}: {e.error_message}")
+except ServerError as e:
+    print(f"Server error {e.status_code}: {e.message}")
+```
+
 ## Local Development
 
 This project uses [uv](https://docs.astral.sh/uv/) for fast dev setup. Install
@@ -425,6 +440,15 @@ uv pip install -r requirements/requirements-dev.txt
 # For runtime dependencies only:
 # uv pip install -r requirements/common.txt
 ```
+
+Dependency files under `requirements/`:
+
+| File                    | Contents                                                             |
+| ----------------------- | ------------------------------------------------------------------- |
+| `common.txt`            | Runtime dependencies (`requests`, `pandas`).                        |
+| `requirements.txt`      | Alias for `common.txt`.                                             |
+| `requirements-test.txt` | `common.txt` + test/lint tooling (pytest, responses, black, flake8). |
+| `requirements-dev.txt`  | `requirements-test.txt` + docs tooling (mkdocs).                    |
 
 ## Tests
 
@@ -464,4 +488,4 @@ If you discover a bug in this project, please feel free to open an issue to disc
 
 ## License
 
-[MIT License](license.md)
+[MIT License](LICENSE)
