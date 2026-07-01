@@ -18,6 +18,9 @@ feed = maxi.liquidation.feed(limit=100)
 # Token x exchange liquidation heatmap over a rolling window
 heatmap = maxi.liquidation.heatmap(window="1h", topN=10)
 
+# Liquidation KPI stats over a rolling window
+stats = maxi.liquidation.stats(window="1h")
+
 # Coinglass-style liquidation map (price x leverage tier)
 liq_map = maxi.liquidation.map(base="BTC", exchange="binance", quote="USDT")
 
@@ -33,7 +36,7 @@ history = maxi.liquidation.symbol_history(
 
 ## Notes
 
-- `heatmap` accepts `window` of `1h`, `4h`, or `24h`; `topN` must be between 1 and 30.
+- `heatmap` and `stats` accept `window` of `1h`, `4h`, or `24h`; `heatmap`'s `topN` must be between 1 and 30.
 - `symbol_history` accepts `interval` of `5m`, `15m`, or `1h` and `window` of `24h`, `72h`, or `7d`.
 
 ::: datamaxi.datamaxi.Liquidation
