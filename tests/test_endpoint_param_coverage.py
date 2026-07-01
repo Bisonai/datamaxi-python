@@ -25,7 +25,6 @@ import os
 import datamaxi
 from datamaxi._endpoints import ENDPOINTS
 
-
 # Pagination is handled per-method (some methods expose page/limit and their
 # own next_request pager, aggregate endpoints return the raw page). The issue
 # scopes the audit to non-pagination params, so ignore these globally.
