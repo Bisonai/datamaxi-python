@@ -6,6 +6,8 @@ from datamaxi.datamaxi.forex import Forex
 from datamaxi.datamaxi.premium import Premium
 from datamaxi.datamaxi.liquidation import Liquidation
 from datamaxi.datamaxi.open_interest import OpenInterest
+from datamaxi.datamaxi.margin_borrow import MarginBorrow
+from datamaxi.datamaxi.index_price import IndexPrice
 from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # noqa:F401
 from datamaxi.datamaxi.cex_ticker import (  # used in documentation # noqa:F401
     CexTicker,
@@ -52,3 +54,8 @@ class Datamaxi:
         # (`datamaxi::generated::{Liquidation, OpenInterest}`).
         self.liquidation = Liquidation(api_key, **kwargs)
         self.open_interest = OpenInterest(api_key, **kwargs)
+        # Standalone `/api/v1/{margin-borrow,index-price}` top-level paths —
+        # callable clients reached via `client.margin_borrow(...)` /
+        # `client.index_price(...)`, mirroring the REST path grouping.
+        self.margin_borrow = MarginBorrow(api_key, **kwargs)
+        self.index_price = IndexPrice(api_key, **kwargs)
