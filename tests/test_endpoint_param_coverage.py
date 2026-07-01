@@ -33,8 +33,9 @@ _IGNORED_PARAMS = {"page", "limit"}
 
 
 # Registry params intentionally NOT reachable from the SDK yet, with rationale.
-# Shape: {op_id: {param_name: "why"}}. An empty dict value ({}) allow-lists the
-# WHOLE endpoint (no client method exists for it at all).
+# Shape: {op_id: {param_name: "why"}}. Only the params listed for an op_id are
+# allow-listed, so to exempt a whole endpoint every one of its params must be
+# named here (an empty dict exempts nothing).
 #
 # NOTE FOR HUMAN REVIEW: the four endpoints below have NO client method in the
 # SDK at all. Exposing them is not a param forward-through — it needs a brand
