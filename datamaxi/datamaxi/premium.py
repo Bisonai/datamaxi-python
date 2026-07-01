@@ -380,5 +380,4 @@ class Premium(API):
         Returns:
             List of supported exchanges
         """
-        url_path = "/api/v1/premium/exchanges"
-        return self.query(url_path)
+        return self.request_endpoint("premium_exchanges")
