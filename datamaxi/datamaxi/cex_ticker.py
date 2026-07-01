@@ -55,19 +55,14 @@ class CexTicker(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {
-            "exchange": exchange,
-            "symbol": symbol,
-            "market": market,
-        }
-
-        if currency is not None:
-            params["currency"] = currency
-
-        if conversion_base is not None:
-            params["conversion_base"] = conversion_base
-
-        res = self.query("/api/v1/ticker", params)
+        res = self.request_endpoint(
+            "ticker",
+            exchange=exchange,
+            symbol=symbol,
+            market=market,
+            currency=currency,
+            conversion_base=conversion_base,
+        )
 
         if pandas:
             df = pd.DataFrame([res["data"]])
@@ -101,12 +96,7 @@ class CexTicker(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {
-            "market": market,
-        }
-
-        url_path = "/api/v1/ticker/exchanges"
-        return self.query(url_path, params)
+        return self.request_endpoint("ticker_exchanges", market=market)
 
     def symbols(
         self,
@@ -136,10 +126,4 @@ class CexTicker(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {
-            "exchange": exchange,
-            "market": market,
-        }
-
-        url_path = "/api/v1/ticker/symbols"
-        return self.query(url_path, params)
+        return self.request_endpoint("ticker_symbols", exchange=exchange, market=market)

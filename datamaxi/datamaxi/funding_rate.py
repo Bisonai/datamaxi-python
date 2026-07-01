@@ -70,17 +70,15 @@ class FundingRate(API):
         if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
-        params = {
-            "exchange": exchange,
-            "symbol": symbol,
-            "page": page,
-            "limit": limit,
-            "from": fromDateTime,
-            "to": toDateTime,
-            "sort": sort,
-        }
-
-        res = self.query("/api/v1/funding-rate/history", params)
+        res = self.request_endpoint(
+            "funding_rate_history",
+            exchange=exchange,
+            symbol=symbol,
+            page=page,
+            limit=limit,
+            sort=sort,
+            **{"from": fromDateTime, "to": toDateTime},
+        )
         if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
@@ -159,8 +157,7 @@ class FundingRate(API):
         Returns:
             List of supported exchanges
         """
-        url_path = "/api/v1/funding-rate/exchanges"
-        return self.query(url_path)
+        return self.request_endpoint("funding_rate_exchanges")
 
     def symbols(self, exchange: str) -> List[str]:
         """Fetch supported symbols for funding rate endpoints.
@@ -176,6 +173,4 @@ class FundingRate(API):
             List of supported symbols
         """
         check_required_parameter(exchange, "exchange")
-        params = {"exchange": exchange}
-        url_path = "/api/v1/funding-rate/symbols"
-        return self.query(url_path, params)
+        return self.request_endpoint("funding_rate_symbols", exchange=exchange)

@@ -39,11 +39,7 @@ class Forex(API):
         """
         check_required_parameter(symbol, "symbol")
 
-        params = {
-            "symbol": symbol,
-        }
-
-        res = self.query("/api/v1/forex", params)
+        res = self.request_endpoint("forex", symbol=symbol)
 
         if pandas:
             return pd.DataFrame([res])
@@ -60,5 +56,4 @@ class Forex(API):
         Returns:
             List of supported symbols
         """
-        url_path = "/api/v1/forex/symbols"
-        return self.query(url_path)
+        return self.request_endpoint("forex_symbols")

@@ -44,13 +44,7 @@ class CexWalletStatus(API):
             ]
         )
 
-        params = {
-            "exchange": exchange,
-            "asset": asset,
-        }
-
-        url_path = "/api/v1/wallet-status"
-        res = self.query(url_path, params)
+        res = self.request_endpoint("wallet_status", exchange=exchange, asset=asset)
         if pandas:
             df = pd.DataFrame(res)
             df = df.set_index("network")
@@ -68,8 +62,7 @@ class CexWalletStatus(API):
         Returns:
             List of supported exchange
         """
-        url_path = "/api/v1/wallet-status/exchanges"
-        return self.query(url_path)
+        return self.request_endpoint("wallet_status_exchanges")
 
     def assets(self, exchange: str) -> List[str]:
         """Fetch supported assets for wallet status data.
@@ -86,9 +79,4 @@ class CexWalletStatus(API):
         """
         check_required_parameter(exchange, "exchange")
 
-        params = {
-            "exchange": exchange,
-        }
-
-        url_path = "/api/v1/wallet-status/assets"
-        return self.query(url_path, params)
+        return self.request_endpoint("wallet_status_assets", exchange=exchange)

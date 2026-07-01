@@ -33,14 +33,7 @@ class CexFee(API):
         Returns:
             Trading fee data
         """
-        params = {}
-        if exchange:
-            params["exchange"] = exchange
-        if symbol:
-            params["symbol"] = symbol
-
-        url_path = "/api/v1/cex/fees"
-        return self.query(url_path, params)
+        return self.request_endpoint("cex_fees", exchange=exchange, symbol=symbol)
 
     def exchanges(self) -> List[str]:
         """Fetch supported exchanges for fee data.
@@ -52,8 +45,7 @@ class CexFee(API):
         Returns:
             List of supported exchanges
         """
-        url_path = "/api/v1/cex/fees/exchanges"
-        return self.query(url_path)
+        return self.request_endpoint("cex_fees_exchanges")
 
     def symbols(self, exchange: str) -> List[str]:
         """Fetch supported symbols for fee data.
@@ -70,9 +62,4 @@ class CexFee(API):
         """
         check_required_parameter(exchange, "exchange")
 
-        params = {
-            "exchange": exchange,
-        }
-
-        url_path = "/api/v1/cex/fees/symbols"
-        return self.query(url_path, params)
+        return self.request_endpoint("cex_fees_symbols", exchange=exchange)

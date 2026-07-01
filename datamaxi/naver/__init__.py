@@ -29,8 +29,7 @@ class Naver(API):
         Returns:
             List of supported Naver trend token symbols
         """
-        url_path = "/api/v1/naver-trend/symbols"
-        return self.query(url_path)
+        return self.request_endpoint("naver_trend_symbols")
 
     def trend(self, symbol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
         """Get Naver trend for given token symbol
@@ -47,8 +46,7 @@ class Naver(API):
             Naver trend data as list or pandas DataFrame
         """
         check_required_parameter(symbol, "symbol")
-        params = {"symbol": symbol}
-        res = self.query("/api/v1/naver-trend", params)
+        res = self.request_endpoint("naver_trend", symbol=symbol)
         if pandas:
             return pd.DataFrame(res)
         return res
