@@ -31,7 +31,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
             "key": {
@@ -39,7 +39,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "timestamp",
-                "enum": ['exchange', 'category', 'title', 'timestamp'],
+                "enum": ["exchange", "category", "title", "timestamp"],
                 "description": "Specifies key to sort by",
             },
             "exchange": {
@@ -53,7 +53,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "",
-                "enum": ['notice', 'listing', 'delisting', 'user_events'],
+                "enum": ["notice", "listing", "delisting", "user_events"],
                 "description": "Specifies category(s), separated by ,",
             },
         },
@@ -74,11 +74,11 @@ ENDPOINTS = {
                 "description": "Specifes exchange",
             },
             "market": {
-                "required": True,
+                "required": False,
                 "in": "query",
                 "type": "str",
                 "default": "spot",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
             "symbol": {
@@ -92,7 +92,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "USD",
-                "enum": ['USD', 'KRW'],
+                "enum": ["USD", "KRW"],
                 "description": "Specifies currency",
             },
             "interval": {
@@ -129,7 +129,7 @@ ENDPOINTS = {
                 "required": True,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market type",
             },
         },
@@ -142,8 +142,7 @@ ENDPOINTS = {
         "requires_auth": False,
         "group": "cex",
         "subgroup": "candle",
-        "params": {
-        },
+        "params": {},
     },
     "cex_candle_symbols": {
         "path": "/api/v1/cex/candle/symbols",
@@ -155,7 +154,7 @@ ENDPOINTS = {
         "subgroup": "candle",
         "params": {
             "exchange": {
-                "required": False,
+                "required": True,
                 "in": "query",
                 "type": "str",
                 "description": "Specifies exchange name",
@@ -164,7 +163,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market type",
             },
         },
@@ -188,14 +187,14 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "min_level": {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['caution', 'warning', 'danger'],
+                "enum": ["caution", "warning", "danger"],
                 "description": "Minimum severity",
             },
             "active_only": {
@@ -237,7 +236,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "from_ms": {
@@ -314,7 +313,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures (empty = both)",
             },
             "base": {
@@ -398,7 +397,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "USD",
-                "enum": ['USD', 'KRW'],
+                "enum": ["USD", "KRW"],
                 "description": "Convert *_usd fields to target currency (USD or KRW)",
             },
         },
@@ -428,7 +427,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "spot or futures",
             },
             "base": {
@@ -441,7 +440,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['rest_native', 'announcement', 'cmc', 'manual'],
+                "enum": ["rest_native", "announcement", "cmc", "manual"],
                 "description": "Tag source filter",
             },
             "min_confidence": {
@@ -483,7 +482,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Filter to spot or futures",
             },
         },
@@ -497,7 +496,7 @@ ENDPOINTS = {
         "group": "forex",
         "params": {
             "symbol": {
-                "required": False,
+                "required": True,
                 "in": "query",
                 "type": "str",
                 "description": "Specifies symbol",
@@ -511,8 +510,7 @@ ENDPOINTS = {
         "summary": "Symbols",
         "requires_auth": False,
         "group": "forex",
-        "params": {
-        },
+        "params": {},
     },
     "funding_rate_exchanges": {
         "path": "/api/v1/funding-rate/exchanges",
@@ -521,8 +519,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "funding_rate",
-        "params": {
-        },
+        "params": {},
     },
     "funding_rate_history": {
         "path": "/api/v1/funding-rate/history",
@@ -547,15 +544,15 @@ ENDPOINTS = {
             "page": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "default": "1",
+                "type": "int",
+                "default": 1,
                 "description": "Specifies page",
             },
             "limit": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "default": "1000",
+                "type": "int",
+                "default": 10,
                 "description": "Specifies limit",
             },
             "from": {
@@ -575,7 +572,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "asc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -732,7 +729,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "1h",
-                "enum": ['1h', '4h', '24h'],
+                "enum": ["1h", "4h", "24h"],
                 "description": "Rolling window",
             },
             "top_n": {
@@ -760,9 +757,10 @@ ENDPOINTS = {
                 "description": "Exchange",
             },
             "base": {
-                "required": True,
+                "required": False,
                 "in": "query",
                 "type": "str",
+                "default": "BTC",
                 "description": "Base asset",
             },
             "quote": {
@@ -787,7 +785,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "1h",
-                "enum": ['1h', '4h', '24h'],
+                "enum": ["1h", "4h", "24h"],
                 "description": "Rolling window",
             },
             "exchange": {
@@ -836,7 +834,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "5m",
-                "enum": ['5m', '15m', '1h'],
+                "enum": ["5m", "15m", "1h"],
                 "description": "Bucket interval",
             },
             "window": {
@@ -844,7 +842,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "24h",
-                "enum": ['24h', '72h', '7d'],
+                "enum": ["24h", "72h", "7d"],
                 "description": "Lookback window",
             },
         },
@@ -905,8 +903,7 @@ ENDPOINTS = {
         "summary": "Symbols",
         "requires_auth": True,
         "group": "naver_trend",
-        "params": {
-        },
+        "params": {},
     },
     "open_interest": {
         "path": "/api/v1/open-interest",
@@ -949,7 +946,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "1h",
-                "enum": ['5m', '15m', '1h', '4h', '1d'],
+                "enum": ["5m", "15m", "1h", "4h", "1d"],
                 "description": "Aggregation interval",
             },
             "from": {
@@ -1016,7 +1013,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Sort direction",
             },
             "query": {
@@ -1042,16 +1039,6 @@ ENDPOINTS = {
                 "default": 10,
                 "description": "Top N tokens to return",
             },
-        },
-    },
-    "front_premium_tags": {
-        "path": "/api/v1/front/premium/tags",
-        "method": "GET",
-        "tag": "premium",
-        "summary": "Available premium tag filters",
-        "requires_auth": False,
-        "group": "premium",
-        "params": {
         },
     },
     "premium": {
@@ -1096,21 +1083,21 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies source market",
             },
             "target_market": {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies target market",
             },
             "premium_type": {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot-spot', 'futures-futures', 'spot-futures'],
+                "enum": ["spot-spot", "futures-futures", "spot-futures"],
                 "description": "Specifies premium type(s), separated by ,",
             },
             "currency": {
@@ -1146,7 +1133,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort order",
             },
             "key": {
@@ -1187,6 +1174,18 @@ ENDPOINTS = {
                 "type": "float",
                 "description": "Minimum target volume",
             },
+            "token_include": {
+                "required": False,
+                "in": "query",
+                "type": "str",
+                "description": "Specifies token id(s) to include, separated by ,",
+            },
+            "token_exclude": {
+                "required": False,
+                "in": "query",
+                "type": "str",
+                "description": "Specifies token id(s) to exclude, separated by ,",
+            },
         },
     },
     "premium_exchanges": {
@@ -1196,8 +1195,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "premium",
-        "params": {
-        },
+        "params": {},
     },
     "telegram_channels": {
         "path": "/api/v1/telegram/channels",
@@ -1233,7 +1231,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "channelName",
-                "enum": ['channelName', 'handle', 'subscribers', 'createdAt'],
+                "enum": ["channelName", "handle", "subscribers", "createdAt"],
                 "description": "Specifies key to sort by",
             },
             "sort": {
@@ -1241,7 +1239,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
         },
@@ -1280,7 +1278,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "publishedAt",
-                "enum": ['channelName', 'views', 'reactions', 'forwards', 'publishedAt'],
+                "enum": ["channelName", "views", "reactions", "forwards", "publishedAt"],
                 "description": "Specifies key to sort by",
             },
             "sort": {
@@ -1288,7 +1286,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "desc",
-                "enum": ['asc', 'desc'],
+                "enum": ["asc", "desc"],
                 "description": "Specifies sort",
             },
             "category": {
@@ -1296,7 +1294,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "",
-                "enum": ['english', 'korean'],
+                "enum": ["english", "korean"],
                 "description": "Specifies category",
             },
             "search_query": {
@@ -1329,10 +1327,10 @@ ENDPOINTS = {
                 "description": "Specifies symbol",
             },
             "market": {
-                "required": False,
+                "required": True,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
             "currency": {
@@ -1340,13 +1338,15 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "USD",
-                "enum": ['KRW', 'USD'],
+                "enum": ["KRW", "USD"],
                 "description": "Specifies currency applied to price values",
             },
             "conversion_base": {
                 "required": False,
                 "in": "query",
                 "type": "str",
+                "default": "USDT",
+                "enum": ["USD", "USDT"],
                 "description": "Specifies conversion base applied to price values",
             },
             "include_source": {
@@ -1367,10 +1367,10 @@ ENDPOINTS = {
         "group": "ticker",
         "params": {
             "market": {
-                "required": False,
+                "required": True,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
         },
@@ -1390,10 +1390,10 @@ ENDPOINTS = {
                 "description": "Specifes exchange",
             },
             "market": {
-                "required": False,
+                "required": True,
                 "in": "query",
                 "type": "str",
-                "enum": ['spot', 'futures'],
+                "enum": ["spot", "futures"],
                 "description": "Specifies market",
             },
         },
@@ -1417,14 +1417,14 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "default": "100",
+                "default": "10",
                 "description": "Specifies limit",
             },
             "type": {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "enum": ['listed', 'delisted'],
+                "enum": ["listed", "delisted"],
                 "description": "Specifies type of token update",
             },
         },
@@ -1458,8 +1458,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "trading_fees",
-        "params": {
-        },
+        "params": {},
     },
     "cex_fees_symbols": {
         "path": "/api/v1/cex/fees/symbols",
@@ -1522,8 +1521,7 @@ ENDPOINTS = {
         "summary": "Exchanges",
         "requires_auth": False,
         "group": "wallet_status",
-        "params": {
-        },
+        "params": {},
     },
 }
 
