@@ -36,32 +36,15 @@ _IGNORED_PARAMS = {"page", "limit"}
 # allow-listed, so to exempt a whole endpoint every one of its params must be
 # named here (an empty dict exempts nothing).
 #
-# NOTE FOR HUMAN REVIEW: the four endpoints below have NO client method in the
-# SDK at all. Exposing them is not a param forward-through — it needs a brand
-# new client method (name, return-shape handling, docs, dedicated tests), which
-# is a product/design decision out of scope for this param-coverage audit.
-# Tracked for follow-up; see PR body.
+# NOTE FOR HUMAN REVIEW: #126 exposed index_price, margin_borrow, and
+# liquidation_stats with dedicated client methods (they are no longer here).
+# listings_historical remains intentionally SDK-excluded — its param is
+# allow-listed below with that rationale.
 _ALLOWLIST = {
-    # No client method — needs a new OHLC-style method + response shaping.
-    "index_price": {
-        "asset": "no client method yet — needs new Index-Price client",
-        "from": "no client method yet — needs new Index-Price client",
-        "to": "no client method yet — needs new Index-Price client",
-        "interval": "no client method yet — needs new Index-Price client",
-    },
-    # No client method — needs a new Margin-Borrow client.
-    "margin_borrow": {
-        "asset": "no client method yet — needs new Margin-Borrow client",
-    },
-    # No client method — needs a new Liquidation.stats() method + shaping.
-    "liquidation_stats": {
-        "window": "no client method yet — needs new Liquidation.stats()",
-        "exchange": "no client method yet — needs new Liquidation.stats()",
-        "min_volume_usd": "no client method yet — needs new Liquidation.stats()",
-    },
-    # No client method — needs a new Listings.historical() method + shaping.
+    # Intentionally SDK-excluded (#126): not surfaced in the public data-api.
     "listings_historical": {
-        "refresh": "no client method yet — needs new Listings.historical()",
+        "refresh": "intentionally SDK-excluded — not surfaced in the public "
+        "data-api (see #126)",
     },
 }
 
