@@ -50,15 +50,14 @@ class Telegram(API):
         if sort not in ["asc", "desc"]:
             raise ValueError("sort must be either asc or desc")
 
-        params = {
-            "page": page,
-            "limit": limit,
-            "category": category,
-            "key": key,
-            "sort": sort,
-        }
-
-        res = self.query("/api/v1/telegram/channels", params)
+        res = self.request_endpoint(
+            "telegram_channels",
+            page=page,
+            limit=limit,
+            category=category,
+            key=key,
+            sort=sort,
+        )
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -107,16 +106,15 @@ class Telegram(API):
         if sort not in ["asc", "desc"]:
             raise ValueError("sort must be either asc or desc")
 
-        params = {
-            "channel": channel_name,
-            "page": page,
-            "limit": limit,
-            "key": key,
-            "sort": sort,
-            "category": category,
-        }
-
-        res = self.query("/api/v1/telegram/messages", params)
+        res = self.request_endpoint(
+            "telegram_messages",
+            channel=channel_name,
+            page=page,
+            limit=limit,
+            key=key,
+            sort=sort,
+            category=category,
+        )
         if res["data"] is None:
             raise ValueError("no data found")
 
