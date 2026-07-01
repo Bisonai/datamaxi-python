@@ -55,10 +55,16 @@ def test_premium_call_param_name_translation():
         json=_RESPONSE,
         status=200,
     )
-    _client()(source_exchange="binance", conversion_base="USDT", page=2)
+    _client()(
+        source_exchange="binance",
+        target_quote="USDT",
+        conversion_base="USDT",
+        page=2,
+    )
     qs = _qs(responses.calls[0])
-    # camelCase wire keys for exchange params, snake_case for conversion_base
-    assert qs["sourceExchange"] == ["binance"]
+    # snake_case wire keys for all params (backend expects snake_case)
+    assert qs["source_exchange"] == ["binance"]
+    assert qs["target_quote"] == ["USDT"]
     assert qs["conversion_base"] == ["USDT"]
     assert qs["page"] == ["2"]
 
