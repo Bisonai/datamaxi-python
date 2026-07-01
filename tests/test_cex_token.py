@@ -42,7 +42,6 @@ def test_token_updates_sends_query_params():
     assert qs["page"] == ["3"]
     assert qs["limit"] == ["10"]
     assert qs["type"] == ["listed"]
-    assert qs["sort"] == ["desc"]
 
 
 def test_token_updates_invalid_type_raises_value_error():

@@ -104,8 +104,6 @@ class FundingRate(API):
         self,
         exchange: str = None,
         symbol: str = None,
-        sort: str = None,
-        limit: int = None,
         pandas: bool = True,
     ) -> Union[Dict, pd.DataFrame]:
         """Fetch latest funding rate data
@@ -117,28 +115,14 @@ class FundingRate(API):
         Args:
             exchange (str): exchange name
             symbol (str): Symbol name
-            sort (str): Sort data by `asc` or `desc`
-            limit (int): Limit number of data to return
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
             Latest funding rate data in pandas DataFrame or dict response
         """
-        params = {}
-
-        if exchange is not None:
-            params["exchange"] = exchange
-
-        if symbol is not None:
-            params["symbol"] = symbol
-
-        if sort is not None:
-            params["sort"] = sort
-
-        if limit is not None:
-            params["limit"] = limit
-
-        res = self.query("/api/v1/funding-rate/latest", params)
+        res = self.request_endpoint(
+            "funding_rate_latest", exchange=exchange, symbol=symbol
+        )
 
         if pandas:
             df = pd.DataFrame([res])
