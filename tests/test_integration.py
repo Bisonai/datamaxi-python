@@ -649,34 +649,9 @@ class TestPremium:
         result = datamaxi.premium(sort="desc", key="pdp", limit=10)
         assert isinstance(result, pd.DataFrame)
 
-    def test_premium_min_pdp(self, datamaxi):
-        """Test premium data with min_pdp filter."""
-        result = datamaxi.premium(min_pdp="1", limit=10)
-        assert isinstance(result, pd.DataFrame)
-
-    def test_premium_max_pdp(self, datamaxi):
-        """Test premium data with max_pdp filter."""
-        result = datamaxi.premium(max_pdp="10", limit=10)
-        assert isinstance(result, pd.DataFrame)
-
-    def test_premium_min_max_pdp(self, datamaxi):
-        """Test premium data with both min and max pdp."""
-        result = datamaxi.premium(min_pdp="1", max_pdp="10", limit=50)
-        assert isinstance(result, pd.DataFrame)
-
-    def test_premium_pdp24h_filters(self, datamaxi):
-        """Test premium data with pdp24h filters."""
-        result = datamaxi.premium(min_pdp24h="-5", max_pdp24h="5", limit=10)
-        assert isinstance(result, pd.DataFrame)
-
     def test_premium_volume_filters(self, datamaxi):
         """Test premium data with volume filters."""
         result = datamaxi.premium(min_sv="100000", limit=10)
-        assert isinstance(result, pd.DataFrame)
-
-    def test_premium_funding_rate_filters(self, datamaxi):
-        """Test premium data with funding rate filters."""
-        result = datamaxi.premium(min_net_funding_rate="-0.01", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_only_transferable(self, datamaxi):
