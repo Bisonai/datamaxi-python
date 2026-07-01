@@ -70,6 +70,31 @@ def test_liquidation_feed_forwards_new_params():
     assert qs["min_volume_usd"] == ["1000.0"]
 
 
+@mock_http_response(responses.GET, "/api/v1/liquidation/stats", {"data": {}})
+def test_liquidation_stats_returns_dict():
+    assert _liq().stats(window="1h") == {"data": {}}
+
+
+@responses.activate
+def test_liquidation_stats_forwards_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/liquidation/stats.*"),
+        json={"data": {}},
+        status=200,
+    )
+    _liq().stats(window="4h", exchange="binance", min_volume_usd=1000.0)
+    qs = _qs(responses.calls[0])
+    assert qs["window"] == ["4h"]
+    assert qs["exchange"] == ["binance"]
+    assert qs["min_volume_usd"] == ["1000.0"]
+
+
+def test_liquidation_stats_invalid_window_raises_value_error():
+    with pytest.raises(ValueError):
+        _liq().stats(window="7d")
+
+
 def test_liquidation_invalid_limit_raises_value_error():
     with pytest.raises(ValueError):
         _liq()(exchange="binance", symbol="BTC-USDT", limit=0)

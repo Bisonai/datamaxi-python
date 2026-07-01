@@ -101,6 +101,30 @@ class Liquidation(API):
             "liquidation_map", base=base, exchange=exchange, quote=quote
         )
 
+    def stats(
+        self,
+        window: str = "1h",
+        exchange: Optional[str] = None,
+        min_volume_usd: Optional[float] = None,
+    ) -> Dict[str, Any]:
+        """Liquidation KPI stats over a rolling window.
+
+        `GET /api/v1/liquidation/stats`
+
+        Args:
+            window (str): Rolling window (``1h``, ``4h``, or ``24h``).
+            exchange (str): Optional exchange filter.
+            min_volume_usd (float): Minimum ``VolumeUsd`` filter.
+        """
+        if window not in ("1h", "4h", "24h"):
+            raise ValueError("window must be one of 1h, 4h, or 24h")
+        return self.request_endpoint(
+            "liquidation_stats",
+            window=window,
+            exchange=exchange,
+            min_volume_usd=min_volume_usd,
+        )
+
     def symbol_history(
         self,
         symbol: str,
