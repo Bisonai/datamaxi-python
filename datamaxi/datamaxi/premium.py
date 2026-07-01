@@ -40,6 +40,7 @@ class Premium(API):
         premium_type: str = None,
         token_include: str = None,
         token_exclude: str = None,
+        query: str = None,
         pandas: bool = True,
     ) -> Union[List, pd.DataFrame]:
         """Fetch premium data
@@ -68,6 +69,7 @@ class Premium(API):
             premium_type (str): Return based on matching premium_type
             token_include (str): Return results containing only specified token
             token_exclude (str): Return results not containing specified token
+            query (str): Search query for filtering assets
 
             pandas (bool): Return data as pandas DataFrame
 
@@ -96,6 +98,9 @@ class Premium(API):
 
         if key is not None:
             params["key"] = key
+
+        if query is not None:
+            params["query"] = query
 
         if page is not None:
             params["page"] = page

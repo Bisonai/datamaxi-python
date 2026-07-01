@@ -79,6 +79,7 @@ class Telegram(API):
         key: Optional[str] = None,
         sort: str = "desc",
         category: Optional[str] = None,
+        search_query: Optional[str] = None,
     ) -> Tuple[Dict[str, Any], Callable]:
         """Get Telegram posts for given channel username
 
@@ -93,6 +94,7 @@ class Telegram(API):
             key (str): Specifies key to sort by
             sort (str): Sort order
             category (str): Specifies category
+            search_query (str): Specifies search query
 
         Returns:
             Tuple of message response and next request function
@@ -114,6 +116,7 @@ class Telegram(API):
             key=key,
             sort=sort,
             category=category,
+            search_query=search_query,
         )
         if res["data"] is None:
             raise ValueError("no data found")
