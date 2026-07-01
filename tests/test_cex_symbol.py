@@ -71,6 +71,80 @@ def test_volume_sends_base_param():
     assert res == {"BTC": {"binance": "100"}}
 
 
+@responses.activate
+def test_metadata_forwards_new_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/cex/symbol/metadata.*"),
+        json={},
+        status=200,
+    )
+    _client().metadata(
+        exchange="binance", base="BTC", market="spot", quote="USDT", status="trading"
+    )
+    qs = _qs(responses.calls[0])
+    assert qs["market"] == ["spot"]
+    assert qs["quote"] == ["USDT"]
+    assert qs["status"] == ["trading"]
+
+
+@responses.activate
+def test_tags_forwards_new_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/cex/symbol/tags.*"),
+        json={},
+        status=200,
+    )
+    _client().tags(base="BTC", tag="seed", source="manual", min_confidence=90)
+    qs = _qs(responses.calls[0])
+    assert qs["tag"] == ["seed"]
+    assert qs["source"] == ["manual"]
+    assert qs["min_confidence"] == ["90"]
+
+
+@responses.activate
+def test_cautions_forwards_new_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/cex/symbol/cautions.*"),
+        json={},
+        status=200,
+    )
+    _client().cautions(exchange="binance", min_level="warning", active_only=True)
+    qs = _qs(responses.calls[0])
+    assert qs["min_level"] == ["warning"]
+    assert qs["active_only"] == ["True"]
+
+
+@responses.activate
+def test_delistings_forwards_new_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/cex/symbol/delistings.*"),
+        json={},
+        status=200,
+    )
+    _client().delistings(exchange="binance", from_ms=1, to_ms=2, include_past=True)
+    qs = _qs(responses.calls[0])
+    assert qs["from_ms"] == ["1"]
+    assert qs["to_ms"] == ["2"]
+    assert qs["include_past"] == ["True"]
+
+
+@responses.activate
+def test_volume_forwards_market_param():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/cex/symbol/volume.*"),
+        json={},
+        status=200,
+    )
+    _client().volume(base="BTC", market="futures")
+    qs = _qs(responses.calls[0])
+    assert qs["market"] == ["futures"]
+
+
 @mock_http_response(responses.GET, "/api/v1/cex/symbol/oi", {"BTC": {"binance": "1"}})
 def test_oi_returns_dict():
     assert _client().oi(base="BTC") == {"BTC": {"binance": "1"}}

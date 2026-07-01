@@ -66,6 +66,19 @@ def test_messages_sends_channel_param():
     assert qs["channel"] == ["alpha"]
 
 
+@responses.activate
+def test_messages_forwards_search_query():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/telegram/messages.*"),
+        json=_MESSAGES,
+        status=200,
+    )
+    _client().messages(channel_name="alpha", search_query="airdrop")
+    qs = _qs(responses.calls[0])
+    assert qs["search_query"] == ["airdrop"]
+
+
 def test_channels_invalid_sort_raises_value_error():
     with pytest.raises(ValueError):
         _client().channels(sort="bogus")

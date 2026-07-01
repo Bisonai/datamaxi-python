@@ -52,6 +52,24 @@ def test_ticker_get_sends_query_params():
     assert qs["conversion_base"] == ["USDT"]
 
 
+@responses.activate
+def test_ticker_get_forwards_include_source():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/ticker.*"),
+        json=_TICKER,
+        status=200,
+    )
+    _client().get(
+        exchange="binance",
+        market="spot",
+        symbol="BTC-USDT",
+        include_source=True,
+    )
+    qs = _qs(responses.calls[0])
+    assert qs["include_source"] == ["True"]
+
+
 def test_ticker_invalid_market_raises_value_error():
     with pytest.raises(ValueError):
         _client().get(exchange="binance", market="bogus", symbol="BTC-USDT")

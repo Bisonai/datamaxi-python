@@ -27,6 +27,7 @@ class Premium(API):
         target_quote: str = None,
         sort: str = None,
         key: str = None,
+        query: str = None,
         page: int = 1,
         limit: int = 100,
         currency: str = None,
@@ -55,6 +56,7 @@ class Premium(API):
             target_quote (str): Target quote currency
             sort (str): Sort data by `asc` or `desc`
             key (str): Key to sort data
+            query (str): Search query for filtering assets
             page (int): Page number
             limit (int): Page size
             currency (str): Currency applied to cross-exchange price differences
@@ -96,6 +98,9 @@ class Premium(API):
 
         if key is not None:
             params["key"] = key
+
+        if query is not None:
+            params["query"] = query
 
         if page is not None:
             params["page"] = page

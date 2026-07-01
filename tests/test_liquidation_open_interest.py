@@ -55,6 +55,21 @@ def test_liquidation_feed_returns_dict():
     assert _liq().feed(limit=10) == {"data": []}
 
 
+@responses.activate
+def test_liquidation_feed_forwards_new_params():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/liquidation/feed.*"),
+        json={"data": []},
+        status=200,
+    )
+    _liq().feed(limit=10, exchange="binance", base="BTC", min_volume_usd=1000.0)
+    qs = _qs(responses.calls[0])
+    assert qs["exchange"] == ["binance"]
+    assert qs["base"] == ["BTC"]
+    assert qs["min_volume_usd"] == ["1000.0"]
+
+
 def test_liquidation_invalid_limit_raises_value_error():
     with pytest.raises(ValueError):
         _liq()(exchange="binance", symbol="BTC-USDT", limit=0)

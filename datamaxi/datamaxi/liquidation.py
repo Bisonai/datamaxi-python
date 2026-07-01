@@ -38,17 +38,32 @@ class Liquidation(API):
             "liquidation", exchange=exchange, symbol=symbol, limit=limit
         )
 
-    def feed(self, limit: int = 100) -> Dict[str, Any]:
+    def feed(
+        self,
+        limit: int = 100,
+        exchange: Optional[str] = None,
+        base: Optional[str] = None,
+        min_volume_usd: Optional[float] = None,
+    ) -> Dict[str, Any]:
         """Firehose: most recent liquidation events across every symbol.
 
         `GET /api/v1/liquidation/feed`
 
         Args:
             limit (int): Max events to return.
+            exchange (str): Optional exchange filter.
+            base (str): Optional base asset filter (case-insensitive).
+            min_volume_usd (float): Minimum ``VolumeUsd`` filter.
         """
         if limit < 1:
             raise ValueError("limit must be greater than 0")
-        return self.request_endpoint("liquidation_feed", limit=limit)
+        return self.request_endpoint(
+            "liquidation_feed",
+            limit=limit,
+            exchange=exchange,
+            base=base,
+            min_volume_usd=min_volume_usd,
+        )
 
     def heatmap(
         self,

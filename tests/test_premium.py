@@ -69,6 +69,19 @@ def test_premium_call_param_name_translation():
     assert qs["page"] == ["2"]
 
 
+@responses.activate
+def test_premium_call_forwards_query():
+    responses.add(
+        responses.GET,
+        re.compile(".*/api/v1/premium.*"),
+        json=_RESPONSE,
+        status=200,
+    )
+    _client()(query="BTC")
+    qs = _qs(responses.calls[0])
+    assert qs["query"] == ["BTC"]
+
+
 @mock_http_response(responses.GET, "/api/v1/premium/exchanges", ["binance", "upbit"])
 def test_premium_exchanges_returns_list():
     assert _client().exchanges() == ["binance", "upbit"]
