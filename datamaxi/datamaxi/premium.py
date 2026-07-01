@@ -162,19 +162,19 @@ class Premium(API):
         params = {}
 
         if source_exchange is not None:
-            params["sourceExchange"] = source_exchange
+            params["source_exchange"] = source_exchange
 
         if target_exchange is not None:
-            params["targetExchange"] = target_exchange
+            params["target_exchange"] = target_exchange
 
         if asset is not None:
             params["asset"] = asset
 
         if source_quote is not None:
-            params["sourceQuote"] = source_quote
+            params["source_quote"] = source_quote
 
         if target_quote is not None:
-            params["targetQuote"] = target_quote
+            params["target_quote"] = target_quote
 
         if sort is not None:
             params["sort"] = sort
