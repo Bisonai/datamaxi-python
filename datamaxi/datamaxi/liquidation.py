@@ -34,8 +34,9 @@ class Liquidation(API):
         """
         if limit < 1:
             raise ValueError("limit must be greater than 0")
-        params = {"exchange": exchange, "symbol": symbol, "limit": limit}
-        return self.query("/api/v1/liquidation", params)
+        return self.request_endpoint(
+            "liquidation", exchange=exchange, symbol=symbol, limit=limit
+        )
 
     def feed(self, limit: int = 100) -> Dict[str, Any]:
         """Firehose: most recent liquidation events across every symbol.
@@ -47,7 +48,7 @@ class Liquidation(API):
         """
         if limit < 1:
             raise ValueError("limit must be greater than 0")
-        return self.query("/api/v1/liquidation/feed", {"limit": limit})
+        return self.request_endpoint("liquidation_feed", limit=limit)
 
     def heatmap(
         self,
@@ -64,8 +65,8 @@ class Liquidation(API):
         """
         if topN < 1 or topN > 30:
             raise ValueError("topN must be between 1 and 30")
-        return self.query(
-            "/api/v1/liquidation/heatmap", {"window": window, "top_n": topN}
+        return self.request_endpoint(
+            "liquidation_heatmap", window=window, top_n=topN
         )
 
     def map(
@@ -83,8 +84,9 @@ class Liquidation(API):
             exchange (str): Exchange (default ``binance``).
             quote (str): Quote asset (default ``USDT``).
         """
-        params = {"base": base, "exchange": exchange, "quote": quote}
-        return self.query("/api/v1/liquidation/map", params)
+        return self.request_endpoint(
+            "liquidation_map", base=base, exchange=exchange, quote=quote
+        )
 
     def symbol_history(
         self,
@@ -106,12 +108,11 @@ class Liquidation(API):
             interval (str): Bucket interval (``5m``, ``15m``, or ``1h``).
             window (str): Lookback window (``24h``, ``72h``, or ``7d``).
         """
-        params = {
-            "symbol": symbol,
-            "quote": quote,
-            "interval": interval,
-            "window": window,
-        }
-        if exchange is not None:
-            params["exchange"] = exchange
-        return self.query("/api/v1/liquidation/symbol-history", params)
+        return self.request_endpoint(
+            "liquidation_symbol_history",
+            symbol=symbol,
+            quote=quote,
+            exchange=exchange,
+            interval=interval,
+            window=window,
+        )

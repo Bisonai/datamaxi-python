@@ -23,8 +23,8 @@ class OpenInterest(API):
             exchange (str): Exchange (e.g. ``binance``).
             symbol (str): Exchange-native API symbol (e.g. ``BTC-USDT``).
         """
-        return self.query(
-            "/api/v1/open-interest", {"exchange": exchange, "symbol": symbol}
+        return self.request_endpoint(
+            "open_interest", exchange=exchange, symbol=symbol
         )
 
     def list(self, exchange: Optional[str] = None) -> Dict[str, Any]:
@@ -35,10 +35,7 @@ class OpenInterest(API):
         Args:
             exchange (str): Optional filter to one exchange.
         """
-        params = {}
-        if exchange is not None:
-            params["exchange"] = exchange
-        return self.query("/api/v1/open-interest/list", params)
+        return self.request_endpoint("open_interest_list", exchange=exchange)
 
     def overview(
         self,
@@ -65,10 +62,14 @@ class OpenInterest(API):
             raise ValueError("limit must be greater than 0")
         if sort not in ("asc", "desc"):
             raise ValueError("sort must be either asc or desc")
-        params = {"page": page, "limit": limit, "key": key, "sort": sort}
-        if query is not None:
-            params["query"] = query
-        return self.query("/api/v1/open-interest/overview", params)
+        return self.request_endpoint(
+            "open_interest_overview",
+            page=page,
+            limit=limit,
+            key=key,
+            sort=sort,
+            query=query,
+        )
 
     def summary(self, topN: int = 10) -> Dict[str, Any]:
         """Top-line OI aggregates (total USD, top tokens, top exchanges).
@@ -80,7 +81,7 @@ class OpenInterest(API):
         """
         if topN < 1 or topN > 30:
             raise ValueError("topN must be between 1 and 30")
-        return self.query("/api/v1/open-interest/summary", {"top_n": topN})
+        return self.request_endpoint("open_interest_summary", top_n=topN)
 
     def history_aggregated(
         self,
@@ -105,9 +106,9 @@ class OpenInterest(API):
             ``from_`` is named with a trailing underscore because ``from``
             is a Python keyword. The wire-level query param remains ``from``.
         """
-        params: Dict[str, Any] = {"token_id": token_id, "interval": interval}
-        if from_ is not None:
-            params["from"] = from_
-        if to is not None:
-            params["to"] = to
-        return self.query("/api/v1/open-interest/history-aggregated", params)
+        return self.request_endpoint(
+            "open_interest_history_aggregated",
+            token_id=token_id,
+            interval=interval,
+            **{"from": from_, "to": to},
+        )

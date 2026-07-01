@@ -50,16 +50,15 @@ class CexAnnouncement(API):
         if sort not in [ASC, DESC]:
             raise ValueError("sort must be either asc or desc")
 
-        params = {
-            "page": page,
-            "limit": limit,
-            "sort": sort,
-            "key": key,
-            "exchange": exchange,
-            "category": category,
-        }
-
-        res = self.query("/api/v1/cex/announcements", params)
+        res = self.request_endpoint(
+            "cex_announcements",
+            page=page,
+            limit=limit,
+            sort=sort,
+            key=key,
+            exchange=exchange,
+            category=category,
+        )
         if res["data"] is None:
             raise ValueError("no data found")
 
