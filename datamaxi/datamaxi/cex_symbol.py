@@ -34,43 +34,26 @@ class CexSymbol(API):
         """
         return self.request_endpoint("cex_symbol_tags", exchange=exchange, base=base)
 
-    def cautions(
-        self, exchange: Optional[str] = None, base: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def cautions(self, exchange: Optional[str] = None) -> Dict[str, Any]:
         """Active caution / investment-warning flags per symbol.
 
         `GET /api/v1/cex/symbol/cautions`
         """
-        params: Dict[str, Any] = {}
-        if exchange is not None:
-            params["exchange"] = exchange
-        if base is not None:
-            params["base"] = base
-        return self.query("/api/v1/cex/symbol/cautions", params)
+        return self.request_endpoint("cex_symbol_cautions", exchange=exchange)
 
-    def delistings(
-        self, exchange: Optional[str] = None, base: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def delistings(self, exchange: Optional[str] = None) -> Dict[str, Any]:
         """Scheduled delistings with timestamps.
 
         `GET /api/v1/cex/symbol/delistings`
         """
-        params: Dict[str, Any] = {}
-        if exchange is not None:
-            params["exchange"] = exchange
-        if base is not None:
-            params["base"] = base
-        return self.query("/api/v1/cex/symbol/delistings", params)
+        return self.request_endpoint("cex_symbol_delistings", exchange=exchange)
 
-    def volume(self, base: str, exchange: Optional[str] = None) -> Dict[str, Any]:
+    def volume(self, base: str) -> Dict[str, Any]:
         """Per-exchange 24h volume for a single base asset.
 
         `GET /api/v1/cex/symbol/volume`
         """
-        params: Dict[str, Any] = {"base": base}
-        if exchange is not None:
-            params["exchange"] = exchange
-        return self.query("/api/v1/cex/symbol/volume", params)
+        return self.request_endpoint("cex_symbol_volume", base=base)
 
     def oi(self, base: str, exchange: Optional[str] = None) -> Dict[str, Any]:
         """Per-exchange Open Interest for a single base asset.

@@ -49,7 +49,7 @@ def test_tags_returns_dict():
 
 @mock_http_response(responses.GET, "/api/v1/cex/symbol/cautions", {"BTC": []})
 def test_cautions_returns_dict():
-    assert _client().cautions(base="BTC") == {"BTC": []}
+    assert _client().cautions(exchange="binance") == {"BTC": []}
 
 
 @mock_http_response(responses.GET, "/api/v1/cex/symbol/delistings", {"BTC": []})
@@ -65,10 +65,9 @@ def test_volume_sends_base_param():
         json={"BTC": {"binance": "100"}},
         status=200,
     )
-    res = _client().volume(base="BTC", exchange="binance")
+    res = _client().volume(base="BTC")
     qs = _qs(responses.calls[0])
     assert qs["base"] == ["BTC"]
-    assert qs["exchange"] == ["binance"]
     assert res == {"BTC": {"binance": "100"}}
 
 

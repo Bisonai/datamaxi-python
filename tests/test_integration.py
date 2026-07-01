@@ -428,18 +428,6 @@ class TestCexToken:
         assert isinstance(result, dict)
         assert "data" in result
 
-    def test_updates_sort_asc(self, datamaxi):
-        """Test token updates with sort=asc."""
-        result, _ = datamaxi.cex.token.updates(sort="asc", limit=10)
-        assert isinstance(result, dict)
-        assert "data" in result
-
-    def test_updates_sort_desc(self, datamaxi):
-        """Test token updates with sort=desc."""
-        result, _ = datamaxi.cex.token.updates(sort="desc", limit=10)
-        assert isinstance(result, dict)
-        assert "data" in result
-
     def test_updates_invalid_type(self, datamaxi):
         """Test that invalid type raises ValueError."""
         with pytest.raises(
@@ -574,26 +562,6 @@ class TestFundingRate:
         )
         assert isinstance(result, pd.DataFrame)
         assert len(result) == 1
-
-    @_FLAKY_PROD_DATA_XFAIL
-    def test_latest_with_sort(self, datamaxi):
-        """Test latest funding rate with sort parameter."""
-        result = datamaxi.funding_rate.latest(
-            exchange="binance",
-            symbol="BTC-USDT",
-            sort="asc",
-        )
-        assert isinstance(result, pd.DataFrame)
-
-    @_FLAKY_PROD_DATA_XFAIL
-    def test_latest_with_limit(self, datamaxi):
-        """Test latest funding rate with limit parameter."""
-        result = datamaxi.funding_rate.latest(
-            exchange="binance",
-            symbol="BTC-USDT",
-            limit=5,
-        )
-        assert isinstance(result, pd.DataFrame)
 
     @_FLAKY_PROD_DATA_XFAIL
     def test_latest_pandas_false(self, datamaxi):

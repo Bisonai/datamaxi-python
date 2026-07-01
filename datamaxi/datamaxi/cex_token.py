@@ -1,6 +1,5 @@
 from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
-from datamaxi.lib.constants import DESC, ASC
 
 
 class CexToken(API):
@@ -20,7 +19,6 @@ class CexToken(API):
         page: int = 1,
         limit: int = 1000,
         type: Optional[str] = None,
-        sort: str = DESC,
     ) -> Tuple[Dict[str, Any], Callable]:
         """Get token update data
 
@@ -31,7 +29,6 @@ class CexToken(API):
         Args:
             page (int): Page number
             limit (int): Limit of data
-            sort (str): Sort order
             type (str): Update type
 
         Returns:
@@ -43,20 +40,12 @@ class CexToken(API):
         if limit < 1:
             raise ValueError("limit must be greater than 0")
 
-        if sort not in [ASC, DESC]:
-            raise ValueError("sort must be either asc or desc")
-
         if type is not None and type not in ["listed", "delisted"]:
             raise ValueError("type must be either listed or delisted when set")
 
-        params = {
-            "page": page,
-            "limit": limit,
-            "type": type,
-            "sort": sort,
-        }
-
-        res = self.query("/api/v1/cex/token/updates", params)
+        res = self.request_endpoint(
+            "cex_token_updates", page=page, limit=limit, type=type
+        )
         if res["data"] is None:
             raise ValueError("no data found")
 
@@ -65,7 +54,6 @@ class CexToken(API):
                 type=type,
                 page=page + 1,
                 limit=limit,
-                sort=sort,
             )
 
         return res, next_request
