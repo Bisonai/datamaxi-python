@@ -32,9 +32,7 @@ class CexSymbol(API):
 
         `GET /api/v1/cex/symbol/tags`
         """
-        return self.request_endpoint(
-            "cex_symbol_tags", exchange=exchange, base=base
-        )
+        return self.request_endpoint("cex_symbol_tags", exchange=exchange, base=base)
 
     def cautions(
         self, exchange: Optional[str] = None, base: Optional[str] = None
@@ -79,9 +77,7 @@ class CexSymbol(API):
 
         `GET /api/v1/cex/symbol/oi`
         """
-        return self.request_endpoint(
-            "cex_symbol_oi", base=base, exchange=exchange
-        )
+        return self.request_endpoint("cex_symbol_oi", base=base, exchange=exchange)
 
     def oi_stats(
         self,
@@ -116,6 +112,4 @@ class CexSymbol(API):
             base (str): Base asset (e.g. ``BTC``).
             window (str): Time window (``1h``, ``24h``, ``7d`` — server caps at 30d).
         """
-        return self.request_endpoint(
-            "cex_symbol_liquidation", base=base, window=window
-        )
+        return self.request_endpoint("cex_symbol_liquidation", base=base, window=window)

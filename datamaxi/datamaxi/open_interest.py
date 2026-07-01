@@ -23,9 +23,7 @@ class OpenInterest(API):
             exchange (str): Exchange (e.g. ``binance``).
             symbol (str): Exchange-native API symbol (e.g. ``BTC-USDT``).
         """
-        return self.request_endpoint(
-            "open_interest", exchange=exchange, symbol=symbol
-        )
+        return self.request_endpoint("open_interest", exchange=exchange, symbol=symbol)
 
     def list(self, exchange: Optional[str] = None) -> Dict[str, Any]:
         """List all (exchange, symbol) pairs currently reporting OI.

@@ -126,6 +126,4 @@ class CexTicker(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        return self.request_endpoint(
-            "ticker_symbols", exchange=exchange, market=market
-        )
+        return self.request_endpoint("ticker_symbols", exchange=exchange, market=market)

@@ -44,9 +44,7 @@ class CexWalletStatus(API):
             ]
         )
 
-        res = self.request_endpoint(
-            "wallet_status", exchange=exchange, asset=asset
-        )
+        res = self.request_endpoint("wallet_status", exchange=exchange, asset=asset)
         if pandas:
             df = pd.DataFrame(res)
             df = df.set_index("network")
