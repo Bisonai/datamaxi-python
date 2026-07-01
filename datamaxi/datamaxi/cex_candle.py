@@ -65,17 +65,15 @@ class CexCandle(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {
-            "exchange": exchange,
-            "market": market,
-            "symbol": symbol,
-            "interval": interval,
-            "from": from_unix,
-            "to": to_unix,
-            "currency": currency,
-        }
-
-        res = self.query("/api/v1/cex/candle", params)
+        res = self.request_endpoint(
+            "cex_candle",
+            exchange=exchange,
+            market=market,
+            symbol=symbol,
+            interval=interval,
+            currency=currency,
+            **{"from": from_unix, "to": to_unix},
+        )
         if res["data"] is None or len(res["data"]) == 0:
             raise ValueError("no data found")
 
@@ -102,9 +100,7 @@ class CexCandle(API):
         if market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {"market": market}
-        url_path = "/api/v1/cex/candle/exchanges"
-        return self.query(url_path, params)
+        return self.request_endpoint("cex_candle_exchanges", market=market)
 
     def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
         """Fetch supported symbols for candle data.
@@ -123,14 +119,9 @@ class CexCandle(API):
         if market is not None and market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
 
-        params = {}
-        if exchange is not None:
-            params["exchange"] = exchange
-        if market is not None:
-            params["market"] = market
-
-        url_path = "/api/v1/cex/candle/symbols"
-        return self.query(url_path, params)
+        return self.request_endpoint(
+            "cex_candle_symbols", exchange=exchange, market=market
+        )
 
     def intervals(self) -> List[str]:
         """Fetch supported intervals for candle data.
@@ -142,5 +133,4 @@ class CexCandle(API):
         Returns:
             List of supported intervals
         """
-        url_path = "/api/v1/cex/candle/intervals"
-        return self.query(url_path)
+        return self.request_endpoint("cex_candle_intervals")
