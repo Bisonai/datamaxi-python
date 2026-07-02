@@ -11,7 +11,7 @@ Usage:
 
 import pytest
 
-from tests.conftest import API_KEY, _FLAKY_PROD_DATA_XFAIL
+from tests.conftest import API_KEY
 
 # Live alive-check / smoke lane: a thin subset of test_integration.py that
 # pings each endpoint once. Skipped without a key and deselected from the
@@ -70,7 +70,6 @@ def test_cex_wallet_status(datamaxi):
     datamaxi.cex.wallet_status.assets(exchange="binance")
 
 
-@_FLAKY_PROD_DATA_XFAIL
 def test_funding_rate(datamaxi):
     """Smoke test for funding rate endpoints."""
     datamaxi.funding_rate.history(exchange="binance", symbol="BTC-USDT")
@@ -87,7 +86,7 @@ def test_forex(datamaxi):
 
 def test_premium(datamaxi):
     """Smoke test for premium endpoints."""
-    datamaxi.premium()
+    datamaxi.premium(limit=10)
     datamaxi.premium.exchanges()
 
 
@@ -97,7 +96,6 @@ def test_telegram(telegram):
     telegram.messages()
 
 
-@_FLAKY_PROD_DATA_XFAIL
 def test_naver(naver):
     """Smoke test for naver endpoints."""
     naver.symbols()

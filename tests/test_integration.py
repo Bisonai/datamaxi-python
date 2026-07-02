@@ -20,8 +20,8 @@ import pytest
 import pandas as pd
 from datetime import datetime, timedelta
 
-from datamaxi.error import ClientError
-from tests.conftest import API_KEY, _FLAKY_PROD_DATA_XFAIL
+from datamaxi.error import ParameterRequiredError
+from tests.conftest import API_KEY
 
 # Live integration lane: exercises prod endpoints with every supported param.
 # Skipped without a key and deselected from the keyless CI lane via the
@@ -74,9 +74,9 @@ class TestCexCandle:
         assert len(result) > 0
 
     def test_symbols_with_market_only(self, datamaxi):
-        """Test getting symbols with only market - requires exchange in API."""
-        # Note: API requires exchange parameter, so this should raise ClientError
-        with pytest.raises(ClientError):
+        """Test getting symbols with only market - exchange is mandatory."""
+        # exchange is a required param, validated client-side before the API call.
+        with pytest.raises(ParameterRequiredError):
             datamaxi.cex.candle.symbols(market="spot")
 
     def test_intervals(self, datamaxi):
@@ -553,7 +553,6 @@ class TestFundingRate:
                 toDateTime=to_dt,
             )
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_latest_basic(self, datamaxi):
         """Test basic latest funding rate fetch."""
         result = datamaxi.funding_rate.latest(
@@ -563,7 +562,6 @@ class TestFundingRate:
         assert isinstance(result, pd.DataFrame)
         assert len(result) == 1
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_latest_pandas_false(self, datamaxi):
         """Test latest funding rate with pandas=False."""
         result = datamaxi.funding_rate.latest(
@@ -675,33 +673,11 @@ class TestPremium:
         result = datamaxi.premium(token_include="bitcoin", limit=10)
         assert isinstance(result, pd.DataFrame)
 
-    @pytest.mark.xfail(
-        reason=(
-            "Flaky against prod data — the SDK raises ValueError('no data found') "
-            "whenever /api/v1/premium returns an empty page, and the specific "
-            "(token_exclude=SHIB, limit=10) combination hits an empty window "
-            "depending on the active premium feed. Test has failed continuously "
-            "on Python 3.14 since 2026-04-22 (well before this PR). Tracked for "
-            "a follow-up that either makes the SDK return empty cleanly or picks "
-            "params with guaranteed-non-empty output."
-        ),
-        strict=False,
-    )
     def test_premium_token_exclude(self, datamaxi):
         """Test premium data with token_exclude filter."""
         result = datamaxi.premium(token_exclude="SHIB", limit=10)
         assert isinstance(result, pd.DataFrame)
 
-    @pytest.mark.xfail(
-        reason=(
-            "Same flake as test_premium_token_exclude — premium(pandas=False, "
-            "limit=10) intermittently hits an empty page on prod and the SDK "
-            "raises instead of returning the empty envelope. Pre-existing "
-            "(failing since 2026-04-22); follow-up should normalize empty-result "
-            "behavior in the SDK."
-        ),
-        strict=False,
-    )
     def test_premium_pandas_false(self, datamaxi):
         """Test premium data with pandas=False."""
         result = datamaxi.premium(pandas=False, limit=10)
@@ -839,27 +815,23 @@ class TestTelegram:
 class TestNaver:
     """Test Naver endpoints with all parameters."""
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_symbols(self, naver):
         """Test getting supported symbols."""
         result = naver.symbols()
         assert isinstance(result, list)
         assert len(result) > 0
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_trend_basic(self, naver):
         """Test basic trend data fetch."""
         result = naver.trend("BTC")
         assert hasattr(result, "head")
         assert len(result) > 0
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_trend_different_symbol(self, naver):
         """Test trend data for different symbol."""
         result = naver.trend("ETH")
         assert hasattr(result, "head")
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_trend_pandas_false(self, naver):
         """Test trend data with pandas=False."""
         result = naver.trend("BTC", pandas=False)
@@ -899,7 +871,6 @@ class TestResponseTypes:
         result = datamaxi.cex.wallet_status(exchange="binance", asset="BTC")
         assert result.index.name == "network"
 
-    @_FLAKY_PROD_DATA_XFAIL
     def test_funding_rate_latest_single_row(self, datamaxi):
         """Test that latest funding rate returns single row."""
         result = datamaxi.funding_rate.latest(
