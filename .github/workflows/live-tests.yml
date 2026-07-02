@@ -20,11 +20,6 @@ permissions:
 jobs:
   live:
     runs-on: ubuntu-latest
-    # Non-blocking: transient prod-data flakiness (cold pods -> 500 "no data
-    # found", empty-page premium ValueError) must not fail a run. PRs never
-    # trigger this lane (main-only), so the required offline build stays the
-    # gating check.
-    continue-on-error: true
 
     steps:
     - uses: actions/checkout@v4
@@ -41,8 +36,29 @@ jobs:
     # Full keyed suite: integration + smoke lanes hit prod with the secret key.
     # DATAMAXI_TIMEOUT bumped past the conftest 30s default to tolerate slow
     # cold pods.
+    #
+    # Non-blocking by design: transient prod-data flakiness (cold pods -> 500
+    # "no data found", empty-page premium ValueError; transient gateway 5xx are
+    # auto-skipped in conftest) must not fail the push. PRs never trigger this
+    # lane (main-only), so the required offline build stays the gating check.
+    # `continue-on-error` is scoped to THIS step (not the job) so setup failures
+    # still go red, and the job's own conclusion stays honest instead of a
+    # green run masking a failed job. `id` lets the next step read the outcome.
     - name: Run live keyed tests
+      id: pytest
+      continue-on-error: true
       env:
         DATAMAXI_API_KEY: ${{ secrets.DATAMAXI_API_KEY }}
         DATAMAXI_TIMEOUT: "60"
       run: python -m pytest tests/ -q
+
+    # Surface the real result. `continue-on-error` above keeps the lane
+    # non-blocking (a red live suite never fails the push), but it also masks
+    # the step as green — so a genuine failure slips by silently. This step
+    # re-reads the pytest outcome and emits a warning annotation + a line in the
+    # run summary when it failed, giving a visible signal without gating.
+    - name: Flag live-suite failure (non-blocking)
+      if: steps.pytest.outcome == 'failure'
+      run: |
+        echo "::warning title=Live keyed tests failed::The non-blocking live lane failed against prod. Inspect the 'Run live keyed tests' step log (transient prod 5xx are auto-skipped, so this is likely a real regression)."
+        echo "⚠️ **Live keyed tests failed** (non-blocking lane). See the 'Run live keyed tests' step log — transient prod 5xx are auto-skipped, so a failure here is likely a real regression." >> "$GITHUB_STEP_SUMMARY"

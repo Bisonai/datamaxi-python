@@ -10,6 +10,7 @@ import time
 import pytest
 
 from datamaxi import Datamaxi, Telegram, Naver
+from datamaxi.api import API
 from datamaxi.error import ServerError
 
 # Transient gateway statuses: the prod edge returns these when an upstream is
@@ -27,27 +28,44 @@ BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
 TIMEOUT = int(os.getenv("DATAMAXI_TIMEOUT") or "30")
 
 
-def live_call(fn, retries=3, backoff=1.0):
-    """Invoke a live-endpoint call, tolerating transient gateway errors.
+@pytest.fixture(autouse=True)
+def _tolerate_transient_gateway(monkeypatch):
+    """Retry transient gateway 5xx at the HTTP boundary for every live call.
 
-    Retries ``fn`` on a transient 5xx (``_TRANSIENT_STATUS``) with linear
-    backoff. If every attempt still hits a transient status the call is
-    ``pytest.skip``-ped rather than failed — the non-blocking live lane must
-    not go red on prod infra flakiness. Any other error (real 5xx, 4xx,
-    assertion) propagates unchanged.
+    The keyed live lane hits prod, whose edge intermittently returns a
+    ``_TRANSIENT_STATUS`` (502/503/504) under load — infra flakiness, not an SDK
+    bug. Wrapping ``API.send_request`` (the single method every endpoint object
+    inherits) makes EVERY live call across ``test_call.py`` and
+    ``test_integration.py`` retry with linear backoff, then ``pytest.skip`` if
+    still transient — so the non-blocking lane never goes red on a transient
+    prod 5xx, without per-test wrapping. Real 5xx/4xx and assertions propagate
+    on the first attempt.
+
+    No-op without a key: the keyless/mocked lanes are skipped (``API_KEY``
+    unset) or mock the transport, so they never raise a transient ``ServerError``
+    and stay untouched.
     """
-    for attempt in range(retries):
-        try:
-            return fn()
-        except ServerError as e:
-            if e.status_code not in _TRANSIENT_STATUS:
-                raise
-            if attempt == retries - 1:
-                pytest.skip(
-                    "transient %s from live endpoint after %d attempts"
-                    % (e.status_code, retries)
-                )
-            time.sleep(backoff * (attempt + 1))
+    if not API_KEY:
+        return
+
+    retries, backoff = 3, 1.0
+    original = API.send_request
+
+    def retrying(self, *args, **kwargs):
+        for attempt in range(retries):
+            try:
+                return original(self, *args, **kwargs)
+            except ServerError as e:
+                if e.status_code not in _TRANSIENT_STATUS:
+                    raise
+                if attempt == retries - 1:
+                    pytest.skip(
+                        "transient %s from live endpoint after %d attempts"
+                        % (e.status_code, retries)
+                    )
+                time.sleep(backoff * (attempt + 1))
+
+    monkeypatch.setattr(API, "send_request", retrying)
 
 
 @pytest.fixture(scope="module")
