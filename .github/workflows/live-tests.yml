@@ -1,0 +1,44 @@
+name: Live keyed tests
+
+# Runs the FULL suite (integration + smoke) against prod using the
+# DATAMAXI_API_KEY secret. Gated to push on `main` only: a dedicated
+# `on: push: branches: [main]` guarantees fork/branch pushes never trigger
+# this lane, so the secret is never exposed to untrusted refs.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'LICENSE'
+      - '.gitignore'
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    # Non-blocking: transient prod-data flakiness (cold pods -> 500 "no data
+    # found", empty-page premium ValueError) must not fail a run. PRs never
+    # trigger this lane (main-only), so the required offline build stays the
+    # gating check.
+    continue-on-error: true
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+    - name: Install dependencies
+      run: uv pip install --system -r requirements/requirements-test.txt
+    # Full keyed suite: integration + smoke lanes hit prod with the secret key.
+    # DATAMAXI_TIMEOUT bumped past the conftest 30s default to tolerate slow
+    # cold pods.
+    - name: Run live keyed tests
+      env:
+        DATAMAXI_API_KEY: ${{ secrets.DATAMAXI_API_KEY }}
+        DATAMAXI_TIMEOUT: "60"
+      run: python -m pytest tests/ -q
