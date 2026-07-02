@@ -1,7 +1,7 @@
 build
 dist
 datamaxi.egg-info/
-__pycache___
+__pycache__/
 *.pyc
 .DS_Store
 
