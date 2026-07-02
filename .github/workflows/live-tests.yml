@@ -13,6 +13,10 @@ on:
       - 'LICENSE'
       - '.gitignore'
 
+# Least-privilege token: the job only checks out code.
+permissions:
+  contents: read
+
 jobs:
   live:
     runs-on: ubuntu-latest
