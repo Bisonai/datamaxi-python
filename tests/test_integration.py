@@ -21,7 +21,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 from datamaxi.error import ParameterRequiredError
-from tests.conftest import API_KEY, live_call
+from tests.conftest import API_KEY
 
 # Live integration lane: exercises prod endpoints with every supported param.
 # Skipped without a key and deselected from the keyless CI lane via the
@@ -587,106 +587,100 @@ class TestPremium:
 
     def test_premium_basic(self, datamaxi):
         """Test basic premium data fetch."""
-        result = live_call(lambda: datamaxi.premium())
+        result = datamaxi.premium()
         assert isinstance(result, pd.DataFrame)
         assert len(result) > 0
 
     def test_premium_with_pagination(self, datamaxi):
         """Test premium data with pagination."""
-        result = live_call(lambda: datamaxi.premium(page=1, limit=10))
+        result = datamaxi.premium(page=1, limit=10)
         assert isinstance(result, pd.DataFrame)
         assert len(result) <= 10
 
     def test_premium_source_exchange(self, datamaxi):
         """Test premium data filtered by source_exchange."""
-        result = live_call(
-            lambda: datamaxi.premium(source_exchange="binance", limit=10)
-        )
+        result = datamaxi.premium(source_exchange="binance", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_target_exchange(self, datamaxi):
         """Test premium data filtered by target_exchange."""
-        result = live_call(lambda: datamaxi.premium(target_exchange="upbit", limit=10))
+        result = datamaxi.premium(target_exchange="upbit", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_with_asset(self, datamaxi):
         """Test premium data filtered by asset."""
-        result = live_call(lambda: datamaxi.premium(asset="BTC", limit=10))
+        result = datamaxi.premium(asset="BTC", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_source_quote(self, datamaxi):
         """Test premium data filtered by source_quote."""
-        result = live_call(lambda: datamaxi.premium(source_quote="USDT", limit=10))
+        result = datamaxi.premium(source_quote="USDT", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_target_quote(self, datamaxi):
         """Test premium data filtered by target_quote."""
-        result = live_call(lambda: datamaxi.premium(target_quote="KRW", limit=10))
+        result = datamaxi.premium(target_quote="KRW", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_source_market(self, datamaxi):
         """Test premium data filtered by source_market."""
-        result = live_call(lambda: datamaxi.premium(source_market="spot", limit=10))
+        result = datamaxi.premium(source_market="spot", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_target_market(self, datamaxi):
         """Test premium data filtered by target_market."""
-        result = live_call(lambda: datamaxi.premium(target_market="spot", limit=10))
+        result = datamaxi.premium(target_market="spot", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_both_markets(self, datamaxi):
         """Test premium data filtered by both markets."""
-        result = live_call(
-            lambda: datamaxi.premium(
-                source_market="spot", target_market="spot", limit=10
-            )
-        )
+        result = datamaxi.premium(source_market="spot", target_market="spot", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_sort_asc(self, datamaxi):
         """Test premium data with sort=asc."""
-        result = live_call(lambda: datamaxi.premium(sort="asc", key="pdp", limit=10))
+        result = datamaxi.premium(sort="asc", key="pdp", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_sort_desc(self, datamaxi):
         """Test premium data with sort=desc."""
-        result = live_call(lambda: datamaxi.premium(sort="desc", key="pdp", limit=10))
+        result = datamaxi.premium(sort="desc", key="pdp", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_volume_filters(self, datamaxi):
         """Test premium data with volume filters."""
-        result = live_call(lambda: datamaxi.premium(min_sv="100000", limit=10))
+        result = datamaxi.premium(min_sv="100000", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_only_transferable(self, datamaxi):
         """Test premium data with only_transferable=True."""
-        result = live_call(lambda: datamaxi.premium(only_transferable=True, limit=10))
+        result = datamaxi.premium(only_transferable=True, limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_with_currency(self, datamaxi):
         """Test premium data with currency parameter."""
-        result = live_call(lambda: datamaxi.premium(currency="KRW", limit=10))
+        result = datamaxi.premium(currency="KRW", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_with_conversion_base(self, datamaxi):
         """Test premium data with conversion_base parameter (USD or USDT)."""
-        result = live_call(lambda: datamaxi.premium(conversion_base="USD", limit=10))
+        result = datamaxi.premium(conversion_base="USD", limit=10)
         assert isinstance(result, pd.DataFrame)
         assert len(result) > 0
 
     def test_premium_token_include(self, datamaxi):
         """Test premium data with token_include filter."""
-        result = live_call(lambda: datamaxi.premium(token_include="bitcoin", limit=10))
+        result = datamaxi.premium(token_include="bitcoin", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_token_exclude(self, datamaxi):
         """Test premium data with token_exclude filter."""
-        result = live_call(lambda: datamaxi.premium(token_exclude="SHIB", limit=10))
+        result = datamaxi.premium(token_exclude="SHIB", limit=10)
         assert isinstance(result, pd.DataFrame)
 
     def test_premium_pandas_false(self, datamaxi):
         """Test premium data with pandas=False."""
-        result = live_call(lambda: datamaxi.premium(pandas=False, limit=10))
+        result = datamaxi.premium(pandas=False, limit=10)
         assert isinstance(result, dict)
         assert "data" in result
 
