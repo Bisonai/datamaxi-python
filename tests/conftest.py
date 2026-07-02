@@ -1,9 +1,7 @@
-"""Shared test fixtures, constants, and markers.
+"""Shared test fixtures and constants.
 
-Centralizes the API key / base URL resolution, the live client fixtures
-(``datamaxi`` / ``telegram`` / ``naver``), and the ``_FLAKY_PROD_DATA_XFAIL``
-marker that ``test_call.py`` and ``test_integration.py`` previously
-copy-pasted verbatim.
+Centralizes the API key / base URL resolution and the live client fixtures
+(``datamaxi`` / ``telegram`` / ``naver``).
 """
 
 import os
@@ -16,34 +14,24 @@ from datamaxi import Datamaxi, Telegram, Naver
 # honor DATAMAXI_API_KEY (preferred) and the legacy API_KEY.
 API_KEY = os.getenv("DATAMAXI_API_KEY") or os.getenv("API_KEY")
 BASE_URL = os.getenv("BASE_URL") or "https://api.datamaxiplus.com"
-
-# Shared xfail marker for tests whose outcome depends on prod-data
-# availability — funding-rate / naver-trend state are NATS-warmed in-memory
-# caches on the API pods, so any cold-start of the API fleet leaves them
-# temporarily empty and the smoke-style tests raise ServerError(500, "no data
-# found"). Marked strict=False so they pass cleanly once the cache is hot.
-_FLAKY_PROD_DATA_XFAIL = pytest.mark.xfail(
-    reason=(
-        "Depends on prod NATS-warmed state; intermittent 500 'no data found' "
-        "on cold pods. Pre-existing flakiness — unrelated to SDK regen."
-    ),
-    strict=False,
-)
+# Live-lane timeout: larger than the SDK's 10s default so slow prod endpoints
+# (e.g. unfiltered premium) don't ReadTimeout on the smoke/integration tests.
+TIMEOUT = int(os.getenv("DATAMAXI_TIMEOUT") or "30")
 
 
 @pytest.fixture(scope="module")
 def datamaxi():
     """Create Datamaxi client for live tests."""
-    return Datamaxi(api_key=API_KEY, base_url=BASE_URL)
+    return Datamaxi(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT)
 
 
 @pytest.fixture(scope="module")
 def telegram():
     """Create Telegram client for live tests."""
-    return Telegram(api_key=API_KEY, base_url=BASE_URL)
+    return Telegram(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT)
 
 
 @pytest.fixture(scope="module")
 def naver():
     """Create Naver client for live tests."""
-    return Naver(api_key=API_KEY, base_url=BASE_URL)
+    return Naver(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT)
