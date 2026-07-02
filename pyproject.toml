@@ -1,6 +1,5 @@
 [project]
 name = "datamaxi"
-version = "0.28.0"
 authors = [
   { name="Bisonai", email="business@bisonai.com" },
 ]
@@ -17,10 +16,11 @@ classifiers = [
    "Programming Language :: Python :: 3.13",
    "Programming Language :: Python :: 3.14",
 ]
-dynamic = ["dependencies"]
+dynamic = ["dependencies", "version"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements/common.txt"]}
+version = {attr = "datamaxi.__version__.__version__"}
 
 [project.urls]
 Homepage = "https://github.com/bisonai/datamaxi-python"
