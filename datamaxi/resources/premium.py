@@ -1,6 +1,7 @@
 from typing import Any, List, Union, Optional
 import pandas as pd
 from datamaxi.api import Resource
+from datamaxi.resources.responses import PremiumResponse
 from datamaxi.lib.constants import Market, SortOrder
 
 
@@ -43,7 +44,7 @@ class Premium(Resource):
         token_exclude: str = None,
         query: str = None,
         pandas: bool = True,
-    ) -> Union[List, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, PremiumResponse]:
         """Fetch premium data
 
         `GET /api/v1/premium`

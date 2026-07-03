@@ -1,5 +1,6 @@
-from typing import Any, Dict, Optional, Tuple, Callable
+from typing import Any, Optional, Tuple, Callable
 from datamaxi.api import Resource
+from datamaxi.resources.responses import TokenUpdateResponse
 
 
 class CexToken(Resource):
@@ -19,7 +20,7 @@ class CexToken(Resource):
         page: int = 1,
         limit: int = 1000,
         type: Optional[str] = None,
-    ) -> Tuple[Dict[str, Any], Callable]:
+    ) -> Tuple[TokenUpdateResponse, Callable]:
         """Get token update data
 
         `GET /api/v1/cex/token/updates`

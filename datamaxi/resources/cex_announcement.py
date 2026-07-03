@@ -1,5 +1,6 @@
-from typing import Any, Dict, Optional, Tuple, Callable
+from typing import Any, Optional, Tuple, Callable
 from datamaxi.api import Resource
+from datamaxi.resources.responses import AnnouncementResponse
 from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
@@ -23,7 +24,7 @@ class CexAnnouncement(Resource):
         key: Optional[str] = None,
         exchange: Optional[str] = None,
         category: Optional[str] = None,
-    ) -> Tuple[Dict[str, Any], Callable]:
+    ) -> Tuple[AnnouncementResponse, Callable]:
         """Get exchange announcements
 
         `GET /api/v1/cex/announcements`

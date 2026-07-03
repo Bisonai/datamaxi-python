@@ -1,6 +1,7 @@
 from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import Resource
+from datamaxi.resources.responses import NaverTrendRow
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.constants import BASE_URL
 
@@ -31,7 +32,9 @@ class Naver(Resource):
         """
         return self.request_endpoint("naver_trend_symbols")
 
-    def trend(self, symbol: str, pandas: bool = True) -> Union[List, pd.DataFrame]:
+    def trend(
+        self, symbol: str, pandas: bool = True
+    ) -> Union[pd.DataFrame, List[NaverTrendRow]]:
         """Get Naver trend for given token symbol
 
         `GET /api/v1/naver-trend`
