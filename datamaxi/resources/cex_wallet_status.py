@@ -1,9 +1,13 @@
-from typing import Any, List, Union
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, List, Union, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.resources.responses import WalletStatusRow
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class CexWalletStatus(Resource):
@@ -47,6 +51,8 @@ class CexWalletStatus(Resource):
 
         res = self.request_endpoint("wallet_status", exchange=exchange, asset=asset)
         if pandas:
+            import pandas as pd
+
             df = pd.DataFrame(res)
             df = df.set_index("network")
             return df

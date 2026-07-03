@@ -47,6 +47,7 @@ class Datamaxi:
         # pool threaded through every sub-client instead of each opening
         # its own. Sub-clients receive it via `api=` and forward it down.
         api = API(api_key, **kwargs)
+        self._api = api
 
         self.cex = Cex(api=api)
         self.funding_rate = FundingRate(api=api)
@@ -62,3 +63,8 @@ class Datamaxi:
         self.open_interest = OpenInterest(api=api)
         self.margin_borrow = MarginBorrow(api=api)
         self.index_price = IndexPrice(api=api)
+
+    def __repr__(self):
+        return "Datamaxi(base_url={!r}, has_key={})".format(
+            self._api.base_url, bool(self._api.api_key)
+        )

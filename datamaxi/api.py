@@ -113,6 +113,11 @@ class API(object):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
+    def __repr__(self):
+        return "{}(base_url={!r}, has_key={})".format(
+            type(self).__name__, self.base_url, bool(self.api_key)
+        )
+
     def query(self, url_path, payload=None):
         return self.send_request("GET", url_path, payload=payload)
 
@@ -282,6 +287,11 @@ class Resource(object):
 
     def __init__(self, api_key=None, api=None, **kwargs):
         self._api = api if api is not None else API(api_key, **kwargs)
+
+    def __repr__(self):
+        return "{}(base_url={!r}, has_key={})".format(
+            type(self).__name__, self._api.base_url, bool(self._api.api_key)
+        )
 
     def request_endpoint(self, op_id, **params):
         return self._api.request_endpoint(op_id, **params)

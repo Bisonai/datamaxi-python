@@ -1,8 +1,12 @@
-from typing import Any, List, Union
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, List, Union, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.resources.responses import ForexRow
 from datamaxi.lib.utils import check_required_parameter
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class Forex(Resource):
@@ -43,6 +47,8 @@ class Forex(Resource):
         res = self.request_endpoint("forex", symbol=symbol)
 
         if pandas:
+            import pandas as pd
+
             return pd.DataFrame([res])
         else:
             return res

@@ -1,8 +1,12 @@
-from typing import Any, List, Union, Optional
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, List, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.resources.responses import PremiumResponse
 from datamaxi.lib.constants import Market, SortOrder
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class Premium(Resource):
@@ -148,6 +152,8 @@ class Premium(Resource):
             raise ValueError("no data found")
 
         if pandas:
+            import pandas as pd
+
             df = pd.DataFrame(
                 [
                     {

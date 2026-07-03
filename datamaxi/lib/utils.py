@@ -1,6 +1,5 @@
 from typing import List
 from urllib.parse import urlencode
-import pandas as pd
 from functools import wraps
 from datamaxi.error import ParameterRequiredError
 from datamaxi.error import AtLeastOneParameterRequiredError
@@ -70,6 +69,8 @@ def encoded_string(query):
 
 
 def convert_to_df(data, header: bool, index: str = None, apply_fn={}):
+    import pandas as pd
+
     df = pd.DataFrame(data)
 
     if header:

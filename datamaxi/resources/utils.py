@@ -1,11 +1,17 @@
-from typing import List
-import pandas as pd
+from __future__ import annotations
+
+from typing import List, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 def convert_data_to_data_frame(
     data: List,
     columns_to_replace: List[str] = [],
 ) -> pd.DataFrame:
+    import pandas as pd
+
     df = pd.DataFrame(data)
     df = df.set_index("d")
 

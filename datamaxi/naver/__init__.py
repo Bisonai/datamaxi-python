@@ -1,9 +1,13 @@
-from typing import Any, List, Union
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, List, Union, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.resources.responses import NaverTrendRow
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.constants import BASE_URL
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class Naver(Resource):
@@ -51,5 +55,7 @@ class Naver(Resource):
         check_required_parameter(symbol, "symbol")
         res = self.request_endpoint("naver_trend", symbol=symbol)
         if pandas:
+            import pandas as pd
+
             return pd.DataFrame(res)
         return res
