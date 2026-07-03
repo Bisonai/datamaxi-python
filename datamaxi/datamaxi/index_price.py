@@ -1,10 +1,10 @@
 from typing import Any, Dict, Optional
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.constants import Interval
 
 
-class IndexPrice(API):
+class IndexPrice(Resource):
     """Client to fetch historical index price data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

@@ -1,9 +1,9 @@
 from typing import Any, Dict, Optional
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.constants import Interval
 
 
-class Liquidation(API):
+class Liquidation(Resource):
     """Client to fetch CEX futures liquidation data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

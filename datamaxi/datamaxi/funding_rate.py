@@ -1,13 +1,13 @@
 from typing import Any, Callable, Tuple, List, Dict, Union
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
-class FundingRate(API):
+class FundingRate(Resource):
     """Client to fetch funding rate data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

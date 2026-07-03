@@ -1,4 +1,5 @@
 from typing import Any
+from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
 from datamaxi.datamaxi.cex import Cex
 from datamaxi.datamaxi.funding_rate import FundingRate
@@ -42,17 +43,22 @@ class Datamaxi:
         if "base_url" not in kwargs:
             kwargs["base_url"] = BASE_URL
 
-        self.cex = Cex(api_key, **kwargs)
-        self.funding_rate = FundingRate(api_key, **kwargs)
-        self.forex = Forex(api_key, **kwargs)
-        self.premium = Premium(api_key, **kwargs)
+        # One shared transport — a single `requests.Session` / connection
+        # pool threaded through every sub-client instead of each opening
+        # its own. Sub-clients receive it via `api=` and forward it down.
+        api = API(api_key, **kwargs)
+
+        self.cex = Cex(api=api)
+        self.funding_rate = FundingRate(api=api)
+        self.forex = Forex(api=api)
+        self.premium = Premium(api=api)
         # Futures-only surfaces. Top-level on the client so callers
         # reach them via `client.liquidation.heatmap(...)` /
         # `client.open_interest.summary(...)` — matches the
         # `/api/v1/{liquidation,open-interest}/*` REST grouping and
         # mirrors the equivalent typed wrappers in the Rust SDK
         # (`datamaxi::generated::{Liquidation, OpenInterest}`).
-        self.liquidation = Liquidation(api_key, **kwargs)
-        self.open_interest = OpenInterest(api_key, **kwargs)
-        self.margin_borrow = MarginBorrow(api_key, **kwargs)
-        self.index_price = IndexPrice(api_key, **kwargs)
+        self.liquidation = Liquidation(api=api)
+        self.open_interest = OpenInterest(api=api)
+        self.margin_borrow = MarginBorrow(api=api)
+        self.index_price = IndexPrice(api=api)

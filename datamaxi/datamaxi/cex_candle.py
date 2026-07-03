@@ -1,13 +1,13 @@
 from typing import Any, List, Dict, Union, Optional
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
 from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD, Market, Interval
 
 
-class CexCandle(API):
+class CexCandle(Resource):
     """Client to fetch CEX candle data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

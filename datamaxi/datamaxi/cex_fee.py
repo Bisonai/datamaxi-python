@@ -1,9 +1,9 @@
 from typing import Any, List, Dict
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 
 
-class CexFee(API):
+class CexFee(Resource):
     """Client to fetch CEX trading fee data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

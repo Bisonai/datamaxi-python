@@ -1,8 +1,8 @@
 from typing import Any, Dict, Optional
-from datamaxi.api import API
+from datamaxi.api import Resource
 
 
-class CexSymbol(API):
+class CexSymbol(Resource):
     """Client to fetch per-base / per-symbol CEX metadata + aggregates."""
 
     def __init__(self, api_key=None, **kwargs: Any):

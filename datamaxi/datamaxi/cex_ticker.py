@@ -1,11 +1,11 @@
 from typing import Any, List, Dict, Union
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.constants import SPOT, FUTURES, Market
 
 
-class CexTicker(API):
+class CexTicker(Resource):
     """Client to fetch ticker data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

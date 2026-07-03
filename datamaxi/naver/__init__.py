@@ -1,11 +1,11 @@
 from typing import Any, List, Union
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.constants import BASE_URL
 
 
-class Naver(API):
+class Naver(Resource):
     """Client to fetch Naver trend data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
