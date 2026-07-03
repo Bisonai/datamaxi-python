@@ -22,7 +22,7 @@ data = maxi.index_price(
 - `from_` is spelled with a trailing underscore because `from` is a Python
   keyword; the wire-level query param remains `from`.
 
-::: datamaxi.datamaxi.IndexPrice
+::: datamaxi.resources.IndexPrice
     options:
       show_submodules: true
       show_source: false

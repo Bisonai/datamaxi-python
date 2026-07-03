@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.forex import Forex
+from datamaxi.resources.forex import Forex
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

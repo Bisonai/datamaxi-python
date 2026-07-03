@@ -24,7 +24,7 @@ more_data, _ = next_request()
 
 - Pagination returns a `next_request` function for the next page.
 
-::: datamaxi.datamaxi.CexAnnouncement
+::: datamaxi.resources.CexAnnouncement
     options:
       show_submodules: true
       show_source: false

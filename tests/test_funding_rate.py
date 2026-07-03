@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.funding_rate import FundingRate
+from datamaxi.resources.funding_rate import FundingRate
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

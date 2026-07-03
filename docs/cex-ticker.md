@@ -25,7 +25,7 @@ ticker = maxi.cex.ticker.get(
 - Use `conversion_base` when you need cross-currency conversions.
 - Set `pandas=False` to return the raw dict response.
 
-::: datamaxi.datamaxi.CexTicker
+::: datamaxi.resources.CexTicker
     options:
       show_submodules: true
       show_source: false

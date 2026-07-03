@@ -9,8 +9,8 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.liquidation import Liquidation
-from datamaxi.datamaxi.open_interest import OpenInterest
+from datamaxi.resources.liquidation import Liquidation
+from datamaxi.resources.open_interest import OpenInterest
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

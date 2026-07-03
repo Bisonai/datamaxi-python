@@ -39,7 +39,7 @@ history = maxi.liquidation.symbol_history(
 - `heatmap` and `stats` accept `window` of `1h`, `4h`, or `24h`; `heatmap`'s `topN` must be between 1 and 30.
 - `symbol_history` accepts `interval` of `5m`, `15m`, or `1h` and `window` of `24h`, `72h`, or `7d`.
 
-::: datamaxi.datamaxi.Liquidation
+::: datamaxi.resources.Liquidation
     options:
       show_submodules: true
       show_source: false

@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.cex_candle import CexCandle
+from datamaxi.resources.cex_candle import CexCandle
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

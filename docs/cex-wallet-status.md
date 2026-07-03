@@ -19,7 +19,7 @@ status = maxi.cex.wallet_status(exchange="binance", asset="BTC")
 
 - Set `pandas=False` to return the raw dict response.
 
-::: datamaxi.datamaxi.CexWalletStatus
+::: datamaxi.resources.CexWalletStatus
     options:
       show_submodules: true
       show_source: false

@@ -39,7 +39,7 @@ liquidation = maxi.cex.symbol.liquidation(base="BTC", window="24h")
 - `metadata`, `tags`, `cautions`, and `delistings` take optional `exchange` / `base` filters; omit both to fetch across all symbols.
 - `oi_stats` accepts `currency` of `USD` or `KRW`.
 
-::: datamaxi.datamaxi.CexSymbol
+::: datamaxi.resources.CexSymbol
     options:
       show_submodules: true
       show_source: false

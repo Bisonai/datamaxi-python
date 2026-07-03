@@ -38,7 +38,7 @@ history = maxi.open_interest.history_aggregated(
 - `overview` requires `sort` to be `asc` or `desc`; `summary` accepts `topN` between 1 and 30.
 - `history_aggregated` uses the token id (e.g. `bitcoin`), not a ticker, and accepts `interval` of `5m`, `15m`, `1h`, `4h`, or `1d`. Pass `from_` / `to` as unix-ms (`from_` maps to the wire param `from`).
 
-::: datamaxi.datamaxi.OpenInterest
+::: datamaxi.resources.OpenInterest
     options:
       show_submodules: true
       show_source: false

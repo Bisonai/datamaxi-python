@@ -5,7 +5,7 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.margin_borrow import MarginBorrow
+from datamaxi.resources.margin_borrow import MarginBorrow
 from datamaxi.error import ParameterRequiredError
 from tests.util import mock_http_response
 

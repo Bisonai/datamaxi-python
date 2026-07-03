@@ -1,31 +1,31 @@
 from typing import Any
 from datamaxi.api import API
 from datamaxi.lib.constants import BASE_URL
-from datamaxi.datamaxi.cex import Cex
-from datamaxi.datamaxi.funding_rate import FundingRate
-from datamaxi.datamaxi.forex import Forex
-from datamaxi.datamaxi.premium import Premium
-from datamaxi.datamaxi.liquidation import Liquidation
-from datamaxi.datamaxi.open_interest import OpenInterest
-from datamaxi.datamaxi.margin_borrow import MarginBorrow
-from datamaxi.datamaxi.index_price import IndexPrice
-from datamaxi.datamaxi.cex_candle import CexCandle  # used in documentation # noqa:F401
-from datamaxi.datamaxi.cex_ticker import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex import Cex
+from datamaxi.resources.funding_rate import FundingRate
+from datamaxi.resources.forex import Forex
+from datamaxi.resources.premium import Premium
+from datamaxi.resources.liquidation import Liquidation
+from datamaxi.resources.open_interest import OpenInterest
+from datamaxi.resources.margin_borrow import MarginBorrow
+from datamaxi.resources.index_price import IndexPrice
+from datamaxi.resources.cex_candle import CexCandle  # used in documentation # noqa:F401
+from datamaxi.resources.cex_ticker import (  # used in documentation # noqa:F401
     CexTicker,
 )
-from datamaxi.datamaxi.cex_fee import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex_fee import (  # used in documentation # noqa:F401
     CexFee,
 )
-from datamaxi.datamaxi.cex_wallet_status import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex_wallet_status import (  # used in documentation # noqa:F401
     CexWalletStatus,
 )
-from datamaxi.datamaxi.cex_announcement import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex_announcement import (  # used in documentation # noqa:F401
     CexAnnouncement,
 )
-from datamaxi.datamaxi.cex_token import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex_token import (  # used in documentation # noqa:F401
     CexToken,
 )
-from datamaxi.datamaxi.cex_symbol import (  # used in documentation # noqa:F401
+from datamaxi.resources.cex_symbol import (  # used in documentation # noqa:F401
     CexSymbol,
 )
 

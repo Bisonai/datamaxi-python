@@ -2,14 +2,14 @@
 
 import responses
 
-from datamaxi.datamaxi.cex import Cex
-from datamaxi.datamaxi.cex_candle import CexCandle
-from datamaxi.datamaxi.cex_ticker import CexTicker
-from datamaxi.datamaxi.cex_fee import CexFee
-from datamaxi.datamaxi.cex_wallet_status import CexWalletStatus
-from datamaxi.datamaxi.cex_announcement import CexAnnouncement
-from datamaxi.datamaxi.cex_token import CexToken
-from datamaxi.datamaxi.cex_symbol import CexSymbol
+from datamaxi.resources.cex import Cex
+from datamaxi.resources.cex_candle import CexCandle
+from datamaxi.resources.cex_ticker import CexTicker
+from datamaxi.resources.cex_fee import CexFee
+from datamaxi.resources.cex_wallet_status import CexWalletStatus
+from datamaxi.resources.cex_announcement import CexAnnouncement
+from datamaxi.resources.cex_token import CexToken
+from datamaxi.resources.cex_symbol import CexSymbol
 from tests.util import mock_http_response
 
 BASE_URL = "https://api.datamaxiplus.com"
