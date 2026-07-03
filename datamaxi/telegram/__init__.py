@@ -1,9 +1,9 @@
 from typing import Any, Dict, Optional, Tuple, Callable
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.constants import BASE_URL, SortOrder
 
 
-class Telegram(API):
+class Telegram(Resource):
     """Client to fetch Telegram data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

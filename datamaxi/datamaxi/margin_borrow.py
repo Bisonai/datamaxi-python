@@ -1,9 +1,9 @@
 from typing import Any, Dict
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 
 
-class MarginBorrow(API):
+class MarginBorrow(Resource):
     """Client to fetch margin borrow data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

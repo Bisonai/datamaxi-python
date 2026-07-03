@@ -1,8 +1,8 @@
 from typing import Any, Dict, Optional, Tuple, Callable
-from datamaxi.api import API
+from datamaxi.api import Resource
 
 
-class CexToken(API):
+class CexToken(Resource):
     """Client to fetch token update data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

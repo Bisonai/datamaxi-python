@@ -1,9 +1,9 @@
 from typing import Any, Dict, Optional
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.constants import Interval, SortOrder
 
 
-class OpenInterest(API):
+class OpenInterest(Resource):
     """Client to fetch CEX futures Open Interest data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

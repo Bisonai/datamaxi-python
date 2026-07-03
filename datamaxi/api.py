@@ -179,3 +179,26 @@ class API(object):
                 error_data,
             )
         raise ServerError(status_code, response.text)
+
+
+class Resource(object):
+    """Base for endpoint/resource clients — *composes* an `API` transport
+    rather than subclassing it.
+
+    Every resource holds a shared `API` (one `requests.Session` /
+    connection pool) instead of each opening its own. A resource either
+    receives an already-built ``api`` (the normal path — `Datamaxi`
+    constructs one and threads it through the whole tree via ``**kwargs``)
+    or builds its own from ``api_key``/``**kwargs`` for direct, standalone
+    instantiation. The thin `request_endpoint`/`query` forwarders keep the
+    call sites in the resource methods unchanged (`self.request_endpoint(...)`).
+    """
+
+    def __init__(self, api_key=None, api=None, **kwargs):
+        self._api = api if api is not None else API(api_key, **kwargs)
+
+    def request_endpoint(self, op_id, **params):
+        return self._api.request_endpoint(op_id, **params)
+
+    def query(self, url_path, payload=None):
+        return self._api.query(url_path, payload=payload)

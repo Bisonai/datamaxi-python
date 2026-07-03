@@ -1,10 +1,10 @@
 from typing import Any, List, Dict, Union
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 
 
-class Forex(API):
+class Forex(Resource):
     """Client to fetch forex data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

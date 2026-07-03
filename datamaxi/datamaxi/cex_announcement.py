@@ -1,9 +1,9 @@
 from typing import Any, Dict, Optional, Tuple, Callable
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
-class CexAnnouncement(API):
+class CexAnnouncement(Resource):
     """Client to fetch announcement data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

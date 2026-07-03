@@ -1,5 +1,5 @@
 from typing import Any
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.datamaxi.cex_candle import CexCandle
 from datamaxi.datamaxi.cex_ticker import CexTicker
 from datamaxi.datamaxi.cex_fee import CexFee
@@ -9,7 +9,7 @@ from datamaxi.datamaxi.cex_token import CexToken
 from datamaxi.datamaxi.cex_symbol import CexSymbol
 
 
-class Cex(API):
+class Cex(Resource):
     """Client to fetch CEX data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):

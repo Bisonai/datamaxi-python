@@ -1,10 +1,10 @@
 from typing import Any, List, Union, Optional
 import pandas as pd
-from datamaxi.api import API
+from datamaxi.api import Resource
 from datamaxi.lib.constants import Market, SortOrder
 
 
-class Premium(API):
+class Premium(Resource):
     """Client to fetch premium data from DataMaxi+ API."""
 
     def __init__(self, api_key=None, **kwargs: Any):
