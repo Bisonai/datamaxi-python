@@ -1,17 +1,13 @@
 import os
-import json
-from json import JSONDecodeError
 import logging
 import warnings
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from .__version__ import __version__
-from datamaxi.error import ClientError, ServerError
 from datamaxi.lib.utils import cleanNoneValue
 from datamaxi.lib.utils import encoded_string
-from datamaxi.lib.utils import check_required_parameter
-from datamaxi._endpoints import ENDPOINTS
+from datamaxi._dispatch import resolve_endpoint, raise_for_error
 
 
 class API(object):
@@ -130,43 +126,12 @@ class API(object):
         required params, and default values. Callers pass wire-level parameter
         names as keyword arguments (e.g. ``**{"from": from_unix}``); semantic
         validation and response shaping stay in the calling client method.
+
+        The resolution itself lives in ``datamaxi._dispatch.resolve_endpoint``
+        so the async client reuses identical param handling.
         """
-        ep = ENDPOINTS.get(op_id)
-        if ep is None:
-            raise ValueError(f"unknown endpoint operation_id: {op_id!r}")
-
-        spec_params = ep.get("params", {})
-
-        unknown = set(params) - set(spec_params)
-        if unknown:
-            raise ValueError(
-                f"{op_id}: unknown parameter(s) {sorted(unknown)}; "
-                f"expected one of {sorted(spec_params)}"
-            )
-
-        # Resolve each value: caller-supplied, else the registry default.
-        values = {}
-        for name, meta in spec_params.items():
-            val = params.get(name)
-            if val is None and "default" in meta:
-                val = meta["default"]
-            values[name] = val
-
-        # Enforce params the spec marks required.
-        for name, meta in spec_params.items():
-            if meta.get("required"):
-                check_required_parameter(values.get(name), name)
-
-        # Split path vs query params; interpolate path params into the URL.
-        url_path = ep["path"]
-        query_params = {}
-        for name, meta in spec_params.items():
-            if meta.get("in") == "path":
-                url_path = url_path.replace("{" + name + "}", str(values[name]))
-            else:
-                query_params[name] = values[name]
-
-        return self.send_request(ep["method"], url_path, payload=query_params)
+        method, url_path, query_params = resolve_endpoint(op_id, **params)
+        return self.send_request(method, url_path, payload=query_params)
 
     def send_request(self, http_method, url_path, payload=None):
         if payload is None:
@@ -229,24 +194,7 @@ class API(object):
         }.get(http_method, "GET")
 
     def _handle_exception(self, response):
-        status_code = response.status_code
-        if status_code < 400:
-            return
-        if 400 <= status_code < 500:
-            try:
-                err = json.loads(response.text)
-            except JSONDecodeError:
-                raise ClientError(status_code, response.text, None, response.headers)
-            error_data = None
-            if "data" in err:
-                error_data = err["data"]
-            raise ClientError(
-                status_code,
-                err["error"],
-                response.headers,
-                error_data,
-            )
-        raise ServerError(status_code, response.text)
+        raise_for_error(response.status_code, response.text, response.headers)
 
 
 class ResponseMeta(object):

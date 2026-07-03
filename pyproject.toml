@@ -18,6 +18,9 @@ classifiers = [
 ]
 dynamic = ["dependencies", "version"]
 
+[project.optional-dependencies]
+async = ["httpx>=0.27,<1"]
+
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements/common.txt"]}
 version = {attr = "datamaxi.__version__.__version__"}
