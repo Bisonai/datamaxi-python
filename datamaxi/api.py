@@ -2,6 +2,7 @@ import os
 import json
 from json import JSONDecodeError
 import logging
+import warnings
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -38,8 +39,11 @@ class API(object):
             base_url (str): The base URL for the DataMaxi+ API.
             timeout (int): The timeout for the requests.
             proxies (dict): The proxies for the requests.
-            show_limit_usage (bool): Show the limit usage.
-            show_header (bool): Show the header.
+            show_limit_usage (bool): Deprecated. Metadata is now always
+                available via ``last_response``; this flag no longer changes
+                the return shape. Kept for backward compatibility.
+            show_header (bool): Deprecated. See ``show_limit_usage`` /
+                ``last_response``.
             max_retries (int): Retry attempts for transient gateway 5xx
                 and connection/read errors. Set to 0 to disable.
             retry_backoff (float): Backoff factor between retries (seconds);
@@ -53,6 +57,22 @@ class API(object):
         self.proxies = proxies if type(proxies) is dict else None
         self.show_limit_usage = bool(show_limit_usage)
         self.show_header = bool(show_header)
+        for _flag, _name in (
+            (show_limit_usage, "show_limit_usage"),
+            (show_header, "show_header"),
+        ):
+            if _flag:
+                warnings.warn(
+                    "'{}' is deprecated and no longer changes the return "
+                    "shape; read response metadata from "
+                    "`client.<resource>.last_response` instead. It will be "
+                    "removed in a future major release.".format(_name),
+                    DeprecationWarning,
+                    stacklevel=2,
+                )
+        # Metadata for the most recent successful response (see #140).
+        # Populated on every call; None until the first request.
+        self.last_response = None
 
         self.session = requests.Session()
         self.session.headers.update(
@@ -164,28 +184,33 @@ class API(object):
             data = response.json()
         except ValueError:
             data = response.text
-        result = {}
 
-        if self.show_limit_usage:
-            limit_usage = {}
-            for key in response.headers.keys():
-                key = key.lower()
-                if (
-                    key.startswith("x-ratelimit-limit")
-                    or key.startswith("x-ratelimit-remaining")
-                    or key.startswith("x-ratelimit-reset")
-                ):
-                    limit_usage[key] = response.headers[key]
-            result["limit_usage"] = limit_usage
-
-        if self.show_header:
-            result["header"] = response.headers
-
-        if len(result) != 0:
-            result["data"] = data
-            return result
+        # Always expose response metadata via last_response instead of
+        # wrapping it into the return value. The old wrapper keyed rate-limit
+        # info under "data" too, which collided with the backend's own
+        # ``{"data": ...}`` envelope and corrupted the DataFrame code paths.
+        self.last_response = ResponseMeta(
+            status_code=response.status_code,
+            headers=response.headers,
+            limit_usage=self._extract_limit_usage(response.headers),
+            data=data,
+        )
 
         return data
+
+    @staticmethod
+    def _extract_limit_usage(headers):
+        """Pull the ``x-ratelimit-*`` triplet out of the response headers."""
+        usage = {}
+        for key in headers.keys():
+            k = key.lower()
+            if (
+                k.startswith("x-ratelimit-limit")
+                or k.startswith("x-ratelimit-remaining")
+                or k.startswith("x-ratelimit-reset")
+            ):
+                usage[k] = headers[key]
+        return usage
 
     def _prepare_params(self, params):
         return encoded_string(cleanNoneValue(params))
@@ -219,6 +244,29 @@ class API(object):
         raise ServerError(status_code, response.text)
 
 
+class ResponseMeta(object):
+    """Metadata for the most recent successful response.
+
+    Exposed via ``client.<resource>.last_response`` so per-call info
+    (rate-limit usage, headers, status) no longer has to be wrapped into —
+    and change the shape of — the returned payload. The client tree shares
+    one transport, so this reflects the *last* call made through it.
+    """
+
+    __slots__ = ("status_code", "headers", "limit_usage", "data")
+
+    def __init__(self, status_code, headers, limit_usage, data):
+        self.status_code = status_code
+        self.headers = headers
+        self.limit_usage = limit_usage
+        self.data = data
+
+    def __repr__(self):
+        return "ResponseMeta(status_code={}, limit_usage={})".format(
+            self.status_code, self.limit_usage
+        )
+
+
 class Resource(object):
     """Base for endpoint/resource clients — *composes* an `API` transport
     rather than subclassing it.
@@ -240,3 +288,8 @@ class Resource(object):
 
     def query(self, url_path, payload=None):
         return self._api.query(url_path, payload=payload)
+
+    @property
+    def last_response(self):
+        """`ResponseMeta` for the most recent call through the shared transport."""
+        return self._api.last_response
