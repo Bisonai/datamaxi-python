@@ -5,7 +5,7 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.cex_announcement import CexAnnouncement
+from datamaxi.resources.cex_announcement import CexAnnouncement
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

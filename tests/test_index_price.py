@@ -5,7 +5,7 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.datamaxi.index_price import IndexPrice
+from datamaxi.resources.index_price import IndexPrice
 from datamaxi.error import ParameterRequiredError
 from tests.util import mock_http_response
 

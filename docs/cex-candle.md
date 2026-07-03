@@ -28,7 +28,7 @@ df = maxi.cex.candle(
 - `from_unix` and `to_unix` use Unix timestamps in seconds.
 - Set `pandas=False` to return the raw dict response.
 
-::: datamaxi.datamaxi.CexCandle
+::: datamaxi.resources.CexCandle
     options:
       show_submodules: true
       show_source: false

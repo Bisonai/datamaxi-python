@@ -12,7 +12,7 @@ maxi = Datamaxi(api_key="YOUR_API_KEY")
 data = maxi.margin_borrow(asset="BTC")
 ```
 
-::: datamaxi.datamaxi.MarginBorrow
+::: datamaxi.resources.MarginBorrow
     options:
       show_submodules: true
       show_source: false

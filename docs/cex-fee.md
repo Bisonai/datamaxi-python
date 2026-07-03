@@ -19,7 +19,7 @@ fees = maxi.cex.fee(exchange="binance", symbol="BTC-USDT")
 
 - You can omit `symbol` to get all symbols for the exchange.
 
-::: datamaxi.datamaxi.CexFee
+::: datamaxi.resources.CexFee
     options:
       show_submodules: true
       show_source: false

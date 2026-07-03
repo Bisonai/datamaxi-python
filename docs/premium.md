@@ -28,7 +28,7 @@ data = maxi.premium(
 - Use `min_`/`max_` filters to narrow price difference, volume, and funding data.
 - Set `pandas=False` to return the raw list response.
 
-::: datamaxi.datamaxi.Premium
+::: datamaxi.resources.Premium
     options:
       show_submodules: true
       show_source: false

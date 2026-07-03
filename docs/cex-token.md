@@ -23,7 +23,7 @@ more_data, _ = next_request()
 
 - Use `type="listed"` or `type="delisted"` to filter update types.
 
-::: datamaxi.datamaxi.CexToken
+::: datamaxi.resources.CexToken
     options:
       show_submodules: true
       show_source: false

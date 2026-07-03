@@ -28,7 +28,7 @@ latest = maxi.funding_rate.latest(exchange="binance", symbol="BTC-USDT")
 - Pagination returns a `next_request` function for the next page.
 - Set `pandas=False` to return the raw dict response.
 
-::: datamaxi.datamaxi.FundingRate
+::: datamaxi.resources.FundingRate
     options:
       show_submodules: true
       show_source: false

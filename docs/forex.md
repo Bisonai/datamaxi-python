@@ -17,7 +17,7 @@ data = maxi.forex(symbol="USD-KRW")
 
 - Set `pandas=False` to return the raw dict response.
 
-::: datamaxi.datamaxi.Forex
+::: datamaxi.resources.Forex
     options:
       show_submodules: true
       show_source: false
