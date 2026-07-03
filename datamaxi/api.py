@@ -3,6 +3,8 @@ import json
 from json import JSONDecodeError
 import logging
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from .__version__ import __version__
 from datamaxi.error import ClientError, ServerError
 from datamaxi.lib.utils import cleanNoneValue
@@ -24,6 +26,9 @@ class API(object):
         proxies=None,
         show_limit_usage=False,
         show_header=False,
+        max_retries=3,
+        retry_backoff=0.5,
+        retry_statuses=(502, 503, 504),
     ):
         """Client API constructor. `api_key` can be set
         as an environment variable `DATAMAXI_API_KEY`.
@@ -35,6 +40,12 @@ class API(object):
             proxies (dict): The proxies for the requests.
             show_limit_usage (bool): Show the limit usage.
             show_header (bool): Show the header.
+            max_retries (int): Retry attempts for transient gateway 5xx
+                and connection/read errors. Set to 0 to disable.
+            retry_backoff (float): Backoff factor between retries (seconds);
+                see urllib3 ``Retry(backoff_factor=...)``.
+            retry_statuses (tuple): HTTP status codes treated as transient
+                and retried (GET only).
         """
         self.api_key = api_key or os.environ.get("DATAMAXI_API_KEY")
         self.base_url = base_url
@@ -51,9 +62,36 @@ class API(object):
                 "X-DTMX-APIKEY": str(self.api_key),
             }
         )
+        self._mount_retries(max_retries, retry_backoff, retry_statuses)
 
         self._logger = logging.getLogger(__name__)
         return
+
+    def _mount_retries(self, max_retries, retry_backoff, retry_statuses):
+        """Mount a urllib3 retry policy on the session's HTTP adapters.
+
+        Retries transient gateway 5xx (``retry_statuses``) and
+        connection/read failures on idempotent GETs, honoring any
+        ``Retry-After`` header. ``raise_on_status`` is False so an
+        exhausted retry returns the final response and the SDK's own
+        ``_handle_exception`` still raises ``ServerError`` — preserving
+        the existing error contract instead of leaking urllib3's
+        ``MaxRetryError``.
+        """
+        retry = Retry(
+            total=max_retries,
+            connect=max_retries,
+            read=max_retries,
+            status=max_retries,
+            status_forcelist=tuple(retry_statuses),
+            allowed_methods=frozenset(["GET"]),
+            backoff_factor=retry_backoff,
+            respect_retry_after_header=True,
+            raise_on_status=False,
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
 
     def query(self, url_path, payload=None):
         return self.send_request("GET", url_path, payload=payload)
