@@ -1,9 +1,10 @@
-from typing import Any, Callable, Tuple, List, Dict, Union
+from typing import Any, Callable, Tuple, List, Union
 import pandas as pd
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.resources.utils import convert_data_to_data_frame
+from datamaxi.resources.responses import FundingHistoryResponse, LatestFundingRate
 from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
@@ -29,7 +30,7 @@ class FundingRate(Resource):
         toDateTime: str = None,
         sort: SortOrder = DESC,
         pandas: bool = True,
-    ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
+    ) -> Union[Tuple[pd.DataFrame, Callable], Tuple[FundingHistoryResponse, Callable]]:
         """Fetch historical funding rate data
 
         `GET /api/v1/funding-rate/history`
@@ -105,7 +106,7 @@ class FundingRate(Resource):
         exchange: str = None,
         symbol: str = None,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, LatestFundingRate]:
         """Fetch latest funding rate data
 
         `GET /api/v1/funding-rate/latest`

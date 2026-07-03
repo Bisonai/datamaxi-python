@@ -1,6 +1,7 @@
-from typing import Any, List, Dict, Union
+from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import Resource
+from datamaxi.resources.responses import WalletStatusRow
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.lib.utils import check_required_parameter
 
@@ -22,7 +23,7 @@ class CexWalletStatus(Resource):
         exchange: str,
         asset: str,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, List[WalletStatusRow]]:
         """Fetch transfer status data
 
         `GET /api/v1/wallet-status`

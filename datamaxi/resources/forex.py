@@ -1,6 +1,7 @@
-from typing import Any, List, Dict, Union
+from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import Resource
+from datamaxi.resources.responses import ForexRow
 from datamaxi.lib.utils import check_required_parameter
 
 
@@ -23,7 +24,7 @@ class Forex(Resource):
         self,
         symbol: str,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, ForexRow]:
         """Fetch forex data
 
         `GET /api/v1/forex`

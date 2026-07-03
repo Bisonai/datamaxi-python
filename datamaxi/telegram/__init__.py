@@ -1,5 +1,9 @@
-from typing import Any, Dict, Optional, Tuple, Callable
+from typing import Any, Optional, Tuple, Callable
 from datamaxi.api import Resource
+from datamaxi.resources.responses import (
+    TelegramChannelsResponse,
+    TelegramMessagesResponse,
+)
 from datamaxi.lib.constants import BASE_URL, SortOrder
 
 
@@ -24,7 +28,7 @@ class Telegram(Resource):
         category: Optional[str] = None,
         key: Optional[str] = None,
         sort: SortOrder = "desc",
-    ) -> Tuple[Dict[str, Any], Callable]:
+    ) -> Tuple[TelegramChannelsResponse, Callable]:
         """Get Telegram supported channels
 
         `GET /api/v1/telegram/channels`
@@ -80,7 +84,7 @@ class Telegram(Resource):
         sort: SortOrder = "desc",
         category: Optional[str] = None,
         search_query: Optional[str] = None,
-    ) -> Tuple[Dict[str, Any], Callable]:
+    ) -> Tuple[TelegramMessagesResponse, Callable]:
         """Get Telegram posts for given channel username
 
         `GET /api/v1/telegram/messages`
