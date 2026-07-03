@@ -6,8 +6,10 @@ value, and the show_limit_usage/show_header flags no longer change the shape.
 """
 
 import re
+import warnings
 import responses
 import pandas as pd
+import pytest
 
 from datamaxi.resources.cex_ticker import CexTicker
 from datamaxi.api import API, ResponseMeta
@@ -61,14 +63,36 @@ def test_last_response_populated_after_call():
 @responses.activate
 def test_flags_do_not_change_return_shape():
     _add_ticker()
-    c = CexTicker(
-        api_key="k", base_url=BASE_URL, show_limit_usage=True, show_header=True
-    )
+    with pytest.warns(DeprecationWarning):
+        c = CexTicker(
+            api_key="k", base_url=BASE_URL, show_limit_usage=True, show_header=True
+        )
     df = c.get(exchange="binance", market="spot", symbol="BTC-USDT")
     # Previously these flags wrapped the return in a dict; now the shape is
     # identical to a plain client and metadata comes from last_response.
     assert isinstance(df, pd.DataFrame)
     assert c.last_response.limit_usage["x-ratelimit-limit"] == "100"
+
+
+def test_deprecated_flags_emit_warning():
+    with pytest.warns(DeprecationWarning, match="show_limit_usage"):
+        API(api_key="k", base_url=BASE_URL, show_limit_usage=True)
+    with pytest.warns(DeprecationWarning, match="show_header"):
+        API(api_key="k", base_url=BASE_URL, show_header=True)
+
+
+def test_no_warning_without_flags():
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        API(api_key="k", base_url=BASE_URL)
+        API(api_key="k", base_url=BASE_URL, show_limit_usage=False, show_header=False)
+    flag_warnings = [
+        w
+        for w in caught
+        if issubclass(w.category, DeprecationWarning)
+        and ("show_limit_usage" in str(w.message) or "show_header" in str(w.message))
+    ]
+    assert flag_warnings == []
 
 
 @responses.activate

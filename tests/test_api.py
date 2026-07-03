@@ -80,14 +80,15 @@ def test_API_with_extra_parameters():
     base_url = random_str()
     proxies = {"https": "https://1.2.3.4:8080"}
 
-    client = API(
-        api_key,
-        base_url=base_url,
-        show_limit_usage=True,
-        show_header=True,
-        timeout=0.1,
-        proxies=proxies,
-    )
+    with pytest.warns(DeprecationWarning):
+        client = API(
+            api_key,
+            base_url=base_url,
+            show_limit_usage=True,
+            show_header=True,
+            timeout=0.1,
+            proxies=proxies,
+        )
 
     assert isinstance(client, API)
     assert client.api_key == api_key
@@ -106,12 +107,14 @@ def test_API_with_custom_timeout():
 
 
 def test_API_with_show_limit_usage():
-    """Tests the API initialization with show_limit_usage enabled."""
-    client = API(show_limit_usage=True)
+    """Tests the API initialization with show_limit_usage enabled (deprecated)."""
+    with pytest.warns(DeprecationWarning, match="show_limit_usage"):
+        client = API(show_limit_usage=True)
     assert client.show_limit_usage is True
 
 
 def test_API_with_show_header():
-    """Tests the API initialization with show_header enabled."""
-    client = API(show_header=True)
+    """Tests the API initialization with show_header enabled (deprecated)."""
+    with pytest.warns(DeprecationWarning, match="show_header"):
+        client = API(show_header=True)
     assert client.show_header is True

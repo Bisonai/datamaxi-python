@@ -2,6 +2,7 @@ import os
 import json
 from json import JSONDecodeError
 import logging
+import warnings
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -56,6 +57,19 @@ class API(object):
         self.proxies = proxies if type(proxies) is dict else None
         self.show_limit_usage = bool(show_limit_usage)
         self.show_header = bool(show_header)
+        for _flag, _name in (
+            (show_limit_usage, "show_limit_usage"),
+            (show_header, "show_header"),
+        ):
+            if _flag:
+                warnings.warn(
+                    "'{}' is deprecated and no longer changes the return "
+                    "shape; read response metadata from "
+                    "`client.<resource>.last_response` instead. It will be "
+                    "removed in a future major release.".format(_name),
+                    DeprecationWarning,
+                    stacklevel=2,
+                )
         # Metadata for the most recent successful response (see #140).
         # Populated on every call; None until the first request.
         self.last_response = None
