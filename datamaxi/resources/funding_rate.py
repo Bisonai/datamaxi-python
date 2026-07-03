@@ -1,11 +1,15 @@
-from typing import Any, Callable, Tuple, List, Union
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, Callable, Tuple, List, Union, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.resources.utils import convert_data_to_data_frame
 from datamaxi.resources.responses import FundingHistoryResponse, LatestFundingRate
 from datamaxi.lib.constants import ASC, DESC, SortOrder
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class FundingRate(Resource):
@@ -126,6 +130,8 @@ class FundingRate(Resource):
         )
 
         if pandas:
+            import pandas as pd
+
             df = pd.DataFrame([res])
             df = df.set_index("d")
             return df

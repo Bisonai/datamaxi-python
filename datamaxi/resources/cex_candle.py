@@ -1,11 +1,15 @@
-from typing import Any, List, Dict, Union, Optional
-import pandas as pd
+from __future__ import annotations
+
+from typing import Any, List, Dict, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.resources.utils import convert_data_to_data_frame
 from datamaxi.resources.responses import CandleResponse
 from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD, Market, Interval
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 class CexCandle(Resource):
