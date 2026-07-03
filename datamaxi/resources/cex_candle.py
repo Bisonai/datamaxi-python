@@ -4,6 +4,7 @@ from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.resources.utils import convert_data_to_data_frame
+from datamaxi.resources.responses import CandleResponse
 from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD, Market, Interval
 
 
@@ -32,7 +33,7 @@ class CexCandle(Resource):
         from_unix: str = None,
         to_unix: str = None,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, CandleResponse]:
         """Fetch candle data
 
         `GET /api/v1/cex/candle`
