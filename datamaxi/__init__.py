@@ -20,6 +20,12 @@ from datamaxi.lib.constants import (  # noqa: F401
     Interval,
     SortOrder,
 )
+from datamaxi.resources.responses import (  # noqa: F401
+    CandleRow,
+    CandleResponse,
+    TickerData,
+    TickerResponse,
+)
 
 __all__ = [
     "Datamaxi",
@@ -42,4 +48,8 @@ __all__ = [
     "Market",
     "Interval",
     "SortOrder",
+    "CandleRow",
+    "CandleResponse",
+    "TickerData",
+    "TickerResponse",
 ]

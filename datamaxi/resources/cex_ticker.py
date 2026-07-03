@@ -1,7 +1,8 @@
-from typing import Any, List, Dict, Union
+from typing import Any, List, Union
 import pandas as pd
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameters
+from datamaxi.resources.responses import TickerResponse
 from datamaxi.lib.constants import SPOT, FUTURES, Market
 
 
@@ -26,7 +27,7 @@ class CexTicker(Resource):
         conversion_base: str = None,
         include_source: bool = False,
         pandas: bool = True,
-    ) -> Union[Dict, pd.DataFrame]:
+    ) -> Union[pd.DataFrame, TickerResponse]:
         """Fetch ticker data
 
         `GET /api/v1/ticker`
