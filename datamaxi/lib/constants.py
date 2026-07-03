@@ -1,4 +1,4 @@
-from typing import Final
+from typing import Final, Literal
 
 BASE_URL: Final = "https://api.datamaxiplus.com"
 SPOT: Final = "spot"
@@ -27,3 +27,10 @@ SUPPORTED_INTERVALS: Final = [
 
 ASC: Final = "asc"
 DESC: Final = "desc"
+
+# Type aliases for the enumerable string parameters used across the client
+# surface. These are hint-only (Literal is not enforced at runtime), so
+# passing a bare string still works — they exist to give IDE/mypy checking.
+Market = Literal["spot", "futures"]
+Interval = Literal["1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d"]
+SortOrder = Literal["asc", "desc"]

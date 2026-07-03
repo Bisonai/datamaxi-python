@@ -1,5 +1,6 @@
 from typing import Any, Dict, Optional
 from datamaxi.api import API
+from datamaxi.lib.constants import Interval, SortOrder
 
 
 class OpenInterest(API):
@@ -40,7 +41,7 @@ class OpenInterest(API):
         page: int = 1,
         limit: int = 20,
         key: str = "binance",
-        sort: str = "desc",
+        sort: SortOrder = "desc",
         query: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Paginated token × exchange OI matrix.
@@ -84,7 +85,7 @@ class OpenInterest(API):
     def history_aggregated(
         self,
         token_id: str,
-        interval: str = "1h",
+        interval: Interval = "1h",
         from_: Optional[int] = None,
         to: Optional[int] = None,
     ) -> Dict[str, Any]:

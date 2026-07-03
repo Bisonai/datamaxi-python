@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
+from datamaxi.lib.constants import Interval
 
 
 class IndexPrice(API):
@@ -23,7 +24,7 @@ class IndexPrice(API):
         asset: str,
         from_: Optional[str] = None,
         to: Optional[str] = None,
-        interval: str = "5m",
+        interval: Interval = "5m",
     ) -> Dict[str, Any]:
         """Fetch historical index price data for a single asset.
 

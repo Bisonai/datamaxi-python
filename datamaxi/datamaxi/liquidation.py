@@ -1,5 +1,6 @@
 from typing import Any, Dict, Optional
 from datamaxi.api import API
+from datamaxi.lib.constants import Interval
 
 
 class Liquidation(API):
@@ -130,7 +131,7 @@ class Liquidation(API):
         symbol: str,
         quote: str = "USDT",
         exchange: Optional[str] = None,
-        interval: str = "5m",
+        interval: Interval = "5m",
         window: str = "24h",
     ) -> Dict[str, Any]:
         """Bucketed long / short liquidation USD time series + price line.

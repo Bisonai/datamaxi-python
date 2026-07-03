@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
-from datamaxi.lib.constants import BASE_URL
+from datamaxi.lib.constants import BASE_URL, SortOrder
 
 
 class Telegram(API):
@@ -23,7 +23,7 @@ class Telegram(API):
         limit: int = 1000,
         category: Optional[str] = None,
         key: Optional[str] = None,
-        sort: str = "desc",
+        sort: SortOrder = "desc",
     ) -> Tuple[Dict[str, Any], Callable]:
         """Get Telegram supported channels
 
@@ -77,7 +77,7 @@ class Telegram(API):
         page: int = 1,
         limit: int = 1000,
         key: Optional[str] = None,
-        sort: str = "desc",
+        sort: SortOrder = "desc",
         category: Optional[str] = None,
         search_query: Optional[str] = None,
     ) -> Tuple[Dict[str, Any], Callable]:

@@ -1,10 +1,10 @@
-from typing import Any, List, Dict, Union
+from typing import Any, List, Dict, Union, Optional
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
-from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD
+from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD, Market, Interval
 
 
 class CexCandle(API):
@@ -25,10 +25,10 @@ class CexCandle(API):
     def __call__(
         self,
         exchange: str,
-        market: str,
+        market: Market,
         symbol: str,
         currency: str = USD,
-        interval: str = INTERVAL_1D,
+        interval: Interval = INTERVAL_1D,
         from_unix: str = None,
         to_unix: str = None,
         pandas: bool = True,
@@ -82,7 +82,7 @@ class CexCandle(API):
         else:
             return res
 
-    def exchanges(self, market: str) -> List[str]:
+    def exchanges(self, market: Market) -> List[str]:
         """Fetch supported exchanges for candle data.
 
         `GET /api/v1/cex/candle/exchanges`
@@ -102,7 +102,9 @@ class CexCandle(API):
 
         return self.request_endpoint("cex_candle_exchanges", market=market)
 
-    def symbols(self, exchange: str = None, market: str = None) -> List[Dict]:
+    def symbols(
+        self, exchange: str = None, market: Optional[Market] = None
+    ) -> List[Dict]:
         """Fetch supported symbols for candle data.
 
         `GET /api/v1/cex/candle/symbols`
