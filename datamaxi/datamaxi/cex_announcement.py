@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Tuple, Callable
 from datamaxi.api import API
-from datamaxi.lib.constants import ASC, DESC
+from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
 class CexAnnouncement(API):
@@ -19,7 +19,7 @@ class CexAnnouncement(API):
         self,
         page: int = 1,
         limit: int = 1000,
-        sort: str = DESC,
+        sort: SortOrder = DESC,
         key: Optional[str] = None,
         exchange: Optional[str] = None,
         category: Optional[str] = None,

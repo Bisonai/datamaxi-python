@@ -4,7 +4,7 @@ from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.datamaxi.utils import convert_data_to_data_frame
-from datamaxi.lib.constants import ASC, DESC
+from datamaxi.lib.constants import ASC, DESC, SortOrder
 
 
 class FundingRate(API):
@@ -27,7 +27,7 @@ class FundingRate(API):
         limit: int = 1000,
         fromDateTime: str = None,
         toDateTime: str = None,
-        sort: str = DESC,
+        sort: SortOrder = DESC,
         pandas: bool = True,
     ) -> Union[Tuple[Dict, Callable], Tuple[pd.DataFrame, Callable]]:
         """Fetch historical funding rate data

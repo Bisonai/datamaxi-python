@@ -2,7 +2,7 @@ from typing import Any, List, Dict, Union
 import pandas as pd
 from datamaxi.api import API
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.lib.constants import SPOT, FUTURES
+from datamaxi.lib.constants import SPOT, FUTURES, Market
 
 
 class CexTicker(API):
@@ -21,7 +21,7 @@ class CexTicker(API):
         self,
         exchange: str,
         symbol: str,
-        market: str,
+        market: Market,
         currency: str = None,
         conversion_base: str = None,
         include_source: bool = False,
@@ -77,7 +77,7 @@ class CexTicker(API):
 
     def exchanges(
         self,
-        market: str,
+        market: Market,
     ) -> List[str]:
         """Fetch supported exchanges for ticker data.
 
@@ -105,7 +105,7 @@ class CexTicker(API):
     def symbols(
         self,
         exchange: str,
-        market: str,
+        market: Market,
     ) -> List[str]:
         """Fetch supported symbols for ticker data.
 

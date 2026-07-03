@@ -1,6 +1,7 @@
-from typing import Any, List, Union
+from typing import Any, List, Union, Optional
 import pandas as pd
 from datamaxi.api import API
+from datamaxi.lib.constants import Market, SortOrder
 
 
 class Premium(API):
@@ -25,7 +26,7 @@ class Premium(API):
         asset: str = None,
         source_quote: str = None,
         target_quote: str = None,
-        sort: str = None,
+        sort: Optional[SortOrder] = None,
         key: str = None,
         page: int = 1,
         limit: int = 100,
@@ -33,8 +34,8 @@ class Premium(API):
         conversion_base: str = None,
         min_sv: str = None,
         min_tv: str = None,
-        source_market: str = None,
-        target_market: str = None,
+        source_market: Optional[Market] = None,
+        target_market: Optional[Market] = None,
         only_transferable: bool = False,
         network: str = None,
         premium_type: str = None,
