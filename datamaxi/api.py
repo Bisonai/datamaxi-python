@@ -39,9 +39,9 @@ class API(object):
         self.api_key = api_key or os.environ.get("DATAMAXI_API_KEY")
         self.base_url = base_url
         self.timeout = timeout
-        self.proxies = None
-        self.show_limit_usage = False
-        self.show_header = False
+        self.proxies = proxies if type(proxies) is dict else None
+        self.show_limit_usage = bool(show_limit_usage)
+        self.show_header = bool(show_header)
 
         self.session = requests.Session()
         self.session.headers.update(
@@ -51,15 +51,6 @@ class API(object):
                 "X-DTMX-APIKEY": str(self.api_key),
             }
         )
-
-        if show_limit_usage is True:
-            self.show_limit_usage = True
-
-        if show_header is True:
-            self.show_header = True
-
-        if type(proxies) is dict:
-            self.proxies = proxies
 
         self._logger = logging.getLogger(__name__)
         return
