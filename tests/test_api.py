@@ -134,3 +134,9 @@ def test_API_context_manager_closes_session():
         client.session.close = lambda: setattr(client.session, "closed", True)
         assert client.__enter__() is client
     assert client.session.closed is True
+
+
+def test_dispatch_request_unknown_method_falls_back_to_get():
+    """Unknown HTTP methods should fall back to a callable (session.get), not a string."""
+    client = API()
+    assert client._dispatch_request("PATCH") == client.session.get
