@@ -12,12 +12,14 @@ class ClientError(Error):
         self.header = header
         # return data if it's returned from server
         self.error_data = error_data
+        super().__init__(f"{status_code}: {error_message}")
 
 
 class ServerError(Error):
     def __init__(self, status_code, message):
         self.status_code = status_code
         self.message = message
+        super().__init__(f"{status_code}: {message}")
 
 
 class ParameterRequiredError(Error):
