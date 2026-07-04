@@ -84,74 +84,78 @@ the key stays out of source code):
 export DATAMAXI_API_KEY="your_api_key"
 ```
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi, Telegram, Naver
+```python
+from datamaxi import Datamaxi, Telegram, Naver
 
-    # Clients read DATAMAXI_API_KEY from the environment automatically.
-    # Alternatively, pass api_key="your_api_key" explicitly to each client.
-    maxi = Datamaxi()
-    telegram = Telegram()
-    naver = Naver()
+# Clients read DATAMAXI_API_KEY from the environment automatically.
+# Alternatively, pass api_key="your_api_key" explicitly to each client.
+maxi = Datamaxi()
+telegram = Telegram()
+naver = Naver()
 
-    # Fetch CEX candle data (returns pandas DataFrame)
-    df = maxi.cex.candle(
-        exchange="binance",
-        symbol="BTC-USDT",
-        interval="1d",
-        market="spot"
-    )
-    print(df.head())
+# Fetch CEX candle data (returns pandas DataFrame)
+df = maxi.cex.candle(
+    exchange="binance",
+    symbol="BTC-USDT",
+    interval="1d",
+    market="spot"
+)
+print(df.head())
 
-    # Fetch ticker data
-    ticker = maxi.cex.ticker.get(
-        exchange="binance",
-        symbol="BTC-USDT",
-        market="spot"
-    )
-    print(ticker)
+# Fetch ticker data
+ticker = maxi.cex.ticker.get(
+    exchange="binance",
+    symbol="BTC-USDT",
+    market="spot"
+)
+print(ticker)
 
-    # Fetch premium data
-    premium = maxi.premium(asset="BTC")
-    print(premium.head())
-    ```
+# Fetch premium data
+premium = maxi.premium(asset="BTC")
+print(premium.head())
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        # Reads DATAMAXI_API_KEY from the environment automatically.
-        # Alternatively, pass api_key="your_api_key" explicitly.
-        async with AsyncDatamaxi() as client:
-            # Fetch CEX candle data (returns pandas DataFrame)
-            df = await client.cex.candle(
-                exchange="binance",
-                symbol="BTC-USDT",
-                interval="1d",
-                market="spot",
-            )
-            print(df.head())
-
-            # Fetch ticker data
-            ticker = await client.cex.ticker.get(
-                exchange="binance",
-                symbol="BTC-USDT",
-                market="spot",
-            )
-            print(ticker)
-
-            # Fetch premium data
-            premium = await client.premium(asset="BTC")
-            print(premium.head())
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    # Reads DATAMAXI_API_KEY from the environment automatically.
+    # Alternatively, pass api_key="your_api_key" explicitly.
+    async with AsyncDatamaxi() as client:
+        # Fetch CEX candle data (returns pandas DataFrame)
+        df = await client.cex.candle(
+            exchange="binance",
+            symbol="BTC-USDT",
+            interval="1d",
+            market="spot",
+        )
+        print(df.head())
+
+        # Fetch ticker data
+        ticker = await client.cex.ticker.get(
+            exchange="binance",
+            symbol="BTC-USDT",
+            market="spot",
+        )
+        print(ticker)
+
+        # Fetch premium data
+        premium = await client.premium(asset="BTC")
+        print(premium.head())
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Async Client
 

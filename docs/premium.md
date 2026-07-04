@@ -4,52 +4,56 @@ Cross-exchange premium data for arbitrage and market dislocation analysis.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    exchanges = maxi.premium.exchanges()
+exchanges = maxi.premium.exchanges()
 
-    data = maxi.premium(
-        source_exchange="binance",
-        target_exchange="upbit",
-        asset="BTC",
-        source_market="spot",
-        target_market="spot",
-        sort="desc",
-        key="pdp",
-        limit=100,
-    )
-    ```
+data = maxi.premium(
+    source_exchange="binance",
+    target_exchange="upbit",
+    asset="BTC",
+    source_market="spot",
+    target_market="spot",
+    sort="desc",
+    key="pdp",
+    limit=100,
+)
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            exchanges = await client.premium.exchanges()
-
-            data = await client.premium(
-                source_exchange="binance",
-                target_exchange="upbit",
-                asset="BTC",
-                source_market="spot",
-                target_market="spot",
-                sort="desc",
-                key="pdp",
-                limit=100,
-            )
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        exchanges = await client.premium.exchanges()
+
+        data = await client.premium(
+            source_exchange="binance",
+            target_exchange="upbit",
+            asset="BTC",
+            source_market="spot",
+            target_market="spot",
+            sort="desc",
+            key="pdp",
+            limit=100,
+        )
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

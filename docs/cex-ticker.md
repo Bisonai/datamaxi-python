@@ -4,46 +4,50 @@ Real-time ticker snapshots for centralized exchanges.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    exchanges = maxi.cex.ticker.exchanges(market="spot")
-    symbols = maxi.cex.ticker.symbols(exchange="binance", market="spot")
+exchanges = maxi.cex.ticker.exchanges(market="spot")
+symbols = maxi.cex.ticker.symbols(exchange="binance", market="spot")
 
-    ticker = maxi.cex.ticker.get(
-        exchange="binance",
-        symbol="BTC-USDT",
-        market="spot",
-        currency="USD",
-    )
-    ```
+ticker = maxi.cex.ticker.get(
+    exchange="binance",
+    symbol="BTC-USDT",
+    market="spot",
+    currency="USD",
+)
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            exchanges = await client.cex.ticker.exchanges(market="spot")
-            symbols = await client.cex.ticker.symbols(exchange="binance", market="spot")
-
-            ticker = await client.cex.ticker.get(
-                exchange="binance",
-                symbol="BTC-USDT",
-                market="spot",
-                currency="USD",
-            )
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        exchanges = await client.cex.ticker.exchanges(market="spot")
+        symbols = await client.cex.ticker.symbols(exchange="binance", market="spot")
+
+        ticker = await client.cex.ticker.get(
+            exchange="binance",
+            symbol="BTC-USDT",
+            market="spot",
+            currency="USD",
+        )
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

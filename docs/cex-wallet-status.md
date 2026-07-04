@@ -4,36 +4,40 @@ Deposit and withdrawal availability for centralized exchange assets.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    exchanges = maxi.cex.wallet_status.exchanges()
-    assets = maxi.cex.wallet_status.assets(exchange="binance")
+exchanges = maxi.cex.wallet_status.exchanges()
+assets = maxi.cex.wallet_status.assets(exchange="binance")
 
-    status = maxi.cex.wallet_status(exchange="binance", asset="BTC")
-    ```
+status = maxi.cex.wallet_status(exchange="binance", asset="BTC")
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            exchanges = await client.cex.wallet_status.exchanges()
-            assets = await client.cex.wallet_status.assets(exchange="binance")
-
-            status = await client.cex.wallet_status(exchange="binance", asset="BTC")
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        exchanges = await client.cex.wallet_status.exchanges()
+        assets = await client.cex.wallet_status.assets(exchange="binance")
+
+        status = await client.cex.wallet_status(exchange="binance", asset="BTC")
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

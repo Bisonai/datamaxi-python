@@ -4,52 +4,56 @@ Historical OHLCV candle data for centralized exchanges.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    exchanges = maxi.cex.candle.exchanges(market="spot")
-    symbols = maxi.cex.candle.symbols(exchange="binance", market="spot")
-    intervals = maxi.cex.candle.intervals()
+exchanges = maxi.cex.candle.exchanges(market="spot")
+symbols = maxi.cex.candle.symbols(exchange="binance", market="spot")
+intervals = maxi.cex.candle.intervals()
 
-    df = maxi.cex.candle(
-        exchange="binance",
-        symbol="BTC-USDT",
-        interval="1d",
-        market="spot",
-        from_unix=1704067200,
-        to_unix=1706745600,
-    )
-    ```
+df = maxi.cex.candle(
+    exchange="binance",
+    symbol="BTC-USDT",
+    interval="1d",
+    market="spot",
+    from_unix=1704067200,
+    to_unix=1706745600,
+)
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            exchanges = await client.cex.candle.exchanges(market="spot")
-            symbols = await client.cex.candle.symbols(exchange="binance", market="spot")
-            intervals = await client.cex.candle.intervals()
-
-            df = await client.cex.candle(
-                exchange="binance",
-                symbol="BTC-USDT",
-                interval="1d",
-                market="spot",
-                from_unix=1704067200,
-                to_unix=1706745600,
-            )
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        exchanges = await client.cex.candle.exchanges(market="spot")
+        symbols = await client.cex.candle.symbols(exchange="binance", market="spot")
+        intervals = await client.cex.candle.intervals()
+
+        df = await client.cex.candle(
+            exchange="binance",
+            symbol="BTC-USDT",
+            interval="1d",
+            market="spot",
+            from_unix=1704067200,
+            to_unix=1706745600,
+        )
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

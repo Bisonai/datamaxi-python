@@ -4,36 +4,40 @@ Trading fee schedules for centralized exchanges.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    exchanges = maxi.cex.fee.exchanges()
-    symbols = maxi.cex.fee.symbols(exchange="binance")
+exchanges = maxi.cex.fee.exchanges()
+symbols = maxi.cex.fee.symbols(exchange="binance")
 
-    fees = maxi.cex.fee(exchange="binance", symbol="BTC-USDT")
-    ```
+fees = maxi.cex.fee(exchange="binance", symbol="BTC-USDT")
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            exchanges = await client.cex.fee.exchanges()
-            symbols = await client.cex.fee.symbols(exchange="binance")
-
-            fees = await client.cex.fee(exchange="binance", symbol="BTC-USDT")
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        exchanges = await client.cex.fee.exchanges()
+        symbols = await client.cex.fee.symbols(exchange="binance")
+
+        fees = await client.cex.fee(exchange="binance", symbol="BTC-USDT")
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

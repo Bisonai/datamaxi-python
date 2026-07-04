@@ -4,30 +4,34 @@ Margin borrow data for a single asset.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    data = maxi.margin_borrow(asset="BTC")
-    ```
+data = maxi.margin_borrow(asset="BTC")
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            data = await client.margin_borrow(asset="BTC")
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        data = await client.margin_borrow(asset="BTC")
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ::: datamaxi.resources.MarginBorrow
     options:

@@ -23,6 +23,7 @@ plugins:
 markdown_extensions:
   - toc:
       permalink: true
+  - md_in_html
   - codehilite
   - pymdownx.highlight:
       use_pygments: true
