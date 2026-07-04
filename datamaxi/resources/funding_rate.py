@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Tuple, List, Union, TYPE_CHECKING
+from typing import Any, Callable, Tuple, List, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
@@ -30,8 +30,8 @@ class FundingRate(Resource):
         symbol: str,
         page: int = 1,
         limit: int = 1000,
-        fromDateTime: str = None,
-        toDateTime: str = None,
+        fromDateTime: Optional[str] = None,
+        toDateTime: Optional[str] = None,
         sort: SortOrder = DESC,
         pandas: bool = True,
     ) -> Union[Tuple[pd.DataFrame, Callable], Tuple[FundingHistoryResponse, Callable]]:
@@ -107,8 +107,8 @@ class FundingRate(Resource):
 
     def latest(
         self,
-        exchange: str = None,
-        symbol: str = None,
+        exchange: Optional[str] = None,
+        symbol: Optional[str] = None,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, LatestFundingRate]:
         """Fetch latest funding rate data

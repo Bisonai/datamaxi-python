@@ -37,8 +37,8 @@ class AsyncCexCandle(AsyncResource):
         symbol: str,
         currency: str = USD,
         interval: Interval = INTERVAL_1D,
-        from_unix: str = None,
-        to_unix: str = None,
+        from_unix: Optional[str] = None,
+        to_unix: Optional[str] = None,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, CandleResponse]:
         """Fetch candle data (async). See ``datamaxi.Datamaxi.cex.candle``."""
@@ -79,7 +79,7 @@ class AsyncCexCandle(AsyncResource):
         return await self.request_endpoint("cex_candle_exchanges", market=market)
 
     async def symbols(
-        self, exchange: str = None, market: Optional[Market] = None
+        self, exchange: Optional[str] = None, market: Optional[Market] = None
     ) -> List[Dict]:
         if market is not None and market not in [SPOT, FUTURES]:
             raise ValueError("market must be either spot or futures")
@@ -97,8 +97,8 @@ class AsyncCexTicker(AsyncResource):
         exchange: str,
         symbol: str,
         market: Market,
-        currency: str = None,
-        conversion_base: str = None,
+        currency: Optional[str] = None,
+        conversion_base: Optional[str] = None,
         include_source: bool = False,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, TickerResponse]:
@@ -154,8 +154,8 @@ class AsyncCexTicker(AsyncResource):
 class AsyncCexFee(AsyncResource):
     async def __call__(
         self,
-        exchange: str = None,
-        symbol: str = None,
+        exchange: Optional[str] = None,
+        symbol: Optional[str] = None,
     ) -> List[Dict]:
         return await self.request_endpoint("cex_fees", exchange=exchange, symbol=symbol)
 

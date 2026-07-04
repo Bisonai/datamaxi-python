@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Callable, Tuple, List, Union, TYPE_CHECKING
+from typing import Callable, Tuple, List, Union, Optional, TYPE_CHECKING
 
 from datamaxi.aio._core import AsyncResource
 from datamaxi.lib.utils import check_required_parameter, check_required_parameters
@@ -20,8 +20,8 @@ class AsyncFundingRate(AsyncResource):
         symbol: str,
         page: int = 1,
         limit: int = 1000,
-        fromDateTime: str = None,
-        toDateTime: str = None,
+        fromDateTime: Optional[str] = None,
+        toDateTime: Optional[str] = None,
         sort: SortOrder = DESC,
         pandas: bool = True,
     ) -> Union[Tuple[pd.DataFrame, Callable], Tuple[FundingHistoryResponse, Callable]]:
@@ -75,8 +75,8 @@ class AsyncFundingRate(AsyncResource):
 
     async def latest(
         self,
-        exchange: str = None,
-        symbol: str = None,
+        exchange: Optional[str] = None,
+        symbol: Optional[str] = None,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, LatestFundingRate]:
         res = await self.request_endpoint(
