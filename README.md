@@ -313,7 +313,6 @@ data, next_request = maxi.cex.token.updates(
     page=1,                  # Optional: page number
     limit=1000,              # Optional: items per page
     type=None,               # Optional: "listed" or "delisted"
-    sort="desc"              # Optional: "asc" or "desc"
 )
 ```
 
