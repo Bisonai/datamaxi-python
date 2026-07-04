@@ -31,7 +31,11 @@ from datamaxi.resources.cex_symbol import (  # used in documentation # noqa:F401
 
 
 class Datamaxi:
-    """Client to fetch unified data from DataMaxi+ API."""
+    """Client to fetch unified data from DataMaxi+ API.
+
+    Use as a context manager so the underlying ``requests.Session`` is
+    closed, or call :meth:`close` explicitly.
+    """
 
     def __init__(self, api_key=None, **kwargs: Any):
         """Initialize the object.
@@ -63,6 +67,15 @@ class Datamaxi:
         self.open_interest = OpenInterest(api=api)
         self.margin_borrow = MarginBorrow(api=api)
         self.index_price = IndexPrice(api=api)
+
+    def close(self):
+        self._api.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.close()
 
     def __repr__(self):
         return "Datamaxi(base_url={!r}, has_key={})".format(
