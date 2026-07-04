@@ -19,6 +19,7 @@ This package is compatible with Python v3.10+.
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Quickstart](#quickstart)
+- [Async Client](#async-client)
 - [API Reference](#api-reference)
   - [CEX Candle Data](#cex-candle-data)
   - [CEX Ticker Data](#cex-ticker-data)
@@ -112,6 +113,95 @@ print(ticker)
 # Fetch premium data
 premium = maxi.premium(asset="BTC")
 print(premium.head())
+```
+
+## Async Client
+
+For `asyncio` applications the SDK ships an async client, `AsyncDatamaxi`, built
+on [httpx](https://www.python-httpx.org/). It mirrors the sync `Datamaxi`
+resource tree — the same endpoints and arguments — but every request method is a
+coroutine and must be `await`ed.
+
+Install the async extra (pulls in `httpx`):
+
+```shell
+pip install "datamaxi[async]"
+```
+
+Use it as an async context manager so the underlying HTTP client is closed
+cleanly (or call `await client.aclose()` yourself). The async client reads the
+same `DATAMAXI_API_KEY` environment variable as the sync client:
+
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
+
+
+async def main():
+    # Reads DATAMAXI_API_KEY from the environment, like the sync client.
+    # Alternatively, pass api_key="your_api_key" explicitly.
+    async with AsyncDatamaxi() as client:
+        # Fetch CEX candle data (returns pandas DataFrame)
+        df = await client.cex.candle(
+            exchange="binance",
+            symbol="BTC-USDT",
+            interval="1d",
+            market="spot",
+        )
+        print(df.head())
+
+        # Fetch ticker data
+        ticker = await client.cex.ticker.get(
+            exchange="binance",
+            symbol="BTC-USDT",
+            market="spot",
+        )
+        print(ticker)
+
+        # Fetch premium data
+        premium = await client.premium(asset="BTC")
+        print(premium.head())
+
+
+asyncio.run(main())
+```
+
+If you do not use `async with`, close the client explicitly:
+
+```python
+client = AsyncDatamaxi()
+try:
+    df = await client.cex.candle(
+        exchange="binance", symbol="BTC-USDT", interval="1d", market="spot"
+    )
+finally:
+    await client.aclose()
+```
+
+Notes on the async client:
+
+- Every data method is a coroutine — `await` it (e.g. `await client.cex.candle(...)`).
+- `AsyncDatamaxi` mirrors the sync resource tree: `cex.*` (candle, ticker, fee,
+  wallet_status, announcement, token, symbol), `funding_rate`, `forex`,
+  `premium`, `liquidation`, `open_interest`, `margin_borrow`, and `index_price`.
+- Paginated endpoints return an **async** `next_request` callable — `await` it too:
+
+```python
+data, next_request = await client.cex.announcement(page=1, limit=100)
+data2, next_request2 = await next_request()
+```
+
+- Telegram and Naver have standalone async clients, `AsyncTelegram` and
+  `AsyncNaver` (also async context managers):
+
+```python
+from datamaxi.aio import AsyncTelegram, AsyncNaver
+
+async with AsyncTelegram() as telegram:
+    channels, next_request = await telegram.channels(page=1, limit=100)
+
+async with AsyncNaver() as naver:
+    trend = await naver.trend(symbol="BTC")
 ```
 
 ## API Reference
