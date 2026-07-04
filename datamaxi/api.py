@@ -114,6 +114,15 @@ class API(object):
             type(self).__name__, self.base_url, bool(self.api_key)
         )
 
+    def close(self):
+        self.session.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.close()
+
     def query(self, url_path, payload=None):
         return self.send_request("GET", url_path, payload=payload)
 

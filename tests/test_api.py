@@ -118,3 +118,19 @@ def test_API_with_show_header():
     with pytest.warns(DeprecationWarning, match="show_header"):
         client = API(show_header=True)
     assert client.show_header is True
+
+
+def test_API_close_closes_session():
+    """`close()` closes the underlying `requests.Session`."""
+    client = API()
+    client.session.close = lambda: setattr(client.session, "closed", True)
+    client.close()
+    assert client.session.closed is True
+
+
+def test_API_context_manager_closes_session():
+    """`with API(...)` closes the session on exit."""
+    with API() as client:
+        client.session.close = lambda: setattr(client.session, "closed", True)
+        assert client.__enter__() is client
+    assert client.session.closed is True

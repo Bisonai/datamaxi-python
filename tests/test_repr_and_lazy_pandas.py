@@ -34,6 +34,14 @@ def test_datamaxi_repr_and_no_key_leak(monkeypatch):
     assert "has_key=False" in repr(Datamaxi(base_url=BASE_URL))
 
 
+def test_datamaxi_context_manager_closes_session():
+    """`with Datamaxi(...)` closes the shared session on exit (see #155)."""
+    with Datamaxi(api_key="secret", base_url=BASE_URL) as c:
+        c._api.session.close = lambda: setattr(c._api.session, "closed", True)
+        assert c.__enter__() is c
+    assert c._api.session.closed is True
+
+
 def test_importing_datamaxi_does_not_load_pandas():
     # Isolated subprocess: other tests in this session load pandas, so a
     # same-process sys.modules check would be unreliable.
