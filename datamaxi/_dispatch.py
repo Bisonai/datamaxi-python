@@ -71,11 +71,11 @@ def raise_for_error(status_code, text, headers):
         try:
             err = json.loads(text)
         except JSONDecodeError:
-            raise ClientError(status_code, text, None, headers)
+            raise ClientError(status_code, text, None, headers) from None
         error_data = None
         if "data" in err:
             error_data = err["data"]
-        raise ClientError(status_code, err["error"], headers, error_data)
+        raise ClientError(status_code, err.get("error", text), headers, error_data)
     raise ServerError(status_code, text)
 
 
