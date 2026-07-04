@@ -1,4 +1,4 @@
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 
@@ -17,8 +17,8 @@ class CexFee(Resource):
 
     def __call__(
         self,
-        exchange: str = None,
-        symbol: str = None,
+        exchange: Optional[str] = None,
+        symbol: Optional[str] = None,
     ) -> List[Dict]:
         """Fetch trading fee data
 

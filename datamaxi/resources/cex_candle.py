@@ -34,8 +34,8 @@ class CexCandle(Resource):
         symbol: str,
         currency: str = USD,
         interval: Interval = INTERVAL_1D,
-        from_unix: str = None,
-        to_unix: str = None,
+        from_unix: Optional[str] = None,
+        to_unix: Optional[str] = None,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, CandleResponse]:
         """Fetch candle data
@@ -108,7 +108,7 @@ class CexCandle(Resource):
         return self.request_endpoint("cex_candle_exchanges", market=market)
 
     def symbols(
-        self, exchange: str = None, market: Optional[Market] = None
+        self, exchange: Optional[str] = None, market: Optional[Market] = None
     ) -> List[Dict]:
         """Fetch supported symbols for candle data.
 

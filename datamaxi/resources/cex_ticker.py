@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, List, Union, TYPE_CHECKING
+from typing import Any, List, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameters
 from datamaxi.resources.responses import TickerResponse
@@ -27,8 +27,8 @@ class CexTicker(Resource):
         exchange: str,
         symbol: str,
         market: Market,
-        currency: str = None,
-        conversion_base: str = None,
+        currency: Optional[str] = None,
+        conversion_base: Optional[str] = None,
         include_source: bool = False,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, TickerResponse]:
