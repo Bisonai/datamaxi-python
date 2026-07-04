@@ -8,8 +8,9 @@ only reachable if some client call site forwards it as a keyword argument.
 
 This test statically extracts, per ``op_id``, the union of keyword arguments
 forwarded at every ``request_endpoint("op_id", ...)`` call site (handling the
-``**{"from": ...}`` dict-splat and the ``**params`` local-dict patterns), then
-asserts that every registry param is either forwarded, globally ignored
+``**{"from": ...}`` dict-splat, the ``**params`` local-dict pattern, and the
+``params = build_x_params(x=x, ...)`` extracted-builder pattern — see #154),
+then asserts that every registry param is either forwarded, globally ignored
 (pagination), or explicitly allow-listed below with a rationale.
 
 Regenerating ``_endpoints.py`` (``make python`` upstream) that adds a new param
@@ -71,7 +72,17 @@ def _enclosing_func(parents, node):
 
 
 def _subscript_string_keys(func_node, name):
-    """Collect literal keys of ``name[<str>] = ...`` assignments in ``func``."""
+    """Collect the wire param names that populate the local dict ``name``.
+
+    Handles two ways a resource method builds its ``params`` dict before
+    ``request_endpoint(op, **params)``:
+
+    - ``name["x"] = ...`` assignments inline in the method.
+    - ``name = build_x_params(x=x, y=y, ...)`` — a call to an extracted,
+      transport-agnostic param-builder shared with the async mirror (see
+      #154); the keyword-argument names at the call site are the wire param
+      names it forwards (builders are written to keep them 1:1).
+    """
     keys = set()
     if func_node is None:
         return keys
@@ -87,6 +98,14 @@ def _subscript_string_keys(func_node, name):
                 and isinstance(tgt.slice.value, str)
             ):
                 keys.add(tgt.slice.value)
+            elif (
+                isinstance(tgt, ast.Name)
+                and tgt.id == name
+                and isinstance(n.value, ast.Call)
+            ):
+                for kw in n.value.keywords:
+                    if kw.arg is not None:
+                        keys.add(kw.arg)
     return keys
 
 

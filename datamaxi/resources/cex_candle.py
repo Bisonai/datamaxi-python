@@ -4,7 +4,7 @@ from typing import Any, List, Dict, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameter
 from datamaxi.lib.utils import check_required_parameters
-from datamaxi.resources.utils import convert_data_to_data_frame
+from datamaxi.resources.utils import convert_data_to_data_frame, raise_if_no_data
 from datamaxi.resources.responses import CandleResponse
 from datamaxi.lib.constants import SPOT, FUTURES, INTERVAL_1D, USD, Market, Interval
 
@@ -79,8 +79,7 @@ class CexCandle(Resource):
             currency=currency,
             **{"from": from_unix, "to": to_unix},
         )
-        if res["data"] is None or len(res["data"]) == 0:
-            raise ValueError("no data found")
+        raise_if_no_data(res)
 
         if pandas:
             return convert_data_to_data_frame(res["data"])
