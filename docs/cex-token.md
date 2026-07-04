@@ -4,42 +4,46 @@ Token listing and delisting updates from centralized exchanges.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    data, next_request = maxi.cex.token.updates(
-        type="listed",
-        page=1,
-        limit=100,
-    )
+data, next_request = maxi.cex.token.updates(
+    type="listed",
+    page=1,
+    limit=100,
+)
 
-    more_data, _ = next_request()
-    ```
+more_data, _ = next_request()
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            data, next_request = await client.cex.token.updates(
-                type="listed",
-                page=1,
-                limit=100,
-            )
-
-            more_data, _ = await next_request()
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        data, next_request = await client.cex.token.updates(
+            type="listed",
+            page=1,
+            limit=100,
+        )
+
+        more_data, _ = await next_request()
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

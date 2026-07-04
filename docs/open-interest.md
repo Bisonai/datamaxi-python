@@ -4,72 +4,76 @@ CEX futures Open Interest: latest snapshots, reporting pairs, the token x exchan
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Datamaxi
+```python
+from datamaxi import Datamaxi
 
-    maxi = Datamaxi(api_key="YOUR_API_KEY")
+maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-    # Latest OI snapshot for a single futures symbol
-    snapshot = maxi.open_interest(exchange="binance", symbol="BTC-USDT")
+# Latest OI snapshot for a single futures symbol
+snapshot = maxi.open_interest(exchange="binance", symbol="BTC-USDT")
 
-    # List all (exchange, symbol) pairs currently reporting OI
-    pairs = maxi.open_interest.list(exchange="binance")
+# List all (exchange, symbol) pairs currently reporting OI
+pairs = maxi.open_interest.list(exchange="binance")
 
-    # Paginated token x exchange OI matrix
-    overview = maxi.open_interest.overview(
-        page=1,
-        limit=20,
-        key="binance",
-        sort="desc",
-    )
+# Paginated token x exchange OI matrix
+overview = maxi.open_interest.overview(
+    page=1,
+    limit=20,
+    key="binance",
+    sort="desc",
+)
 
-    # Top-line OI aggregates (total USD, top tokens, top exchanges)
-    summary = maxi.open_interest.summary(topN=10)
+# Top-line OI aggregates (total USD, top tokens, top exchanges)
+summary = maxi.open_interest.summary(topN=10)
 
-    # Per-exchange aggregated OI history for a single token
-    history = maxi.open_interest.history_aggregated(
-        token_id="bitcoin",
-        interval="1h",
-    )
-    ```
+# Per-exchange aggregated OI history for a single token
+history = maxi.open_interest.history_aggregated(
+    token_id="bitcoin",
+    interval="1h",
+)
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncDatamaxi
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
-            # Latest OI snapshot for a single futures symbol
-            snapshot = await client.open_interest(exchange="binance", symbol="BTC-USDT")
-
-            # List all (exchange, symbol) pairs currently reporting OI
-            pairs = await client.open_interest.list(exchange="binance")
-
-            # Paginated token x exchange OI matrix
-            overview = await client.open_interest.overview(
-                page=1,
-                limit=20,
-                key="binance",
-                sort="desc",
-            )
-
-            # Top-line OI aggregates (total USD, top tokens, top exchanges)
-            summary = await client.open_interest.summary(topN=10)
-
-            # Per-exchange aggregated OI history for a single token
-            history = await client.open_interest.history_aggregated(
-                token_id="bitcoin",
-                interval="1h",
-            )
+```python
+import asyncio
+from datamaxi.aio import AsyncDatamaxi
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        # Latest OI snapshot for a single futures symbol
+        snapshot = await client.open_interest(exchange="binance", symbol="BTC-USDT")
+
+        # List all (exchange, symbol) pairs currently reporting OI
+        pairs = await client.open_interest.list(exchange="binance")
+
+        # Paginated token x exchange OI matrix
+        overview = await client.open_interest.overview(
+            page=1,
+            limit=20,
+            key="binance",
+            sort="desc",
+        )
+
+        # Top-line OI aggregates (total USD, top tokens, top exchanges)
+        summary = await client.open_interest.summary(topN=10)
+
+        # Per-exchange aggregated OI history for a single token
+        history = await client.open_interest.history_aggregated(
+            token_id="bitcoin",
+            interval="1h",
+        )
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 

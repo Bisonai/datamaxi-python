@@ -4,38 +4,42 @@ Telegram channel metadata and message history.
 
 ## Usage
 
-=== "Sync"
+<details markdown="1"><summary>Sync</summary>
 
-    ```python
-    from datamaxi import Telegram
+```python
+from datamaxi import Telegram
 
-    telegram = Telegram(api_key="YOUR_API_KEY")
+telegram = Telegram(api_key="YOUR_API_KEY")
 
-    channels, _ = telegram.channels(category="korean", limit=50)
-    messages, next_request = telegram.messages(channel_name="yunlog_announcement", limit=50)
+channels, _ = telegram.channels(category="korean", limit=50)
+messages, next_request = telegram.messages(channel_name="yunlog_announcement", limit=50)
 
-    more_messages, _ = next_request()
-    ```
+more_messages, _ = next_request()
+```
 
-=== "Async"
+</details>
 
-    ```python
-    import asyncio
-    from datamaxi.aio import AsyncTelegram
+<details markdown="1"><summary>Async</summary>
 
-
-    async def main():
-        async with AsyncTelegram(api_key="YOUR_API_KEY") as telegram:
-            channels, _ = await telegram.channels(category="korean", limit=50)
-            messages, next_request = await telegram.messages(
-                channel_name="yunlog_announcement", limit=50
-            )
-
-            more_messages, _ = await next_request()
+```python
+import asyncio
+from datamaxi.aio import AsyncTelegram
 
 
-    asyncio.run(main())
-    ```
+async def main():
+    async with AsyncTelegram(api_key="YOUR_API_KEY") as telegram:
+        channels, _ = await telegram.channels(category="korean", limit=50)
+        messages, next_request = await telegram.messages(
+            channel_name="yunlog_announcement", limit=50
+        )
+
+        more_messages, _ = await next_request()
+
+
+asyncio.run(main())
+```
+
+</details>
 
 ## Notes
 
