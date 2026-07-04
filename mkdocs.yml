@@ -31,6 +31,7 @@ markdown_extensions:
 nav:
   - Main: index.md
   - API: api.md
+  - Async Client: async.md
   - CEX:
       - Candle: cex-candle.md
       - Ticker: cex-ticker.md
