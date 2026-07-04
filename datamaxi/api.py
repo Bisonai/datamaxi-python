@@ -7,7 +7,7 @@ from urllib3.util.retry import Retry
 from .__version__ import __version__
 from datamaxi.lib.utils import cleanNoneValue
 from datamaxi.lib.utils import encoded_string
-from datamaxi._dispatch import resolve_endpoint, raise_for_error
+from datamaxi._dispatch import resolve_endpoint, raise_for_error, extract_limit_usage
 
 
 class API(object):
@@ -93,6 +93,11 @@ class API(object):
         ``_handle_exception`` still raises ``ServerError`` — preserving
         the existing error contract instead of leaking urllib3's
         ``MaxRetryError``.
+
+        This is the canonical retry policy; ``datamaxi._retry`` documents
+        the same GET-only/backoff/``Retry-After`` semantics for the async
+        (``httpx``) client, which has no urllib3-equivalent adapter to
+        mount this on directly.
         """
         retry = Retry(
             total=max_retries,
@@ -171,25 +176,11 @@ class API(object):
         self.last_response = ResponseMeta(
             status_code=response.status_code,
             headers=response.headers,
-            limit_usage=self._extract_limit_usage(response.headers),
+            limit_usage=extract_limit_usage(response.headers),
             data=data,
         )
 
         return data
-
-    @staticmethod
-    def _extract_limit_usage(headers):
-        """Pull the ``x-ratelimit-*`` triplet out of the response headers."""
-        usage = {}
-        for key in headers.keys():
-            k = key.lower()
-            if (
-                k.startswith("x-ratelimit-limit")
-                or k.startswith("x-ratelimit-remaining")
-                or k.startswith("x-ratelimit-reset")
-            ):
-                usage[k] = headers[key]
-        return usage
 
     def _prepare_params(self, params):
         return encoded_string(cleanNoneValue(params))

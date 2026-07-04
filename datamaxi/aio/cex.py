@@ -6,6 +6,7 @@ from typing import Any, List, Dict, Union, Optional, Tuple, Callable, TYPE_CHECK
 
 from datamaxi.aio._core import AsyncAPI, AsyncResource
 from datamaxi.lib.utils import check_required_parameter, check_required_parameters
+from datamaxi.resources.utils import raise_if_no_data, to_indexed_dataframe
 from datamaxi.lib.constants import (
     SPOT,
     FUTURES,
@@ -63,8 +64,7 @@ class AsyncCexCandle(AsyncResource):
             currency=currency,
             **{"from": from_unix, "to": to_unix},
         )
-        if res["data"] is None or len(res["data"]) == 0:
-            raise ValueError("no data found")
+        raise_if_no_data(res)
 
         if pandas:
             from datamaxi.resources.utils import convert_data_to_data_frame
@@ -124,11 +124,7 @@ class AsyncCexTicker(AsyncResource):
         )
 
         if pandas:
-            import pandas as pd
-
-            df = pd.DataFrame([res["data"]])
-            df = df.set_index("d")
-            return df
+            return to_indexed_dataframe([res["data"]], "d")
         return res
 
     async def exchanges(self, market: Market) -> List[str]:
@@ -184,11 +180,7 @@ class AsyncCexWalletStatus(AsyncResource):
             "wallet_status", exchange=exchange, asset=asset
         )
         if pandas:
-            import pandas as pd
-
-            df = pd.DataFrame(res)
-            df = df.set_index("network")
-            return df
+            return to_indexed_dataframe(res, "network")
         return res
 
     async def exchanges(self) -> List[str]:

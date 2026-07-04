@@ -2,7 +2,10 @@
 
 Reuses the sync client's endpoint resolution and error handling
 (``datamaxi._dispatch``) plus ``ResponseMeta``, so the sync and async clients
-can't drift on request building or error semantics.
+can't drift on request building or error semantics. The retry loop below
+also follows the shared policy described in ``datamaxi._retry`` (GET-only,
+exponential backoff, honors ``Retry-After``) so it can't drift from the
+``urllib3``-backed retry mounted on the sync ``requests.Session``.
 """
 
 import asyncio
@@ -11,6 +14,7 @@ import os
 from datamaxi.__version__ import __version__
 from datamaxi.api import ResponseMeta
 from datamaxi._dispatch import resolve_endpoint, raise_for_error, extract_limit_usage
+from datamaxi._retry import is_retryable, get_retry_delay
 
 
 def _import_httpx():
@@ -28,8 +32,9 @@ class AsyncAPI:
     """Async transport built on ``httpx.AsyncClient``.
 
     Mirrors the sync ``API``: shared endpoint resolution, bounded retry of
-    transient gateway 5xx, the same ``ClientError`` / ``ServerError`` contract,
-    and ``last_response`` metadata.
+    transient gateway 5xx on GET requests with exponential backoff (honoring
+    ``Retry-After`` — see ``datamaxi._retry``), the same ``ClientError`` /
+    ``ServerError`` contract, and ``last_response`` metadata.
     """
 
     def __init__(
@@ -69,15 +74,20 @@ class AsyncAPI:
         # str()-encode scalars so bools match the sync client's urlencode
         # output (e.g. include_source -> "True", not httpx's "true").
         params = {k: str(v) for k, v in (payload or {}).items() if v is not None}
-        for attempt in range(self.max_retries + 1):
+        attempt = 0
+        while True:
             response = await self._client.request(method, url_path, params=params)
-            if (
-                response.status_code in self.retry_statuses
-                and attempt < self.max_retries
+            attempt += 1
+            if not is_retryable(
+                method,
+                response.status_code,
+                attempt,
+                self.max_retries,
+                self.retry_statuses,
             ):
-                await asyncio.sleep(self.retry_backoff * (attempt + 1))
-                continue
-            break
+                break
+            delay = get_retry_delay(attempt, self.retry_backoff, response.headers)
+            await asyncio.sleep(delay)
 
         raise_for_error(response.status_code, response.text, response.headers)
 

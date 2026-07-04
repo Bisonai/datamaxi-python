@@ -1,4 +1,9 @@
-"""Async premium resource — mirror of ``datamaxi.resources.premium``."""
+"""Async premium resource — mirror of ``datamaxi.resources.premium``.
+
+Param assembly and response shaping are shared with the sync resource via
+``build_premium_params`` / ``shape_premium_response`` (see #154); only the
+``await`` glue differs.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +11,7 @@ from typing import List, Union, Optional, TYPE_CHECKING
 
 from datamaxi.aio._core import AsyncResource
 from datamaxi.resources.responses import PremiumResponse
+from datamaxi.resources.premium import build_premium_params, shape_premium_response
 from datamaxi.lib.constants import Market, SortOrder
 
 if TYPE_CHECKING:
@@ -13,7 +19,7 @@ if TYPE_CHECKING:
 
 
 class AsyncPremium(AsyncResource):
-    async def __call__(  # noqa: C901
+    async def __call__(
         self,
         source_exchange: Optional[str] = None,
         target_exchange: Optional[str] = None,
@@ -38,94 +44,31 @@ class AsyncPremium(AsyncResource):
         query: Optional[str] = None,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, PremiumResponse]:
-        params = {}
-
-        if source_exchange is not None:
-            params["source_exchange"] = source_exchange
-
-        if target_exchange is not None:
-            params["target_exchange"] = target_exchange
-
-        if asset is not None:
-            params["asset"] = asset
-
-        if source_quote is not None:
-            params["source_quote"] = source_quote
-
-        if target_quote is not None:
-            params["target_quote"] = target_quote
-
-        if sort is not None:
-            params["sort"] = sort
-
-        if key is not None:
-            params["key"] = key
-
-        if query is not None:
-            params["query"] = query
-
-        if page is not None:
-            params["page"] = page
-
-        if limit is not None:
-            params["limit"] = limit
-
-        if currency is not None:
-            params["currency"] = currency
-
-        if conversion_base is not None:
-            params["conversion_base"] = conversion_base
-
-        if min_sv is not None:
-            params["min_sv"] = min_sv
-
-        if min_tv is not None:
-            params["min_tv"] = min_tv
-
-        if source_market is not None:
-            params["source_market"] = source_market
-
-        if target_market is not None:
-            params["target_market"] = target_market
-
-        if only_transferable:
-            params["only_transferable"] = True
-
-        if network is not None:
-            params["network"] = network
-
-        if premium_type is not None:
-            params["premium_type"] = premium_type
-
-        if token_include is not None:
-            params["token_include"] = token_include
-
-        if token_exclude is not None:
-            params["token_exclude"] = token_exclude
-
+        params = build_premium_params(
+            source_exchange=source_exchange,
+            target_exchange=target_exchange,
+            asset=asset,
+            source_quote=source_quote,
+            target_quote=target_quote,
+            sort=sort,
+            key=key,
+            page=page,
+            limit=limit,
+            currency=currency,
+            conversion_base=conversion_base,
+            min_sv=min_sv,
+            min_tv=min_tv,
+            source_market=source_market,
+            target_market=target_market,
+            only_transferable=only_transferable,
+            network=network,
+            premium_type=premium_type,
+            token_include=token_include,
+            token_exclude=token_exclude,
+            query=query,
+        )
         res = await self.request_endpoint("premium", **params)
-        if res["data"] is None or len(res["data"]) == 0:
-            raise ValueError("no data found")
-
-        if pandas:
-            import pandas as pd
-
-            df = pd.DataFrame(
-                [
-                    {
-                        **item["detail"],
-                        "source_annualized_funding_rate": item.get(
-                            "source_annualized_funding_rate"
-                        ),
-                        "target_annualized_funding_rate": item.get(
-                            "target_annualized_funding_rate"
-                        ),
-                    }
-                    for item in res["data"]
-                ]
-            )
-            return df
-        return res
+        return shape_premium_response(res, pandas)
 
     async def exchanges(self) -> List[str]:
         return await self.request_endpoint("premium_exchanges")

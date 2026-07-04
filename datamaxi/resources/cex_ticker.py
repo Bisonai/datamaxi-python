@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, List, Union, Optional, TYPE_CHECKING
 from datamaxi.api import Resource
 from datamaxi.lib.utils import check_required_parameters
+from datamaxi.resources.utils import to_indexed_dataframe
 from datamaxi.resources.responses import TickerResponse
 from datamaxi.lib.constants import SPOT, FUTURES, Market
 
@@ -74,11 +75,7 @@ class CexTicker(Resource):
         )
 
         if pandas:
-            import pandas as pd
-
-            df = pd.DataFrame([res["data"]])
-            df = df.set_index("d")
-            return df
+            return to_indexed_dataframe([res["data"]], "d")
         else:
             return res
 
