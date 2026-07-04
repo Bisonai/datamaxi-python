@@ -4,24 +4,52 @@ Cross-exchange premium data for arbitrage and market dislocation analysis.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-exchanges = maxi.premium.exchanges()
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-data = maxi.premium(
-    source_exchange="binance",
-    target_exchange="upbit",
-    asset="BTC",
-    source_market="spot",
-    target_market="spot",
-    sort="desc",
-    key="pdp",
-    limit=100,
-)
-```
+    exchanges = maxi.premium.exchanges()
+
+    data = maxi.premium(
+        source_exchange="binance",
+        target_exchange="upbit",
+        asset="BTC",
+        source_market="spot",
+        target_market="spot",
+        sort="desc",
+        key="pdp",
+        limit=100,
+    )
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            exchanges = await client.premium.exchanges()
+
+            data = await client.premium(
+                source_exchange="binance",
+                target_exchange="upbit",
+                asset="BTC",
+                source_market="spot",
+                target_market="spot",
+                sort="desc",
+                key="pdp",
+                limit=100,
+            )
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

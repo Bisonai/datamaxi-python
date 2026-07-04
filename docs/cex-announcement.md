@@ -4,21 +4,46 @@ Exchange announcements such as listings and delistings.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-data, next_request = maxi.cex.announcement(
-    exchange="binance",
-    category="listing",
-    page=1,
-    limit=50,
-    sort="desc",
-)
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-more_data, _ = next_request()
-```
+    data, next_request = maxi.cex.announcement(
+        exchange="binance",
+        category="listing",
+        page=1,
+        limit=50,
+        sort="desc",
+    )
+
+    more_data, _ = next_request()
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            data, next_request = await client.cex.announcement(
+                exchange="binance",
+                category="listing",
+                page=1,
+                limit=50,
+                sort="desc",
+            )
+
+            more_data, _ = await next_request()
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

@@ -27,10 +27,13 @@ markdown_extensions:
   - pymdownx.highlight:
       use_pygments: true
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
   - Main: index.md
   - API: api.md
+  - Async Client: async.md
   - CEX:
       - Candle: cex-candle.md
       - Ticker: cex-ticker.md

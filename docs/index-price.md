@@ -4,18 +4,40 @@ Historical index price time series for a single asset.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-data = maxi.index_price(
-    asset="BTC",
-    from_="now - 1 month",
-    to="now",
-    interval="5m",
-)
-```
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
+
+    data = maxi.index_price(
+        asset="BTC",
+        from_="now - 1 month",
+        to="now",
+        interval="5m",
+    )
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            data = await client.index_price(
+                asset="BTC",
+                from_="now - 1 month",
+                to="now",
+                interval="5m",
+            )
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

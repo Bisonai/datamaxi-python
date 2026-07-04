@@ -4,16 +4,38 @@ Telegram channel metadata and message history.
 
 ## Usage
 
-```python
-from datamaxi import Telegram
+=== "Sync"
 
-telegram = Telegram(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Telegram
 
-channels, _ = telegram.channels(category="korean", limit=50)
-messages, next_request = telegram.messages(channel_name="yunlog_announcement", limit=50)
+    telegram = Telegram(api_key="YOUR_API_KEY")
 
-more_messages, _ = next_request()
-```
+    channels, _ = telegram.channels(category="korean", limit=50)
+    messages, next_request = telegram.messages(channel_name="yunlog_announcement", limit=50)
+
+    more_messages, _ = next_request()
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncTelegram
+
+
+    async def main():
+        async with AsyncTelegram(api_key="YOUR_API_KEY") as telegram:
+            channels, _ = await telegram.channels(category="korean", limit=50)
+            messages, next_request = await telegram.messages(
+                channel_name="yunlog_announcement", limit=50
+            )
+
+            more_messages, _ = await next_request()
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

@@ -4,24 +4,52 @@ Historical OHLCV candle data for centralized exchanges.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-exchanges = maxi.cex.candle.exchanges(market="spot")
-symbols = maxi.cex.candle.symbols(exchange="binance", market="spot")
-intervals = maxi.cex.candle.intervals()
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-df = maxi.cex.candle(
-    exchange="binance",
-    symbol="BTC-USDT",
-    interval="1d",
-    market="spot",
-    from_unix=1704067200,
-    to_unix=1706745600,
-)
-```
+    exchanges = maxi.cex.candle.exchanges(market="spot")
+    symbols = maxi.cex.candle.symbols(exchange="binance", market="spot")
+    intervals = maxi.cex.candle.intervals()
+
+    df = maxi.cex.candle(
+        exchange="binance",
+        symbol="BTC-USDT",
+        interval="1d",
+        market="spot",
+        from_unix=1704067200,
+        to_unix=1706745600,
+    )
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            exchanges = await client.cex.candle.exchanges(market="spot")
+            symbols = await client.cex.candle.symbols(exchange="binance", market="spot")
+            intervals = await client.cex.candle.intervals()
+
+            df = await client.cex.candle(
+                exchange="binance",
+                symbol="BTC-USDT",
+                interval="1d",
+                market="spot",
+                from_unix=1704067200,
+                to_unix=1706745600,
+            )
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

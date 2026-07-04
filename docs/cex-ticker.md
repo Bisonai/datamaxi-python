@@ -4,21 +4,46 @@ Real-time ticker snapshots for centralized exchanges.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-exchanges = maxi.cex.ticker.exchanges(market="spot")
-symbols = maxi.cex.ticker.symbols(exchange="binance", market="spot")
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-ticker = maxi.cex.ticker.get(
-    exchange="binance",
-    symbol="BTC-USDT",
-    market="spot",
-    currency="USD",
-)
-```
+    exchanges = maxi.cex.ticker.exchanges(market="spot")
+    symbols = maxi.cex.ticker.symbols(exchange="binance", market="spot")
+
+    ticker = maxi.cex.ticker.get(
+        exchange="binance",
+        symbol="BTC-USDT",
+        market="spot",
+        currency="USD",
+    )
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            exchanges = await client.cex.ticker.exchanges(market="spot")
+            symbols = await client.cex.ticker.symbols(exchange="binance", market="spot")
+
+            ticker = await client.cex.ticker.get(
+                exchange="binance",
+                symbol="BTC-USDT",
+                market="spot",
+                currency="USD",
+            )
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 
