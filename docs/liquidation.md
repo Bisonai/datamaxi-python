@@ -4,35 +4,74 @@ CEX futures liquidation data: recent events, firehose feed, heatmaps, maps, and 
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-# Recent liquidation events for a single futures symbol
-events = maxi.liquidation(exchange="binance", symbol="BTC-USDT", limit=100)
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
 
-# Firehose: most recent events across every symbol
-feed = maxi.liquidation.feed(limit=100)
+    # Recent liquidation events for a single futures symbol
+    events = maxi.liquidation(exchange="binance", symbol="BTC-USDT", limit=100)
 
-# Token x exchange liquidation heatmap over a rolling window
-heatmap = maxi.liquidation.heatmap(window="1h", topN=10)
+    # Firehose: most recent events across every symbol
+    feed = maxi.liquidation.feed(limit=100)
 
-# Liquidation KPI stats over a rolling window
-stats = maxi.liquidation.stats(window="1h")
+    # Token x exchange liquidation heatmap over a rolling window
+    heatmap = maxi.liquidation.heatmap(window="1h", topN=10)
 
-# Coinglass-style liquidation map (price x leverage tier)
-liq_map = maxi.liquidation.map(base="BTC", exchange="binance", quote="USDT")
+    # Liquidation KPI stats over a rolling window
+    stats = maxi.liquidation.stats(window="1h")
 
-# Bucketed long / short liquidation USD time series + price line
-history = maxi.liquidation.symbol_history(
-    symbol="BTC",
-    quote="USDT",
-    exchange="binance",
-    interval="5m",
-    window="24h",
-)
-```
+    # Coinglass-style liquidation map (price x leverage tier)
+    liq_map = maxi.liquidation.map(base="BTC", exchange="binance", quote="USDT")
+
+    # Bucketed long / short liquidation USD time series + price line
+    history = maxi.liquidation.symbol_history(
+        symbol="BTC",
+        quote="USDT",
+        exchange="binance",
+        interval="5m",
+        window="24h",
+    )
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            # Recent liquidation events for a single futures symbol
+            events = await client.liquidation(exchange="binance", symbol="BTC-USDT", limit=100)
+
+            # Firehose: most recent events across every symbol
+            feed = await client.liquidation.feed(limit=100)
+
+            # Token x exchange liquidation heatmap over a rolling window
+            heatmap = await client.liquidation.heatmap(window="1h", topN=10)
+
+            # Liquidation KPI stats over a rolling window
+            stats = await client.liquidation.stats(window="1h")
+
+            # Coinglass-style liquidation map (price x leverage tier)
+            liq_map = await client.liquidation.map(base="BTC", exchange="binance", quote="USDT")
+
+            # Bucketed long / short liquidation USD time series + price line
+            history = await client.liquidation.symbol_history(
+                symbol="BTC",
+                quote="USDT",
+                exchange="binance",
+                interval="5m",
+                window="24h",
+            )
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 

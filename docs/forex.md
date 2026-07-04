@@ -4,14 +4,32 @@ Foreign exchange spot rates.
 
 ## Usage
 
-```python
-from datamaxi import Datamaxi
+=== "Sync"
 
-maxi = Datamaxi(api_key="YOUR_API_KEY")
+    ```python
+    from datamaxi import Datamaxi
 
-symbols = maxi.forex.symbols()
-data = maxi.forex(symbol="USD-KRW")
-```
+    maxi = Datamaxi(api_key="YOUR_API_KEY")
+
+    symbols = maxi.forex.symbols()
+    data = maxi.forex(symbol="USD-KRW")
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+    from datamaxi.aio import AsyncDatamaxi
+
+
+    async def main():
+        async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+            symbols = await client.forex.symbols()
+            data = await client.forex(symbol="USD-KRW")
+
+
+    asyncio.run(main())
+    ```
 
 ## Notes
 
