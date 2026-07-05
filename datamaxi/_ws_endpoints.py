@@ -34,7 +34,6 @@ WS_CHANNELS = {
         "param": "SYMBOL",
         "subscribe": True,
         "unsubscribe": True,
-        "param_note": "fx pair e.g. USD-KRW, no exchange",
     },
     "/funding-rate": {
         "plan": "basic",
@@ -43,7 +42,6 @@ WS_CHANNELS = {
         "param": "SYMBOL@exchange",
         "subscribe": True,
         "unsubscribe": True,
-        "param_note": "UPPER symbol + lower exchange; verified live (handler.go doc comment is wrong — Bisonai/datamaxi-backend#7926)",
     },
     "/liquidation": {
         "plan": "basic",
