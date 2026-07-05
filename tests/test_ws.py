@@ -14,7 +14,7 @@ import pytest
 websockets = pytest.importorskip("websockets")
 
 import datamaxi._ws_models as _ws_models  # noqa: E402
-from datamaxi.aio.ws import AsyncDatamaxiWS  # noqa: E402
+from datamaxi.aio.ws import AsyncDatamaxiWS, build_param  # noqa: E402
 from datamaxi._ws_endpoints import WS_CHANNELS, WS_BASE_PATH  # noqa: E402
 from datamaxi._ws_models import TickerMessage  # noqa: E402
 
@@ -281,3 +281,150 @@ def test_ws_reconnect_replays_active_subscription(monkeypatch):
     assert len(seen) >= 2
     assert seen[0] == ["USD-KRW"]
     assert seen[1] == ["USD-KRW"]  # `_open` replays sorted(self._active)
+
+
+# --- structured subscribe helpers: build_param unit tests ---
+
+
+def test_build_param_forex_single_token():
+    # SYMBOL: no separator, one token; and the SYMBOL->symbol lowercase rule.
+    assert build_param("SYMBOL", symbol="USD-KRW") == "USD-KRW"
+
+
+def test_build_param_symbol_exchange():
+    assert (
+        build_param("SYMBOL@exchange", symbol="BTC-USDT", exchange="binance")
+        == "BTC-USDT@binance"
+    )
+
+
+def test_build_param_ticker_without_optional_group():
+    fmt = "SYMBOL@exchange[@currency@conversionBase]"
+    assert build_param(fmt, symbol="BTC-USDT", exchange="binance") == "BTC-USDT@binance"
+
+
+def test_build_param_ticker_with_optional_group():
+    fmt = "SYMBOL@exchange[@currency@conversionBase]"
+    assert (
+        build_param(
+            fmt,
+            symbol="BTC-USDT",
+            exchange="binance",
+            currency="KRW",
+            conversionBase="USDT",
+        )
+        == "BTC-USDT@binance@KRW@USDT"
+    )
+
+
+def test_build_param_premium_all_seven_tokens():
+    fmt = "src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt"
+    assert (
+        build_param(
+            fmt,
+            src="binance",
+            tgt="upbit",
+            tokenId="bitcoin",
+            srcQuote="USDT",
+            tgtQuote="KRW",
+            srcMkt="spot",
+            tgtMkt="spot",
+        )
+        == "binance:upbit:bitcoin:USDT:KRW:spot:spot"
+    )
+
+
+def test_build_param_verbatim_token_not_lowercased():
+    # tokenId is mixed-case, so it stays verbatim (not lowercased).
+    with pytest.raises(ValueError):
+        build_param(
+            "src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt",
+            src="a",
+            tgt="b",
+            tokenid="c",  # wrong: lowercased key
+            srcQuote="d",
+            tgtQuote="e",
+            srcMkt="f",
+            tgtMkt="g",
+        )
+
+
+def test_build_param_none_channel_rejects_tokens():
+    with pytest.raises(ValueError):
+        build_param(None, symbol="X")
+
+
+def test_build_param_missing_required_token():
+    with pytest.raises(ValueError) as ei:
+        build_param("SYMBOL@exchange", symbol="BTC-USDT")
+    assert "exchange" in str(ei.value)
+
+
+def test_build_param_unknown_token():
+    with pytest.raises(ValueError) as ei:
+        build_param("SYMBOL@exchange", symbol="BTC-USDT", exchange="binance", bogus="x")
+    assert "bogus" in str(ei.value)
+
+
+def test_build_param_partial_optional_group_rejected():
+    fmt = "SYMBOL@exchange[@currency@conversionBase]"
+    with pytest.raises(ValueError):
+        build_param(fmt, symbol="BTC-USDT", exchange="binance", currency="KRW")
+
+
+def test_build_param_roundtrip_matches_raw_ticker():
+    fmt = WS_CHANNELS["/ticker/spot"]["param"]
+    assert build_param(fmt, symbol="BTC-USDT", exchange="binance") == "BTC-USDT@binance"
+
+
+def test_build_param_roundtrip_matches_raw_premium():
+    fmt = WS_CHANNELS["/premium"]["param"]
+    assert (
+        build_param(
+            fmt,
+            src="binance",
+            tgt="upbit",
+            tokenId="bitcoin",
+            srcQuote="USDT",
+            tgtQuote="KRW",
+            srcMkt="spot",
+            tgtMkt="spot",
+        )
+        == "binance:upbit:bitcoin:USDT:KRW:spot:spot"
+    )
+
+
+def test_ws_structured_subscribe_produces_expected_wire_param():
+    # A structured subscribe(...) call sends the same wire param as the raw form.
+    async def handler(conn):
+        async for raw in conn:
+            m = json.loads(raw)
+            if m.get("method") == "SUBSCRIBE":
+                await conn.send(json.dumps({"result": m["params"], "id": m["id"]}))
+                for p in m["params"]:
+                    sym, exch = p.split("@")[0], p.split("@")[1]
+                    await conn.send(
+                        json.dumps({"s": sym, "e": exch, "p": 1.0, "d": 1, "_param": p})
+                    )
+
+    async def run():
+        async with _serve(handler) as server:
+            async with AsyncDatamaxiWS(
+                api_key="k", ws_url=f"ws://localhost:{_port(server)}"
+            ) as ws:
+                stream = await ws.ticker.subscribe(
+                    symbol="BTC-USDT", exchange="binance", market="spot"
+                )
+                return await _first(stream)
+
+    msg = _run(run())
+    assert msg["_param"] == "BTC-USDT@binance"
+
+
+def test_ws_structured_subscribe_mixing_raw_and_tokens_raises():
+    async def run():
+        async with AsyncDatamaxiWS(api_key="k", ws_url="ws://localhost:1") as ws:
+            await ws.forex.subscribe("USD-KRW", symbol="USD-KRW")
+
+    with pytest.raises(ValueError):
+        _run(run())
