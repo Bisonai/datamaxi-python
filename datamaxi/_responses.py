@@ -672,10 +672,10 @@ class ListingsHistoricalResponse:
 class ListingsHistoricalView:
     announced_at: int = 0
     base: str = ""
-    deposit_at: int = 0
+    deposit_at: Optional[int] = None
     exchange: str = ""
     network: Optional[str] = None
-    trade_at: int = 0
+    trade_at: Optional[int] = None
     url: str = ""
 
     @classmethod
@@ -683,10 +683,10 @@ class ListingsHistoricalView:
         return cls(
             announced_at=data.get("announced_at", 0),
             base=data.get("base", ""),
-            deposit_at=data.get("deposit_at", 0),
+            deposit_at=data.get("deposit_at"),
             exchange=data.get("exchange", ""),
             network=data.get("network"),
-            trade_at=data.get("trade_at", 0),
+            trade_at=data.get("trade_at"),
             url=data.get("url", ""),
         )
 
@@ -887,223 +887,223 @@ class PremiumDetail:
     # specifies the date and the time in UTC milliseconds
     d: int = 0
     # funding gap which is difference between source and target fundingrate without funding interval consideration
-    fg: float = 0.0
+    fg: Optional[float] = None
     # net fundingrate which takes funding interval into account
-    nfr: float = 0.0
+    nfr: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges
-    pdp: float = 0.0
+    pdp: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 15m ago
-    pdp15m: float = 0.0
+    pdp15m: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 1h ago
-    pdp1h: float = 0.0
+    pdp1h: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 24h ago
-    pdp24h: float = 0.0
+    pdp24h: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 30m ago
-    pdp30m: float = 0.0
+    pdp30m: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 4h ago
-    pdp4h: float = 0.0
+    pdp4h: Optional[float] = None
     # specifies the price difference percentage between the source and target exchanges 5m ago
-    pdp5m: float = 0.0
+    pdp5m: Optional[float] = None
     # sepcifies premium duration
-    pmd: int = 0
+    pmd: Optional[int] = None
     # source ask depth within +2% base
-    sad: float = 0.0
+    sad: Optional[float] = None
     # specifies -2% volume depth from source exchange
-    sad2p: float = 0.0
+    sad2p: Optional[float] = None
     # source ask depth within +2% quote
-    sadf: float = 0.0
+    sadf: Optional[float] = None
     # specifies the base token of the source exchange
     sb: str = ""
     # specifies +2% volume depth from source exchange
-    sbd2p: float = 0.0
+    sbd2p: Optional[float] = None
     # for amm source ticker, amm source chain
     sc: Optional[str] = None
     # specifies the source exchange name
     se: str = ""
     # source funding rate
-    sfr: float = 0.0
+    sfr: Optional[float] = None
     # source funding rate interval, 1 stands for 1 hour
-    sfri: int = 0
+    sfri: Optional[int] = None
     # source fundingrate info timestamp in UTC millisecond
-    sfrt: int = 0
+    sfrt: Optional[int] = None
     # specifies highest bid from source exchange
-    shb: float = 0.0
+    shb: Optional[float] = None
     # specifies lowest bid from source exchange
-    sla: float = 0.0
+    sla: Optional[float] = None
     # specifies the source market type
     sm: str = ""
     # boolean if source exchange margin is supported, returned only for spot market
-    sms: bool = False
+    sms: Optional[bool] = None
     # source next distribution time in UTC milliseconds
-    snd: int = 0
+    snd: Optional[int] = None
     # Open Interest snapshot — USD-denominated. Source and target sides.
-    soi: float = 0.0
+    soi: Optional[float] = None
     # OI % change over rolling 1h / 4h / 24h windows.
-    soich1h: float = 0.0
-    soich24h: float = 0.0
-    soich4h: float = 0.0
+    soich1h: Optional[float] = None
+    soich24h: Optional[float] = None
+    soich4h: Optional[float] = None
     # OI / 24h USD quote volume. Crude "leverage per turnover" metric.
-    soivr: float = 0.0
+    soivr: Optional[float] = None
     # specifies the latest price of the source exchange in requested currency
-    sp: float = 0.0
+    sp: Optional[float] = None
     # for amm source ticker, amm pool address
     spa: Optional[str] = None
     # specifies the price difference percentage of the source exchange in the last 15m
-    spdp15m: float = 0.0
+    spdp15m: Optional[float] = None
     # specifies the price difference percentage of the source exchange in the last 1h
-    spdp1h: float = 0.0
+    spdp1h: Optional[float] = None
     # specifies the price difference percentage of the source exchange in the last 24h
-    spdp24h: float = 0.0
+    spdp24h: Optional[float] = None
     # specifies the price difference percentage of the source exchange in the last 30m
-    spdp30m: float = 0.0
+    spdp30m: Optional[float] = None
     # specifies the price difference percentage of the source exchange in the last 4h
-    spdp4h: float = 0.0
+    spdp4h: Optional[float] = None
     # specifies the price difference percentage of the source exchange in the last 5m
-    spdp5m: float = 0.0
+    spdp5m: Optional[float] = None
     # specifies the quote token of the source exchange
     sq: str = ""
     # specifies the date and the time of source ticker in UTC milliseconds
     st: int = 0
     # specifies the trading volume of the source exchange in the last 24 hours in requested currency
-    sv: float = 0.0
+    sv: Optional[float] = None
     # transferable, null if unknown
-    t: bool = False
+    t: Optional[bool] = None
     # specifies -2% volume depth from target exchange
-    tad2p: float = 0.0
+    tad2p: Optional[float] = None
     # specifies the base token of the target exchange
     tb: str = ""
     # target bid depth within -2% base
-    tbd: float = 0.0
+    tbd: Optional[float] = None
     # specifies +2% volume depth from target exchange
-    tbd2p: float = 0.0
+    tbd2p: Optional[float] = None
     # target bid depth within -2% quote
-    tbdf: float = 0.0
+    tbdf: Optional[float] = None
     # for amm target ticker, amm target chain
     tc: Optional[str] = None
     # specifies the target exchange name
     te: str = ""
     # target funding rate
-    tfr: float = 0.0
+    tfr: Optional[float] = None
     # target funding rate interval, 1 stands for 1 hour
-    tfri: int = 0
+    tfri: Optional[int] = None
     # target fundingrate info timestamp in UTC millisecond
-    tfrt: int = 0
+    tfrt: Optional[int] = None
     # specifies highest bid from target exchange
-    thb: float = 0.0
+    thb: Optional[float] = None
     # specifies lowest bid from target exchange
-    tla: float = 0.0
+    tla: Optional[float] = None
     # specifies the target market type
     tm: str = ""
     # boolean if target exchange margin is supported, returned only for spot market
-    tms: bool = False
+    tms: Optional[bool] = None
     # target next distribution time in UTC millisconds
-    tnd: int = 0
-    toi: float = 0.0
-    toich1h: float = 0.0
-    toich24h: float = 0.0
-    toich4h: float = 0.0
-    toivr: float = 0.0
+    tnd: Optional[int] = None
+    toi: Optional[float] = None
+    toich1h: Optional[float] = None
+    toich24h: Optional[float] = None
+    toich4h: Optional[float] = None
+    toivr: Optional[float] = None
     # specifies the latest price of the target exchange
-    tp: float = 0.0
+    tp: Optional[float] = None
     # for amm target ticker, amm pool address
     tpa: Optional[str] = None
     # specifies the price difference percentage of the target exchange in the last 15m
-    tpdp15m: float = 0.0
+    tpdp15m: Optional[float] = None
     # specifies the price difference percentage of the target exchange in the last 1h
-    tpdp1h: float = 0.0
+    tpdp1h: Optional[float] = None
     # specifies the price difference percentage of the target exchange in the last 24h
-    tpdp24h: float = 0.0
+    tpdp24h: Optional[float] = None
     # specifies the price difference percentage of the target exchange in the last 30m
-    tpdp30m: float = 0.0
+    tpdp30m: Optional[float] = None
     # specifies the price difference percentage of the target exchange in the last 4h
-    tpdp4h: float = 0.0
+    tpdp4h: Optional[float] = None
     # specifies the price difference percentage of the target exchange in the last 5m
-    tpdp5m: float = 0.0
+    tpdp5m: Optional[float] = None
     # specifies the quote token of the target exchange
     tq: str = ""
     # specifies the date and the time of target ticker in UTC milliseconds
     tt: int = 0
     # specifies the trading volume of the target exchange in the last 24 hours in requested currency
-    tv: float = 0.0
+    tv: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> PremiumDetail:
         return cls(
             bid=data.get("bid", ""),
             d=data.get("d", 0),
-            fg=data.get("fg", 0.0),
-            nfr=data.get("nfr", 0.0),
-            pdp=data.get("pdp", 0.0),
-            pdp15m=data.get("pdp15m", 0.0),
-            pdp1h=data.get("pdp1h", 0.0),
-            pdp24h=data.get("pdp24h", 0.0),
-            pdp30m=data.get("pdp30m", 0.0),
-            pdp4h=data.get("pdp4h", 0.0),
-            pdp5m=data.get("pdp5m", 0.0),
-            pmd=data.get("pmd", 0),
-            sad=data.get("sad", 0.0),
-            sad2p=data.get("sad2p", 0.0),
-            sadf=data.get("sadf", 0.0),
+            fg=data.get("fg"),
+            nfr=data.get("nfr"),
+            pdp=data.get("pdp"),
+            pdp15m=data.get("pdp15m"),
+            pdp1h=data.get("pdp1h"),
+            pdp24h=data.get("pdp24h"),
+            pdp30m=data.get("pdp30m"),
+            pdp4h=data.get("pdp4h"),
+            pdp5m=data.get("pdp5m"),
+            pmd=data.get("pmd"),
+            sad=data.get("sad"),
+            sad2p=data.get("sad2p"),
+            sadf=data.get("sadf"),
             sb=data.get("sb", ""),
-            sbd2p=data.get("sbd2p", 0.0),
+            sbd2p=data.get("sbd2p"),
             sc=data.get("sc"),
             se=data.get("se", ""),
-            sfr=data.get("sfr", 0.0),
-            sfri=data.get("sfri", 0),
-            sfrt=data.get("sfrt", 0),
-            shb=data.get("shb", 0.0),
-            sla=data.get("sla", 0.0),
+            sfr=data.get("sfr"),
+            sfri=data.get("sfri"),
+            sfrt=data.get("sfrt"),
+            shb=data.get("shb"),
+            sla=data.get("sla"),
             sm=data.get("sm", ""),
-            sms=data.get("sms", False),
-            snd=data.get("snd", 0),
-            soi=data.get("soi", 0.0),
-            soich1h=data.get("soich1h", 0.0),
-            soich24h=data.get("soich24h", 0.0),
-            soich4h=data.get("soich4h", 0.0),
-            soivr=data.get("soivr", 0.0),
-            sp=data.get("sp", 0.0),
+            sms=data.get("sms"),
+            snd=data.get("snd"),
+            soi=data.get("soi"),
+            soich1h=data.get("soich1h"),
+            soich24h=data.get("soich24h"),
+            soich4h=data.get("soich4h"),
+            soivr=data.get("soivr"),
+            sp=data.get("sp"),
             spa=data.get("spa"),
-            spdp15m=data.get("spdp15m", 0.0),
-            spdp1h=data.get("spdp1h", 0.0),
-            spdp24h=data.get("spdp24h", 0.0),
-            spdp30m=data.get("spdp30m", 0.0),
-            spdp4h=data.get("spdp4h", 0.0),
-            spdp5m=data.get("spdp5m", 0.0),
+            spdp15m=data.get("spdp15m"),
+            spdp1h=data.get("spdp1h"),
+            spdp24h=data.get("spdp24h"),
+            spdp30m=data.get("spdp30m"),
+            spdp4h=data.get("spdp4h"),
+            spdp5m=data.get("spdp5m"),
             sq=data.get("sq", ""),
             st=data.get("st", 0),
-            sv=data.get("sv", 0.0),
-            t=data.get("t", False),
-            tad2p=data.get("tad2p", 0.0),
+            sv=data.get("sv"),
+            t=data.get("t"),
+            tad2p=data.get("tad2p"),
             tb=data.get("tb", ""),
-            tbd=data.get("tbd", 0.0),
-            tbd2p=data.get("tbd2p", 0.0),
-            tbdf=data.get("tbdf", 0.0),
+            tbd=data.get("tbd"),
+            tbd2p=data.get("tbd2p"),
+            tbdf=data.get("tbdf"),
             tc=data.get("tc"),
             te=data.get("te", ""),
-            tfr=data.get("tfr", 0.0),
-            tfri=data.get("tfri", 0),
-            tfrt=data.get("tfrt", 0),
-            thb=data.get("thb", 0.0),
-            tla=data.get("tla", 0.0),
+            tfr=data.get("tfr"),
+            tfri=data.get("tfri"),
+            tfrt=data.get("tfrt"),
+            thb=data.get("thb"),
+            tla=data.get("tla"),
             tm=data.get("tm", ""),
-            tms=data.get("tms", False),
-            tnd=data.get("tnd", 0),
-            toi=data.get("toi", 0.0),
-            toich1h=data.get("toich1h", 0.0),
-            toich24h=data.get("toich24h", 0.0),
-            toich4h=data.get("toich4h", 0.0),
-            toivr=data.get("toivr", 0.0),
-            tp=data.get("tp", 0.0),
+            tms=data.get("tms"),
+            tnd=data.get("tnd"),
+            toi=data.get("toi"),
+            toich1h=data.get("toich1h"),
+            toich24h=data.get("toich24h"),
+            toich4h=data.get("toich4h"),
+            toivr=data.get("toivr"),
+            tp=data.get("tp"),
             tpa=data.get("tpa"),
-            tpdp15m=data.get("tpdp15m", 0.0),
-            tpdp1h=data.get("tpdp1h", 0.0),
-            tpdp24h=data.get("tpdp24h", 0.0),
-            tpdp30m=data.get("tpdp30m", 0.0),
-            tpdp4h=data.get("tpdp4h", 0.0),
-            tpdp5m=data.get("tpdp5m", 0.0),
+            tpdp15m=data.get("tpdp15m"),
+            tpdp1h=data.get("tpdp1h"),
+            tpdp24h=data.get("tpdp24h"),
+            tpdp30m=data.get("tpdp30m"),
+            tpdp4h=data.get("tpdp4h"),
+            tpdp5m=data.get("tpdp5m"),
             tq=data.get("tq", ""),
             tt=data.get("tt", 0),
-            tv=data.get("tv", 0.0),
+            tv=data.get("tv"),
         )
 
 
@@ -1135,19 +1135,15 @@ class PremiumResponse:
 @dataclass
 class PremiumView:
     detail: Optional[PremiumDetail] = None
-    source_annualized_funding_rate: float = 0.0
-    target_annualized_funding_rate: float = 0.0
+    source_annualized_funding_rate: Optional[float] = None
+    target_annualized_funding_rate: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> PremiumView:
         return cls(
             detail=_as_model(PremiumDetail, data.get("detail")),
-            source_annualized_funding_rate=data.get(
-                "source_annualized_funding_rate", 0.0
-            ),
-            target_annualized_funding_rate=data.get(
-                "target_annualized_funding_rate", 0.0
-            ),
+            source_annualized_funding_rate=data.get("source_annualized_funding_rate"),
+            target_annualized_funding_rate=data.get("target_annualized_funding_rate"),
         )
 
 
