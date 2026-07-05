@@ -53,12 +53,12 @@ def test_ws_liquidation_subscribe_tolerates_quiet_window():
 
 def test_ws_announcement_subscribe_tolerates_quiet_window():
     # /announcement/listing is Pro+ and takes no param. A non-Pro key is
-    # rejected at the handshake (InvalidStatus) or the server closes with an
-    # auth code (ConnectionClosed) — both subclass WebSocketException. Skip
-    # rather than fail so a Basic key doesn't red the lane; a Pro key exercises
-    # connect + auth + SUBSCRIBE for real. reconnect=False so a post-connect
-    # auth close propagates to the skip below instead of being swallowed by the
-    # reconnect loop (which would just hit the timeout and pass silently).
+    # rejected either at the handshake (InvalidStatus, a WebSocketException) or
+    # by a close right after connect. reconnect=False makes that post-connect
+    # close deterministic: the reader stops instead of reconnect-looping, so the
+    # stream ends and __anext__ raises StopAsyncIteration. Skip on either so a
+    # Basic key doesn't red the lane; a Pro key streams (or hits the quiet-window
+    # timeout) for real. A quiet Pro connection stays open -> TimeoutError -> pass.
     async def run():
         async with AsyncDatamaxiWS(
             api_key=API_KEY, base_url=BASE_URL, reconnect=False
@@ -72,7 +72,7 @@ def test_ws_announcement_subscribe_tolerates_quiet_window():
 
     try:
         msg = _run(run())
-    except websockets.exceptions.WebSocketException as exc:
+    except (websockets.exceptions.WebSocketException, StopAsyncIteration) as exc:
         pytest.skip(f"/announcement/listing rejected (needs Pro+ tier): {exc!r}")
     if msg is not None:
         assert isinstance(msg, dict)
