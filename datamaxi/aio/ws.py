@@ -175,8 +175,12 @@ class AsyncWSConnection:
                 else:
                     continue
             msg = json.loads(raw)
-            # Subscription acks are {"result": [...], "id": N} — not data.
-            if isinstance(msg, dict) and "result" in msg and "id" in msg:
+            # Subscription acks are {"result": [...], "id": N}; when the accepted
+            # param list is empty the server omits `result`, leaving just
+            # {"id": N}. Data payloads always carry other fields (s/e/d/...) —
+            # note they may also include an "id" (token id), so detect an ack as
+            # any dict whose keys are a subset of {"result", "id"}.
+            if isinstance(msg, dict) and set(msg) <= {"result", "id"}:
                 continue
             for q in list(self._subscribers):
                 q.put_nowait(msg)

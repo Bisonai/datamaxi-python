@@ -76,6 +76,31 @@ def test_ws_ticker_subscribe_streams_and_filters_ack():
     assert msg == {"s": "BTC-USDT", "e": "binance", "p": 105.5, "d": 1}
 
 
+def test_ws_empty_result_ack_is_filtered():
+    # When the accepted param list is empty the server omits `result`, sending
+    # just {"id": N}. That must be filtered, not yielded as data. (A data
+    # payload can itself carry an "id" token, e.g. {"id": "bitcoin", ...}.)
+    async def handler(conn):
+        async for raw in conn:
+            m = json.loads(raw)
+            if m.get("method") == "SUBSCRIBE":
+                await conn.send(json.dumps({"id": m["id"]}))  # empty-result ack
+                await conn.send(
+                    json.dumps({"id": "bitcoin", "s": "BTC-USDT", "p": 1.0})
+                )
+
+    async def run():
+        async with _serve(handler) as server:
+            async with AsyncDatamaxiWS(
+                api_key="k", ws_url=f"ws://localhost:{_port(server)}"
+            ) as ws:
+                stream = await ws.ticker.subscribe("BTC-USDT@binance", market="spot")
+                return await _first(stream)
+
+    msg = _run(run())
+    assert msg == {"id": "bitcoin", "s": "BTC-USDT", "p": 1.0}  # data, not the ack
+
+
 def test_ws_multi_symbol_multiplexed_on_one_connection():
     async def handler(conn):
         async for raw in conn:
