@@ -1278,7 +1278,13 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "publishedAt",
-                "enum": ["channelName", "views", "reactions", "forwards", "publishedAt"],
+                "enum": [
+                    "channelName",
+                    "views",
+                    "reactions",
+                    "forwards",
+                    "publishedAt",
+                ],
                 "description": "Specifies key to sort by",
             },
             "sort": {
