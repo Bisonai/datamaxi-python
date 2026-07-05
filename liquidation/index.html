@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../cex-ticker/">
+        <link rel="prev" href="../funding-rate/">
       
       
-        <link rel="next" href="../cex-wallet-status/">
+        <link rel="next" href="../open-interest/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Fees - </title>
+        <title>Liquidation - </title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cex-fees" class="md-skip">
+        <a href="#liquidation" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fees
+              Liquidation
             
           </span>
         </div>
@@ -346,20 +346,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -380,7 +378,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -451,37 +449,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fees
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../cex-fee/" class="md-nav__link">
         
   
   
@@ -497,92 +468,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CexFee
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.__call__" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        __call__
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.exchanges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        exchanges
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.symbols" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        symbols
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -738,10 +623,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../liquidation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Liquidation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -757,6 +669,125 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liquidation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.__call__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __call__
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        feed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.heatmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        heatmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.symbol_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        symbol_history
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1026,10 +1057,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee" class="md-nav__link">
+  <a href="#datamaxi.resources.Liquidation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CexFee
+        Liquidation
       
     </span>
   </a>
@@ -1037,7 +1068,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.__call__" class="md-nav__link">
+  <a href="#datamaxi.resources.Liquidation.__call__" class="md-nav__link">
     <span class="md-ellipsis">
       
         __call__
@@ -1048,10 +1079,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.exchanges" class="md-nav__link">
+  <a href="#datamaxi.resources.Liquidation.feed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        exchanges
+        feed
       
     </span>
   </a>
@@ -1059,10 +1090,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexFee.symbols" class="md-nav__link">
+  <a href="#datamaxi.resources.Liquidation.heatmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        symbols
+        heatmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.resources.Liquidation.symbol_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        symbol_history
       
     </span>
   </a>
@@ -1087,46 +1151,6 @@
   
 
 
-  <nav class="md-path" aria-label="Navigation" >
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href=".." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Main
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../cex-candle/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    CEX
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
               
               <article class="md-content__inner md-typeset">
                 
@@ -1137,8 +1161,8 @@
   
 
 
-<h1 id="cex-fees">CEX Fees<a class="headerlink" href="#cex-fees" title="Permanent link">&para;</a></h1>
-<p>Trading fee schedules for centralized exchanges.</p>
+<h1 id="liquidation">Liquidation<a class="headerlink" href="#liquidation" title="Permanent link">&para;</a></h1>
+<p>CEX futures liquidation data: recent events, firehose feed, heatmaps, maps, and bucketed history.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <details>
 <summary>Sync</summary>
@@ -1146,10 +1170,29 @@
 
 <span class="n">maxi</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
 
-<span class="n">exchanges</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">exchanges</span><span class="p">()</span>
-<span class="n">symbols</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">)</span>
+<span class="c1"># Recent liquidation events for a single futures symbol</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">fees</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">)</span>
+<span class="c1"># Firehose: most recent events across every symbol</span>
+<span class="n">feed</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Token x exchange liquidation heatmap over a rolling window</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">&quot;1h&quot;</span><span class="p">,</span> <span class="n">topN</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Liquidation KPI stats over a rolling window</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">&quot;1h&quot;</span><span class="p">)</span>
+
+<span class="c1"># Coinglass-style liquidation map (price x leverage tier)</span>
+<span class="n">liq_map</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="s2">&quot;USDT&quot;</span><span class="p">)</span>
+
+<span class="c1"># Bucketed long / short liquidation USD time series + price line</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">symbol_history</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="s2">&quot;USDT&quot;</span><span class="p">,</span>
+    <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+    <span class="n">interval</span><span class="o">=</span><span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
 </details>
 <details>
@@ -1160,10 +1203,29 @@
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-        <span class="n">exchanges</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">exchanges</span><span class="p">()</span>
-        <span class="n">symbols</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">)</span>
+        <span class="c1"># Recent liquidation events for a single futures symbol</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-        <span class="n">fees</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">fee</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">)</span>
+        <span class="c1"># Firehose: most recent events across every symbol</span>
+        <span class="n">feed</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># Token x exchange liquidation heatmap over a rolling window</span>
+        <span class="n">heatmap</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">&quot;1h&quot;</span><span class="p">,</span> <span class="n">topN</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># Liquidation KPI stats over a rolling window</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">&quot;1h&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Coinglass-style liquidation map (price x leverage tier)</span>
+        <span class="n">liq_map</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="s2">&quot;USDT&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Bucketed long / short liquidation USD time series + price line</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">liquidation</span><span class="o">.</span><span class="n">symbol_history</span><span class="p">(</span>
+            <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+            <span class="n">quote</span><span class="o">=</span><span class="s2">&quot;USDT&quot;</span><span class="p">,</span>
+            <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+            <span class="n">interval</span><span class="o">=</span><span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+            <span class="n">window</span><span class="o">=</span><span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 
 
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
@@ -1171,7 +1233,8 @@
 </details>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>You can omit <code>symbol</code> to get all symbols for the exchange.</li>
+<li><code>heatmap</code> and <code>stats</code> accept <code>window</code> of <code>1h</code>, <code>4h</code>, or <code>24h</code>; <code>heatmap</code>'s <code>topN</code> must be between 1 and 30.</li>
+<li><code>symbol_history</code> accepts <code>interval</code> of <code>5m</code>, <code>15m</code>, or <code>1h</code> and <code>window</code> of <code>24h</code>, <code>72h</code>, or <code>7d</code>.</li>
 </ul>
 
 
@@ -1179,14 +1242,14 @@
 
 
 
-<a id="datamaxi.resources.CexFee"></a>
+<a id="datamaxi.resources.Liquidation"></a>
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="            Resource (datamaxi.api.Resource)" href="../api/#datamaxi.api.Resource">Resource</a></code></p>
 
 
 
-        <p>Client to fetch CEX trading fee data from DataMaxi+ API.</p>
+        <p>Client to fetch CEX futures liquidation data from DataMaxi+ API.</p>
 
 
 
@@ -1238,115 +1301,20 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="datamaxi.resources.CexFee.__call__" class="doc doc-heading">
+<h2 id="datamaxi.resources.Liquidation.__call__" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">__call__</span>
 
 
-<a href="#datamaxi.resources.CexFee.__call__" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#datamaxi.resources.Liquidation.__call__" class="headerlink" title="Permanent link">&para;</a></h2>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">__call__</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Fetch trading fee data</p>
-<p><code>GET /api/v1/cex/fees</code></p>
-<p><a href="https://docs.datamaxiplus.com/rest/cex/trading-fees/data">https://docs.datamaxiplus.com/rest/cex/trading-fees/data</a></p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>exchange</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Exchange name</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>symbol</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Symbol name</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>]</code>
-          –
-          <div class="doc-md-description">
-            <p>Trading fee data</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="datamaxi.resources.CexFee.exchanges" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">exchanges</span>
-
-
-<a href="#datamaxi.resources.CexFee.exchanges" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">exchanges</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Fetch supported exchanges for fee data.</p>
-<p><code>GET /api/v1/cex/fees/exchanges</code></p>
-<p><a href="https://docs.datamaxiplus.com/rest/cex/trading-fees/exchanges">https://docs.datamaxiplus.com/rest/cex/trading-fees/exchanges</a></p>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="typing.List">List</span>[<span title="str">str</span>]</code>
-          –
-          <div class="doc-md-description">
-            <p>List of supported exchanges</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="datamaxi.resources.CexFee.symbols" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">symbols</span>
-
-
-<a href="#datamaxi.resources.CexFee.symbols" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">symbols</span><span class="p">(</span><span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Fetch supported symbols for fee data.</p>
-<p><code>GET /api/v1/cex/fees/symbols</code></p>
-<p><a href="https://docs.datamaxiplus.com/rest/cex/trading-fees/symbols">https://docs.datamaxiplus.com/rest/cex/trading-fees/symbols</a></p>
+        <p>Recent liquidation events for a specific futures symbol.</p>
+<p><code>GET /api/v1/liquidation</code></p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1356,7 +1324,25 @@
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>Exchange name</p>
+            <p>Exchange name (e.g. <code>binance</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>symbol</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Exchange-native API symbol (e.g. <code>BTC-USDT</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>limit</code></b>
+              (<code><span title="int">int</span></code>, default:
+                  <code>100</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Max events to return (server caps).</p>
           </div>
         </li>
     </ul>
@@ -1365,10 +1351,328 @@
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><span title="typing.List">List</span>[<span title="str">str</span>]</code>
+              <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
           –
           <div class="doc-md-description">
-            <p>List of supported symbols</p>
+            <p>Liquidation events response.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="datamaxi.resources.Liquidation.feed" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">feed</span>
+
+
+<a href="#datamaxi.resources.Liquidation.feed" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">feed</span><span class="p">(</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_volume_usd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Firehose: most recent liquidation events across every symbol.</p>
+<p><code>GET /api/v1/liquidation/feed</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>limit</code></b>
+              (<code><span title="int">int</span></code>, default:
+                  <code>100</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Max events to return.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>exchange</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional exchange filter.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>base</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional base asset filter (case-insensitive).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>min_volume_usd</code></b>
+              (<code><span title="float">float</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Minimum <code>VolumeUsd</code> filter.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="datamaxi.resources.Liquidation.heatmap" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">heatmap</span>
+
+
+<a href="#datamaxi.resources.Liquidation.heatmap" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">heatmap</span><span class="p">(</span>
+    <span class="n">window</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1h&quot;</span><span class="p">,</span> <span class="n">topN</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Token × exchange liquidation heatmap over a rolling window.</p>
+<p><code>GET /api/v1/liquidation/heatmap</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>window</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;1h&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Rolling window (<code>1h</code>, <code>4h</code>, or <code>24h</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>topN</code></b>
+              (<code><span title="int">int</span></code>, default:
+                  <code>10</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Top N tokens by total (1-30).</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="datamaxi.resources.Liquidation.map" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">map</span>
+
+
+<a href="#datamaxi.resources.Liquidation.map" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">map</span><span class="p">(</span>
+    <span class="n">base</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;binance&quot;</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;USDT&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Coinglass-style liquidation map (price × leverage tier).</p>
+<p><code>GET /api/v1/liquidation/map</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>base</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Base asset (e.g. <code>BTC</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>exchange</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;binance&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Exchange (default <code>binance</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>quote</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;USDT&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Quote asset (default <code>USDT</code>).</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="datamaxi.resources.Liquidation.stats" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">stats</span>
+
+
+<a href="#datamaxi.resources.Liquidation.stats" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">stats</span><span class="p">(</span>
+    <span class="n">window</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_volume_usd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Liquidation KPI stats over a rolling window.</p>
+<p><code>GET /api/v1/liquidation/stats</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>window</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;1h&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Rolling window (<code>1h</code>, <code>4h</code>, or <code>24h</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>exchange</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional exchange filter.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>min_volume_usd</code></b>
+              (<code><span title="float">float</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Minimum <code>VolumeUsd</code> filter.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="datamaxi.resources.Liquidation.symbol_history" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">symbol_history</span>
+
+
+<a href="#datamaxi.resources.Liquidation.symbol_history" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">symbol_history</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;USDT&quot;</span><span class="p">,</span>
+    <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">interval</span><span class="p">:</span> <span class="n">Interval</span> <span class="o">=</span> <span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+    <span class="n">window</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Bucketed long / short liquidation USD time series + price line.</p>
+<p><code>GET /api/v1/liquidation/symbol-history</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>symbol</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Base asset (e.g. <code>BTC</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>quote</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;USDT&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Quote asset (default <code>USDT</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>exchange</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional exchange filter for the liquidation
+aggregation. Price line stays on Binance unless set.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>interval</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;5m&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Bucket interval (<code>5m</code>, <code>15m</code>, or <code>1h</code>).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>window</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;24h&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Lookback window (<code>24h</code>, <code>72h</code>, or <code>7d</code>).</p>
           </div>
         </li>
     </ul>
@@ -1466,7 +1770,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../cex-ticker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Ticker">
+          <a href="../funding-rate/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Funding Rate">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1476,20 +1780,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Ticker
+                Funding Rate
               </div>
             </div>
           </a>
         
         
           
-          <a href="../cex-wallet-status/" class="md-footer__link md-footer__link--next" aria-label="Next: Wallet Status">
+          <a href="../open-interest/" class="md-footer__link md-footer__link--next" aria-label="Next: Open Interest">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Wallet Status
+                Open Interest
               </div>
             </div>
             <div class="md-footer__button md-icon">

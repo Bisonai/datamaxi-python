@@ -12,7 +12,7 @@
         <link rel="prev" href="../cex-announcement/">
       
       
-        <link rel="next" href="../dex/">
+        <link rel="next" href="../cex-symbol/">
       
       
         
@@ -319,6 +319,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../async/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Async Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -332,10 +359,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -353,8 +380,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -593,7 +620,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.CexToken" class="md-nav__link">
+  <a href="#datamaxi.resources.CexToken" class="md-nav__link">
     <span class="md-ellipsis">
       
         CexToken
@@ -604,7 +631,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.CexToken.updates" class="md-nav__link">
+  <a href="#datamaxi.resources.CexToken.updates" class="md-nav__link">
     <span class="md-ellipsis">
       
         updates
@@ -618,6 +645,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cex-symbol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Symbol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -637,14 +692,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../dex/" class="md-nav__link">
+      <a href="../funding-rate/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    DEX
+    Funding Rate
   
 
     
@@ -664,14 +719,95 @@
   
   
     <li class="md-nav__item">
-      <a href="../funding-rate/" class="md-nav__link">
+      <a href="../liquidation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Funding Rate
+    Liquidation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../open-interest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open Interest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../margin-borrow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Margin Borrow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index-price/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index Price
   
 
     
@@ -868,7 +1004,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.CexToken" class="md-nav__link">
+  <a href="#datamaxi.resources.CexToken" class="md-nav__link">
     <span class="md-ellipsis">
       
         CexToken
@@ -879,7 +1015,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.datamaxi.CexToken.updates" class="md-nav__link">
+  <a href="#datamaxi.resources.CexToken.updates" class="md-nav__link">
     <span class="md-ellipsis">
       
         updates
@@ -960,6 +1096,8 @@
 <h1 id="cex-token">CEX Token<a class="headerlink" href="#cex-token" title="Permanent link">&para;</a></h1>
 <p>Token listing and delisting updates from centralized exchanges.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<details>
+<summary>Sync</summary>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datamaxi</span>
 
 <span class="n">maxi</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
@@ -968,11 +1106,31 @@
     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;listed&quot;</span><span class="p">,</span>
     <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;desc&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">more_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">next_request</span><span class="p">()</span>
 </code></pre></div>
+</details>
+<details>
+<summary>Async</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncDatamaxi</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">next_request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">token</span><span class="o">.</span><span class="n">updates</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;listed&quot;</span><span class="p">,</span>
+            <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">more_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">next_request</span><span class="p">()</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+</details>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>type="listed"</code> or <code>type="delisted"</code> to filter update types.</li>
@@ -983,45 +1141,52 @@
 
 
 
-<a id="datamaxi.datamaxi.CexToken"></a>
-  <div class="doc doc-contents first">
-          <p class="doc doc-class-bases">
-            Bases: <code><a class="autorefs autorefs-internal" title="datamaxi.api.API" href="../api/#datamaxi.api.API">API</a></code></p>
-
-  
-      <p>Client to fetch token update data from DataMaxi+ API.</p>
-  
+<a id="datamaxi.resources.CexToken"></a>
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            Resource (datamaxi.api.Resource)" href="../api/#datamaxi.api.Resource">Resource</a></code></p>
 
 
 
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>api_key</code></b>
-            (<code>str</code>, default:
-                <code>None</code>
+        <p>Client to fetch token update data from DataMaxi+ API.</p>
+
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>api_key</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>The DataMaxi+ API key</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>**kwargs</code></b>
-            (<code><span title="typing.Any">Any</span></code>, default:
-                <code>{}</code>
+          –
+          <div class="doc-md-description">
+            <p>The DataMaxi+ API key</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>**kwargs</code></b>
+              (<code><span title="typing.Any">Any</span></code>, default:
+                  <code>{}</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Keyword arguments used by <code>datamaxi.api.API</code>.</p>
-        </div>
-      </li>
-  </ul>
+          –
+          <div class="doc-md-description">
+            <p>Keyword arguments used by <code>datamaxi.api.API</code>.</p>
+          </div>
+        </li>
+    </ul>
 
 
-  
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
 
 
 
@@ -1035,86 +1200,73 @@
 <div class="doc doc-object doc-function">
 
 
+<h2 id="datamaxi.resources.CexToken.updates" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">updates</span>
 
-<h2 id="datamaxi.datamaxi.CexToken.updates" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <span class="doc doc-object-name doc-function-name">updates</span>
 
-
-<a href="#datamaxi.datamaxi.CexToken.updates" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">updates</span><span class="p">(</span>
+<a href="#datamaxi.resources.CexToken.updates" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">updates</span><span class="p">(</span>
     <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">sort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DESC</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">TokenUpdateResponse</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
 </code></pre></div>
 
-  <div class="doc doc-contents ">
-  
-      <p>Get token update data</p>
+    <div class="doc doc-contents ">
+
+        <p>Get token update data</p>
 <p><code>GET /api/v1/cex/token/updates</code></p>
 <p><a href="https://docs.datamaxiplus.com/rest/cex/token-updates">https://docs.datamaxiplus.com/rest/cex/token-updates</a></p>
 
 
-
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>page</code></b>
-            (<code>int</code>, default:
-                <code>1</code>
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>page</code></b>
+              (<code><span title="int">int</span></code>, default:
+                  <code>1</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Page number</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>limit</code></b>
-            (<code>int</code>, default:
-                <code>1000</code>
+          –
+          <div class="doc-md-description">
+            <p>Page number</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>limit</code></b>
+              (<code><span title="int">int</span></code>, default:
+                  <code>1000</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Limit of data</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>sort</code></b>
-            (<code>str</code>, default:
-                <code><span title="datamaxi.lib.constants.DESC">DESC</span></code>
+          –
+          <div class="doc-md-description">
+            <p>Limit of data</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>type</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
 )
-        –
-        <div class="doc-md-description">
-          <p>Sort order</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>type</code></b>
-            (<code>str</code>, default:
-                <code>None</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Update type</p>
-        </div>
-      </li>
-  </ul>
+          –
+          <div class="doc-md-description">
+            <p>Update type</p>
+          </div>
+        </li>
+    </ul>
 
 
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.Tuple">Tuple</span>[<span title="datamaxi.resources.responses.TokenUpdateResponse">TokenUpdateResponse</span>, <span title="typing.Callable">Callable</span>]</code>
+          –
+          <div class="doc-md-description">
+            <p>Tuple of token update response and next request function</p>
+          </div>
+        </li>
+    </ul>
 
-  <p>Returns:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="typing.Tuple">Tuple</span>[<span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>], <span title="typing.Callable">Callable</span>]</code>
-        –
-        <div class="doc-md-description">
-          <p>Tuple of token update response and next request function</p>
-      </div>
-      </li>
-  </ul>
 
-  </div>
+    </div>
 
 </div>
 
@@ -1122,8 +1274,7 @@
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -1224,13 +1375,13 @@
         
         
           
-          <a href="../dex/" class="md-footer__link md-footer__link--next" aria-label="Next: DEX">
+          <a href="../cex-symbol/" class="md-footer__link md-footer__link--next" aria-label="Next: Symbol">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                DEX
+                Symbol
               </div>
             </div>
             <div class="md-footer__button md-icon">

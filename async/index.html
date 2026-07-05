@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../api/">
+      
+      
+        <link rel="next" href="../cex-candle/">
       
       
         
@@ -19,14 +23,14 @@
     
     
       
-        <title></title>
+        <title>Async Client - </title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -45,11 +49,11 @@
       
     
     
-      <link rel="stylesheet" href="/assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="/extra.css">
+      <link rel="stylesheet" href="../extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -83,6 +87,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#async-client" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -95,7 +104,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
+    <a href=".." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
       
   <img src="/assets/logo.png" alt="logo">
 
@@ -114,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Async Client
             
           </span>
         </div>
@@ -230,7 +239,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
+    <a href=".." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
       
   <img src="/assets/logo.png" alt="logo">
 
@@ -259,7 +268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -286,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/api/" class="md-nav__link">
+      <a href="../api/" class="md-nav__link">
         
   
   
@@ -310,10 +319,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/async/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Async Client
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -329,6 +365,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.aio.AsyncDatamaxi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncDatamaxi
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -387,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-candle/" class="md-nav__link">
+      <a href="../cex-candle/" class="md-nav__link">
         
   
   
@@ -415,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-ticker/" class="md-nav__link">
+      <a href="../cex-ticker/" class="md-nav__link">
         
   
   
@@ -443,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-fee/" class="md-nav__link">
+      <a href="../cex-fee/" class="md-nav__link">
         
   
   
@@ -471,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-wallet-status/" class="md-nav__link">
+      <a href="../cex-wallet-status/" class="md-nav__link">
         
   
   
@@ -499,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-announcement/" class="md-nav__link">
+      <a href="../cex-announcement/" class="md-nav__link">
         
   
   
@@ -527,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-token/" class="md-nav__link">
+      <a href="../cex-token/" class="md-nav__link">
         
   
   
@@ -555,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cex-symbol/" class="md-nav__link">
+      <a href="../cex-symbol/" class="md-nav__link">
         
   
   
@@ -590,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/funding-rate/" class="md-nav__link">
+      <a href="../funding-rate/" class="md-nav__link">
         
   
   
@@ -617,7 +739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/liquidation/" class="md-nav__link">
+      <a href="../liquidation/" class="md-nav__link">
         
   
   
@@ -644,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/open-interest/" class="md-nav__link">
+      <a href="../open-interest/" class="md-nav__link">
         
   
   
@@ -671,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/margin-borrow/" class="md-nav__link">
+      <a href="../margin-borrow/" class="md-nav__link">
         
   
   
@@ -698,7 +820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/index-price/" class="md-nav__link">
+      <a href="../index-price/" class="md-nav__link">
         
   
   
@@ -725,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/premium/" class="md-nav__link">
+      <a href="../premium/" class="md-nav__link">
         
   
   
@@ -752,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/forex/" class="md-nav__link">
+      <a href="../forex/" class="md-nav__link">
         
   
   
@@ -779,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/naver-trend/" class="md-nav__link">
+      <a href="../naver-trend/" class="md-nav__link">
         
   
   
@@ -806,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/telegram/" class="md-nav__link">
+      <a href="../telegram/" class="md-nav__link">
         
   
   
@@ -833,7 +955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/license/" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -870,6 +992,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.aio.AsyncDatamaxi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncDatamaxi
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -890,8 +1088,175 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="async-client">Async client<a class="headerlink" href="#async-client" title="Permanent link">&para;</a></h1>
+<p>The SDK ships an async client, <code>AsyncDatamaxi</code>, built on
+<a href="https://www.python-httpx.org/">httpx</a>. It mirrors the sync
+<a href="../api/"><code>Datamaxi</code></a> resource tree — the same endpoints and arguments — with one
+rule: every method is a coroutine and must be <code>await</code>ed.</p>
+<p>Every endpoint page in this documentation carries a <strong>Sync</strong> / <strong>Async</strong> tab —
+switch to the <em>Async</em> tab to see the awaited twin of that page's example.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The async client requires the <code>async</code> extra, which pulls in <code>httpx</code>:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;datamaxi[async]&quot;</span>
+</code></pre></div>
+<h2 id="lifecycle">Lifecycle<a class="headerlink" href="#lifecycle" title="Permanent link">&para;</a></h2>
+<p>Use <code>AsyncDatamaxi</code> as an async context manager so the underlying <code>httpx</code> client
+is closed cleanly, or call <code>await client.aclose()</code> yourself. It reads the same
+<code>DATAMAXI_API_KEY</code> environment variable as the sync client.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncDatamaxi</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Reads DATAMAXI_API_KEY from the environment, or pass api_key=... explicitly.</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxi</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">candle</span><span class="p">(</span>
+            <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s2">&quot;1d&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+<p>Without a context manager, close the client explicitly:</p>
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">AsyncDatamaxi</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">candle</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC-USDT&quot;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s2">&quot;1d&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span>
+    <span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">aclose</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Every data and discovery method is a coroutine — <code>await</code> it (e.g.
+  <code>await client.cex.candle.exchanges(market="spot")</code>).</li>
+<li>Telegram and Naver have standalone async clients, <code>AsyncTelegram</code> and
+  <code>AsyncNaver</code>, also imported from <code>datamaxi.aio</code> and used the same way (async
+  context managers, awaited methods). See the <a href="../telegram/">Telegram</a> and
+  <a href="../naver-trend/">Naver Trend</a> pages for tabbed examples.</li>
+</ul>
+<h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
+<p>Paginated endpoints return an <strong>async</strong> <code>next_request</code> callable — <code>await</code> it too:</p>
+<div class="highlight"><pre><span></span><code><span class="n">data</span><span class="p">,</span> <span class="n">next_request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">announcement</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">data2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">next_request</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="datamaxi.aio.AsyncDatamaxi"></a>
+    <div class="doc doc-contents first">
+
+
+
+        <p>Async entrypoint — full mirror of the sync :class:<code>datamaxi.Datamaxi</code>.</p>
+<p>Use as an async context manager so the underlying <code>httpx</code> client is
+closed, or call :meth:<code>aclose</code> explicitly.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback! Help us improve this page by using our <a href="..." target="_blank" rel="noopener">feedback form</a>.
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
               </article>
             </div>
           
@@ -903,6 +1268,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../api/" class="md-footer__link md-footer__link--prev" aria-label="Previous: API">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                API
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cex-candle/" class="md-footer__link md-footer__link--next" aria-label="Next: Candle">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Candle
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -983,10 +1386,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["header.autohide", "announce.dismiss", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
