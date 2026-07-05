@@ -1,0 +1,112 @@
+"""
+Auto-generated WebSocket channel registry from the datamaxi-backend WS surface.
+DO NOT EDIT — regenerate with: make ws-python
+
+Source: pkg/apiws/app.go route table + protobuf/*.proto + Go view structs.
+The subscribe `param` formats come from overrides/ws_channels.json (the one
+piece not derivable from those sources — see parse_ws.py).
+"""
+
+WS_BASE_PATH = "/ws/v1"
+WS_AUTH_HEADER = "X-DTMX-APIKEY"
+
+WS_CHANNELS = {
+    "/announcement/listing": {
+        "plan": "pro_plus",
+        "market": None,
+        "message": "ListingMessage",
+        "param": None,
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/announcement/listing/internal": {
+        "plan": "pro_plus",
+        "market": None,
+        "message": "InternalListingMessage",
+        "param": None,
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/forex": {
+        "plan": "basic",
+        "market": None,
+        "message": "ForexMessage",
+        "param": "SYMBOL",
+        "subscribe": True,
+        "unsubscribe": True,
+        "param_note": "fx pair e.g. USD-KRW, no exchange",
+    },
+    "/funding-rate": {
+        "plan": "basic",
+        "market": None,
+        "message": "FundingRateMessage",
+        "param": "SYMBOL@exchange",
+        "subscribe": True,
+        "unsubscribe": True,
+        "param_note": "UPPER symbol + lower exchange; code/doc disagree — verify live",
+    },
+    "/liquidation": {
+        "plan": "basic",
+        "market": None,
+        "message": "LiquidationMessage",
+        "param": "SYMBOL@exchange",
+        "subscribe": True,
+        "unsubscribe": False,
+    },
+    "/liquidation/feed": {
+        "plan": "basic",
+        "market": None,
+        "message": "LiquidationMessage",
+        "param": None,
+        "subscribe": False,
+        "unsubscribe": False,
+    },
+    "/open-interest": {
+        "plan": "basic",
+        "market": None,
+        "message": "OpenInterestMessage",
+        "param": "SYMBOL@exchange",
+        "subscribe": True,
+        "unsubscribe": False,
+    },
+    "/orderbook/futures": {
+        "plan": "basic",
+        "market": "futures",
+        "message": "OrderbookMessage",
+        "param": "SYMBOL@exchange[@currency@conversionBase]",
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/orderbook/spot": {
+        "plan": "basic",
+        "market": "spot",
+        "message": "OrderbookMessage",
+        "param": "SYMBOL@exchange[@currency@conversionBase]",
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/premium": {
+        "plan": "basic",
+        "market": None,
+        "message": "PremiumMessage",
+        "param": "src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt",
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/ticker/futures": {
+        "plan": "basic",
+        "market": "futures",
+        "message": "TickerMessage",
+        "param": "SYMBOL@exchange[@currency@conversionBase]",
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+    "/ticker/spot": {
+        "plan": "basic",
+        "market": "spot",
+        "message": "TickerMessage",
+        "param": "SYMBOL@exchange[@currency@conversionBase]",
+        "subscribe": True,
+        "unsubscribe": True,
+    },
+}
