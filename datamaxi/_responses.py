@@ -245,8 +245,6 @@ class FundingRateLatestResponse:
     i: int = 0
     # Specifies the token id
     id: str = ""
-    # Specifies the processed at
-    p: int = 0
     # Specifies the quote
     q: str = ""
     # Specifies the symbol
@@ -261,7 +259,6 @@ class FundingRateLatestResponse:
             f=data.get("f", 0.0),
             i=data.get("i", 0),
             id=data.get("id", ""),
-            p=data.get("p", 0),
             q=data.get("q", ""),
             s=data.get("s", ""),
         )
