@@ -12,150 +12,150 @@ from __future__ import annotations
 from typing import Any, Dict, List, TypedDict  # noqa: F401
 
 
-# source: gostruct:pkg/apiforex/app.go::Forex
+# source: asyncapi:payload
 ForexMessage = TypedDict(
     "ForexMessage",
     {
-        "s": str,
         "d": int,
         "r": float,
+        "s": str,
     },
     total=False,
 )
 
 
-# source: gostruct:pkg/apifundingrate/types.go::Snapshot
+# source: asyncapi:payload
 FundingRateMessage = TypedDict(
     "FundingRateMessage",
     {
+        "b": str,
+        "d": int,
+        "e": str,
         "f": float,
         "i": int,
-        "e": str,
         "id": str,
-        "s": str,
-        "b": str,
-        "q": str,
-        "d": int,
         "p": int,
+        "q": str,
+        "s": str,
     },
     total=False,
 )
 
 
-# source: gostruct:pkg/apiannouncement/app.go::InternalListing
+# source: asyncapi:payload
 InternalListingMessage = TypedDict(
     "InternalListingMessage",
     {
-        "s": str,
-        "e": str,
         "b": str,
+        "d": int,
+        "e": str,
+        "s": str,
         "t": str,
         "u": str,
-        "d": int,
     },
     total=False,
 )
 
 
-# source: proto:protobuf/liquidation.proto::liquidation
+# source: asyncapi:payload
 LiquidationMessage = TypedDict(
     "LiquidationMessage",
     {
-        "id": str,
-        "e": str,
-        "d": str,
-        "s": str,
         "b": str,
-        "q": str,
-        "sd": str,
+        "d": str,
+        "e": str,
+        "id": str,
         "p": float,
-        "pusd": float,
-        "pfiat": float,
-        "v": float,
-        "vusd": float,
-        "vfiat": float,
-        "pt": Dict[str, Any],
         "pa": str,
-        "src": Any,
+        "pfiat": float,
+        "pt": Dict[str, Any],
+        "pusd": float,
+        "q": str,
+        "s": str,
+        "sd": str,
+        "src": str,
+        "v": float,
+        "vfiat": float,
+        "vusd": float,
     },
     total=False,
 )
 
 
-# source: gostruct:pkg/apiannouncement/app.go::Listing
+# source: asyncapi:payload
 ListingMessage = TypedDict(
     "ListingMessage",
     {
-        "e": str,
         "b": str,
+        "d": int,
+        "e": str,
         "q": str,
         "u": str,
-        "d": int,
     },
     total=False,
 )
 
 
-# source: proto:protobuf/open-interest.proto::open_interest
+# source: asyncapi:payload
 OpenInterestMessage = TypedDict(
     "OpenInterestMessage",
     {
-        "id": str,
-        "e": str,
-        "d": str,
-        "s": str,
         "b": str,
-        "q": str,
+        "d": str,
+        "e": str,
+        "id": str,
         "oi": float,
-        "oiusd": float,
         "oifiat": float,
-        "pt": Dict[str, Any],
+        "oiusd": float,
         "pa": str,
+        "pt": Dict[str, Any],
+        "q": str,
+        "s": str,
     },
     total=False,
 )
 
 
-# source: gostruct:pkg/apipremium/handlers/dataapipremiumws/handler.go::PremiumOut
+# source: asyncapi:payload
 PremiumMessage = TypedDict(
     "PremiumMessage",
     {
         "key": str,
-        "source_exchange": str,
-        "target_exchange": str,
-        "token_id": str,
-        "source_base": str,
-        "source_quote": str,
-        "target_quote": str,
-        "source_market": str,
-        "target_market": str,
         "premium": float,
+        "source_base": str,
+        "source_exchange": str,
+        "source_market": str,
         "source_price": float,
+        "source_quote": str,
+        "target_exchange": str,
+        "target_market": str,
         "target_price": float,
+        "target_quote": str,
         "timestamp": int,
+        "token_id": str,
     },
     total=False,
 )
 
 
-# source: gostruct:pkg/apiticker/app.go::View
+# source: asyncapi:payload
 TickerMessage = TypedDict(
     "TickerMessage",
     {
-        "p": float,
-        "v": float,
-        "p24h": float,
-        "pc": float,
+        "b": str,
+        "d": int,
+        "e": str,
         "hb": float,
         "la": float,
-        "ud": float,
         "ld": float,
-        "e": str,
-        "s": str,
-        "b": str,
-        "q": str,
-        "d": int,
         "m": str,
+        "p": float,
+        "p24h": float,
+        "pc": float,
+        "q": str,
+        "s": str,
+        "ud": float,
+        "v": float,
     },
     total=False,
 )
