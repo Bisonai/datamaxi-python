@@ -10,10 +10,14 @@ Usage::
     from datamaxi.aio.ws import AsyncDatamaxiWS
 
     async with AsyncDatamaxiWS(api_key="...") as ws:
+        # raw wire param ...
         async for msg in ws.ticker.subscribe("BTC-USDT@binance", market="spot"):
             print(msg["s"], msg["p"])
 
-        async for oi in ws.open_interest.subscribe("BTC-USDT@binance"):
+        # ... or structured tokens named after the channel's param_format
+        async for oi in ws.open_interest.subscribe(
+            symbol="BTC-USDT", exchange="binance"
+        ):
             ...
 
 Channels (accessors driven by the generated ``WS_CHANNELS`` registry):
@@ -217,6 +221,112 @@ def _require_channel(path: str) -> str:
     return path
 
 
+def _token_kwarg(token: str) -> str:
+    """Map a raw format token to its kwarg name.
+
+    Rule: lower-case a token only when it is entirely upper-case
+    (``SYMBOL`` -> ``symbol``); every other token is used verbatim
+    (``exchange``, ``tokenId``, ``srcQuote`` ...).
+    """
+    return token.lower() if token.isupper() else token
+
+
+def build_param(param_format: Optional[str], **tokens: str) -> str:
+    """Assemble a wire subscribe param from named tokens per a channel's format.
+
+    ``param_format`` is the generated ``WS_CHANNELS[path]["param"]`` string, e.g.
+    ``"SYMBOL@exchange"`` or ``"src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt"``.
+    Keyword names ARE the raw format tokens, with the single :func:`_token_kwarg`
+    rule (only an all-upper token is lower-cased, so ``SYMBOL`` -> ``symbol``;
+    ``exchange``/``tokenId``/``srcQuote`` stay verbatim).
+
+    Grammar handled:
+
+    * ``None`` -> the channel takes no params; structured kwargs are rejected.
+    * a single token (``SYMBOL``, forex) -> no separator.
+    * ``@``- or ``:``-separated tokens; the separator is inferred from the format.
+    * a trailing ``[...]`` group is optional and both-or-neither: supply every
+      token in it or none.
+
+    Raises ``ValueError`` for an unknown token, a missing required token, or a
+    partially-supplied optional group; the message echoes ``param_format``.
+
+    Examples::
+
+        build_param("SYMBOL", symbol="USD-KRW")                # "USD-KRW"
+        build_param("SYMBOL@exchange", symbol="BTC-USDT", exchange="binance")
+        # -> "BTC-USDT@binance"
+        build_param(
+            "src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt",
+            src="binance", tgt="upbit", tokenId="bitcoin",
+            srcQuote="USDT", tgtQuote="KRW", srcMkt="spot", tgtMkt="spot",
+        )  # -> "binance:upbit:bitcoin:USDT:KRW:spot:spot"
+    """
+    if param_format is None:
+        raise ValueError(
+            "this channel takes no subscribe params; call subscribe() without "
+            "keyword tokens"
+        )
+
+    sep = "@" if "@" in param_format else ":" if ":" in param_format else ""
+    required_fmt, _, optional_fmt = param_format.partition("[")
+    optional_fmt = optional_fmt.rstrip("]")
+
+    def _split(section: str) -> List[str]:
+        section = section.strip(sep)
+        if not section:
+            return []
+        return section.split(sep) if sep else [section]
+
+    required_kw = [_token_kwarg(t) for t in _split(required_fmt)]
+    optional_kw = [_token_kwarg(t) for t in _split(optional_fmt)]
+    valid = required_kw + optional_kw
+
+    unknown = [k for k in tokens if k not in valid]
+    if unknown:
+        raise ValueError(
+            f"unknown subscribe token(s) {unknown} for format {param_format!r}; "
+            f"valid tokens: {valid}"
+        )
+
+    missing = [k for k in required_kw if k not in tokens]
+    if missing:
+        raise ValueError(
+            f"missing required subscribe token(s) {missing} for format "
+            f"{param_format!r}"
+        )
+
+    supplied_optional = [k for k in optional_kw if k in tokens]
+    if supplied_optional and len(supplied_optional) != len(optional_kw):
+        raise ValueError(
+            f"optional token group {optional_kw} is both-or-neither for format "
+            f"{param_format!r}; got only {supplied_optional}"
+        )
+
+    values = [str(tokens[k]) for k in required_kw + supplied_optional]
+    return sep.join(values)
+
+
+def _resolve_params(
+    param_format: Optional[str],
+    params: tuple,
+    tokens: Dict[str, str],
+) -> List[str]:
+    """Resolve a subscribe/unsubscribe call to a list of wire param strings.
+
+    Raw positional ``params`` pass through unchanged (the backward-compatible
+    path). Keyword ``tokens`` build exactly one param via :func:`build_param`.
+    Mixing both is rejected.
+    """
+    if params and tokens:
+        raise ValueError(
+            "pass either raw positional params or keyword tokens, not both"
+        )
+    if tokens:
+        return [build_param(param_format, **tokens)]
+    return list(params)
+
+
 class Subscription:
     """A single-path subscribable channel (``ws.forex``, ``ws.premium``, ...).
 
@@ -232,16 +342,27 @@ class Subscription:
     def param_format(self) -> Optional[str]:
         return WS_CHANNELS[self._path].get("param")
 
-    async def subscribe(self, *params: str) -> AsyncIterator[Dict[str, Any]]:
-        """SUBSCRIBE to ``params``; return an async iterator over the channel."""
+    async def subscribe(
+        self, *params: str, **tokens: str
+    ) -> AsyncIterator[Dict[str, Any]]:
+        """SUBSCRIBE and return an async iterator over the channel.
+
+        Two forms: pass raw wire ``params`` positionally
+        (``subscribe("BTC-USDT@binance")``), or pass structured keyword
+        ``tokens`` named after this channel's :attr:`param_format` to build one
+        param (``subscribe(symbol="BTC-USDT", exchange="binance")``). See
+        :func:`build_param`. The two forms are mutually exclusive.
+        """
+        resolved = _resolve_params(self.param_format, params, tokens)
         conn = await self._client._conn(self._path)
         stream = conn.stream()  # register the queue before SUBSCRIBE (no missed msgs)
-        await conn.subscribe(list(params))
+        await conn.subscribe(resolved)
         return stream
 
-    async def unsubscribe(self, *params: str) -> None:
+    async def unsubscribe(self, *params: str, **tokens: str) -> None:
+        resolved = _resolve_params(self.param_format, params, tokens)
         conn = await self._client._conn(self._path)
-        await conn.unsubscribe(list(params))
+        await conn.unsubscribe(resolved)
 
 
 class MarketSubscription:
@@ -259,16 +380,25 @@ class MarketSubscription:
         return path
 
     async def subscribe(
-        self, *params: str, market: str = "spot"
+        self, *params: str, market: str = "spot", **tokens: str
     ) -> AsyncIterator[Dict[str, Any]]:
-        conn = await self._client._conn(self._path(market))
+        """SUBSCRIBE on ``market``; ``params`` or structured ``tokens`` (see
+        :meth:`Subscription.subscribe`). ``market`` is a control kwarg, not a
+        param token."""
+        path = self._path(market)
+        resolved = _resolve_params(WS_CHANNELS[path].get("param"), params, tokens)
+        conn = await self._client._conn(path)
         stream = conn.stream()
-        await conn.subscribe(list(params))
+        await conn.subscribe(resolved)
         return stream
 
-    async def unsubscribe(self, *params: str, market: str = "spot") -> None:
-        conn = await self._client._conn(self._path(market))
-        await conn.unsubscribe(list(params))
+    async def unsubscribe(
+        self, *params: str, market: str = "spot", **tokens: str
+    ) -> None:
+        path = self._path(market)
+        resolved = _resolve_params(WS_CHANNELS[path].get("param"), params, tokens)
+        conn = await self._client._conn(path)
+        await conn.unsubscribe(resolved)
 
 
 class Feed:
