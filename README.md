@@ -73,9 +73,11 @@ You may use environment variables to configure the SDK to avoid any inline boile
 
 DataMaxi+ Python package includes the following clients:
 
-- `Datamaxi` - Main client for crypto trading data (CEX, funding rates, premium, forex)
+- `Datamaxi` - Main (synchronous) client for crypto trading data (CEX, funding rates, premium, forex)
 - `Telegram` - Client for Telegram channel data
 - `Naver` - Client for Naver trend data
+
+An asynchronous variant, `AsyncDatamaxi`, is covered in [Async Client](#async-client).
 
 Set your API key via the `DATAMAXI_API_KEY` environment variable (recommended, so
 the key stays out of source code):
@@ -159,10 +161,10 @@ asyncio.run(main())
 
 ## Async Client
 
-The SDK also ships an async client, `AsyncDatamaxi` (built on
+`AsyncDatamaxi` is the asynchronous counterpart to `Datamaxi` (built on
 [httpx](https://www.python-httpx.org/)). It mirrors the same resource tree and
-arguments as `Datamaxi`, with one rule: every method is a coroutine and must be
-`await`ed. Install the async extra:
+arguments, with one rule: every method is a coroutine and must be `await`ed.
+Install the async extra:
 
 ```shell
 pip install "datamaxi[async]"
