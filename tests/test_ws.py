@@ -234,3 +234,50 @@ def test_ws_repr_no_key_leak():
     assert ws.ws_url == "wss://api.datamaxiplus.com"
     assert "secret" not in repr(ws)
     assert "has_key=True" in repr(ws)
+
+
+def test_ws_reconnect_replays_active_subscription(monkeypatch):
+    # Drop the connection mid-stream and assert the client reconnects and
+    # replays its active SUBSCRIBE, then resumes streaming. `_RECONNECT_BACKOFF`
+    # is a module global read at call time in `_reader`, so shrink it to keep
+    # the test fast.
+    monkeypatch.setattr("datamaxi.aio.ws._RECONNECT_BACKOFF", 0.01)
+
+    seen = []  # SUBSCRIBE params observed, one entry per connection
+
+    async def handler(conn):
+        idx = len(seen)
+        seen.append(None)
+        async for raw in conn:
+            m = json.loads(raw)
+            if m.get("method") == "SUBSCRIBE":
+                seen[idx] = m["params"]
+                await conn.send(json.dumps({"result": m["params"], "id": m["id"]}))
+                if idx == 0:
+                    # first connection: stream one message then drop it
+                    await conn.send(json.dumps({"s": "USD-KRW", "d": 1, "r": 1.0}))
+                    return  # returning closes the conn -> client reconnects
+                # reconnect: send a distinguishable message, keep the conn open
+                await conn.send(json.dumps({"s": "USD-KRW", "d": 2, "r": 2.0}))
+
+    async def run():
+        async with _serve(handler) as server:
+            async with AsyncDatamaxiWS(
+                api_key="k",
+                ws_url=f"ws://localhost:{_port(server)}",
+                keepalive=0,  # no PING noise
+            ) as ws:
+                stream = await ws.forex.subscribe("USD-KRW")
+                first = await _first(stream)
+                # reading the second message forces the reconnect path to
+                # complete (resubscribe + resume)
+                second = await _first(stream)
+                return first, second
+
+    first, second = _run(run())
+    assert first == {"s": "USD-KRW", "d": 1, "r": 1.0}
+    assert second == {"s": "USD-KRW", "d": 2, "r": 2.0}  # post-reconnect payload
+    # the server saw two connections and the reconnect replayed the active params
+    assert len(seen) >= 2
+    assert seen[0] == ["USD-KRW"]
+    assert seen[1] == ["USD-KRW"]  # `_open` replays sorted(self._active)
