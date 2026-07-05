@@ -116,29 +116,6 @@ OpenInterestMessage = TypedDict(
 )
 
 
-# source: proto:protobuf/orderbook.proto::Orderbook
-OrderbookMessage = TypedDict(
-    "OrderbookMessage",
-    {
-        "id": str,
-        "m": str,
-        "e": str,
-        "d": str,
-        "s": str,
-        "b": str,
-        "q": str,
-        "as": List[Any],
-        "bs": List[Any],
-        "pt": Dict[str, Any],
-        "pa": str,
-        "ms": bool,
-        "src": Any,
-        "snap": bool,
-    },
-    total=False,
-)
-
-
 # source: gostruct:pkg/apipremium/handlers/dataapipremiumws/handler.go::PremiumOut
 PremiumMessage = TypedDict(
     "PremiumMessage",

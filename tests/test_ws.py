@@ -13,6 +13,7 @@ import pytest
 
 websockets = pytest.importorskip("websockets")
 
+import datamaxi._ws_models as _ws_models  # noqa: E402
 from datamaxi.aio.ws import AsyncDatamaxiWS  # noqa: E402
 from datamaxi._ws_endpoints import WS_CHANNELS, WS_BASE_PATH  # noqa: E402
 from datamaxi._ws_models import TickerMessage  # noqa: E402
@@ -41,6 +42,76 @@ def test_ws_consumes_generated_registry_and_model():
     assert WS_CHANNELS["/ticker/spot"]["message"] == "TickerMessage"
     assert WS_BASE_PATH == "/ws/v1"
     assert {"p", "e", "s", "d"} <= set(TickerMessage.__annotations__)
+
+
+def test_ws_orderbook_excluded():
+    assert not any("orderbook" in p for p in WS_CHANNELS)
+
+
+def test_ws_every_channel_has_a_generated_model_and_accessor():
+    # Every generated channel maps to a real model in _ws_models...
+    for path, ch in WS_CHANNELS.items():
+        assert hasattr(_ws_models, ch["message"]), f"{path}: missing {ch['message']}"
+    # ...and the client exposes an accessor for every data type.
+    ws = AsyncDatamaxiWS(api_key="k")
+    for name in (
+        "ticker",
+        "forex",
+        "premium",
+        "funding_rate",
+        "open_interest",
+        "liquidation",
+        "liquidation_feed",
+        "announcement",
+        "announcement_internal",
+    ):
+        assert hasattr(ws, name), f"client missing ws.{name}"
+
+
+def test_ws_param_format_from_registry():
+    ws = AsyncDatamaxiWS(api_key="k")
+    assert ws.premium.param_format == "src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt"
+    assert ws.forex.param_format == "SYMBOL"
+
+
+def test_ws_forex_subscribe_streams():
+    async def handler(conn):
+        seen = None
+        async for raw in conn:
+            m = json.loads(raw)
+            if m.get("method") == "SUBSCRIBE":
+                seen = (conn.request.path, m["params"])
+                await conn.send(json.dumps({"result": m["params"], "id": m["id"]}))
+                await conn.send(json.dumps({"s": "USD-KRW", "d": 1, "r": 1530.0}))
+                assert seen == ("/ws/v1/forex", ["USD-KRW"])
+
+    async def run():
+        async with _serve(handler) as server:
+            async with AsyncDatamaxiWS(
+                api_key="k", ws_url=f"ws://localhost:{_port(server)}"
+            ) as ws:
+                stream = await ws.forex.subscribe("USD-KRW")
+                return await _first(stream)
+
+    assert _run(run()) == {"s": "USD-KRW", "d": 1, "r": 1530.0}
+
+
+def test_ws_liquidation_feed_streams_without_subscribe():
+    async def handler(conn):
+        # firehose: push immediately, no SUBSCRIBE expected
+        await conn.send(json.dumps({"s": "RPL-USDT", "sd": "sell", "p": 2.2}))
+        async for _ in conn:
+            pass
+
+    async def run():
+        async with _serve(handler) as server:
+            async with AsyncDatamaxiWS(
+                api_key="k", ws_url=f"ws://localhost:{_port(server)}"
+            ) as ws:
+                stream = await ws.liquidation_feed.stream()
+                return await _first(stream)
+
+    assert _run(run())["s"] == "RPL-USDT"
 
 
 def test_ws_ticker_subscribe_streams_and_filters_ack():

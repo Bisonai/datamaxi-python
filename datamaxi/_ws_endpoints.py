@@ -43,7 +43,7 @@ WS_CHANNELS = {
         "param": "SYMBOL@exchange",
         "subscribe": True,
         "unsubscribe": True,
-        "param_note": "UPPER symbol + lower exchange; code/doc disagree — verify live",
+        "param_note": "UPPER symbol + lower exchange; verified live (handler.go doc comment is wrong — Bisonai/datamaxi-backend#7926)",
     },
     "/liquidation": {
         "plan": "basic",
@@ -68,22 +68,6 @@ WS_CHANNELS = {
         "param": "SYMBOL@exchange",
         "subscribe": True,
         "unsubscribe": False,
-    },
-    "/orderbook/futures": {
-        "plan": "basic",
-        "market": "futures",
-        "message": "OrderbookMessage",
-        "param": "SYMBOL@exchange[@currency@conversionBase]",
-        "subscribe": True,
-        "unsubscribe": True,
-    },
-    "/orderbook/spot": {
-        "plan": "basic",
-        "market": "spot",
-        "message": "OrderbookMessage",
-        "param": "SYMBOL@exchange[@currency@conversionBase]",
-        "subscribe": True,
-        "unsubscribe": True,
     },
     "/premium": {
         "plan": "basic",

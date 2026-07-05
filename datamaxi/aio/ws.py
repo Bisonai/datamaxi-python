@@ -1,4 +1,4 @@
-"""Async WebSocket client (Phase-1 pilot — ticker).
+"""Async WebSocket client for every DataMaxi+ WS data type.
 
 Streams real-time data over the DataMaxi+ WebSocket API. Requires the ``ws``
 extra::
@@ -13,12 +13,18 @@ Usage::
         async for msg in ws.ticker.subscribe("BTC-USDT@binance", market="spot"):
             print(msg["s"], msg["p"])
 
-This is a deliberately small pilot (ticker) that consumes the **generated**
-WS surface — ``WS_CHANNELS`` / ``WS_BASE_PATH`` / ``WS_AUTH_HEADER`` from
-``datamaxi._ws_endpoints`` and the ``TickerMessage`` model from
-``datamaxi._ws_models`` (both emitted by datamaxi-codegen from the backend).
-The goal is to validate that the generated artifacts are sufficient to drive a
-real client before expanding to every channel.
+        async for oi in ws.open_interest.subscribe("BTC-USDT@binance"):
+            ...
+
+Channels (accessors driven by the generated ``WS_CHANNELS`` registry):
+``ticker`` (market-keyed), ``forex``, ``premium``, ``funding_rate``,
+``open_interest``, ``liquidation`` (subscribe), ``liquidation_feed``
+(firehose, no params), ``announcement`` / ``announcement_internal`` (Pro+).
+
+Consumes the **generated** WS surface — ``WS_CHANNELS`` / ``WS_BASE_PATH`` /
+``WS_AUTH_HEADER`` from ``datamaxi._ws_endpoints`` and the per-channel message
+models from ``datamaxi._ws_models`` (both emitted by datamaxi-codegen from the
+backend). Orderbook is intentionally excluded (unsupported product).
 
 Routing model: one connection per channel path, multiplexing all subscribed
 ``params``. ``subscribe()`` returns an async iterator over **every** message on
@@ -32,13 +38,10 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-from typing import Any, AsyncIterator, Dict, List, Optional, TYPE_CHECKING
+from typing import Any, AsyncIterator, Dict, List, Optional
 
 from datamaxi.__version__ import __version__
 from datamaxi._ws_endpoints import WS_CHANNELS, WS_BASE_PATH, WS_AUTH_HEADER
-
-if TYPE_CHECKING:
-    from datamaxi._ws_models import TickerMessage
 
 _DEFAULT_WS_URL = "wss://api.datamaxiplus.com"
 # Send an app-level PING within the ~90s openresty proxy idle timeout.
@@ -206,38 +209,87 @@ class AsyncWSConnection:
             q.put_nowait(_CLOSED)
 
 
-class TickerChannel:
-    """`ws.ticker` — subscribe to real-time ticker updates.
+def _require_channel(path: str) -> str:
+    if path not in WS_CHANNELS:
+        raise ValueError(
+            f"unknown WS channel {path!r}; generated: {sorted(WS_CHANNELS)}"
+        )
+    return path
 
-    Resolves the channel path from the generated ``WS_CHANNELS`` registry by
-    market (``/ticker/spot`` or ``/ticker/futures``).
+
+class Subscription:
+    """A single-path subscribable channel (``ws.forex``, ``ws.premium``, ...).
+
+    ``param_format`` echoes the generated registry's subscribe param format for
+    reference; callers pass the raw param strings (e.g. ``"BTC-USDT@binance"``).
     """
 
-    def __init__(self, client: "AsyncDatamaxiWS"):
+    def __init__(self, client: "AsyncDatamaxiWS", path: str):
         self._client = client
+        self._path = _require_channel(path)
 
-    def _path(self, market: str) -> str:
-        path = f"/ticker/{market}"
-        if path not in WS_CHANNELS:
-            valid = [p for p in WS_CHANNELS if p.startswith("/ticker/")]
-            raise ValueError(f"unknown ticker market {market!r}; valid paths: {valid}")
-        return path
+    @property
+    def param_format(self) -> Optional[str]:
+        return WS_CHANNELS[self._path].get("param")
 
-    async def subscribe(
-        self, *params: str, market: str = "spot"
-    ) -> AsyncIterator["TickerMessage"]:
-        """Subscribe to ``params`` (``SYMBOL@exchange[@currency@conversionBase]``).
-
-        Returns an async iterator over ticker messages on the channel.
-        """
-        conn = await self._client._conn(self._path(market))
+    async def subscribe(self, *params: str) -> AsyncIterator[Dict[str, Any]]:
+        """SUBSCRIBE to ``params``; return an async iterator over the channel."""
+        conn = await self._client._conn(self._path)
         stream = conn.stream()  # register the queue before SUBSCRIBE (no missed msgs)
         await conn.subscribe(list(params))
         return stream
 
+    async def unsubscribe(self, *params: str) -> None:
+        conn = await self._client._conn(self._path)
+        await conn.unsubscribe(list(params))
+
+
+class MarketSubscription:
+    """A market-keyed subscribable channel (``ws.ticker``) → ``<base>/<market>``."""
+
+    def __init__(self, client: "AsyncDatamaxiWS", base: str):
+        self._client = client
+        self._base = base
+
+    def _path(self, market: str) -> str:
+        path = f"{self._base}/{market}"
+        if path not in WS_CHANNELS:
+            valid = [p for p in WS_CHANNELS if p.startswith(self._base + "/")]
+            raise ValueError(f"unknown market {market!r}; valid paths: {valid}")
+        return path
+
+    async def subscribe(
+        self, *params: str, market: str = "spot"
+    ) -> AsyncIterator[Dict[str, Any]]:
+        conn = await self._client._conn(self._path(market))
+        stream = conn.stream()
+        await conn.subscribe(list(params))
+        return stream
+
+    async def unsubscribe(self, *params: str, market: str = "spot") -> None:
+        conn = await self._client._conn(self._path(market))
+        await conn.unsubscribe(list(params))
+
+
+class Feed:
+    """A firehose channel (``ws.liquidation_feed``) — auto-subscribed, no params."""
+
+    def __init__(self, client: "AsyncDatamaxiWS", path: str):
+        self._client = client
+        self._path = _require_channel(path)
+
+    async def stream(self) -> AsyncIterator[Dict[str, Any]]:
+        conn = await self._client._conn(self._path)
+        return conn.stream()
+
 
 class AsyncDatamaxiWS:
-    """Async WebSocket entrypoint (pilot). Exposes ``ticker``.
+    """Async WebSocket entrypoint — every DataMaxi+ WS data type.
+
+    Accessors are driven by the generated ``WS_CHANNELS`` registry:
+    ``ticker`` (market-keyed), ``forex``, ``premium``, ``funding_rate``,
+    ``open_interest``, ``liquidation`` (subscribe), ``liquidation_feed``
+    (firehose), ``announcement`` / ``announcement_internal`` (Pro+).
 
     Use as an async context manager so open connections are closed, or call
     :meth:`aclose` explicitly.
@@ -258,7 +310,18 @@ class AsyncDatamaxiWS:
         self._reconnect = reconnect
         self._connect_kwargs = connect_kwargs
         self._conns: Dict[str, AsyncWSConnection] = {}
-        self.ticker = TickerChannel(self)
+
+        self.ticker = MarketSubscription(self, "/ticker")
+        self.forex = Subscription(self, "/forex")
+        self.premium = Subscription(self, "/premium")
+        self.funding_rate = Subscription(self, "/funding-rate")
+        self.open_interest = Subscription(self, "/open-interest")
+        self.liquidation = Subscription(self, "/liquidation")
+        self.liquidation_feed = Feed(self, "/liquidation/feed")
+        self.announcement = Subscription(self, "/announcement/listing")
+        self.announcement_internal = Subscription(
+            self, "/announcement/listing/internal"
+        )
 
     async def _conn(self, path: str) -> AsyncWSConnection:
         conn = self._conns.get(path)
