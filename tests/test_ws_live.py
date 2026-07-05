@@ -56,9 +56,13 @@ def test_ws_announcement_subscribe_tolerates_quiet_window():
     # rejected at the handshake (InvalidStatus) or the server closes with an
     # auth code (ConnectionClosed) — both subclass WebSocketException. Skip
     # rather than fail so a Basic key doesn't red the lane; a Pro key exercises
-    # connect + auth + SUBSCRIBE for real.
+    # connect + auth + SUBSCRIBE for real. reconnect=False so a post-connect
+    # auth close propagates to the skip below instead of being swallowed by the
+    # reconnect loop (which would just hit the timeout and pass silently).
     async def run():
-        async with AsyncDatamaxiWS(api_key=API_KEY, base_url=BASE_URL) as ws:
+        async with AsyncDatamaxiWS(
+            api_key=API_KEY, base_url=BASE_URL, reconnect=False
+        ) as ws:
             stream = await ws.announcement.subscribe()
             try:
                 return await asyncio.wait_for(stream.__anext__(), _QUIET_TIMEOUT)
