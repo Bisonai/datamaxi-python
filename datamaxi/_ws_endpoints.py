@@ -35,6 +35,22 @@ WS_CHANNELS = {
         "subscribe": True,
         "unsubscribe": True,
     },
+    "/front/liquidation/feed": {
+        "plan": "front",
+        "market": None,
+        "message": "LiquidationMessage",
+        "param": None,
+        "subscribe": False,
+        "unsubscribe": False,
+    },
+    "/front/listing/deposit": {
+        "plan": "front",
+        "market": None,
+        "message": "DepositListingMessage",
+        "param": None,
+        "subscribe": True,
+        "unsubscribe": True,
+    },
     "/funding-rate": {
         "plan": "basic",
         "market": None,
