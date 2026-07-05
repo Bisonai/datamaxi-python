@@ -13,6 +13,27 @@ from typing import Any, Dict, List, TypedDict  # noqa: F401
 
 
 # source: asyncapi:payload
+DepositListingMessage = TypedDict(
+    "DepositListingMessage",
+    {
+        "amount": float,
+        "amount_krw": float,
+        "amount_usd": float,
+        "asset": str,
+        "block_number": int,
+        "chain": str,
+        "exchange": str,
+        "from_address": str,
+        "timestamp": int,
+        "to_address": str,
+        "tx_hash": str,
+        "type": int,
+    },
+    total=False,
+)
+
+
+# source: asyncapi:payload
 ForexMessage = TypedDict(
     "ForexMessage",
     {
@@ -34,7 +55,6 @@ FundingRateMessage = TypedDict(
         "f": float,
         "i": int,
         "id": str,
-        "p": int,
         "q": str,
         "s": str,
     },
@@ -62,18 +82,15 @@ LiquidationMessage = TypedDict(
     "LiquidationMessage",
     {
         "b": str,
-        "d": str,
+        "d": int,
         "e": str,
         "id": str,
         "p": float,
-        "pa": str,
         "pfiat": float,
-        "pt": Dict[str, Any],
         "pusd": float,
         "q": str,
         "s": str,
         "sd": str,
-        "src": str,
         "v": float,
         "vfiat": float,
         "vusd": float,
@@ -101,14 +118,12 @@ OpenInterestMessage = TypedDict(
     "OpenInterestMessage",
     {
         "b": str,
-        "d": str,
+        "d": int,
         "e": str,
         "id": str,
         "oi": float,
         "oifiat": float,
         "oiusd": float,
-        "pa": str,
-        "pt": Dict[str, Any],
         "q": str,
         "s": str,
     },
