@@ -192,8 +192,6 @@ The package ships these clients, all configured the same way (see
 | Client            | Import                                        | Purpose                                                    |
 | ----------------- | --------------------------------------------- | ---------------------------------------------------------- |
 | `Datamaxi`        | `from datamaxi import Datamaxi`               | Synchronous client for all REST data, incl. `maxi.telegram` / `maxi.naver`. |
-| `Telegram`        | `from datamaxi import Telegram`               | Standalone Telegram client (also mounted as `maxi.telegram`). |
-| `Naver`           | `from datamaxi import Naver`                  | Standalone Naver search-trend client (also mounted as `maxi.naver`). |
 | `AsyncDatamaxi`   | `from datamaxi.aio import AsyncDatamaxi`      | Async twin of `Datamaxi` (needs the `[async]` extra).      |
 | `AsyncDatamaxiWS` | `from datamaxi.aio.ws import AsyncDatamaxiWS` | Async WebSocket streaming (needs the `[ws]` extra).        |
 
@@ -500,9 +498,6 @@ Off-exchange signals: Telegram channels and Naver search trends.
 Fetch Telegram channel messages and metadata.
 
 ```python
-# Telegram is mounted on the client as `maxi.telegram`
-# (a standalone `from datamaxi import Telegram` client also works).
-
 # Fetch channels
 data, next_request = maxi.telegram.channels(
     page=1,                  # Optional: page number
@@ -528,9 +523,6 @@ data, next_request = maxi.telegram.messages(
 Fetch Naver search trend data (South Korea).
 
 ```python
-# Naver is mounted on the client as `maxi.naver`
-# (a standalone `from datamaxi import Naver` client also works).
-
 # Get supported symbols
 symbols = maxi.naver.symbols()
 
