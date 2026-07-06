@@ -5,7 +5,8 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi import Datamaxi, Telegram
+from datamaxi import Datamaxi
+from datamaxi.telegram import Telegram
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 
@@ -125,3 +126,9 @@ def test_telegram_mounted_messages_work():
     res, next_request = maxi.telegram.messages(channel_name="alpha")
     assert res == _MESSAGES
     assert callable(next_request)
+
+
+def test_standalone_telegram_not_top_level_importable():
+    import datamaxi
+
+    assert not hasattr(datamaxi, "Telegram")

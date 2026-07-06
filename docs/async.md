@@ -55,10 +55,9 @@ finally:
 
 - Every data and discovery method is a coroutine — `await` it (e.g.
   `await client.cex.candle.exchanges(market="spot")`).
-- Telegram and Naver have standalone async clients, `AsyncTelegram` and
-  `AsyncNaver`, also imported from `datamaxi.aio` and used the same way (async
-  context managers, awaited methods). See the [Telegram](telegram.md) and
-  [Naver Trend](naver-trend.md) pages for tabbed examples.
+- Telegram and Naver are reached via `client.telegram` and `client.naver`. See
+  the [Telegram](telegram.md) and [Naver Trend](naver-trend.md) pages for tabbed
+  examples.
 
 ## Pagination
 

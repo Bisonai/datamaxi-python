@@ -7,9 +7,9 @@ Search trend data for South Korea via Naver.
 <details markdown="1"><summary>Sync</summary>
 
 ```python
-from datamaxi import Naver
+from datamaxi import Datamaxi
 
-naver = Naver(api_key="YOUR_API_KEY")
+naver = Datamaxi(api_key="YOUR_API_KEY").naver
 
 symbols = naver.symbols()
 trend = naver.trend(symbol="BTC")
@@ -21,13 +21,13 @@ trend = naver.trend(symbol="BTC")
 
 ```python
 import asyncio
-from datamaxi.aio import AsyncNaver
+from datamaxi.aio import AsyncDatamaxi
 
 
 async def main():
-    async with AsyncNaver(api_key="YOUR_API_KEY") as naver:
-        symbols = await naver.symbols()
-        trend = await naver.trend(symbol="BTC")
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        symbols = await client.naver.symbols()
+        trend = await client.naver.trend(symbol="BTC")
 
 
 asyncio.run(main())

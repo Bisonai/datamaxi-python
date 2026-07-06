@@ -6,7 +6,8 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi import Datamaxi, Naver
+from datamaxi import Datamaxi
+from datamaxi.naver import Naver
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 
@@ -84,3 +85,9 @@ def test_naver_mounted_trend_works():
     df = maxi.naver.trend("BTC")
     assert isinstance(df, pd.DataFrame)
     assert len(df) == 2
+
+
+def test_standalone_naver_not_top_level_importable():
+    import datamaxi
+
+    assert not hasattr(datamaxi, "Naver")
