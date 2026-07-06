@@ -171,6 +171,30 @@ def test_async_telegram_pagination():
     assert _run(run()) == _CHANNELS
 
 
+def test_async_telegram_naver_mounted_reuse_shared_session():
+    c = _dm()
+    assert isinstance(c.telegram, AsyncTelegram)
+    assert isinstance(c.naver, AsyncNaver)
+    # Same shared AsyncAPI/transport as every other sub-resource.
+    assert c.telegram._api is c._api
+    assert c.naver._api is c._api
+    assert c.telegram._api is c.cex._api
+
+
+def test_async_mounted_telegram_and_naver_work():
+    async def run():
+        async with _dm() as c:
+            channels, _ = await c.telegram.channels()
+            messages, _ = await c.telegram.messages(channel_name="alpha")
+            trend = await c.naver.trend("BTC", pandas=False)
+            return channels, messages, trend
+
+    channels, messages, trend = _run(run())
+    assert channels == _CHANNELS
+    assert messages == _MESSAGES
+    assert trend == _TREND
+
+
 def test_async_funding_history_and_latest():
     async def run():
         async with _dm() as c:

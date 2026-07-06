@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.naver import Naver
+from datamaxi import Datamaxi, Naver
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 
@@ -68,3 +68,22 @@ def test_naver_trend_client_error():
 def test_naver_trend_server_error():
     with pytest.raises(ServerError):
         _client().trend("BTC")
+
+
+# --- mounted sub-resource on Datamaxi (see #184) ---
+
+
+def test_naver_mounted_reuses_shared_session():
+    maxi = Datamaxi(api_key="key", base_url=BASE_URL)
+    assert isinstance(maxi.naver, Naver)
+    # Same shared API/transport as every other sub-resource.
+    assert maxi.naver._api is maxi._api
+    assert maxi.naver._api is maxi.cex._api
+
+
+@mock_http_response(responses.GET, "/api/v1/naver-trend", _TREND)
+def test_naver_mounted_trend_works():
+    maxi = Datamaxi(api_key="key", base_url=BASE_URL)
+    df = maxi.naver.trend("BTC")
+    assert isinstance(df, pd.DataFrame)
+    assert len(df) == 2
