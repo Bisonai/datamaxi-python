@@ -106,8 +106,7 @@ from datamaxi import Datamaxi
 # Alternatively, pass api_key="your_api_key" explicitly.
 maxi = Datamaxi()
 
-# Telegram and Naver are mounted as `maxi.telegram` / `maxi.naver`
-# (standalone `Telegram` / `Naver` clients remain available too).
+# Telegram and Naver are mounted as `maxi.telegram` / `maxi.naver`.
 channels, _ = maxi.telegram.channels()
 trend = maxi.naver.trend(symbol="BTC")
 
@@ -191,14 +190,12 @@ The package ships these clients, all configured the same way (see
 
 | Client            | Import                                        | Purpose                                                    |
 | ----------------- | --------------------------------------------- | ---------------------------------------------------------- |
-| `Datamaxi`        | `from datamaxi import Datamaxi`               | Synchronous client for all REST data, incl. `maxi.telegram` / `maxi.naver`. |
+| `Datamaxi`        | `from datamaxi import Datamaxi`               | Synchronous client for all REST data. |
 | `AsyncDatamaxi`   | `from datamaxi.aio import AsyncDatamaxi`      | Async twin of `Datamaxi` (needs the `[async]` extra).      |
 | `AsyncDatamaxiWS` | `from datamaxi.aio.ws import AsyncDatamaxiWS` | Async WebSocket streaming (needs the `[ws]` extra).        |
 
 Telegram and Naver are mounted on `Datamaxi` / `AsyncDatamaxi` (`maxi.telegram`,
-`maxi.naver`) so they reuse the client's shared session. The standalone
-`Telegram` / `Naver` (and their async twins `AsyncTelegram` / `AsyncNaver`,
-imported from `datamaxi.aio`) remain available for independent use.
+`maxi.naver`) so they reuse the client's shared session.
 
 ## REST API Reference
 
