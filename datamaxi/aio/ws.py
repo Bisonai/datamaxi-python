@@ -23,7 +23,7 @@ Usage::
 Channels (accessors driven by the generated ``WS_CHANNELS`` registry):
 ``ticker`` (market-keyed), ``forex``, ``premium``, ``funding_rate``,
 ``open_interest``, ``liquidation`` (subscribe), ``liquidation_feed``
-(firehose, no params), ``announcement`` / ``announcement_internal`` (Pro+).
+(firehose, no params), ``announcement`` (Pro+).
 
 Consumes the **generated** WS surface — ``WS_CHANNELS`` / ``WS_BASE_PATH`` /
 ``WS_AUTH_HEADER`` from ``datamaxi._ws_endpoints`` and the per-channel message
@@ -419,7 +419,7 @@ class AsyncDatamaxiWS:
     Accessors are driven by the generated ``WS_CHANNELS`` registry:
     ``ticker`` (market-keyed), ``forex``, ``premium``, ``funding_rate``,
     ``open_interest``, ``liquidation`` (subscribe), ``liquidation_feed``
-    (firehose), ``announcement`` / ``announcement_internal`` (Pro+).
+    (firehose), ``announcement`` (Pro+).
 
     Use as an async context manager so open connections are closed, or call
     :meth:`aclose` explicitly.
@@ -449,9 +449,6 @@ class AsyncDatamaxiWS:
         self.liquidation = Subscription(self, "/liquidation")
         self.liquidation_feed = Feed(self, "/liquidation/feed")
         self.announcement = Subscription(self, "/announcement/listing")
-        self.announcement_internal = Subscription(
-            self, "/announcement/listing/internal"
-        )
 
     async def _conn(self, path: str) -> AsyncWSConnection:
         conn = self._conns.get(path)

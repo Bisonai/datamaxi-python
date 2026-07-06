@@ -572,7 +572,6 @@ you can also read the expected shape at runtime via `ws.<channel>.param_format`.
 | `ws.liquidation`            | `subscribe(*p)`                             | `SYMBOL@exchange`                                    | Basic |
 | `ws.liquidation_feed`       | `stream()`                                  | — (firehose, no params)                             | Basic |
 | `ws.announcement`           | `subscribe()`                               | — (no params)                                       | Pro+  |
-| `ws.announcement_internal`  | `subscribe()`                               | — (no params)                                       | Pro+  |
 
 ### Multiplexing and filtering
 

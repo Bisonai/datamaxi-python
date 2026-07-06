@@ -63,7 +63,6 @@ def test_ws_every_channel_has_a_generated_model_and_accessor():
         "liquidation",
         "liquidation_feed",
         "announcement",
-        "announcement_internal",
     ):
         assert hasattr(ws, name), f"client missing ws.{name}"
 

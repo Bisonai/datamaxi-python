@@ -53,7 +53,6 @@ strings shown below; you can also inspect the expected format at runtime via
 | `ws.liquidation`            | `subscribe(*p)`                             | `SYMBOL@exchange`                                    | Basic |
 | `ws.liquidation_feed`       | `stream()`                                  | — (firehose, no params)                             | Basic |
 | `ws.announcement`           | `subscribe()`                               | — (no params)                                       | Pro+  |
-| `ws.announcement_internal`  | `subscribe()`                               | — (no params)                                       | Pro+  |
 
 `ticker` is market-keyed — pass `market="spot"` (default) or `market="futures"`.
 The announcement channels require a **Pro+** plan.
