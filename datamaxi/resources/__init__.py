@@ -69,9 +69,6 @@ class Datamaxi:
         self.open_interest = OpenInterest(api=api)
         self.margin_borrow = MarginBorrow(api=api)
         self.index_price = IndexPrice(api=api)
-        # Non-crypto data types. Mounted here so they reuse the one shared
-        # session like every other sub-resource; the standalone `Telegram` /
-        # `Naver` classes stay exported for back-compat (see #184).
         self.telegram = Telegram(api=api)
         self.naver = Naver(api=api)
 

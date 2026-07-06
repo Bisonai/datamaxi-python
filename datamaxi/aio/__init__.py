@@ -70,10 +70,6 @@ class AsyncDatamaxi:
         self.open_interest = AsyncOpenInterest(api)
         self.margin_borrow = AsyncMarginBorrow(api)
         self.index_price = AsyncIndexPrice(api)
-        # Non-crypto data types. Mounted here so they reuse the one shared
-        # session like every other sub-resource; the standalone
-        # ``AsyncTelegram`` / ``AsyncNaver`` classes stay exported for
-        # back-compat (see #184).
         self.telegram = AsyncTelegram(api=api)
         self.naver = AsyncNaver(api=api)
 
