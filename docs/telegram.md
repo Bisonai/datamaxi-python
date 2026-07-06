@@ -7,9 +7,9 @@ Telegram channel metadata and message history.
 <details markdown="1"><summary>Sync</summary>
 
 ```python
-from datamaxi import Telegram
+from datamaxi import Datamaxi
 
-telegram = Telegram(api_key="YOUR_API_KEY")
+telegram = Datamaxi(api_key="YOUR_API_KEY").telegram
 
 channels, _ = telegram.channels(category="korean", limit=50)
 messages, next_request = telegram.messages(channel_name="yunlog_announcement", limit=50)
@@ -23,13 +23,13 @@ more_messages, _ = next_request()
 
 ```python
 import asyncio
-from datamaxi.aio import AsyncTelegram
+from datamaxi.aio import AsyncDatamaxi
 
 
 async def main():
-    async with AsyncTelegram(api_key="YOUR_API_KEY") as telegram:
-        channels, _ = await telegram.channels(category="korean", limit=50)
-        messages, next_request = await telegram.messages(
+    async with AsyncDatamaxi(api_key="YOUR_API_KEY") as client:
+        channels, _ = await client.telegram.channels(category="korean", limit=50)
+        messages, next_request = await client.telegram.messages(
             channel_name="yunlog_announcement", limit=50
         )
 

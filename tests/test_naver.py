@@ -85,3 +85,9 @@ def test_naver_mounted_trend_works():
     df = maxi.naver.trend("BTC")
     assert isinstance(df, pd.DataFrame)
     assert len(df) == 2
+
+
+def test_standalone_naver_not_top_level_importable():
+    import datamaxi
+
+    assert not hasattr(datamaxi, "Naver")

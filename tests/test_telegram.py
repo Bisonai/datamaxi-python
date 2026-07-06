@@ -128,8 +128,7 @@ def test_telegram_mounted_messages_work():
     assert callable(next_request)
 
 
-def test_standalone_clients_not_top_level_importable():
+def test_standalone_telegram_not_top_level_importable():
     import datamaxi
 
     assert not hasattr(datamaxi, "Telegram")
-    assert not hasattr(datamaxi, "Naver")
