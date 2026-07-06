@@ -10,16 +10,19 @@ from datamaxi.lib.constants import BASE_URL, SortOrder
 class Telegram(Resource):
     """Client to fetch Telegram data from DataMaxi+ API."""
 
-    def __init__(self, api_key=None, **kwargs: Any):
+    def __init__(self, api_key=None, api=None, **kwargs: Any):
         """Initialize the object.
 
         Args:
             api_key (str): The DataMaxi+ API key
+            api (API): Shared transport to reuse when mounted on
+                ``Datamaxi`` (``maxi.telegram``); when omitted this builds
+                its own ``API`` for standalone use.
             **kwargs: Keyword arguments used by `datamaxi.api.API`.
         """
-        if "base_url" not in kwargs:
+        if api is None and "base_url" not in kwargs:
             kwargs["base_url"] = BASE_URL
-        super().__init__(api_key, **kwargs)
+        super().__init__(api_key, api=api, **kwargs)
 
     def channels(
         self,
