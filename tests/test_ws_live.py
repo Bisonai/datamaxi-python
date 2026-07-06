@@ -28,6 +28,9 @@ pytestmark = [
 
 # Sporadic channels may be silent for long stretches; a quiet window is a pass.
 _QUIET_TIMEOUT = 10.0
+# High-traffic channels emit continuously, so a quiet window is a FAIL. ticker
+# ticks roughly every ~10s in practice; give headroom so one slow tick can't flake.
+_DATA_TIMEOUT = 30.0
 
 
 def _run(coro):
@@ -76,3 +79,19 @@ def test_ws_announcement_subscribe_tolerates_quiet_window():
         pytest.skip(f"/announcement/listing rejected (needs Pro+ tier): {exc!r}")
     if msg is not None:
         assert isinstance(msg, dict)
+
+
+def test_ws_ticker_yields_live_data():
+    # /ticker (spot) is high-traffic: it emits continuously, so a quiet window is
+    # a FAIL, not a pass. Unlike the sporadic channels above, this proves the SDK
+    # decodes and yields a real payload end-to-end — connect + auth + SUBSCRIBE +
+    # an actual well-formed data message for BTC-USDT@binance within the timeout.
+    async def run():
+        async with AsyncDatamaxiWS(api_key=API_KEY, base_url=BASE_URL) as ws:
+            stream = await ws.ticker.subscribe("BTC-USDT@binance", market="spot")
+            return await asyncio.wait_for(stream.__anext__(), _DATA_TIMEOUT)
+
+    msg = _run(run())
+    assert isinstance(msg, dict)
+    assert msg["s"] == "BTC-USDT"
+    assert "p" in msg
