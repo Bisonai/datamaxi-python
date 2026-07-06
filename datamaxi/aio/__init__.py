@@ -16,7 +16,9 @@ Usage::
 
 Mirrors the full sync surface (``cex.*``, ``funding_rate``, ``forex``,
 ``premium``, ``liquidation``, ``open_interest``, ``margin_borrow``,
-``index_price``, plus standalone ``AsyncTelegram`` / ``AsyncNaver``). Reuses
+``index_price``, ``telegram``, ``naver``). The standalone
+``AsyncTelegram`` / ``AsyncNaver`` classes stay exported for back-compat.
+Reuses
 the sync client's endpoint resolution and error handling (``datamaxi._dispatch``)
 and the shared DataFrame / ResponseMeta helpers, so the two clients can't drift
 on request building or error semantics.
@@ -68,6 +70,12 @@ class AsyncDatamaxi:
         self.open_interest = AsyncOpenInterest(api)
         self.margin_borrow = AsyncMarginBorrow(api)
         self.index_price = AsyncIndexPrice(api)
+        # Non-crypto data types. Mounted here so they reuse the one shared
+        # session like every other sub-resource; the standalone
+        # ``AsyncTelegram`` / ``AsyncNaver`` classes stay exported for
+        # back-compat (see #184).
+        self.telegram = AsyncTelegram(api=api)
+        self.naver = AsyncNaver(api=api)
 
     async def aclose(self):
         await self._api.aclose()

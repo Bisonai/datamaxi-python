@@ -20,10 +20,12 @@ if TYPE_CHECKING:
 class AsyncNaver(AsyncResource):
     """Client to fetch Naver trend data from DataMaxi+ API (async)."""
 
-    def __init__(self, api_key=None, **kwargs: Any):
-        if "base_url" not in kwargs:
-            kwargs["base_url"] = BASE_URL
-        super().__init__(AsyncAPI(api_key, **kwargs))
+    def __init__(self, api_key=None, api=None, **kwargs: Any):
+        if api is None:
+            if "base_url" not in kwargs:
+                kwargs["base_url"] = BASE_URL
+            api = AsyncAPI(api_key, **kwargs)
+        super().__init__(api)
 
     async def aclose(self):
         await self._api.aclose()
