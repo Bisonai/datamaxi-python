@@ -19,14 +19,6 @@ WS_CHANNELS = {
         "subscribe": True,
         "unsubscribe": True,
     },
-    "/announcement/listing/internal": {
-        "plan": "pro_plus",
-        "market": None,
-        "message": "InternalListingMessage",
-        "param": None,
-        "subscribe": True,
-        "unsubscribe": True,
-    },
     "/forex": {
         "plan": "basic",
         "market": None,
