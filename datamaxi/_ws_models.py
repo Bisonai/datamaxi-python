@@ -63,21 +63,6 @@ FundingRateMessage = TypedDict(
 
 
 # source: asyncapi:payload
-InternalListingMessage = TypedDict(
-    "InternalListingMessage",
-    {
-        "b": str,
-        "d": int,
-        "e": str,
-        "s": str,
-        "t": str,
-        "u": str,
-    },
-    total=False,
-)
-
-
-# source: asyncapi:payload
 LiquidationMessage = TypedDict(
     "LiquidationMessage",
     {
