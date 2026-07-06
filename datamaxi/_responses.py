@@ -33,10 +33,10 @@ class CexAnnouncementsResponse:
     data: List[CexAnnouncementsView] = field(default_factory=list)
     # specifies the categories of the announcements
     exchange: List[str] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
@@ -45,10 +45,10 @@ class CexAnnouncementsResponse:
             category=data.get("category") or [],
             data=_as_models(CexAnnouncementsView, data.get("data")),
             exchange=data.get("exchange") or [],
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
@@ -132,20 +132,20 @@ class CexCandleView:
 class CexTokenUpdatesResponse:
     # `data` specifies an array of the token updates
     data: List[CexTokenUpdatesView] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> CexTokenUpdatesResponse:
         return cls(
             data=_as_models(CexTokenUpdatesView, data.get("data")),
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
@@ -756,20 +756,20 @@ class OpenInterestListResponse:
 @dataclass
 class OpenInterestOverviewResponse:
     data: List[OpenInterestOverviewView] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> OpenInterestOverviewResponse:
         return cls(
             data=_as_models(OpenInterestOverviewView, data.get("data")),
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
@@ -1106,25 +1106,25 @@ class PremiumDetail:
 
 @dataclass
 class PremiumResponse:
-    conversion_base: str = ""
-    currency: str = ""
+    conversion_base: Optional[str] = None
+    currency: Optional[str] = None
     data: List[PremiumView] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> PremiumResponse:
         return cls(
-            conversion_base=data.get("conversion_base", ""),
-            currency=data.get("currency", ""),
+            conversion_base=data.get("conversion_base"),
+            currency=data.get("currency"),
             data=_as_models(PremiumView, data.get("data")),
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
@@ -1146,23 +1146,23 @@ class PremiumView:
 
 @dataclass
 class TelegramChannelsResponse:
-    category: str = ""
+    category: Optional[str] = None
     data: List[TelegramChannelsView] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> TelegramChannelsResponse:
         return cls(
-            category=data.get("category", ""),
+            category=data.get("category"),
             data=_as_models(TelegramChannelsView, data.get("data")),
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
@@ -1199,24 +1199,24 @@ class TelegramChannelsView:
 
 @dataclass
 class TelegramMessagesResponse:
-    category: str = ""
+    category: Optional[str] = None
     # specifies an array of the Telegram messages
     data: List[TelegramMessagesView] = field(default_factory=list)
-    key: str = ""
+    key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: str = ""
+    sort: Optional[str] = None
     total: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> TelegramMessagesResponse:
         return cls(
-            category=data.get("category", ""),
+            category=data.get("category"),
             data=_as_models(TelegramMessagesView, data.get("data")),
-            key=data.get("key", ""),
+            key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort", ""),
+            sort=data.get("sort"),
             total=data.get("total", 0),
         )
 
