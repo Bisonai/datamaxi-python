@@ -348,6 +348,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../websocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebSocket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -357,10 +384,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -378,8 +405,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1112,9 +1139,9 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <details>
 <summary>Sync</summary>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Naver</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datamaxi</span>
 
-<span class="n">naver</span> <span class="o">=</span> <span class="n">Naver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">naver</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">naver</span>
 
 <span class="n">symbols</span> <span class="o">=</span> <span class="n">naver</span><span class="o">.</span><span class="n">symbols</span><span class="p">()</span>
 <span class="n">trend</span> <span class="o">=</span> <span class="n">naver</span><span class="o">.</span><span class="n">trend</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">)</span>
@@ -1123,13 +1150,13 @@
 <details>
 <summary>Async</summary>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncNaver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncDatamaxi</span>
 
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncNaver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">naver</span><span class="p">:</span>
-        <span class="n">symbols</span> <span class="o">=</span> <span class="k">await</span> <span class="n">naver</span><span class="o">.</span><span class="n">symbols</span><span class="p">()</span>
-        <span class="n">trend</span> <span class="o">=</span> <span class="k">await</span> <span class="n">naver</span><span class="o">.</span><span class="n">trend</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">naver</span><span class="o">.</span><span class="n">symbols</span><span class="p">()</span>
+        <span class="n">trend</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">naver</span><span class="o">.</span><span class="n">trend</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;BTC&quot;</span><span class="p">)</span>
 
 
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
@@ -1176,7 +1203,7 @@
 
 
 <a href="#datamaxi.naver.Naver" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Naver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Naver</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1199,6 +1226,18 @@
           –
           <div class="doc-md-description">
             <p>The DataMaxi+ API key</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>api</code></b>
+              (<code><span title="API">API</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Shared transport to reuse when mounted on
+<code>Datamaxi</code> (<code>maxi.naver</code>); when omitted this builds its
+own <code>API</code> for standalone use.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">

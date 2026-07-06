@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../cex-wallet-status/">
+        <link rel="prev" href="../async/">
       
       
-        <link rel="next" href="../cex-token/">
+        <link rel="next" href="../cex-candle/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Announcement - </title>
+        <title>WebSocket - </title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cex-announcement" class="md-skip">
+        <a href="#websocket" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Announcement
+              WebSocket
             
           </span>
         </div>
@@ -346,10 +346,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../websocket/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebSocket
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -365,6 +392,136 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickstart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quickstart
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplexing-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiplexing and filtering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firehose-feeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firehose feeds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconnect-and-keepalive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconnect and keepalive
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message shapes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.aio.ws.AsyncDatamaxiWS" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncDatamaxiWS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -373,20 +530,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -407,7 +562,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -534,37 +689,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Announcement
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../cex-announcement/" class="md-nav__link">
         
   
   
@@ -580,70 +708,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexAnnouncement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CexAnnouncement
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexAnnouncement.__call__" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        __call__
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1009,10 +1073,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Installation
       
     </span>
   </a>
@@ -1020,10 +1084,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#quickstart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        Quickstart
       
     </span>
   </a>
@@ -1031,10 +1095,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexAnnouncement" class="md-nav__link">
+  <a href="#channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CexAnnouncement
+        Channels
       
     </span>
   </a>
@@ -1042,10 +1106,76 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamaxi.resources.CexAnnouncement.__call__" class="md-nav__link">
+  <a href="#multiplexing-and-filtering" class="md-nav__link">
     <span class="md-ellipsis">
       
-        __call__
+        Multiplexing and filtering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firehose-feeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firehose feeds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconnect-and-keepalive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconnect and keepalive
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message shapes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamaxi.aio.ws.AsyncDatamaxiWS" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncDatamaxiWS
       
     </span>
   </a>
@@ -1070,46 +1200,6 @@
   
 
 
-  <nav class="md-path" aria-label="Navigation" >
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href=".." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Main
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../cex-candle/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    CEX
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
               
               <article class="md-content__inner md-typeset">
                 
@@ -1120,92 +1210,183 @@
   
 
 
-<h1 id="cex-announcement">CEX Announcement<a class="headerlink" href="#cex-announcement" title="Permanent link">&para;</a></h1>
-<p>Exchange announcements such as listings and delistings.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<details>
-<summary>Sync</summary>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datamaxi</span>
-
-<span class="n">maxi</span> <span class="o">=</span> <span class="n">Datamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
-
-<span class="n">data</span><span class="p">,</span> <span class="n">next_request</span> <span class="o">=</span> <span class="n">maxi</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">announcement</span><span class="p">(</span>
-    <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;listing&quot;</span><span class="p">,</span>
-    <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-    <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;desc&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">more_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">next_request</span><span class="p">()</span>
+<h1 id="websocket">WebSocket<a class="headerlink" href="#websocket" title="Permanent link">&para;</a></h1>
+<p>Stream real-time market data over the DataMaxi+ WebSocket API. Unlike the REST
+resources, the WebSocket client is <strong>async-only</strong> — there is no synchronous
+variant.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The WebSocket client requires the <code>ws</code> extra, which pulls in
+<a href="https://websockets.readthedocs.io/"><code>websockets</code></a>:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;datamaxi[ws]&quot;</span>
 </code></pre></div>
-</details>
-<details>
-<summary>Async</summary>
+<h2 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h2>
+<p><code>AsyncDatamaxiWS</code> reads the same <code>DATAMAXI_API_KEY</code> environment variable as the
+REST clients (or pass <code>api_key=...</code>). Use it as an async context manager so open
+connections close cleanly.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncDatamaxi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi.aio.ws</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncDatamaxiWS</span>
 
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-        <span class="n">data</span><span class="p">,</span> <span class="n">next_request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">cex</span><span class="o">.</span><span class="n">announcement</span><span class="p">(</span>
-            <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;binance&quot;</span><span class="p">,</span>
-            <span class="n">category</span><span class="o">=</span><span class="s2">&quot;listing&quot;</span><span class="p">,</span>
-            <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-            <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;desc&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">more_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">next_request</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncDatamaxiWS</span><span class="p">()</span> <span class="k">as</span> <span class="n">ws</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s2">&quot;BTC-USDT@binance&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">))</span>  <span class="c1"># symbol, price</span>
 
 
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div>
-</details>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p><code>subscribe(*params)</code> is a coroutine that returns an <strong>async iterator</strong> over live
+messages. Iterate it with <code>async for</code>.</p>
+<h2 id="channels">Channels<a class="headerlink" href="#channels" title="Permanent link">&para;</a></h2>
+<p>Each accessor on <code>AsyncDatamaxiWS</code> maps to one channel. Pass the raw param
+strings shown below; you can also inspect the expected format at runtime via
+<code>ws.&lt;channel&gt;.param_format</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Accessor</th>
+<th>Call</th>
+<th>Param format</th>
+<th>Plan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ws.ticker</code></td>
+<td><code>subscribe(*p, market="spot"\|"futures")</code></td>
+<td><code>SYMBOL@exchange[@currency@conversionBase]</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.forex</code></td>
+<td><code>subscribe(*p)</code></td>
+<td><code>SYMBOL</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.premium</code></td>
+<td><code>subscribe(*p)</code></td>
+<td><code>src:tgt:tokenId:srcQuote:tgtQuote:srcMkt:tgtMkt</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.funding_rate</code></td>
+<td><code>subscribe(*p)</code></td>
+<td><code>SYMBOL@exchange</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.open_interest</code></td>
+<td><code>subscribe(*p)</code></td>
+<td><code>SYMBOL@exchange</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.liquidation</code></td>
+<td><code>subscribe(*p)</code></td>
+<td><code>SYMBOL@exchange</code></td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.liquidation_feed</code></td>
+<td><code>stream()</code></td>
+<td>— (firehose, no params)</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>ws.announcement</code></td>
+<td><code>subscribe()</code></td>
+<td>— (no params)</td>
+<td>Pro+</td>
+</tr>
+<tr>
+<td><code>ws.announcement_internal</code></td>
+<td><code>subscribe()</code></td>
+<td>— (no params)</td>
+<td>Pro+</td>
+</tr>
+</tbody>
+</table>
+<p><code>ticker</code> is market-keyed — pass <code>market="spot"</code> (default) or <code>market="futures"</code>.
+The announcement channels require a <strong>Pro+</strong> plan.</p>
+<h2 id="multiplexing-and-filtering">Multiplexing and filtering<a class="headerlink" href="#multiplexing-and-filtering" title="Permanent link">&para;</a></h2>
+<p>One connection is opened per channel and multiplexes every param you subscribe
+to. Because the protocol tags messages by payload fields (not by a subscription
+id), <code>subscribe()</code> yields <strong>every</strong> message on the channel — filter client-side
+by symbol (<code>msg["s"]</code>) when subscribing to more than one:</p>
+<div class="highlight"><pre><span></span><code><span class="n">stream</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span>
+    <span class="s2">&quot;BTC-USDT@binance&quot;</span><span class="p">,</span> <span class="s2">&quot;ETH-USDT@binance&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;BTC-USDT&quot;</span><span class="p">:</span>
+        <span class="n">handle_btc</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</code></pre></div>
+<p>Add or drop params on the fly:</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s2">&quot;SOL-USDT@binance&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span><span class="p">)</span>   <span class="c1"># add</span>
+<span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="s2">&quot;SOL-USDT@binance&quot;</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="s2">&quot;spot&quot;</span><span class="p">)</span> <span class="c1"># remove</span>
+</code></pre></div>
+<blockquote>
+<p>Not every channel supports removing an individual param server-side —
+<code>liquidation</code> and <code>open_interest</code> are subscribe-only. Closing the client
+(<code>await ws.aclose()</code>, or exiting the <code>async with</code> block) always stops all
+streams.</p>
+</blockquote>
+<h2 id="firehose-feeds">Firehose feeds<a class="headerlink" href="#firehose-feeds" title="Permanent link">&para;</a></h2>
+<p><code>ws.liquidation_feed</code> needs no subscription — call <code>stream()</code> and consume:</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">for</span> <span class="n">evt</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">liquidation_feed</span><span class="o">.</span><span class="n">stream</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">evt</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span> <span class="n">evt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sd&quot;</span><span class="p">),</span> <span class="n">evt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">))</span>  <span class="c1"># symbol, side, price</span>
+</code></pre></div>
+<h2 id="reconnect-and-keepalive">Reconnect and keepalive<a class="headerlink" href="#reconnect-and-keepalive" title="Permanent link">&para;</a></h2>
+<p>The client is resilient by default:</p>
 <ul>
-<li>Pagination returns a <code>next_request</code> function for the next page.</li>
+<li><strong>Auto-reconnect</strong> — if the connection drops it reconnects and replays your
+  active subscriptions, so your <code>async for</code> loop resumes without extra code.
+  Disable with <code>AsyncDatamaxiWS(reconnect=False)</code>.</li>
+<li><strong>Keepalive</strong> — an app-level <code>PING</code> is sent every 30 seconds to stay under the
+  server's idle timeout. Tune it with the <code>keepalive=&lt;seconds&gt;</code> argument (<code>0</code>
+  disables it).</li>
 </ul>
+<h2 id="lifecycle">Lifecycle<a class="headerlink" href="#lifecycle" title="Permanent link">&para;</a></h2>
+<p>Use <code>AsyncDatamaxiWS</code> as an async context manager, or manage it yourself:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ws</span> <span class="o">=</span> <span class="n">AsyncDatamaxiWS</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">forex</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s2">&quot;USD-KRW&quot;</span><span class="p">):</span>
+        <span class="o">...</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">aclose</span><span class="p">()</span>
+</code></pre></div>
+<p>Constructor options: <code>api_key</code>, <code>base_url</code> (derives the <code>wss://</code> URL) or an
+explicit <code>ws_url</code>, <code>keepalive</code>, <code>reconnect</code>, and <code>connect_kwargs</code> (passed through
+to the underlying <code>websockets.connect</code>).</p>
+<h2 id="message-shapes">Message shapes<a class="headerlink" href="#message-shapes" title="Permanent link">&para;</a></h2>
+<p>Each message is a plain <code>dict</code>. Compact channels use short wire keys (<code>s</code> =
+symbol, plus per-channel fields like <code>p</code>, <code>e</code>, <code>r</code>, <code>oi</code>, …), while others
+(<code>premium</code>, announcements) use descriptive keys. The typed shape of every channel
+is generated into <code>datamaxi._ws_models</code> as <code>TypedDict</code>s, and field meanings are
+documented in the <a href="https://docs.datamaxiplus.com/">API docs</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datamaxi._ws_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TickerMessage</span><span class="p">,</span> <span class="n">PremiumMessage</span>
+</code></pre></div>
+<p>Orderbook streaming is intentionally not exposed.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 
 
 <div class="doc doc-object doc-class">
 
 
 
-<a id="datamaxi.resources.CexAnnouncement"></a>
+<a id="datamaxi.aio.ws.AsyncDatamaxiWS"></a>
     <div class="doc doc-contents first">
-            <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="            Resource (datamaxi.api.Resource)" href="../api/#datamaxi.api.Resource">Resource</a></code></p>
 
 
 
-        <p>Client to fetch announcement data from DataMaxi+ API.</p>
-
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>api_key</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The DataMaxi+ API key</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>**kwargs</code></b>
-              (<code><span title="typing.Any">Any</span></code>, default:
-                  <code>{}</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Keyword arguments used by <code>datamaxi.api.API</code>.</p>
-          </div>
-        </li>
-    </ul>
+        <p>Async WebSocket entrypoint — every DataMaxi+ WS data type.</p>
+<p>Accessors are driven by the generated <code>WS_CHANNELS</code> registry:
+<code>ticker</code> (market-keyed), <code>forex</code>, <code>premium</code>, <code>funding_rate</code>,
+<code>open_interest</code>, <code>liquidation</code> (subscribe), <code>liquidation_feed</code>
+(firehose), <code>announcement</code> / <code>announcement_internal</code> (Pro+).</p>
+<p>Use as an async context manager so open connections are closed, or call
+:meth:<code>aclose</code> explicitly.</p>
 
 
 
@@ -1228,119 +1409,13 @@
 
 
 
-<div class="doc doc-object doc-function">
-
-
-<h2 id="datamaxi.resources.CexAnnouncement.__call__" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">__call__</span>
-
-
-<a href="#datamaxi.resources.CexAnnouncement.__call__" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">__call__</span><span class="p">(</span>
-    <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="n">sort</span><span class="p">:</span> <span class="n">SortOrder</span> <span class="o">=</span> <span class="n">DESC</span><span class="p">,</span>
-    <span class="n">key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exchange</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">category</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">AnnouncementResponse</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Get exchange announcements</p>
-<p><code>GET /api/v1/cex/announcements</code></p>
-<p><a href="https://docs.datamaxiplus.com/rest/cex/announcements">https://docs.datamaxiplus.com/rest/cex/announcements</a></p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>page</code></b>
-              (<code><span title="int">int</span></code>, default:
-                  <code>1</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Page number</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>limit</code></b>
-              (<code><span title="int">int</span></code>, default:
-                  <code>1000</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Limit of data</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>sort</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code><span title="datamaxi.lib.constants.DESC">DESC</span></code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Sort order</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>key</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Key to sort by</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>exchange</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Exchange name filter</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>category</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Announcement category</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="typing.Tuple">Tuple</span>[<span title="datamaxi.resources.responses.AnnouncementResponse">AnnouncementResponse</span>, <span title="typing.Callable">Callable</span>]</code>
-          –
-          <div class="doc-md-description">
-            <p>Tuple of announcement response and next request function</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
 
 
   </div>
 
     </div>
 
-</div>
+</div><p></content></p>
 
 
 
@@ -1422,7 +1497,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../cex-wallet-status/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Wallet Status">
+          <a href="../async/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Async Client">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1432,20 +1507,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Wallet Status
+                Async Client
               </div>
             </div>
           </a>
         
         
           
-          <a href="../cex-token/" class="md-footer__link md-footer__link--next" aria-label="Next: Token">
+          <a href="../cex-candle/" class="md-footer__link md-footer__link--next" aria-label="Next: Candle">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Token
+                Candle
               </div>
             </div>
             <div class="md-footer__button md-icon">
