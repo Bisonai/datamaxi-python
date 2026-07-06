@@ -103,9 +103,6 @@ def test_messages_server_error():
         _client().messages(channel_name="alpha")
 
 
-# --- mounted sub-resource on Datamaxi (see #184) ---
-
-
 def test_telegram_mounted_reuses_shared_session():
     maxi = Datamaxi(api_key="key", base_url=BASE_URL)
     assert isinstance(maxi.telegram, Telegram)

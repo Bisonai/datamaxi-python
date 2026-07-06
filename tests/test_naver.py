@@ -70,9 +70,6 @@ def test_naver_trend_server_error():
         _client().trend("BTC")
 
 
-# --- mounted sub-resource on Datamaxi (see #184) ---
-
-
 def test_naver_mounted_reuses_shared_session():
     maxi = Datamaxi(api_key="key", base_url=BASE_URL)
     assert isinstance(maxi.naver, Naver)
