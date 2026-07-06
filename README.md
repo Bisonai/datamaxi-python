@@ -751,9 +751,7 @@ asyncio.run(main())
 Use `AsyncDatamaxi` as an async context manager (shown above) or call
 `await client.aclose()` yourself. Paginated endpoints return an async
 `next_request` — `await` it too
-(`data, next_request = await client.cex.announcement(...)`). Telegram and Naver
-are mounted as `client.telegram` / `client.naver`; standalone
-`AsyncTelegram` / `AsyncNaver` clients remain available too.
+(`data, next_request = await client.cex.announcement(...)`).
 
 Every endpoint in the [REST API Reference](#rest-api-reference) works the same
 under the async client — see the [docs](https://datamaxi.readthedocs.io/) where
