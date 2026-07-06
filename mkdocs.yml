@@ -35,6 +35,7 @@ nav:
   - Main: index.md
   - API: api.md
   - Async Client: async.md
+  - WebSocket: websocket.md
   - CEX:
       - Candle: cex-candle.md
       - Ticker: cex-ticker.md
