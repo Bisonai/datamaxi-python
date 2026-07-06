@@ -221,13 +221,13 @@ class FundingRateHistoryView:
     # specifies the date and time in UNIX timestamp format
     d: int = 0
     # specifies the funding rate
-    f: float = 0.0
+    f: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> FundingRateHistoryView:
         return cls(
             d=data.get("d", 0),
-            f=data.get("f", 0.0),
+            f=data.get("f"),
         )
 
 
@@ -240,9 +240,9 @@ class FundingRateLatestResponse:
     # Specifies the exchange
     e: str = ""
     # Specifies the funding rate
-    f: float = 0.0
+    f: Optional[float] = None
     # Specifies the interval hours
-    i: int = 0
+    i: Optional[int] = None
     # Specifies the token id
     id: str = ""
     # Specifies the quote
@@ -256,8 +256,8 @@ class FundingRateLatestResponse:
             b=data.get("b", ""),
             d=data.get("d", 0),
             e=data.get("e", ""),
-            f=data.get("f", 0.0),
-            i=data.get("i", 0),
+            f=data.get("f"),
+            i=data.get("i"),
             id=data.get("id", ""),
             q=data.get("q", ""),
             s=data.get("s", ""),
@@ -295,14 +295,14 @@ class LiquidationEntry:
     base: str = ""
     exchange: str = ""
     price: float = 0.0
-    price_usd: float = 0.0
+    price_usd: Optional[float] = None
     quote: str = ""
     side: str = ""
     symbol: str = ""
     timestamp: int = 0
     token_id: str = ""
     volume: float = 0.0
-    volume_usd: float = 0.0
+    volume_usd: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> LiquidationEntry:
@@ -310,14 +310,14 @@ class LiquidationEntry:
             base=data.get("base", ""),
             exchange=data.get("exchange", ""),
             price=data.get("price", 0.0),
-            price_usd=data.get("priceUsd", 0.0),
+            price_usd=data.get("priceUsd"),
             quote=data.get("quote", ""),
             side=data.get("side", ""),
             symbol=data.get("symbol", ""),
             timestamp=data.get("timestamp", 0),
             token_id=data.get("tokenId", ""),
             volume=data.get("volume", 0.0),
-            volume_usd=data.get("volumeUsd", 0.0),
+            volume_usd=data.get("volumeUsd"),
         )
 
 
@@ -326,14 +326,14 @@ class LiquidationFeedEntry:
     base: str = ""
     exchange: str = ""
     price: float = 0.0
-    price_usd: float = 0.0
+    price_usd: Optional[float] = None
     quote: str = ""
     side: str = ""
     symbol: str = ""
     timestamp: int = 0
     token_id: str = ""
     volume: float = 0.0
-    volume_usd: float = 0.0
+    volume_usd: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> LiquidationFeedEntry:
@@ -341,14 +341,14 @@ class LiquidationFeedEntry:
             base=data.get("base", ""),
             exchange=data.get("exchange", ""),
             price=data.get("price", 0.0),
-            price_usd=data.get("priceUsd", 0.0),
+            price_usd=data.get("priceUsd"),
             quote=data.get("quote", ""),
             side=data.get("side", ""),
             symbol=data.get("symbol", ""),
             timestamp=data.get("timestamp", 0),
             token_id=data.get("tokenId", ""),
             volume=data.get("volume", 0.0),
-            volume_usd=data.get("volumeUsd", 0.0),
+            volume_usd=data.get("volumeUsd"),
         )
 
 
@@ -607,7 +607,7 @@ class LiquidationSymbolHistoryBucket:
     # Liquidated long positions in USD over this bucket (Side='sell').
     long_usd: float = 0.0
     # Candle close mid for the same bucket. nil when no candle exists (very early in a newly listed pair, or when the price feed is down). FE renders the price line with `connectNulls=false` so gaps stay visible instead of being smoothed across.
-    price: float = 0.0
+    price: Optional[float] = None
     # Liquidated short positions in USD over this bucket (Side='buy').
     short_usd: float = 0.0
     # Convenience sum so the FE can drive a "total" line without re-add.
@@ -619,7 +619,7 @@ class LiquidationSymbolHistoryBucket:
     def from_dict(cls, data: dict) -> LiquidationSymbolHistoryBucket:
         return cls(
             long_usd=data.get("longUsd", 0.0),
-            price=data.get("price", 0.0),
+            price=data.get("price"),
             short_usd=data.get("shortUsd", 0.0),
             total_usd=data.get("totalUsd", 0.0),
             ts=data.get("ts", 0),
@@ -722,7 +722,7 @@ class OpenInterestListEntry:
     base: str = ""
     exchange: str = ""
     open_interest: float = 0.0
-    open_interest_usd: float = 0.0
+    open_interest_usd: Optional[float] = None
     quote: str = ""
     symbol: str = ""
     timestamp: int = 0
@@ -734,7 +734,7 @@ class OpenInterestListEntry:
             base=data.get("base", ""),
             exchange=data.get("exchange", ""),
             open_interest=data.get("openInterest", 0.0),
-            open_interest_usd=data.get("openInterestUsd", 0.0),
+            open_interest_usd=data.get("openInterestUsd"),
             quote=data.get("quote", ""),
             symbol=data.get("symbol", ""),
             timestamp=data.get("timestamp", 0),
@@ -794,7 +794,7 @@ class OpenInterestResponse:
     base: str = ""
     exchange: str = ""
     open_interest: float = 0.0
-    open_interest_usd: float = 0.0
+    open_interest_usd: Optional[float] = None
     quote: str = ""
     symbol: str = ""
     timestamp: int = 0
@@ -806,7 +806,7 @@ class OpenInterestResponse:
             base=data.get("base", ""),
             exchange=data.get("exchange", ""),
             open_interest=data.get("openInterest", 0.0),
-            open_interest_usd=data.get("openInterestUsd", 0.0),
+            open_interest_usd=data.get("openInterestUsd"),
             quote=data.get("quote", ""),
             symbol=data.get("symbol", ""),
             timestamp=data.get("timestamp", 0),
@@ -1287,27 +1287,27 @@ class TickerView:
     # specifies the exchange name
     e: str = ""
     # highest bid from orderbook
-    hb: float = 0.0
+    hb: Optional[float] = None
     # lowest ask from orderbook
-    la: float = 0.0
+    la: Optional[float] = None
     # lower depth(2%)
-    ld: float = 0.0
+    ld: Optional[float] = None
     # specifies the market type
     m: str = ""
     # specifies the latest price
-    p: float = 0.0
+    p: Optional[float] = None
     # specifies the price 24 hours ago
-    p24h: float = 0.0
+    p24h: Optional[float] = None
     # specified price change between the latest price and the price 24 hours ago
-    pc: float = 0.0
+    pc: Optional[float] = None
     # specifies the quote token
     q: str = ""
     # specifies the symbol (base-quote)
     s: str = ""
     # upper depth(2%)
-    ud: float = 0.0
+    ud: Optional[float] = None
     # specifies the trading volume in the last 24 hours
-    v: float = 0.0
+    v: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> TickerView:
@@ -1315,24 +1315,24 @@ class TickerView:
             b=data.get("b", ""),
             d=data.get("d", 0),
             e=data.get("e", ""),
-            hb=data.get("hb", 0.0),
-            la=data.get("la", 0.0),
-            ld=data.get("ld", 0.0),
+            hb=data.get("hb"),
+            la=data.get("la"),
+            ld=data.get("ld"),
             m=data.get("m", ""),
-            p=data.get("p", 0.0),
-            p24h=data.get("p24h", 0.0),
-            pc=data.get("pc", 0.0),
+            p=data.get("p"),
+            p24h=data.get("p24h"),
+            pc=data.get("pc"),
             q=data.get("q", ""),
             s=data.get("s", ""),
-            ud=data.get("ud", 0.0),
-            v=data.get("v", 0.0),
+            ud=data.get("ud"),
+            v=data.get("v"),
         )
 
 
 @dataclass
 class TokenDetail:
     # specifies cmc id of the token
-    cmc_id: str = ""
+    cmc_id: Optional[str] = None
     # specifies the token icon url path
     icon: str = ""
     # specifies the unique id
@@ -1345,7 +1345,7 @@ class TokenDetail:
     @classmethod
     def from_dict(cls, data: dict) -> TokenDetail:
         return cls(
-            cmc_id=data.get("cmc_id", ""),
+            cmc_id=data.get("cmc_id"),
             icon=data.get("icon", ""),
             id=data.get("id", ""),
             name=data.get("name", ""),
