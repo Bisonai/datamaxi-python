@@ -107,6 +107,22 @@ def test_ws_ticker_yields_live_data():
     assert "p" in msg
 
 
+def test_ws_ticker_futures_yields_live_data():
+    # /ticker/futures is the futures-market sibling of the spot test above: also
+    # high-traffic, so a quiet window is a FAIL. Assert `m == "futures"` too, to
+    # prove the futures path (not spot) is what's exercised end-to-end.
+    async def run():
+        async with AsyncDatamaxiWS(api_key=API_KEY, base_url=BASE_URL) as ws:
+            stream = await ws.ticker.subscribe("BTC-USDT@binance", market="futures")
+            return await asyncio.wait_for(stream.__anext__(), _DATA_TIMEOUT)
+
+    msg = _run(run())
+    assert isinstance(msg, dict)
+    assert msg["s"] == "BTC-USDT"
+    assert "p" in msg
+    assert msg["m"] == "futures"
+
+
 def test_ws_premium_yields_live_data():
     # /premium (cross-exchange premium) is high-traffic: crypto premium trades
     # 24/7, so — like ticker — a quiet window is a FAIL. Proves the SDK decodes
