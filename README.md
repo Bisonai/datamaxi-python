@@ -100,13 +100,16 @@ the others.
 <details markdown="1"><summary>Sync</summary>
 
 ```python
-from datamaxi import Datamaxi, Telegram, Naver
+from datamaxi import Datamaxi
 
-# Clients read DATAMAXI_API_KEY from the environment automatically.
-# Alternatively, pass api_key="your_api_key" explicitly to each client.
+# The client reads DATAMAXI_API_KEY from the environment automatically.
+# Alternatively, pass api_key="your_api_key" explicitly.
 maxi = Datamaxi()
-telegram = Telegram()
-naver = Naver()
+
+# Telegram and Naver are mounted as `maxi.telegram` / `maxi.naver`
+# (standalone `Telegram` / `Naver` clients remain available too).
+channels, _ = maxi.telegram.channels()
+trend = maxi.naver.trend(symbol="BTC")
 
 # Fetch CEX candle data (returns pandas DataFrame)
 df = maxi.cex.candle(
@@ -188,14 +191,14 @@ The package ships these clients, all configured the same way (see
 
 | Client            | Import                                        | Purpose                                                    |
 | ----------------- | --------------------------------------------- | ---------------------------------------------------------- |
-| `Datamaxi`        | `from datamaxi import Datamaxi`               | Synchronous client for all crypto REST data.               |
-| `Telegram`        | `from datamaxi import Telegram`               | Telegram channel messages and metadata.                    |
-| `Naver`           | `from datamaxi import Naver`                  | Naver search-trend data (South Korea).                     |
+| `Datamaxi`        | `from datamaxi import Datamaxi`               | Synchronous client for all REST data, incl. `maxi.telegram` / `maxi.naver`. |
 | `AsyncDatamaxi`   | `from datamaxi.aio import AsyncDatamaxi`      | Async twin of `Datamaxi` (needs the `[async]` extra).      |
 | `AsyncDatamaxiWS` | `from datamaxi.aio.ws import AsyncDatamaxiWS` | Async WebSocket streaming (needs the `[ws]` extra).        |
 
-`AsyncTelegram` and `AsyncNaver` are the async twins of `Telegram` / `Naver`,
-also imported from `datamaxi.aio`.
+Telegram and Naver are mounted on `Datamaxi` / `AsyncDatamaxi` (`maxi.telegram`,
+`maxi.naver`) so they reuse the client's shared session. The standalone
+`Telegram` / `Naver` (and their async twins `AsyncTelegram` / `AsyncNaver`,
+imported from `datamaxi.aio`) remain available for independent use.
 
 ## REST API Reference
 
@@ -495,12 +498,8 @@ Off-exchange signals: Telegram channels and Naver search trends.
 Fetch Telegram channel messages and metadata.
 
 ```python
-# Initialize Telegram client
-from datamaxi import Telegram
-telegram = Telegram(api_key=api_key)
-
 # Fetch channels
-data, next_request = telegram.channels(
+data, next_request = maxi.telegram.channels(
     page=1,                  # Optional: page number
     limit=1000,              # Optional: items per page
     category=None,           # Optional: filter by category
@@ -509,7 +508,7 @@ data, next_request = telegram.channels(
 )
 
 # Fetch messages
-data, next_request = telegram.messages(
+data, next_request = maxi.telegram.messages(
     channel_name=None,       # Optional: filter by channel
     page=1,                  # Optional: page number
     limit=1000,              # Optional: items per page
@@ -524,15 +523,11 @@ data, next_request = telegram.messages(
 Fetch Naver search trend data (South Korea).
 
 ```python
-# Initialize Naver client
-from datamaxi import Naver
-naver = Naver(api_key=api_key)
-
 # Get supported symbols
-symbols = naver.symbols()
+symbols = maxi.naver.symbols()
 
 # Fetch trend data
-data = naver.trend(
+data = maxi.naver.trend(
     symbol="BTC",            # Required: symbol to search
     pandas=True              # Optional: return DataFrame or list
 )
@@ -756,8 +751,7 @@ asyncio.run(main())
 Use `AsyncDatamaxi` as an async context manager (shown above) or call
 `await client.aclose()` yourself. Paginated endpoints return an async
 `next_request` — `await` it too
-(`data, next_request = await client.cex.announcement(...)`). Telegram and Naver
-have standalone `AsyncTelegram` / `AsyncNaver` clients.
+(`data, next_request = await client.cex.announcement(...)`).
 
 Every endpoint in the [REST API Reference](#rest-api-reference) works the same
 under the async client — see the [docs](https://datamaxi.readthedocs.io/) where

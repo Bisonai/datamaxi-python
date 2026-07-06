@@ -5,7 +5,7 @@ import responses
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi.telegram import Telegram
+from datamaxi import Datamaxi, Telegram
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 
@@ -101,3 +101,27 @@ def test_channels_client_error():
 def test_messages_server_error():
     with pytest.raises(ServerError):
         _client().messages(channel_name="alpha")
+
+
+def test_telegram_mounted_reuses_shared_session():
+    maxi = Datamaxi(api_key="key", base_url=BASE_URL)
+    assert isinstance(maxi.telegram, Telegram)
+    # Same shared API/transport as every other sub-resource.
+    assert maxi.telegram._api is maxi._api
+    assert maxi.telegram._api is maxi.cex._api
+
+
+@mock_http_response(responses.GET, "/api/v1/telegram/channels", _CHANNELS)
+def test_telegram_mounted_channels_work():
+    maxi = Datamaxi(api_key="key", base_url=BASE_URL)
+    res, next_request = maxi.telegram.channels()
+    assert res == _CHANNELS
+    assert callable(next_request)
+
+
+@mock_http_response(responses.GET, "/api/v1/telegram/messages", _MESSAGES)
+def test_telegram_mounted_messages_work():
+    maxi = Datamaxi(api_key="key", base_url=BASE_URL)
+    res, next_request = maxi.telegram.messages(channel_name="alpha")
+    assert res == _MESSAGES
+    assert callable(next_request)
