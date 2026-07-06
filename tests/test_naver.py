@@ -6,7 +6,8 @@ import pandas as pd
 import pytest
 from urllib.parse import urlparse, parse_qs
 
-from datamaxi import Datamaxi, Naver
+from datamaxi import Datamaxi
+from datamaxi.naver import Naver
 from datamaxi.error import ClientError, ServerError
 from tests.util import mock_http_response
 

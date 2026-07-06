@@ -9,7 +9,7 @@ import time
 
 import pytest
 
-from datamaxi import Datamaxi, Telegram, Naver
+from datamaxi import Datamaxi
 from datamaxi.api import API
 from datamaxi.error import ServerError
 
@@ -76,11 +76,11 @@ def datamaxi():
 
 @pytest.fixture(scope="module")
 def telegram():
-    """Create Telegram client for live tests."""
-    return Telegram(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT)
+    """Telegram resource (mounted) for live tests."""
+    return Datamaxi(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT).telegram
 
 
 @pytest.fixture(scope="module")
 def naver():
-    """Create Naver client for live tests."""
-    return Naver(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT)
+    """Naver resource (mounted) for live tests."""
+    return Datamaxi(api_key=API_KEY, base_url=BASE_URL, timeout=TIMEOUT).naver

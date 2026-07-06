@@ -11,7 +11,9 @@ import pytest
 
 httpx = pytest.importorskip("httpx")
 
-from datamaxi.aio import AsyncDatamaxi, AsyncTelegram, AsyncNaver  # noqa: E402
+from datamaxi.aio import AsyncDatamaxi  # noqa: E402
+from datamaxi.aio.telegram import AsyncTelegram  # noqa: E402
+from datamaxi.aio.naver import AsyncNaver  # noqa: E402
 
 BASE_URL = "https://api.datamaxiplus.com"
 
@@ -169,6 +171,13 @@ def test_async_telegram_pagination():
             return res
 
     assert _run(run()) == _CHANNELS
+
+
+def test_standalone_async_clients_not_top_level_importable():
+    import datamaxi.aio
+
+    assert not hasattr(datamaxi.aio, "AsyncTelegram")
+    assert not hasattr(datamaxi.aio, "AsyncNaver")
 
 
 def test_async_telegram_naver_mounted_reuse_shared_session():

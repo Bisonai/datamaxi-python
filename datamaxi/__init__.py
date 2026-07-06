@@ -1,6 +1,4 @@
 from datamaxi.resources import Datamaxi  # noqa: F401
-from datamaxi.telegram import Telegram  # noqa: F401
-from datamaxi.naver import Naver  # noqa: F401
 from datamaxi.lib.constants import (  # noqa: F401
     SPOT,
     FUTURES,
@@ -46,8 +44,6 @@ from datamaxi.resources.responses import (  # noqa: F401
 
 __all__ = [
     "Datamaxi",
-    "Telegram",
-    "Naver",
     "SPOT",
     "FUTURES",
     "USD",

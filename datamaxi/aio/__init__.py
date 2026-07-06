@@ -16,12 +16,10 @@ Usage::
 
 Mirrors the full sync surface (``cex.*``, ``funding_rate``, ``forex``,
 ``premium``, ``liquidation``, ``open_interest``, ``margin_borrow``,
-``index_price``, ``telegram``, ``naver``). The standalone
-``AsyncTelegram`` / ``AsyncNaver`` classes stay exported for back-compat.
-Reuses
-the sync client's endpoint resolution and error handling (``datamaxi._dispatch``)
-and the shared DataFrame / ResponseMeta helpers, so the two clients can't drift
-on request building or error semantics.
+``index_price``, ``telegram``, ``naver``). Reuses the sync client's endpoint
+resolution and error handling (``datamaxi._dispatch``) and the shared DataFrame
+/ ResponseMeta helpers, so the two clients can't drift on request building or
+error semantics.
 """
 
 from typing import Any
@@ -45,8 +43,8 @@ from datamaxi.aio.liquidation import AsyncLiquidation
 from datamaxi.aio.open_interest import AsyncOpenInterest
 from datamaxi.aio.margin_borrow import AsyncMarginBorrow
 from datamaxi.aio.index_price import AsyncIndexPrice
-from datamaxi.aio.telegram import AsyncTelegram
-from datamaxi.aio.naver import AsyncNaver
+from datamaxi.aio.telegram import AsyncTelegram as _AsyncTelegram
+from datamaxi.aio.naver import AsyncNaver as _AsyncNaver
 
 
 class AsyncDatamaxi:
@@ -70,8 +68,8 @@ class AsyncDatamaxi:
         self.open_interest = AsyncOpenInterest(api)
         self.margin_borrow = AsyncMarginBorrow(api)
         self.index_price = AsyncIndexPrice(api)
-        self.telegram = AsyncTelegram(api=api)
-        self.naver = AsyncNaver(api=api)
+        self.telegram = _AsyncTelegram(api=api)
+        self.naver = _AsyncNaver(api=api)
 
     async def aclose(self):
         await self._api.aclose()
@@ -90,8 +88,6 @@ class AsyncDatamaxi:
 
 __all__ = [
     "AsyncDatamaxi",
-    "AsyncTelegram",
-    "AsyncNaver",
     "AsyncAPI",
     "AsyncResource",
     "AsyncCex",
