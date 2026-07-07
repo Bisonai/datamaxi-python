@@ -558,14 +558,14 @@ ENDPOINTS = {
             "from": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "description": "Specifies from",
+                "type": "int",
+                "description": "Specifies from (unix seconds)",
             },
             "to": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "description": "Specifies to",
+                "type": "int",
+                "description": "Specifies to (unix seconds)",
             },
             "sort": {
                 "required": False,
@@ -632,16 +632,14 @@ ENDPOINTS = {
             "from": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "default": "now - 1 month",
-                "description": "Specifies from",
+                "type": "int",
+                "description": "Specifies from (unix seconds)",
             },
             "to": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "default": "now",
-                "description": "Specifies to",
+                "type": "int",
+                "description": "Specifies to (unix seconds)",
             },
             "interval": {
                 "required": False,
