@@ -100,6 +100,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "1d",
+                "enum": ["1m", "5m", "15m", "1h", "4h", "12h", "1d"],
                 "description": "Specifies interval",
             },
             "from": {
@@ -646,6 +647,7 @@ ENDPOINTS = {
                 "in": "query",
                 "type": "str",
                 "default": "5m",
+                "enum": ["5m", "15m", "1h", "4h", "12h", "1d"],
                 "description": "interval",
             },
         },
