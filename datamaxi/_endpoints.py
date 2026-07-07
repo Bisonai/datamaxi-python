@@ -105,14 +105,14 @@ ENDPOINTS = {
             "from": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "description": "Specifies from",
+                "type": "int",
+                "description": "Specifies from (unix seconds)",
             },
             "to": {
                 "required": False,
                 "in": "query",
-                "type": "str",
-                "description": "Specifies to",
+                "type": "int",
+                "description": "Specifies to (unix seconds)",
             },
         },
     },
