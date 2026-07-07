@@ -499,7 +499,6 @@ class LiquidationMapResponse:
     assumptions: Optional[LiquidationMapAssumptions] = None
     base: str = ""
     buckets: List[LiquidationMapBucket] = field(default_factory=list)
-    # Cumulative totals — separately surfaced so the FE doesn't have to re-sum to drive the cumulative line series (Coinglass-style).
     cumulative_long_usd: float = 0.0
     cumulative_short_usd: float = 0.0
     current_price: float = 0.0
@@ -604,15 +603,10 @@ class LiquidationStatsResponse:
 
 @dataclass
 class LiquidationSymbolHistoryBucket:
-    # Liquidated long positions in USD over this bucket (Side='sell').
     long_usd: float = 0.0
-    # Candle close mid for the same bucket. nil when no candle exists (very early in a newly listed pair, or when the price feed is down). FE renders the price line with `connectNulls=false` so gaps stay visible instead of being smoothed across.
     price: Optional[float] = None
-    # Liquidated short positions in USD over this bucket (Side='buy').
     short_usd: float = 0.0
-    # Convenience sum so the FE can drive a "total" line without re-add.
     total_usd: float = 0.0
-    # Unix ms timestamp at the start of the interval bucket.
     ts: int = 0
 
     @classmethod
@@ -634,7 +628,6 @@ class LiquidationSymbolHistoryResponse:
     interval: str = ""
     quote: str = ""
     symbol: str = ""
-    # Totals over the window — handy for a header line without making the FE re-aggregate the bucket list.
     total_long_usd: float = 0.0
     total_short_usd: float = 0.0
     window: str = ""
@@ -818,7 +811,6 @@ class OpenInterestResponse:
 class OpenInterestSummaryExchangesummary:
     exchange: str = ""
     open_interest_usd: float = 0.0
-    # Number of tokens this exchange has non-zero OI for.
     tokens: int = 0
 
     @classmethod
@@ -832,13 +824,10 @@ class OpenInterestSummaryExchangesummary:
 
 @dataclass
 class OpenInterestSummaryResponse:
-    # sorted desc, all venues with data
     exchanges: List[OpenInterestSummaryExchangesummary] = field(default_factory=list)
     generated_at: int = 0
     grand_total: float = 0.0
-    # top N by OI desc
     tokens: List[OpenInterestSummaryTokensummary] = field(default_factory=list)
-    # Token universe size — useful in the FE to label the KPI as "BTC of 1,234 tokens" instead of just "BTC".
     total_tokens: int = 0
 
     @classmethod
@@ -862,7 +851,6 @@ class OpenInterestSummaryTokensummary:
     open_interest_usd: float = 0.0
     symbol: str = ""
     token_id: str = ""
-    # Number of exchanges this token is listed on with non-zero OI. Useful for the breakdown card to show e.g. "BTC · 8 venues".
     venues: int = 0
 
     @classmethod
