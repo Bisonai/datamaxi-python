@@ -35,14 +35,6 @@ WS_CHANNELS = {
         "subscribe": False,
         "unsubscribe": False,
     },
-    "/front/listing/deposit": {
-        "plan": "front",
-        "market": None,
-        "message": "DepositListingMessage",
-        "param": None,
-        "subscribe": True,
-        "unsubscribe": True,
-    },
     "/funding-rate": {
         "plan": "basic",
         "market": None,
