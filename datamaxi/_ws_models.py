@@ -13,27 +13,6 @@ from typing import Any, Dict, List, TypedDict  # noqa: F401
 
 
 # source: asyncapi:payload
-DepositListingMessage = TypedDict(
-    "DepositListingMessage",
-    {
-        "amount": float,
-        "amount_krw": float,
-        "amount_usd": float,
-        "asset": str,
-        "block_number": int,
-        "chain": str,
-        "exchange": str,
-        "from_address": str,
-        "timestamp": int,
-        "to_address": str,
-        "tx_hash": str,
-        "type": int,
-    },
-    total=False,
-)
-
-
-# source: asyncapi:payload
 ForexMessage = TypedDict(
     "ForexMessage",
     {
