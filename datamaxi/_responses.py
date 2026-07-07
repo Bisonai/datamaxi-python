@@ -36,7 +36,7 @@ class CexAnnouncementsResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -48,7 +48,7 @@ class CexAnnouncementsResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
@@ -135,7 +135,7 @@ class CexTokenUpdatesResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -145,7 +145,7 @@ class CexTokenUpdatesResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
@@ -759,7 +759,7 @@ class OpenInterestOverviewResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -769,7 +769,7 @@ class OpenInterestOverviewResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
@@ -1112,7 +1112,7 @@ class PremiumResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -1124,7 +1124,7 @@ class PremiumResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
@@ -1151,7 +1151,7 @@ class TelegramChannelsResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -1162,7 +1162,7 @@ class TelegramChannelsResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
@@ -1205,7 +1205,7 @@ class TelegramMessagesResponse:
     key: Optional[str] = None
     limit: int = 0
     page: int = 0
-    sort: Optional[str] = None
+    sort: str = ""
     total: int = 0
 
     @classmethod
@@ -1216,7 +1216,7 @@ class TelegramMessagesResponse:
             key=data.get("key"),
             limit=data.get("limit", 0),
             page=data.get("page", 0),
-            sort=data.get("sort"),
+            sort=data.get("sort", ""),
             total=data.get("total", 0),
         )
 
