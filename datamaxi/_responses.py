@@ -56,27 +56,27 @@ class CexAnnouncementsResponse:
 @dataclass
 class CexAnnouncementsView:
     # specifies the category of the announcement
-    c: str = ""
+    category: str = ""
     # specifies the date of the announcement
-    d: int = 0
+    timestamp: int = 0
     # specifies the exchange of the announcement
-    e: str = ""
+    exchange: str = ""
     # specifies the summary of the announcement
-    s: str = ""
+    summary: str = ""
     # specifies the title of the announcement
-    t: str = ""
+    title: str = ""
     # specifies the URL of the announcement
-    u: str = ""
+    url: str = ""
 
     @classmethod
     def from_dict(cls, data: dict) -> CexAnnouncementsView:
         return cls(
-            c=data.get("c", ""),
-            d=data.get("d", 0),
-            e=data.get("e", ""),
-            s=data.get("s", ""),
-            t=data.get("t", ""),
-            u=data.get("u", ""),
+            category=data.get("c", ""),
+            timestamp=data.get("d", 0),
+            exchange=data.get("e", ""),
+            summary=data.get("s", ""),
+            title=data.get("t", ""),
+            url=data.get("u", ""),
         )
 
 
@@ -104,27 +104,27 @@ class CexCandleResponse:
 @dataclass
 class CexCandleView:
     # specifies close price of the candle
-    c: float = 0.0
+    close: float = 0.0
     # specifies the opening date and time of candle
-    d: int = 0
+    timestamp: int = 0
     # specifies high price of the candle
-    h: float = 0.0
+    high: float = 0.0
     # specifies low price of the candle
-    l: float = 0.0
+    low: float = 0.0
     # specifies open price of the candle
-    o: float = 0.0
+    open: float = 0.0
     # specifies trading volume (base token) of the candle
-    v: float = 0.0
+    volume: float = 0.0
 
     @classmethod
     def from_dict(cls, data: dict) -> CexCandleView:
         return cls(
-            c=data.get("c", 0.0),
-            d=data.get("d", 0),
-            h=data.get("h", 0.0),
-            l=data.get("l", 0.0),
-            o=data.get("o", 0.0),
-            v=data.get("v", 0.0),
+            close=data.get("c", 0.0),
+            timestamp=data.get("d", 0),
+            high=data.get("h", 0.0),
+            low=data.get("l", 0.0),
+            open=data.get("o", 0.0),
+            volume=data.get("v", 0.0),
         )
 
 
@@ -153,45 +153,45 @@ class CexTokenUpdatesResponse:
 @dataclass
 class CexTokenUpdatesView:
     # Specifies the base token
-    b: str = ""
+    base: str = ""
     # Specifies the timestamp
-    d: int = 0
+    timestamp: int = 0
     # Specifies the exchange
-    e: str = ""
+    exchange: str = ""
     # Specifies the market
-    m: str = ""
+    market: str = ""
     # Specifies the quote token
-    q: str = ""
+    quote: str = ""
     # Specifies the type of the token update (listed or delisted)
-    t: str = ""
+    update_type: str = ""
 
     @classmethod
     def from_dict(cls, data: dict) -> CexTokenUpdatesView:
         return cls(
-            b=data.get("b", ""),
-            d=data.get("d", 0),
-            e=data.get("e", ""),
-            m=data.get("m", ""),
-            q=data.get("q", ""),
-            t=data.get("t", ""),
+            base=data.get("b", ""),
+            timestamp=data.get("d", 0),
+            exchange=data.get("e", ""),
+            market=data.get("m", ""),
+            quote=data.get("q", ""),
+            update_type=data.get("t", ""),
         )
 
 
 @dataclass
 class ForexResponse:
     # specifies the unix timestamp of the forex rate
-    d: int = 0
+    timestamp: int = 0
     # specifies the forex rate
-    r: float = 0.0
+    rate: float = 0.0
     # specifies the name of the forex symbol
-    s: str = ""
+    symbol: str = ""
 
     @classmethod
     def from_dict(cls, data: dict) -> ForexResponse:
         return cls(
-            d=data.get("d", 0),
-            r=data.get("r", 0.0),
-            s=data.get("s", ""),
+            timestamp=data.get("d", 0),
+            rate=data.get("r", 0.0),
+            symbol=data.get("s", ""),
         )
 
 
@@ -219,48 +219,48 @@ class FundingRateHistoryResponse:
 @dataclass
 class FundingRateHistoryView:
     # specifies the date and time in UNIX timestamp format
-    d: int = 0
+    timestamp: int = 0
     # specifies the funding rate
-    f: Optional[float] = None
+    funding_rate: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> FundingRateHistoryView:
         return cls(
-            d=data.get("d", 0),
-            f=data.get("f"),
+            timestamp=data.get("d", 0),
+            funding_rate=data.get("f"),
         )
 
 
 @dataclass
 class FundingRateLatestResponse:
     # Specifies the base
-    b: str = ""
+    base: str = ""
     # Specifies the timestamp
-    d: int = 0
+    timestamp: int = 0
     # Specifies the exchange
-    e: str = ""
+    exchange: str = ""
     # Specifies the funding rate
-    f: Optional[float] = None
+    funding_rate: Optional[float] = None
     # Specifies the interval hours
-    i: Optional[int] = None
+    interval_hours: Optional[int] = None
     # Specifies the token id
-    id: str = ""
+    token_id: str = ""
     # Specifies the quote
-    q: str = ""
+    quote: str = ""
     # Specifies the symbol
-    s: str = ""
+    symbol: str = ""
 
     @classmethod
     def from_dict(cls, data: dict) -> FundingRateLatestResponse:
         return cls(
-            b=data.get("b", ""),
-            d=data.get("d", 0),
-            e=data.get("e", ""),
-            f=data.get("f"),
-            i=data.get("i"),
-            id=data.get("id", ""),
-            q=data.get("q", ""),
-            s=data.get("s", ""),
+            base=data.get("b", ""),
+            timestamp=data.get("d", 0),
+            exchange=data.get("e", ""),
+            funding_rate=data.get("f"),
+            interval_hours=data.get("i"),
+            token_id=data.get("id", ""),
+            quote=data.get("q", ""),
+            symbol=data.get("s", ""),
         )
 
 
@@ -1269,51 +1269,51 @@ class TickerResponse:
 @dataclass
 class TickerView:
     # specifies the base token
-    b: str = ""
+    base: str = ""
     # specifies the date and the time in UTC milliseconds
-    d: int = 0
+    timestamp: int = 0
     # specifies the exchange name
-    e: str = ""
+    exchange: str = ""
     # highest bid from orderbook
-    hb: Optional[float] = None
+    highest_bid: Optional[float] = None
     # lowest ask from orderbook
-    la: Optional[float] = None
+    lowest_ask: Optional[float] = None
     # lower depth(2%)
-    ld: Optional[float] = None
+    lower_depth: Optional[float] = None
     # specifies the market type
-    m: str = ""
+    market: str = ""
     # specifies the latest price
-    p: Optional[float] = None
+    price: Optional[float] = None
     # specifies the price 24 hours ago
-    p24h: Optional[float] = None
+    price_24h: Optional[float] = None
     # specified price change between the latest price and the price 24 hours ago
-    pc: Optional[float] = None
+    price_change: Optional[float] = None
     # specifies the quote token
-    q: str = ""
+    quote: str = ""
     # specifies the symbol (base-quote)
-    s: str = ""
+    symbol: str = ""
     # upper depth(2%)
-    ud: Optional[float] = None
+    upper_depth: Optional[float] = None
     # specifies the trading volume in the last 24 hours
-    v: Optional[float] = None
+    volume: Optional[float] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> TickerView:
         return cls(
-            b=data.get("b", ""),
-            d=data.get("d", 0),
-            e=data.get("e", ""),
-            hb=data.get("hb"),
-            la=data.get("la"),
-            ld=data.get("ld"),
-            m=data.get("m", ""),
-            p=data.get("p"),
-            p24h=data.get("p24h"),
-            pc=data.get("pc"),
-            q=data.get("q", ""),
-            s=data.get("s", ""),
-            ud=data.get("ud"),
-            v=data.get("v"),
+            base=data.get("b", ""),
+            timestamp=data.get("d", 0),
+            exchange=data.get("e", ""),
+            highest_bid=data.get("hb"),
+            lowest_ask=data.get("la"),
+            lower_depth=data.get("ld"),
+            market=data.get("m", ""),
+            price=data.get("p"),
+            price_24h=data.get("p24h"),
+            price_change=data.get("pc"),
+            quote=data.get("q", ""),
+            symbol=data.get("s", ""),
+            upper_depth=data.get("ud"),
+            volume=data.get("v"),
         )
 
 
