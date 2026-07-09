@@ -368,7 +368,7 @@ ENDPOINTS = {
                 "required": False,
                 "in": "query",
                 "type": "str",
-                "description": "Exchange filter (narrows the Redis scan)",
+                "description": "Exchange filter (narrows to a single venue)",
             },
         },
     },
