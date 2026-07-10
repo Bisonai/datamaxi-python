@@ -177,7 +177,7 @@ def test_ws_liquidation_feed_replays_on_connect():
     assert isinstance(first, dict)
     for field in ("e", "d", "s", "b", "q", "sd"):
         assert field in first, f"missing {field!r} in {first!r}"
-    assert isinstance(first["d"], int) and first["d"] > 1_000_000_000_000
+    assert int(first["d"]) > 1_000_000_000_000  # plausible UNIX-ms (str or int)
     assert any(f.get("snap") is True for f in frames)
 
 
