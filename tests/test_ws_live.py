@@ -8,9 +8,11 @@ tests hit prod. Two kinds of channel:
   window (no message in the timeout) is a PASS — the value is that connect +
   auth + SUBSCRIBE succeed without raising; when a message does arrive its shape
   is still checked.
-- High-traffic (continuous): `/ticker` and `/premium`. These emit non-stop, so
-  a quiet window is a FAIL — the test asserts a real, well-formed data payload
-  actually arrives, proving the SDK decodes and yields end-to-end.
+- Guaranteed-data: `/ticker` and `/premium` emit non-stop; `/liquidation/feed`
+  replays the last N liquidations immediately on connect. Either way a fresh
+  connection yields data, so a quiet window is a FAIL — the test asserts a real,
+  well-formed data payload actually arrives, proving the SDK decodes and yields
+  end-to-end.
 
 Opt-in and deselected from the keyless CI lane via the `integration` marker;
 needs DATAMAXI_API_KEY. Skipped when `websockets` absent.
@@ -41,6 +43,11 @@ _DATA_TIMEOUT = 30.0
 # /forex is quiet-tolerant but its first tick can lag (~14s observed); wait a bit
 # longer than _QUIET_TIMEOUT so an arriving tick gets shape-checked, not skipped.
 _FOREX_TIMEOUT = 20.0
+# /liquidation/feed replays the last N liquidations immediately on connect, so
+# data lands within the handshake — a short timeout suffices and a quiet window
+# is a FAIL. Number of leading frames to collect for the snap-replay assertion.
+_REPLAY_TIMEOUT = 10.0
+_REPLAY_FRAMES = 5
 
 
 def _run(coro):
@@ -139,6 +146,39 @@ def test_ws_premium_yields_live_data():
     assert isinstance(msg, dict)
     assert msg["key"] == key
     assert "premium" in msg
+
+
+def test_ws_liquidation_feed_replays_on_connect():
+    # /liquidation/feed is a connect-only firehose (no SUBSCRIBE, no params). The
+    # backend replays the last N liquidations immediately on connect (each frame
+    # tagged `snap: true`), so a fresh connection deterministically yields data
+    # and — like ticker — a quiet window is a FAIL. A live event may interleave
+    # between replayed frames, so the first frame is not guaranteed to be replay;
+    # assert `snap: true` on at least one of the first few frames, not frame[0].
+    # (This couples the test to replay being enabled: with
+    # LIQUIDATION_FEED_REPLAY_N=0 in the target env, it FAILs rather than skips —
+    # deliberately, so an accidentally-disabled replay is caught.)
+    async def run():
+        async with AsyncDatamaxiWS(api_key=API_KEY, base_url=BASE_URL) as ws:
+            stream = await ws.liquidation_feed.stream()
+            frames = []
+            try:
+                while len(frames) < _REPLAY_FRAMES:
+                    frames.append(
+                        await asyncio.wait_for(stream.__anext__(), _REPLAY_TIMEOUT)
+                    )
+            except asyncio.TimeoutError:
+                pass  # fewer than N in the ring; keep what arrived
+            return frames
+
+    frames = _run(run())
+    assert frames, "no liquidation frame within timeout (replay disabled?)"
+    first = frames[0]
+    assert isinstance(first, dict)
+    for field in ("e", "d", "s", "b", "q", "sd"):
+        assert field in first, f"missing {field!r} in {first!r}"
+    assert isinstance(first["d"], int) and first["d"] > 1_000_000_000_000
+    assert any(f.get("snap") is True for f in frames)
 
 
 def test_ws_forex_tolerates_quiet_window():
