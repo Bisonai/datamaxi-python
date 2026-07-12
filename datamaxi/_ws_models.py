@@ -55,6 +55,7 @@ LiquidationMessage = TypedDict(
         "q": str,
         "s": str,
         "sd": str,
+        "snap": bool,
         "v": float,
         "vfiat": float,
         "vusd": float,
