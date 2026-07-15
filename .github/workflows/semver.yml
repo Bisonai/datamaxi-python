@@ -1,0 +1,46 @@
+# Semver check — the Python analog of the Rust sibling repo's
+# `cargo-semver-checks` gate.
+#
+# On every pull request this diffs the public API of the `datamaxi` package
+# between the PR base commit and the PR head, and FAILS when the version bump in
+# `datamaxi/__version__.py` is smaller than the change requires. This keeps
+# breaking changes from shipping under a patch bump (or no bump at all), which
+# matters here because several public modules (`_endpoints.py`,
+# `_ws_endpoints.py`, `_ws_models.py`) are codegen-generated and churn often —
+# so we enforce the bump rather than block the churn.
+#
+# The repo is still 0.x, so breaking changes require a MINOR bump
+# (0.29.0 -> 0.30.0); the check script also does the right thing once the repo
+# reaches >=1.0 (breaking => MAJOR). The diff uses `griffe check`, which is
+# static (AST-based) and needs neither the optional deps (httpx/websockets) nor
+# prod credentials/network. griffe checks out the base ref through an internal
+# git worktree, hence `fetch-depth: 0`.
+
+name: Semver check
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  semver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history so griffe can check out the PR base commit.
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install griffe
+        run: uv pip install --system 'griffe>=2,<3'
+      - name: Check public-API semver vs base version bump
+        run: python .github/scripts/check_semver.py "${{ github.event.pull_request.base.sha }}"
