@@ -72,7 +72,7 @@ class AsyncAPI:
 
     async def send_request(self, method, url_path, payload=None):
         # str()-encode scalars so bools match the sync client's urlencode
-        # output (e.g. include_source -> "True", not httpx's "true").
+        # output (e.g. a bool param -> "True", not httpx's "true").
         params = {k: str(v) for k, v in (payload or {}).items() if v is not None}
         attempt = 0
         while True:
