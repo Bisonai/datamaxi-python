@@ -59,28 +59,6 @@ def test_async_candle_pandas_false_returns_envelope():
     assert res == _CANDLE
 
 
-def test_async_ticker_forwards_bool_param_like_sync():
-    seen = {}
-
-    def handler(request):
-        seen.update(dict(request.url.params))
-        return httpx.Response(200, json=_TICKER)
-
-    async def run():
-        async with _client(handler) as c:
-            return await c.cex.ticker.get(
-                exchange="binance",
-                market="spot",
-                symbol="BTC-USDT",
-                include_source=True,
-            )
-
-    df = _run(run())
-    assert isinstance(df, pd.DataFrame)
-    # bool encoded as "True" (matches the sync urlencode output), not "true"
-    assert seen["include_source"] == "True"
-
-
 def test_async_last_response_populated():
     headers = {"x-ratelimit-remaining": "42"}
 

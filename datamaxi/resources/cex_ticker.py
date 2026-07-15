@@ -30,7 +30,6 @@ class CexTicker(Resource):
         market: Market,
         currency: Optional[str] = None,
         conversion_base: Optional[str] = None,
-        include_source: bool = False,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, TickerResponse]:
         """Fetch ticker data
@@ -45,8 +44,6 @@ class CexTicker(Resource):
             market (str): Market type (spot/futures)
             currency (str): Price currency
             conversion_base (str): Conversion base currency
-            include_source (bool): Include the frame's transport source
-                (``ws``|``rest``) in the response
             pandas (bool): Return data as pandas DataFrame
 
         Returns:
@@ -71,7 +68,6 @@ class CexTicker(Resource):
             market=market,
             currency=currency,
             conversion_base=conversion_base,
-            include_source=include_source,
         )
 
         if pandas:

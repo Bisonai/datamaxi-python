@@ -99,7 +99,6 @@ class AsyncCexTicker(AsyncResource):
         market: Market,
         currency: Optional[str] = None,
         conversion_base: Optional[str] = None,
-        include_source: bool = False,
         pandas: bool = True,
     ) -> Union[pd.DataFrame, TickerResponse]:
         """Fetch ticker data (async). See ``datamaxi.Datamaxi.cex.ticker``."""
@@ -120,7 +119,6 @@ class AsyncCexTicker(AsyncResource):
             market=market,
             currency=currency,
             conversion_base=conversion_base,
-            include_source=include_source,
         )
 
         if pandas:

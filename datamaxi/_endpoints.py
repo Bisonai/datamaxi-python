@@ -1355,13 +1355,6 @@ ENDPOINTS = {
                 "enum": ["USD", "USDT"],
                 "description": "Specifies conversion base applied to price values",
             },
-            "include_source": {
-                "required": False,
-                "in": "query",
-                "type": "bool",
-                "default": False,
-                "description": "When true, include the frame's transport source (ws|rest) in the response.",
-            },
         },
     },
     "ticker_exchanges": {

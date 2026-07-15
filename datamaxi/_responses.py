@@ -1253,8 +1253,6 @@ class TickerResponse:
     currency: str = ""
     data: Optional[TickerView] = None
     market: str = ""
-    # Source is populated only when ?include_source=true; omitempty drops the key for default callers, preserving the pre-Phase-1 JSON byte shape (strict-decoder safe).
-    src: Any = None
 
     @classmethod
     def from_dict(cls, data: dict) -> TickerResponse:
@@ -1262,7 +1260,6 @@ class TickerResponse:
             currency=data.get("currency", ""),
             data=_as_model(TickerView, data.get("data")),
             market=data.get("market", ""),
-            src=data.get("src"),
         )
 
 
