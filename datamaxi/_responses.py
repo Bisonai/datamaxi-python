@@ -583,7 +583,7 @@ class LiquidationStatsResponse:
     total: float = 0.0
     # distinct exchanges
     venues: int = 0
-    # "1h" | "4h" | "24h"
+    # "1h" | "4h" | "24h" | "7d"
     window: str = ""
 
     @classmethod
